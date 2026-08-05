@@ -5102,7 +5102,7 @@
       "nombre": "paisBrasil_destinos_amazonas_nombre",
       "tag": "paisBrasil_destinos_amazonas_tag",
       "descripcion": "paisBrasil_destinos_amazonas_descripcion",
-      "imagen": "img/brasil/amazonas.jpg",
+      "imagen": "img/Brasil/amazonas.png",
       "detalle": "paisBrasil_destinos_amazonas_detalle",
       "precio_entrada": "Tours desde 200 BRL/día",
       "horario": "6:00 AM - 6:00 PM",
@@ -5113,7 +5113,7 @@
       "nombre": "paisBrasil_destinos_iguazu_nombre",
       "tag": "paisBrasil_destinos_iguazu_tag",
       "descripcion": "paisBrasil_destinos_iguazu_descripcion",
-      "imagen": "img/brasil/iguazu.jpg",
+      "imagen": "img/Brasil/Cataratas del Iguazú.jpg",
       "detalle": "paisBrasil_destinos_iguazu_detalle",
       "precio_entrada": "90 BRL",
       "horario": "9:00 AM - 5:00 PM",
@@ -5124,7 +5124,7 @@
       "nombre": "paisBrasil_destinos_salvador_nombre",
       "tag": "paisBrasil_destinos_salvador_tag",
       "descripcion": "paisBrasil_destinos_salvador_descripcion",
-      "imagen": "img/brasil/salvador.jpg",
+      "imagen": "img/Brasil/salvador de Bahía.jpg",
       "detalle": "paisBrasil_destinos_salvador_detalle",
       "precio_entrada": "Museos: 20-50 BRL",
       "horario": "8:00 AM - 6:00 PM",
@@ -5135,7 +5135,7 @@
       "nombre": "paisBrasil_destinos_saopaulo_nombre",
       "tag": "paisBrasil_destinos_saopaulo_tag",
       "descripcion": "paisBrasil_destinos_saopaulo_descripcion",
-      "imagen": "img/brasil/saopaulo.jpg",
+      "imagen": "img/Brasil/são Paulo.jpg",
       "detalle": "paisBrasil_destinos_saopaulo_detalle",
       "precio_entrada": "MASP: 60 BRL",
       "horario": "10:00 AM - 6:00 PM",
@@ -5146,7 +5146,7 @@
       "nombre": "paisBrasil_destinos_florianopolis_nombre",
       "tag": "paisBrasil_destinos_florianopolis_tag",
       "descripcion": "paisBrasil_destinos_florianopolis_descripcion",
-      "imagen": "img/brasil/florianopolis.jpg",
+      "imagen": "img/Brasil/florianópolis.jpg",
       "detalle": "paisBrasil_destinos_florianopolis_detalle",
       "precio_entrada": "Parques: 30 BRL",
       "horario": "24 horas",
@@ -5157,7 +5157,7 @@
       "nombre": "paisBrasil_destinos_recife_nombre",
       "tag": "paisBrasil_destinos_recife_tag",
       "descripcion": "paisBrasil_destinos_recife_descripcion",
-      "imagen": "img/brasil/recife.jpg",
+      "imagen": "img/Brasil/Recife y Olinda.jpg",
       "detalle": "paisBrasil_destinos_recife_detalle",
       "precio_entrada": "Museos: 20-40 BRL",
       "horario": "8:00 AM - 6:00 PM",
@@ -5168,7 +5168,7 @@
       "nombre": "paisBrasil_destinos_pantanal_nombre",
       "tag": "paisBrasil_destinos_pantanal_tag",
       "descripcion": "paisBrasil_destinos_pantanal_descripcion",
-      "imagen": "img/brasil/pantanal.jpg",
+      "imagen": "img/Brasil/pantanal.jpg",
       "detalle": "paisBrasil_destinos_pantanal_detalle",
       "precio_entrada": "Tours desde 300 BRL/día",
       "horario": "6:00 AM - 6:00 PM",
@@ -5191,7 +5191,7 @@
         "nombre": "paisBrasil_cultura_items_carnaval_nombre",
         "tag": "paisBrasil_cultura_items_carnaval_tag",
         "descripcion": "paisBrasil_cultura_items_carnaval_descripcion",
-        "imagen": "img/brasil/carnaval.jpg",
+        "imagen": "img/Brasil/Carnaval de Río.webp",
         "detalle": "paisBrasil_cultura_items_carnaval_detalle"
       },
       {
@@ -5199,7 +5199,7 @@
         "nombre": "paisBrasil_cultura_items_samba_nombre",
         "tag": "paisBrasil_cultura_items_samba_tag",
         "descripcion": "paisBrasil_cultura_items_samba_descripcion",
-        "imagen": "img/brasil/samba.jpg",
+        "imagen": "img/Brasil/Samba.webp",
         "detalle": "paisBrasil_cultura_items_samba_detalle"
       },
       {
@@ -5207,7 +5207,7 @@
         "nombre": "paisBrasil_cultura_items_futbol_nombre",
         "tag": "paisBrasil_cultura_items_futbol_tag",
         "descripcion": "paisBrasil_cultura_items_futbol_descripcion",
-        "imagen": "img/brasil/futbol.jpg",
+        "imagen": "img/Brasil/Fútbol Brasileño.jpg",
         "detalle": "paisBrasil_cultura_items_futbol_detalle"
       },
       {
@@ -5215,7 +5215,7 @@
         "nombre": "paisBrasil_cultura_items_capoeira_nombre",
         "tag": "paisBrasil_cultura_items_capoeira_tag",
         "descripcion": "paisBrasil_cultura_items_capoeira_descripcion",
-        "imagen": "img/brasil/capoeira.jpg",
+        "imagen": "img/Brasil/Capoeira.jpg",
         "detalle": "paisBrasil_cultura_items_capoeira_detalle"
       }
     ],
@@ -5246,63 +5246,63 @@
         "nombre": "paisBrasil_gastronomia_platos_1_nombre",
         "categoria": "paisBrasil_gastronomia_platos_1_categoria",
         "descripcion": "paisBrasil_gastronomia_platos_1_descripcion",
-        "imagen": "img/brasil/paodequeijo.jpg",
+        "imagen": "img/Brasil/Pão de Queijo.webp",
         "nota": "paisBrasil_gastronomia_platos_1_nota"
       },
       {
         "nombre": "paisBrasil_gastronomia_platos_2_nombre",
         "categoria": "paisBrasil_gastronomia_platos_2_categoria",
         "descripcion": "paisBrasil_gastronomia_platos_2_descripcion",
-        "imagen": "img/brasil/moqueca.jpg",
+        "imagen": "img/Brasil/Moqueca.webp",
         "nota": "paisBrasil_gastronomia_platos_2_nota"
       },
       {
         "nombre": "paisBrasil_gastronomia_platos_3_nombre",
         "categoria": "paisBrasil_gastronomia_platos_3_categoria",
         "descripcion": "paisBrasil_gastronomia_platos_3_descripcion",
-        "imagen": "img/brasil/acaraje.jpg",
+        "imagen": "img/Brasil/Acarajé.webp",
         "nota": "paisBrasil_gastronomia_platos_3_nota"
       },
       {
         "nombre": "paisBrasil_gastronomia_platos_4_nombre",
         "categoria": "paisBrasil_gastronomia_platos_4_categoria",
         "descripcion": "paisBrasil_gastronomia_platos_4_descripcion",
-        "imagen": "img/brasil/churrasco.jpg",
+        "imagen": "img/Brasil/Churrasco.jpg",
         "nota": "paisBrasil_gastronomia_platos_4_nota"
       },
       {
         "nombre": "paisBrasil_gastronomia_platos_5_nombre",
         "categoria": "paisBrasil_gastronomia_platos_5_categoria",
         "descripcion": "paisBrasil_gastronomia_platos_5_descripcion",
-        "imagen": "img/brasil/brigadeiro.jpg",
+        "imagen": "img/Brasil/Brigadeiro.jpg",
         "nota": "paisBrasil_gastronomia_platos_5_nota"
       },
       {
         "nombre": "paisBrasil_gastronomia_platos_6_nombre",
         "categoria": "paisBrasil_gastronomia_platos_6_categoria",
         "descripcion": "paisBrasil_gastronomia_platos_6_descripcion",
-        "imagen": "img/brasil/tapioca.jpg",
+        "imagen": "img/Brasil/Tapioca.webp",
         "nota": "paisBrasil_gastronomia_platos_6_nota"
       },
       {
         "nombre": "paisBrasil_gastronomia_platos_7_nombre",
         "categoria": "paisBrasil_gastronomia_platos_7_categoria",
         "descripcion": "paisBrasil_gastronomia_platos_7_descripcion",
-        "imagen": "img/brasil/coxinha.jpg",
+        "imagen": "img/Brasil/Coxinha.webp",
         "nota": "paisBrasil_gastronomia_platos_7_nota"
       },
       {
         "nombre": "paisBrasil_gastronomia_platos_8_nombre",
         "categoria": "paisBrasil_gastronomia_platos_8_categoria",
         "descripcion": "paisBrasil_gastronomia_platos_8_descripcion",
-        "imagen": "img/brasil/vatapa.jpg",
+        "imagen": "img/Brasil/Vatapa.jpg",
         "nota": "paisBrasil_gastronomia_platos_8_nota"
       },
       {
         "nombre": "paisBrasil_gastronomia_platos_9_nombre",
         "categoria": "paisBrasil_gastronomia_platos_9_categoria",
         "descripcion": "paisBrasil_gastronomia_platos_9_descripcion",
-        "imagen": "img/brasil/acai.jpg",
+        "imagen": "img/Brasil/Açaí.webp",
         "nota": "paisBrasil_gastronomia_platos_9_nota"
       }
     ]
