@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil · KAVARI</title>
+  <meta name="description" content="Gestiona tu perfil de KAVARI, preferencias de viaje y configuración de cuenta.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/ui-system.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/account.css">
+  <link rel="stylesheet" href="css/site-polish.css">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/perfil.css">
+  <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://accounts.google.com/gsi/client"></script>
+  <script src="js/idioma.js"></script>
+  <script src="js/theme.js"></script>
+</head>
+<body class="auth-page">
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="navbar">
+    <div class="logo">
+      <a href="index.html" style="color: inherit; text-decoration: none;">KAVARI</a>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
+      <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
+      <li><a href="planes.html" data-i18n="planesNavPlanes">Planes</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-btn-tutorial" id="btnTutorial" onclick="startTutorial(true)" aria-label="Tutorial" data-i18n="tutorial">Tutorial</button>
+      <button class="btn-lang-nav" id="btnLang" onclick="toggleLang()" aria-label="Cambiar idioma"><span id="langLabel">ES</span></button>
+      <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro">Oscuro</button>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <main class="auth-main">
+    <section class="perfil-container" id="perfilContainer">
+
+      <!-- Estado: No autenticado -->
+      <div class="perfil-auth-required" id="perfilAuthRequired" style="display:none;">
+        <div class="perfil-auth-card">
+          <div class="perfil-auth-icon">
+            <svg width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </div>
+          <h2 data-i18n="perfilAuthTitulo">Inicia sesión para ver tu perfil</h2>
+          <p data-i18n="perfilAuthDesc">Accede a tu cuenta para gestionar tu información y preferencias de viaje.</p>
+
+          <!-- Banner de error -->
+          <div class="perfil-auth-error" id="perfilAuthError" role="alert" style="display:none;"></div>
+
+          <!-- Login Form -->
+          <form class="perfil-login-form" id="perfilLoginForm">
+            <div class="auth-field">
+              <label for="loginEmail" data-i18n="cuentaCorreoPlaceholder">Correo electrónico</label>
+              <div class="auth-input-wrap">
+                <input id="loginEmail" name="email" type="email" required autocomplete="email" placeholder="tu@correo.com">
+              </div>
+              <p class="auth-error" id="loginErrEmail" aria-live="polite"></p>
+            </div>
+
+            <div class="auth-field">
+              <label for="loginPassword" data-i18n="cuentaPassLabel">Contraseña</label>
+              <div class="auth-input-wrap">
+                <input id="loginPassword" name="password" type="password" minlength="6" required autocomplete="current-password" placeholder="Mínimo 6 caracteres">
+                <button type="button" class="pw-toggle" id="loginPwToggle" aria-label="Mostrar contraseña">Ver</button>
+              </div>
+              <p class="auth-error" id="loginErrPassword" aria-live="polite"></p>
+            </div>
+
+            <button type="submit" class="auth-submit" id="loginSubmitBtn" data-i18n="cuentaBtnIngresar">Ingresar</button>
+          </form>
+
+          <!-- Divider -->
+          <div class="perfil-divider"><span>o</span></div>
+
+          <!-- Google Login -->
+          <button class="perfil-google-btn" id="googleLoginBtn" type="button" data-client_id="103720820760-f0l3vlt07d1c1nitrhpg92van43078cv.apps.googleusercontent.com">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <span data-i18n="perfilGoogleBtn">Continuar con Google</span>
+          </button>
+
+          <!-- GitHub Login -->
+          <button class="perfil-google-btn" id="githubLoginBtn" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#181717"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.13-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 015.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.26 5.68.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A10.52 10.52 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            <span data-i18n="perfilGithubBtn">Continuar con GitHub</span>
+          </button>
+
+          <!-- OTP Section -->
+          <div class="perfil-divider"><span>o</span></div>
+          <button class="perfil-otp-link" id="showOtpBtn" type="button" data-i18n="perfilOtpLink">Enviar código de verificación por email</button>
+
+          <div class="perfil-otp-section" id="otpSection" style="display:none;">
+            <div class="auth-field">
+              <label for="otpEmail" data-i18n="perfilOtpEmailLabel">Correo electrónico</label>
+              <div class="auth-input-wrap">
+                <input id="otpEmail" name="otpEmail" type="email" required autocomplete="email" placeholder="tu@correo.com">
+              </div>
+            </div>
+            <button class="auth-submit otp-send" id="otpSendBtn" type="button" data-i18n="perfilOtpEnviar">Enviar código</button>
+
+            <div class="auth-field" id="otpCodeField" style="display:none;">
+              <label for="otpCode" data-i18n="perfilOtpCodeLabel">Código de verificación</label>
+              <div class="auth-input-wrap">
+                <input id="otpCode" name="otpCode" type="text" inputmode="numeric" maxlength="6" placeholder="000000">
+              </div>
+            </div>
+            <button class="auth-submit otp-verify" id="otpVerifyBtn" type="button" style="display:none;" data-i18n="perfilOtpVerificar">Verificar código</button>
+          </div>
+
+          <!-- Register Link -->
+          <p class="perfil-register-link">
+            <span data-i18n="perfilNoCuenta">¿No tienes cuenta?</span>
+            <button type="button" id="showRegisterBtn" data-i18n="perfilCrearCuenta">Crear cuenta</button>
+          </p>
+        </div>
+      </div>
+
+      <!-- Estado: Registro -->
+      <div class="perfil-auth-required" id="perfilRegisterForm" style="display:none;">
+        <div class="perfil-auth-card">
+          <h2 data-i18n="perfilRegistroTitulo">Crea tu cuenta KAVARI</h2>
+          <p data-i18n="perfilRegistroDesc">Regístrate para guardar tus preferencias y acceder a funcionalidades exclusivas.</p>
+
+          <div class="perfil-auth-error" id="perfilRegError" role="alert" style="display:none;"></div>
+
+          <form class="perfil-login-form" id="registerForm">
+            <div class="auth-field">
+              <label for="regName" data-i18n="cuentaNombreLabel">Nombre completo</label>
+              <div class="auth-input-wrap">
+                <input id="regName" name="name" required autocomplete="name" placeholder="Tu nombre completo">
+              </div>
+              <p class="auth-error" id="regErrName" aria-live="polite"></p>
+            </div>
+
+            <div class="auth-field">
+              <label for="regEmail" data-i18n="cuentaCorreoPlaceholder">Correo electrónico</label>
+              <div class="auth-input-wrap">
+                <input id="regEmail" name="email" type="email" required autocomplete="email" placeholder="tu@correo.com">
+              </div>
+              <p class="auth-error" id="regErrEmail" aria-live="polite"></p>
+            </div>
+
+            <div class="auth-field">
+              <label for="regPassword" data-i18n="cuentaPassLabel">Contraseña</label>
+              <div class="auth-input-wrap">
+                <input id="regPassword" name="password" type="password" minlength="6" required autocomplete="new-password" placeholder="Mínimo 6 caracteres">
+                <button type="button" class="pw-toggle" id="regPwToggle" aria-label="Mostrar contraseña">Ver</button>
+              </div>
+              <p class="auth-error" id="regErrPassword" aria-live="polite"></p>
+            </div>
+
+            <div class="auth-field">
+              <label for="regPhone" data-i18n="perfilTelefono">Teléfono (opcional)</label>
+              <div class="auth-input-wrap">
+                <input id="regPhone" name="phone" type="tel" autocomplete="tel" placeholder="+507 6000-0000">
+              </div>
+            </div>
+
+            <div class="auth-check">
+              <label>
+                <input type="checkbox" id="regTerms" required>
+                <span data-i18n="cuentaTerminos">Acepto los Términos de Servicio y la Política de Privacidad.</span>
+              </label>
+              <p class="auth-error" id="regErrTerms" aria-live="polite"></p>
+            </div>
+
+            <button type="submit" class="auth-submit" id="registerSubmitBtn" data-i18n="cuentaBtnCrear">Crear cuenta</button>
+          </form>
+
+          <div class="perfil-divider"><span>o</span></div>
+
+          <button class="perfil-google-btn" id="googleRegisterBtn" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <span data-i18n="perfilGoogleBtn">Continuar con Google</span>
+          </button>
+
+          <button class="perfil-google-btn" id="githubRegisterBtn" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#181717"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.13-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 015.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.26 5.68.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A10.52 10.52 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            <span data-i18n="perfilGithubBtn">Continuar con GitHub</span>
+          </button>
+
+          <p class="perfil-register-link">
+            <span data-i18n="perfilYaCuenta">¿Ya tienes cuenta?</span>
+            <button type="button" id="showLoginBtn" data-i18n="perfilIniciarSesion">Iniciar sesión</button>
+          </p>
+        </div>
+      </div>
+
+      <!-- Estado: Perfil autenticado -->
+      <div class="perfil-view" id="perfilView" style="display:none;">
+        <div class="perfil-header">
+          <div class="perfil-avatar-section">
+            <div class="perfil-avatar" id="perfilAvatar">
+              <img id="perfilAvatarImg" src="" alt="Avatar" style="display:none;">
+              <span class="perfil-avatar-initials" id="perfilAvatarInitials">?</span>
+              <label class="perfil-avatar-upload" for="avatarFileInput">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </label>
+              <input type="file" id="avatarFileInput" accept="image/*" style="display:none;">
+            </div>
+            <div class="perfil-header-info">
+              <h1 id="perfilFullName">—</h1>
+              <p id="perfilEmail" class="perfil-email">—</p>
+              <span class="perfil-plan-badge" id="perfilPlanBadge">Viajero</span>
+            </div>
+          </div>
+          <button class="perfil-logout-btn" id="perfilLogoutBtn" type="button" data-i18n="cuentaCerrarSesion">Cerrar sesión</button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="perfil-tabs" role="tablist">
+          <button class="perfil-tab active" data-tab="info" role="tab" aria-selected="true" data-i18n="perfilTabInfo">Información personal</button>
+          <button class="perfil-tab" data-tab="travel" role="tab" aria-selected="false" data-i18n="perfilTabViaje">Preferencias de viaje</button>
+          <button class="perfil-tab" data-tab="settings" role="tab" aria-selected="false" data-i18n="perfilTabConfig">Configuración</button>
+        </div>
+
+        <!-- Tab: Información Personal -->
+        <div class="perfil-tab-content active" id="tabInfo">
+          <form class="perfil-form" id="perfilInfoForm">
+            <div class="perfil-form-grid">
+              <div class="auth-field">
+                <label for="perfilName" data-i18n="cuentaNombreLabel">Nombre completo</label>
+                <div class="auth-input-wrap">
+                  <input id="perfilName" name="full_name" autocomplete="name">
+                </div>
+              </div>
+
+              <div class="auth-field">
+                <label for="perfilPhone" data-i18n="perfilTelefono">Teléfono</label>
+                <div class="auth-input-wrap">
+                  <input id="perfilPhone" name="phone" type="tel" autocomplete="tel">
+                </div>
+              </div>
+
+              <div class="auth-field">
+                <label for="perfilBirthDate" data-i18n="perfilFechaNacimiento">Fecha de nacimiento</label>
+                <div class="auth-input-wrap">
+                  <input id="perfilBirthDate" name="birth_date" type="date">
+                </div>
+              </div>
+
+              <div class="auth-field">
+                <label for="perfilCountry" data-i18n="perfilPaisResidencia">País de residencia</label>
+                <div class="auth-input-wrap">
+                  <select id="perfilCountry" name="country">
+                    <option value="">Selecciona un país</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="auth-submit" id="perfilSaveInfoBtn" data-i18n="perfilGuardar">Guardar cambios</button>
+            <p class="perfil-status" id="perfilInfoStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <!-- Tab: Preferencias de Viaje -->
+        <div class="perfil-tab-content" id="tabTravel">
+          <form class="perfil-form" id="perfilTravelForm">
+            <div class="perfil-form-grid">
+              <div class="auth-field">
+                <label for="perfilDestinos" data-i18n="perfilDestinosInteres">Destinos de interés</label>
+                <div class="auth-input-wrap">
+                  <select id="perfilDestinos" name="preferred_destinations" multiple>
+                    <option value="latam">Latinoamérica</option>
+                    <option value="europa">Europa</option>
+                    <option value="asia">Asia</option>
+                    <option value="africa">África</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="auth-field">
+                <label for="perfilBudget" data-i18n="perfilPresupuesto">Presupuesto mensual viajes</label>
+                <div class="auth-input-wrap">
+                  <select id="perfilBudget" name="travel_budget">
+                    <option value="economico">Económico</option>
+                    <option value="moderado">Moderado</option>
+                    <option value="premium">Premium</option>
+                    <option value="lujo">Lujo</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="auth-field">
+                <label for="perfilEstilo" data-i18n="perfilEstiloViaje">Estilo de viaje</label>
+                <div class="auth-input-wrap">
+                  <select id="perfilEstilo" name="travel_style">
+                    <option value="aventura">Aventura</option>
+                    <option value="cultural">Cultural</option>
+                    <option value="playa">Playa</option>
+                    <option value="gastronomico">Gastronómico</option>
+                    <option value="mixto">Mixto</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="auth-field">
+                <label for="perfilIdiomas" data-i18n="perfilIdiomasViaje">Idiomas que hablas</label>
+                <div class="auth-input-wrap">
+                  <input id="perfilIdiomas" name="languages" placeholder="Español, Inglés, Francés">
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="auth-submit" id="perfilSaveTravelBtn" data-i18n="perfilGuardar">Guardar cambios</button>
+            <p class="perfil-status" id="perfilTravelStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <!-- Tab: Configuración -->
+        <div class="perfil-tab-content" id="tabSettings">
+          <div class="perfil-settings-section">
+            <h3 data-i18n="perfilConfigCuenta">Cuenta</h3>
+            <div class="perfil-settings-item">
+              <span data-i18n="perfilConfigEmail">Correo electrónico</span>
+              <span id="settingsEmail" class="perfil-settings-value">—</span>
+            </div>
+            <div class="perfil-settings-item">
+              <span data-i18n="perfilConfigPlan">Plan actual</span>
+              <a href="planes.html" class="perfil-settings-link" id="settingsPlan">Viajero</a>
+            </div>
+          </div>
+
+          <div class="perfil-settings-section">
+            <h3 data-i18n="perfilConfigPreferencias">Preferencias</h3>
+            <div class="perfil-settings-item">
+              <span data-i18n="perfilConfigIdioma">Idioma</span>
+              <button class="perfil-settings-toggle" id="settingsLangToggle">ES</button>
+            </div>
+            <div class="perfil-settings-item">
+              <span data-i18n="perfilConfigTema">Modo oscuro</span>
+              <button class="perfil-settings-toggle" id="settingsThemeToggle">OFF</button>
+            </div>
+          </div>
+
+          <div class="perfil-settings-section">
+            <h3 data-i18n="perfilConfigZona">Zona de peligro</h3>
+            <button class="perfil-danger-btn" id="perfilDeleteAccountBtn" type="button" data-i18n="perfilEliminarCuenta">Eliminar cuenta</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="logo-globe"></span> KAVARI
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="navInicio">Inicio</a>
+        <a href="paises.html" data-i18n="navDestinos">Destinos</a>
+        <a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a>
+        <a href="ayuda.html" data-i18n="ayuda">Ayuda</a>
+        <a href="contacto.html" data-i18n="contacto">Contacto</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/kavari.travel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">✈</a>
+      </div>
+      <p class="textfooter" data-i18n="footerTexto">© 2025 Kavari — Fundación Emanuel González-Revilla · Supérate Promo 2027</p>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/perfil.js"></script>
+  <script src="js/tutorial.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 /* Cuenta local de KAVARI: la sesión vive únicamente en este navegador. */
+/* Versión mejorada: integra con Supabase cuando está disponible. */
 (function () {
   const KEY = 'kavari-user';
   const PLAN_KEY = 'kavari-plan';
@@ -11,7 +12,40 @@
       '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;',
     })[char]);
 
+  /**
+   * Lee la sesión persistida de Supabase de forma síncrona.
+   * Supabase guarda el token en localStorage bajo la clave "sb-<ref>-auth-token".
+   */
+  function getSupabaseUserSync() {
+    try {
+      const url = window.KavariDB && window.KavariDB.SUPABASE_URL;
+      if (!url) return null;
+      const projectRef = String(url).replace(/^https?:\/\//, '').split('.')[0];
+      if (!projectRef) return null;
+      const raw = localStorage.getItem(`sb-${projectRef}-auth-token`);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      const user = data && data.user;
+      if (!user) return null;
+      return {
+        name: user.user_metadata?.full_name || user.user_metadata?.name || user.email?.split('@')[0],
+        email: user.email,
+        id: user.id
+      };
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /**
+   * Obtiene el usuario actual.
+   * Primero intenta la sesión de Supabase, luego localStorage.
+   */
   function getUser() {
+    // Intentar Supabase primero (sesión persistida, incluye login con Google)
+    const supabaseUser = getSupabaseUserSync();
+    if (supabaseUser) return supabaseUser;
+    // Fallback a localStorage
     try {
       const raw = localStorage.getItem(KEY);
       if (!raw) return null;
@@ -47,6 +81,10 @@
   }
 
   function logout() {
+    // Cerrar sesión en Supabase si está disponible
+    if (window.KavariAuth && window.KavariAuth.signOut) {
+      window.KavariAuth.signOut();
+    }
     localStorage.removeItem(KEY);
     renderNavAccount();
   }
@@ -68,12 +106,14 @@
 
     const planLabel = window.t ? window.t('planesNavPlanes') : (en ? 'Plans' : 'Planes');
     const loginLabel = window.t ? window.t('planesNavMiCuenta') : (en ? 'My account' : 'Mi cuenta');
+    const profileLabel = window.t ? window.t('navMiPerfil') : (en ? 'My Profile' : 'Mi Perfil');
     const accountLabel = user
       ? `👤 ${escapeHtml(user.name)}`
       : loginLabel;
 
     wrap.innerHTML =
       `<a href="planes.html" class="kavari-nav-plan">${planLabel}</a>` +
+      `<a href="perfil.html" class="kavari-nav-profile">${profileLabel}</a>` +
       `<a href="cuenta.html" class="kavari-nav-user">${accountLabel}</a>`;
 
     target.appendChild(wrap);
@@ -90,6 +130,7 @@
 
   document.addEventListener('DOMContentLoaded', renderNavAccount);
   window.addEventListener('kavari:langchange', renderNavAccount);
+  window.addEventListener('kavari:authchange', renderNavAccount);
 })();
 /* Controlador de la vista de cuenta (tarjeta de embarque KAVARI). */
 (function () {

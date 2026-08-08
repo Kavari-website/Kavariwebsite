@@ -1,0 +1,537 @@
+/**
+ * perfil.css — Estilos para la página de perfil KAVARI
+ * Diseño consistente con el sistema visual existente (account.css, ui-system.css)
+ */
+
+/* ─── Variables del perfil ─── */
+.perfil-container {
+  width: min(720px, 100%);
+  margin: 0 auto;
+}
+
+/* ─── Auth Required / Login / Register ─── */
+.perfil-auth-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border: 1px solid var(--kv-line);
+  border-radius: 24px;
+  padding: 40px 36px;
+  box-shadow: 0 40px 90px rgba(2,6,16,.55), 0 1px 0 rgba(255,255,255,.08) inset;
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+}
+
+.perfil-auth-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(155deg, rgba(61,123,239,.55), rgba(255,255,255,.06) 40%, rgba(242,184,114,.35));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.perfil-auth-card h2 {
+  font-family: "Manrope", "Inter", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  text-align: center;
+  letter-spacing: -.01em;
+}
+
+.perfil-auth-card > p {
+  text-align: center;
+  color: var(--kv-mist-dim);
+  margin-bottom: 28px;
+  font-size: 0.95rem;
+}
+
+.perfil-auth-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--kv-blue);
+}
+
+.perfil-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Banner de error */
+.perfil-auth-error {
+  display: none;
+  padding: 12px 16px;
+  margin: 0 0 18px;
+  border: 1px solid rgba(239,124,124,.45);
+  border-radius: 12px;
+  background: rgba(239,68,68,.10);
+  color: #ef7c7c;
+  font-size: .88rem;
+  line-height: 1.45;
+}
+
+/* ─── Divider ─── */
+.perfil-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: var(--kv-mist-dim);
+  font-size: 0.85rem;
+}
+
+.perfil-divider::before,
+.perfil-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--kv-line);
+}
+
+/* ─── Google / GitHub Button ─── */
+.perfil-google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid var(--kv-line);
+  border-radius: 12px;
+  background: var(--kv-glass);
+  color: var(--kv-ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.perfil-google-btn svg {
+  flex-shrink: 0;
+}
+
+.perfil-google-btn:hover {
+  border-color: rgba(66,133,244,.5);
+  background: rgba(61,123,239,.10);
+  box-shadow: 0 8px 20px rgba(46,110,220,.18);
+}
+
+.perfil-google-btn:active {
+  transform: translateY(1px) scale(.99);
+}
+
+.perfil-google-btn iframe {
+  width: 100% !important;
+  border-radius: 10px !important;
+}
+
+[data-theme="dark"] .perfil-google-btn {
+  background: rgba(255,255,255,.04);
+  color: #f8fafc;
+}
+
+/* ─── OTP Section ─── */
+.perfil-otp-link {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: none;
+  color: var(--kv-blue);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.perfil-otp-link:hover {
+  text-decoration: underline;
+}
+
+.perfil-otp-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.otp-send,
+.otp-verify {
+  width: 100%;
+}
+
+/* ─── Register Link ─── */
+.perfil-register-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--kv-mist-dim);
+}
+
+.perfil-register-link button {
+  background: none;
+  border: none;
+  color: var(--kv-blue);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.perfil-register-link button:hover {
+  text-decoration: underline;
+}
+
+/* ─── Profile View ─── */
+.perfil-view {
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border: 1px solid var(--kv-line);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 40px 90px rgba(2,6,16,.55), 0 1px 0 rgba(255,255,255,.08) inset;
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+}
+
+/* ─── Profile Header ─── */
+.perfil-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 32px 36px;
+  border-bottom: 1px solid var(--kv-line);
+  background: linear-gradient(155deg, rgba(61,123,239,.14), rgba(16,40,77,.08) 60%, rgba(8,17,32,.10));
+}
+
+.perfil-avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.perfil-avatar {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--kv-blue), #1d4678);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.perfil-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.perfil-avatar-initials {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.perfil-avatar-upload {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.perfil-avatar:hover .perfil-avatar-upload {
+  opacity: 1;
+}
+
+.perfil-header-info h1 {
+  font-family: "Manrope", "Inter", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.perfil-email {
+  color: var(--kv-mist-dim);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.perfil-plan-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, rgba(46,110,220,.15), rgba(46,110,220,.08));
+  color: var(--kv-blue);
+  border: 1px solid rgba(46,110,220,.25);
+}
+
+.perfil-logout-btn {
+  padding: 10px 20px;
+  border: 1px solid var(--kv-line);
+  border-radius: 999px;
+  background: var(--kv-glass);
+  color: var(--kv-ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.perfil-logout-btn:hover {
+  background: rgba(220,38,38,.08);
+  border-color: rgba(220,38,38,.35);
+  color: #dc2626;
+}
+
+/* ─── Tabs ─── */
+.perfil-tabs {
+  display: flex;
+  gap: 6px;
+  border-bottom: 1px solid var(--kv-line);
+  padding: 14px 36px 0;
+  background: rgba(255,255,255,.02);
+}
+
+.perfil-tab {
+  padding: 11px 18px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+  color: var(--kv-mist-dim);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color .2s ease, background .2s ease, border-color .2s ease;
+  white-space: nowrap;
+}
+
+.perfil-tab:hover {
+  color: var(--kv-ink);
+  background: rgba(255,255,255,.04);
+}
+
+.perfil-tab.active {
+  color: var(--kv-blue);
+  background: rgba(61,123,239,.10);
+  border-color: var(--kv-line);
+  border-bottom-color: transparent;
+}
+
+.perfil-tab:hover {
+  color: var(--kv-ink);
+}
+
+.perfil-tab.active {
+  color: var(--kv-blue);
+  border-bottom-color: var(--kv-blue);
+}
+
+[data-theme="dark"] .perfil-tab { color: rgba(248,250,252,.5); }
+[data-theme="dark"] .perfil-tab:hover { color: #f8fafc; }
+[data-theme="dark"] .perfil-tab.active { color: var(--kv-blue-light); border-bottom-color: var(--kv-blue-light); }
+
+/* ─── Tab Content ─── */
+.perfil-tab-content {
+  display: none;
+  padding: 32px 36px;
+}
+
+.perfil-tab-content.active {
+  display: block;
+}
+
+.perfil-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.perfil-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .perfil-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.perfil-status {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--kv-blue);
+  min-height: 20px;
+}
+
+.perfil-status.is-error {
+  color: #dc2626;
+}
+
+/* ─── Settings ─── */
+.perfil-settings-section {
+  margin-bottom: 28px;
+}
+
+.perfil-settings-section h3 {
+  font-family: "Manrope", "Inter", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--kv-ink);
+}
+
+[data-theme="dark"] .perfil-settings-section h3 { color: #f8fafc; }
+
+.perfil-settings-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border: 1px solid var(--kv-line);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  background: rgba(255,255,255,.03);
+}
+
+.perfil-settings-value {
+  color: var(--kv-mist-dim);
+  font-weight: 500;
+}
+
+.perfil-settings-link {
+  color: var(--kv-blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.perfil-settings-link:hover {
+  text-decoration: underline;
+}
+
+.perfil-settings-toggle {
+  padding: 7px 18px;
+  border: 1px solid var(--kv-line);
+  border-radius: 999px;
+  background: var(--kv-glass);
+  color: var(--kv-ink);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.perfil-settings-toggle:hover {
+  background: rgba(61,123,239,.10);
+  border-color: rgba(61,123,239,.4);
+  box-shadow: 0 6px 16px rgba(46,110,220,.15);
+}
+
+.perfil-danger-btn {
+  padding: 11px 22px;
+  border: 1px solid rgba(220,38,38,.3);
+  border-radius: 999px;
+  background: rgba(220,38,38,.06);
+  color: #dc2626;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.perfil-danger-btn:hover {
+  background: rgba(220,38,38,.12);
+  border-color: rgba(220,38,38,.5);
+  box-shadow: 0 8px 20px rgba(220,38,38,.15);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .perfil-auth-card {
+    padding: 28px 20px;
+  }
+
+  .perfil-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px 20px;
+  }
+
+  .perfil-tabs {
+    padding: 12px 20px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .perfil-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .perfil-tab-content {
+    padding: 24px 20px;
+  }
+
+  .perfil-avatar-section {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ─── Animaciones ─── */
+@keyframes perfilFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.perfil-view,
+.perfil-auth-card {
+  animation: perfilFadeIn .4s cubic-bezier(.2,.8,.2,1) both;
+}
+
+/* ─── Loading State ─── */
+.perfil-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: var(--kv-mist-dim);
+}
+
+.perfil-loading::after {
+  content: '';
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--kv-line);
+  border-top-color: var(--kv-blue);
+  border-radius: 50%;
+  animation: perfilSpin .8s linear infinite;
+  margin-left: 12px;
+}
+
+@keyframes perfilSpin {
+  to { transform: rotate(360deg); }
+}

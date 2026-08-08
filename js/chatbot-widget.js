@@ -24,10 +24,12 @@
   const generalQuestions = [
     { qKey: 'chatQDestino', key: 'destino' },
     { qKey: 'chatQGuias', key: 'guía' },
+    { qKey: 'chatQPlanes', key: 'planes' },
+    { qKey: 'chatQCuenta', key: 'cuenta' },
     { qKey: 'chatQIdioma', key: 'idioma' },
     { qKey: 'chatQPaquetes', key: 'paquete' },
-    { qKey: 'chatQCuenta', key: 'cuenta' },
-    { qKey: 'chatQPlanes', key: 'planes' }
+    { qKey: 'chatQAyuda', key: 'ayuda' },
+    { qKey: 'chatQContacto', key: 'contacto' }
   ];
 
   function getDestinationQuestions(d) {

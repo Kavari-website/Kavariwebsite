@@ -204,31 +204,132 @@
       : `Solo puedo responder con esta ficha de <strong>${name}</strong>. Prueba preguntando por: ${topics.join(', ')}.`;
   };
 
+  /* ---------- intenciones generales (fuera de una ficha de destino) ---------- */
+  const GENERAL_INTENTS = [
+    {
+      name: 'saludo',
+      keywords: ['hola', 'buenas', 'buenos dias', 'buenas tardes', 'buenas noches', 'hi', 'hello', 'hey', 'que tal'],
+      handler: en => en
+        ? 'Hi! I\'m Kari, the KAVARI assistant. Ask me about destinations, guides, plans, your account, language, theme, contact or how the site works.'
+        : '¡Hola! Soy Kari, el asistente de KAVARI. Pregúntame por destinos, guías, planes, tu cuenta, idioma, tema, contacto o cómo funciona el sitio.'
+    },
+    {
+      name: 'gracias',
+      keywords: ['gracias', 'genial', 'perfecto', 'excelente', 'thanks', 'thank you', 'great', 'awesome'],
+      handler: en => en ? 'You\'re welcome! Anything else I can help with?' : '¡De nada! ¿Algo más en lo que pueda ayudarte?'
+    },
+    {
+      name: 'identidad',
+      keywords: ['quien eres', 'eres un bot', 'eres una ia', 'eres humano', 'who are you', 'are you a bot', 'are you ai', 'que eres'],
+      handler: en => en
+        ? 'I\'m Kari, KAVARI\'s virtual assistant. I answer using the information published on this site — destinations, guides, plans and account help.'
+        : 'Soy Kari, el asistente virtual de KAVARI. Respondo con la información publicada en este sitio: destinos, guías, planes y ayuda con tu cuenta.'
+    },
+    {
+      name: 'ayuda',
+      keywords: ['ayuda', 'que puedes hacer', 'que sabes', 'capacidades', 'help', 'what can you do', 'en que me ayudas'],
+      handler: en => en
+        ? 'I can help with: finding destinations, tourist guides, travel plans and pricing, creating or managing your account, and site settings like language or dark mode. Ask me anything about those.'
+        : 'Puedo ayudarte con: buscar destinos, guías turísticos, planes de viaje y precios, crear o gestionar tu cuenta, y ajustes del sitio como idioma o modo oscuro. Pregúntame lo que necesites sobre eso.'
+    },
+    {
+      name: 'quees',
+      keywords: ['que es kavari', 'como funciona kavari', 'para que sirve kavari', 'what is kavari', 'how does kavari work'],
+      handler: en => en
+        ? 'KAVARI is a travel platform: browse destinations by country, see culture, food, activities and practical info, find certified local guides, compare flights and stays, and manage everything from your account.'
+        : 'KAVARI es una plataforma de viajes: explora destinos por país, mira cultura, gastronomía, actividades e info práctica, encuentra guías locales certificados, compara vuelos y hospedajes, y gestiona todo desde tu cuenta.'
+    },
+    {
+      name: 'destinos',
+      keywords: ['destino', 'destinos', 'pais', 'paises', 'buscar destino', 'a donde viajar', 'donde viajar', 'destination', 'destinations', 'country', 'countries', 'where to travel'],
+      handler: en => en
+        ? 'Open <strong>Destinations</strong> in the navigation to browse countries. Each country page has places, food, culture, activities, guides, flights, stays and practical info.'
+        : 'Abre <strong>Destinos</strong> en la navegación para explorar países. Cada ficha de país tiene lugares, gastronomía, cultura, actividades, guías, vuelos, hospedajes e info práctica.'
+    },
+    {
+      name: 'guias',
+      keywords: ['guia', 'guias', 'tour', 'tours', 'guide', 'guides', 'guia turistico', 'tourist guide'],
+      handler: en => en
+        ? 'The <strong>Guides</strong> page and every destination page show the certified local guides KAVARI has listed, with their specialties and rates.'
+        : 'La página <strong>Guías</strong> y cada ficha de destino muestran los guías locales certificados que KAVARI tiene listados, con sus especialidades y tarifas.'
+    },
+    {
+      name: 'planes',
+      keywords: ['plan', 'planes', 'membres', 'membership', 'precio del plan', 'suscripcion', 'pricing', 'subscription', 'tarifas del plan'],
+      handler: en => en
+        ? 'Open <strong>Plans</strong> in the navigation to compare Traveler, Explorer and Professional Guide. This demo saves your choice on this device.'
+        : 'Abre <strong>Planes</strong> en la navegación para comparar Viajero, Explorador y Guía profesional. Esta demo guarda tu elección en este dispositivo.'
+    },
+    {
+      name: 'cuenta',
+      keywords: ['cuenta', 'registr', 'login', 'ingresar', 'iniciar sesion', 'crear cuenta', 'join', 'account', 'sign up', 'log in', 'contrasena', 'password'],
+      handler: en => en
+        ? 'Use <strong>Log in / Join</strong> in the navigation to sign in, register, or continue with Google. Once registered, you can edit your info, travel preferences and settings from your profile.'
+        : 'Usa <strong>Ingresar / Unirme</strong> en la navegación para entrar, registrarte o continuar con Google. Ya registrado, puedes editar tu información, preferencias de viaje y configuración desde tu perfil.'
+    },
+    {
+      name: 'idioma_tema',
+      keywords: ['idioma', 'language', 'ingles', 'english', 'espanol', 'spanish', 'oscuro', 'tema', 'dark mode', 'modo oscuro', 'modo claro'],
+      handler: en => en
+        ? 'Use the ES/EN switch and the theme button in the navigation to change language or turn on dark mode. Your choice is saved on this device.'
+        : 'Usa el interruptor ES/EN y el botón de tema en la navegación para cambiar el idioma o activar el modo oscuro. Tu elección se guarda en este dispositivo.'
+    },
+    {
+      name: 'contacto',
+      keywords: ['contacto', 'soporte', 'ayuda humana', 'hablar con alguien', 'contact', 'support', 'talk to someone', 'reclamo', 'queja'],
+      handler: en => en
+        ? 'For anything I can\'t solve, open <strong>Contact</strong> in the footer to reach the KAVARI team directly.'
+        : 'Para lo que no pueda resolver yo, abre <strong>Contacto</strong> en el pie de página para escribirle directo al equipo de KAVARI.'
+    },
+    {
+      name: 'privacidad',
+      keywords: ['privacidad', 'datos personales', 'seguridad de mis datos', 'privacy', 'my data', 'data security'],
+      handler: en => en
+        ? 'Your account data is stored securely and only used to personalize your KAVARI experience. Check the Privacy Policy linked at registration for details.'
+        : 'Los datos de tu cuenta se guardan de forma segura y solo se usan para personalizar tu experiencia en KAVARI. Revisa la Política de Privacidad enlazada en el registro para más detalles.'
+    },
+    {
+      name: 'presupuesto_general',
+      keywords: ['presupuesto', 'precio', 'precios', 'costo', 'costos', 'cuanto cuesta', 'cuanto vale', 'budget', 'price', 'cost', 'how much does it cost', 'how much is'],
+      handler: en => en
+        ? 'Prices depend on the destination. Open a country page and ask me there — I\'ll pull the flights, stays and guide rates loaded for that page.'
+        : 'Los precios dependen del destino. Abre la ficha de un país y pregúntame ahí — te muestro los vuelos, hospedajes y tarifas de guías cargados en esa ficha.'
+    },
+    {
+      name: 'clima_general',
+      keywords: ['clima', 'temporada', 'epoca', 'weather', 'season', 'best time to visit'],
+      handler: en => en
+        ? 'Weather and seasons are shown per destination. Open a country page and ask me about its seasons there.'
+        : 'El clima y las temporadas se muestran por destino. Abre la ficha de un país y pregúntame por sus temporadas ahí.'
+    }
+  ];
+
+  function bestGeneralIntent(qNorm) {
+    let best = null;
+    let bestScore = 0;
+    for (const intent of GENERAL_INTENTS) {
+      let score = 0;
+      for (const kw of intent.keywords) {
+        if (qNorm.includes(normalize(kw))) score += kw.split(' ').length;
+      }
+      if (score > bestScore) { bestScore = score; best = intent; }
+    }
+    return bestScore > 0 ? best : null;
+  }
+
   /* ---------- respuesta general (fuera de una ficha de destino) ---------- */
   window.generateGeneralResponse = function (q) {
     const en = lang();
     const qNorm = normalize(q);
 
-    if (/\b(hola|buenas|hi|hello|hey)\b/.test(qNorm)) {
-      return en ? 'Hi! Ask me about destinations, guides, plans, your account, language or theme.' : '¡Hola! Pregúntame por destinos, guías, planes, tu cuenta, idioma o tema.';
-    }
-    if (/\b(gracias|thanks|thank you)\b/.test(qNorm)) {
-      return en ? 'You\'re welcome!' : '¡De nada!';
-    }
-    if (/\b(plan|membres|membership)\b/.test(qNorm)) {
-      return en ? 'Open <strong>Plans</strong> in the navigation to choose Traveler, Explorer or Professional Guide. This demo saves your choice on this device.' : 'Abre <strong>Planes</strong> en la navegación para elegir Viajero, Explorador o Guía profesional. Esta demo guarda la elección en este dispositivo.';
-    }
-    if (/\b(cuenta|registr|login|ingresar|join|account)\b/.test(qNorm)) {
-      return en ? 'Use <strong>Log in / Join</strong> in the navigation. Once registered, it becomes your account name.' : 'Usa <strong>Ingresar / Unirme</strong> en la navegación. Al registrarte, aparecerá el nombre de tu cuenta.';
-    }
-    if (/\b(guia|guias|guide)\b/.test(qNorm)) {
-      return en ? 'The Guides page and every destination page show the guides that KAVARI has listed.' : 'La página Guías y cada destino muestran los guías que KAVARI tenga listados.';
-    }
-    if (/\b(idioma|language|oscuro|tema|dark)\b/.test(qNorm)) {
-      return en ? 'Use the ES/EN and theme controls in the navigation. Your preference is saved.' : 'Usa los controles ES/EN y de tema en la navegación. Tu preferencia se guarda.';
-    }
+    const intent = bestGeneralIntent(qNorm);
+    if (intent) return intent.handler(en);
+
+    const topics = en
+      ? ['destinations', 'guides', 'plans', 'your account', 'language/theme', 'contact']
+      : ['destinos', 'guías', 'planes', 'tu cuenta', 'idioma/tema', 'contacto'];
     return en
-      ? 'I answer only about KAVARI. Ask about destinations, guides, plans, your account, language or the theme.'
-      : 'Respondo solo sobre KAVARI. Pregunta por destinos, guías, planes, tu cuenta, idioma o tema.';
+      ? `I answer only about KAVARI. Try asking about: ${topics.join(', ')}.`
+      : `Respondo solo sobre KAVARI. Prueba preguntando por: ${topics.join(', ')}.`;
   };
 })();
