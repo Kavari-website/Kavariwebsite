@@ -169,6 +169,7 @@
 
 /* ─── Botón Google / GitHub ─── */
 .perfil-google-btn {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -191,6 +192,24 @@
   flex-shrink: 0;
 }
 
+/* Overlay invisible de Google Identity Services: GIS dibuja ahí su botón
+   oficial (captura el clic y abre el popup de Google) mientras el diseño
+   visible del botón sigue siendo el personalizado, idéntico al de GitHub. */
+.perfil-google-btn .gsi-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  overflow: hidden;
+  opacity: .001;
+}
+
+.perfil-google-btn .gsi-overlay iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0;
+}
+
 .perfil-google-btn:hover {
   border-color: rgba(46, 110, 220, .5);
   background: rgba(46, 110, 220, .08);
@@ -201,11 +220,6 @@
 .perfil-google-btn:active {
   transform: scale(.97);
   transition-duration: .1s;
-}
-
-.perfil-google-btn iframe {
-  width: 100% !important;
-  border-radius: 10px !important;
 }
 
 [data-theme="dark"] .perfil-google-btn {

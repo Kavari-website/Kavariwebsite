@@ -579,8 +579,14 @@ body.menu-open {
     font-size: 1.6rem;
   }
 
+  /* Franja de característica: apilada (imagen arriba, texto abajo) */
   .feature-band {
+    grid-template-columns: 1fr;
     min-height: 0;
+  }
+
+  .feature-band.rev {
+    direction: ltr;
   }
 
   .feature-img {
@@ -751,6 +757,133 @@ body.menu-open {
   }
 }
 
+/* ─── Perfil / autenticación en móvil (medidas ajustadas) ─── */
+@media (max-width: 640px) {
+  /* Evita que iOS haga zoom automático al enfocar los campos */
+  .perfil-container input,
+  .perfil-container select,
+  .perfil-container textarea {
+    font-size: 16px;
+  }
+
+  .auth-field label {
+    font-size: .82rem;
+  }
+
+  .auth-input-wrap input {
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .perfil-container {
+    padding: 0 2px;
+  }
+
+  .perfil-auth-card {
+    padding: 26px 16px;
+    border-radius: 16px;
+  }
+
+  .perfil-auth-card h2 {
+    font-size: 1.35rem;
+  }
+
+  .perfil-header {
+    padding: 20px 16px;
+  }
+
+  .perfil-avatar {
+    width: 68px;
+    height: 68px;
+  }
+
+  .perfil-avatar-initials {
+    font-size: 1.5rem;
+  }
+
+  .perfil-header-info h1 {
+    font-size: 1.2rem;
+  }
+
+  .perfil-tab {
+    padding: 10px 14px;
+    font-size: .84rem;
+  }
+
+  .perfil-tab-content {
+    padding: 20px 16px;
+  }
+
+  .perfil-form-grid {
+    gap: 14px;
+  }
+
+  .perfil-fav-sortbar {
+    gap: 6px;
+  }
+
+  .perfil-fav-sortbtn {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 10px;
+    font-size: .76rem;
+  }
+
+  .perfil-fav-sortlabel {
+    width: 100%;
+  }
+
+  .perfil-settings-item {
+    padding: 13px 14px;
+  }
+
+  .perfil-container .auth-submit {
+    padding: 14px 20px;
+  }
+
+  .perfil-google-btn {
+    padding: 12px 14px;
+  }
+
+  .perfil-divider {
+    margin: 16px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Cuenta: aprovechar mejor el ancho en pantallas pequeñas */
+  .auth-copy,
+  .auth-panel {
+    padding: 28px 18px;
+  }
+
+  .auth-user .ticket-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .perfil-auth-card {
+    padding: 22px 12px;
+  }
+
+  .perfil-avatar-section {
+    gap: 12px;
+  }
+
+  .perfil-fav-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .perfil-fav-name {
+    padding: 9px 10px;
+    font-size: .82rem;
+  }
+}
+
 /* ══════════════════════════════════════════════════════════════════════════
    08 · AYUDA (ayuda.html)
    ══════════════════════════════════════════════════════════════════════════ */
@@ -847,6 +980,13 @@ body.menu-open {
   .contact-float h2 {
     font-size: 22px;
   }
+
+  /* Grids de 2-3 columnas → 1 columna en móvil (no quedan apretados) */
+  .contact-grid,
+  .quick-links,
+  .superate-details-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 560px) {
@@ -857,6 +997,12 @@ body.menu-open {
 
   .contact-float {
     padding: 26px 18px;
+  }
+
+  .superatebar {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
   }
 
   .contact-card,
@@ -922,6 +1068,11 @@ body.menu-open {
   .mv-section {
     width: 92%;
     gap: 16px;
+    grid-template-columns: 1fr;
+  }
+
+  .team-section-title h2 {
+    font-size: clamp(28px, 7vw, 36px);
   }
 
   .mv-card {

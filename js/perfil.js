@@ -611,16 +611,13 @@
   /* ─── Google Login (Google Identity Services + fallback OAuth) ─── */
 
   /**
-   * Renderiza el botón de Google SOLO cuando su vista está visible.
-   * GIS no dibuja el botón dentro de elementos con display:none (falla en silencio).
-   * Si GIS no está disponible o falla, se restaura el contenido original del botón
-   * y el click cae en handleGoogleClick() → OAuth redirect (igual que GitHub).
-   */
-  /**
-   * GIS solo funciona en https o en localhost (http). En file:// u orígenes
-   * no autorizados, Google lo rechaza con '[GSI_LOGGER]: origin not allowed'.
-   * En ese caso dejamos el botón personalizado y el click usa OAuth redirect
-   * de Supabase (el mismo flujo que ya funciona para GitHub).
+   * Diseño unificado: el botón visible es SIEMPRE el botón personalizado
+   * (clase .perfil-google-btn, idéntico al de GitHub). El botón oficial de
+   * Google Identity Services (GIS) se renderiza dentro de un overlay invisible
+   * que cubre el botón: captura el clic y abre el popup de Google, mientras el
+   * diseño que se ve es el personalizado. Si GIS no está disponible o el
+   * origen no es válido, el clic usa OAuth redirect de Supabase (igual que
+   * GitHub).
    */
   function gisOriginAllowed() {
     if (window.location.protocol === 'https:') return true;
@@ -634,34 +631,56 @@
   function renderGoogleButton(btn) {
     if (!btn) return;
     if (btn.dataset.gisRendered === 'true') return; // ya renderizado
-    if (!gisOriginAllowed()) {
-      // Origen no válido para GIS → usar OAuth redirect (como GitHub)
+    if (!gisOriginAllowed() || !window.google?.accounts?.id) {
+      // GIS no disponible → botón personalizado + OAuth redirect (como GitHub)
       btn.dataset.gisRendered = 'false';
       return;
     }
-    if (!window.google?.accounts?.id) return;
     // No renderizar si el botón (o su contenedor) está oculto
     if (btn.offsetParent === null) return;
 
-    // Guardamos el HTML original para poder restaurarlo si GIS falla
-    if (!btn.dataset.originalHtml) {
-      btn.dataset.originalHtml = btn.innerHTML;
+    // Guardamos el contenido personalizado (ícono + texto)
+    if (!btn.dataset.originalHtml) btn.dataset.originalHtml = btn.innerHTML;
+
+    // Overlay invisible donde GIS dibuja su botón oficial (captura el clic).
+    // El CSS (.gsi-overlay en perfil.css) es quien lo posiciona y lo oculta;
+    // si un navegador con caché vieja no lo aplicara, el overlay no cubre el
+    // botón y el clic cae en el botón personalizado → OAuth redirect (seguro).
+    let overlay = btn.querySelector('.gsi-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'gsi-overlay';
+      overlay.setAttribute('aria-hidden', 'true');
+      btn.appendChild(overlay);
     }
 
     try {
-      window.google.accounts.id.renderButton(btn, {
+      window.google.accounts.id.renderButton(overlay, {
         type: 'standard',
         theme: 'outline',
         size: 'large',
-        shape: 'rectangular',
+        shape: 'pill',
         text: 'continue_with',
-        width: btn.clientWidth || 320
+        width: btn.clientWidth || 320,
+        locale: (lang() === 'en') ? 'en' : 'es'
       });
       btn.dataset.gisRendered = 'true';
+      // El iframe de GIS se inyecta de forma (casi) síncrona. Si al cabo de
+      // un instante no apareció, quitamos el overlay: un overlay vacío sobre
+      // el botón bloquearía los clics y dejaría el botón muerto (sin popup y
+      // sin redirect). Al quitarlo, el botón personalizado sigue funcionando
+      // con OAuth redirect (igual que GitHub).
+      setTimeout(() => {
+        const ifr = overlay.querySelector('iframe');
+        if (!ifr) {
+          overlay.remove();
+          btn.dataset.gisRendered = 'false';
+        }
+      }, 600);
     } catch (e) {
       console.warn('[KAVARI Perfil] No se pudo renderizar el botón de Google, se usará redirección:', e);
+      overlay.remove();
       btn.dataset.gisRendered = 'false';
-      if (btn.dataset.originalHtml) btn.innerHTML = btn.dataset.originalHtml;
     }
   }
 
@@ -682,7 +701,7 @@
       console.warn('[KAVARI Perfil] No se pudo inicializar Google Identity Services:', e);
     }
 
-    // El botón se renderiza cuando la vista esté visible (ver showView)
+    // El botón de GIS se renderiza en el overlay cuando la vista es visible (ver showView)
   }
 
   /**
@@ -701,14 +720,15 @@
   }
 
   /**
-   * Click del botón de Google. Si GIS renderizó su iframe, GIS maneja el evento
-   * y NO llega aquí (el iframe intercepta el click). Si llegamos aquí, GIS no
-   * está disponible o el origen no es válido, así que usamos el flujo de
-   * redirección de Supabase (el mismo que ya funciona para GitHub).
+   * Click del botón de Google. Si GIS renderizó su iframe en el overlay de
+   * ESTE botón, GIS maneja el evento (el overlay está encima y captura el
+   * clic) y no llega aquí. Si llegamos aquí, GIS no está disponible o el
+   * origen no es válido, así que usamos el flujo de redirección de Supabase
+   * (el mismo que ya funciona para GitHub).
    */
-  async function handleGoogleClick() {
-    if (els.googleLoginBtn?.querySelector('iframe') || els.googleRegisterBtn?.querySelector('iframe')) {
-      return;
+  async function handleGoogleClick(btn) {
+    if (btn && btn.querySelector('iframe')) {
+      return; // GIS maneja el clic
     }
     await startGoogleRedirect();
   }
@@ -1024,10 +1044,10 @@
     if (els.registerForm) els.registerForm.addEventListener('submit', handleRegister);
     if (els.githubLoginBtn) els.githubLoginBtn.addEventListener('click', handleGitHubLogin);
     if (els.githubRegisterBtn) els.githubRegisterBtn.addEventListener('click', handleGitHubLogin);
-    // Google: GIS renderiza su propio botón cuando está disponible; si no,
-    // el click cae aquí y usa OAuth redirect (mismo flujo que GitHub).
-    if (els.googleLoginBtn) els.googleLoginBtn.addEventListener('click', handleGoogleClick);
-    if (els.googleRegisterBtn) els.googleRegisterBtn.addEventListener('click', handleGoogleClick);
+    // Google: GIS captura el clic con su overlay invisible; si no está
+    // disponible, el clic cae aquí y usa OAuth redirect (mismo flujo que GitHub).
+    if (els.googleLoginBtn) els.googleLoginBtn.addEventListener('click', () => handleGoogleClick(els.googleLoginBtn));
+    if (els.googleRegisterBtn) els.googleRegisterBtn.addEventListener('click', () => handleGoogleClick(els.googleRegisterBtn));
     if (els.showOtpBtn) els.showOtpBtn.addEventListener('click', () => {
       els.otpSection.style.display = els.otpSection.style.display === 'none' ? 'flex' : 'none';
     });
