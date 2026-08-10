@@ -1,25 +1,35 @@
 /**
- * chatbot-widget.js — Asistente flotante KAVARI (todas las páginas) · v2
- * Mejoras sobre la v1:
- *  - Indicador "escribiendo..." antes de mostrar la respuesta
- *  - Cierre con Esc y clic fuera del panel
- *  - Foco accesible: al abrir enfoca el input, aria-live en mensajes,
- *    aria-expanded correcto, rol de diálogo bien anunciado
- *  - Input + botón de enviar se deshabilitan mientras "piensa"
- *    (evita mensajes duplicados por doble clic o Enter repetido)
- *  - Insignia de "no leído" en el botón flotante antes de abrir por
- *    primera vez, para invitar a interactuar
- *  - Manejo de errores: si data.json falla, el bot avisa en vez de
- *    quedarse mudo; si generateChatResponse lanza un error, no rompe
- *    el widget
- *  - Historial de conversación se conserva en memoria por contexto
- *    (no se resetea si vuelves a abrir el panel sin cambiar de país)
+ * chatbot-widget.js — Asistente flotante KAVARI (todas las páginas) · v3
+ * Cambios de la v3 (memoria e IA):
+ *  - MEMORIA de conversación por contexto (país o general): cada charla
+ *    se guarda en localStorage y se restaura al volver a abrir el chat,
+ *    aunque cambies de página. Con sesión iniciada también se guarda en
+ *    Supabase (tabla chat_messages) y se recuerda en cualquier dispositivo.
+ *  - El historial de los últimos mensajes se envía al servidor para que el
+ *    asistente (Gemini) recuerde el contexto de la conversación.
+ *  - Se envía también el perfil del usuario (nombre, plan, favoritos) para
+ *    personalizar las respuestas.
+ *  - Las respuestas de la IA se renderizan como markdown simple (**negrita**,
+ *    listas "-", saltos de línea) con texto escapado (seguro).
+ *  - El endpoint del servidor se puede cambiar con localStorage
+ *    'kavari-chat-api' (por defecto localhost:3007 en desarrollo, o la
+ *    misma URL del sitio en producción).
+ *  - Timeout ampliado a 35s (Gemini tarda más que el motor local).
  */
 (function () {
   let ctx = { country: null, guias: [], aerolineas: [], hospedajes: [] };
   let opened = false;
   let welcomeShown = false;
   let thinking = false;
+
+  const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  const CHAT_API = (localStorage.getItem('kavari-chat-api') || (isLocal ? 'http://localhost:3007' : '')).replace(/\/+$/, '');
+  const CHAT_URL = CHAT_API + '/api/chat';
+  const MAX_HISTORY = 24;
+
+  function lang() {
+    return (localStorage.getItem('kavari-idioma') || 'es') === 'en';
+  }
 
   const generalQuestions = [
     { qKey: 'chatQDestino', key: 'destino' },
@@ -42,6 +52,105 @@
       { q: t('chatBtnDestinoPlatos'), text: t('chatQDestinoPlatos').replace('{nombre}', n) },
       { q: t('chatBtnDestinoCosto'), text: t('chatQDestinoCosto').replace('{nombre}', n) }
     ];
+  }
+
+  /* ═══════════════════ memoria de conversación ═══════════════════ */
+  function slugify(s) {
+    return String(s || '').toLowerCase().normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function contextKey() {
+    if (ctx.country?.nombre) return 'pais-' + slugify(ctx.country.nombre);
+    if (ctx.country?.code) return 'pais-' + String(ctx.country.code);
+    return 'general';
+  }
+
+  function historyKey() {
+    return 'kavari-chat-history-' + contextKey();
+  }
+
+  function loadHistory() {
+    try {
+      const h = JSON.parse(localStorage.getItem(historyKey()) || '[]');
+      return Array.isArray(h) ? h : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function saveHistory(h) {
+    try {
+      localStorage.setItem(historyKey(), JSON.stringify(h.slice(-MAX_HISTORY)));
+    } catch (_) { /* almacenamiento lleno */ }
+  }
+
+  async function getUserId() {
+    try {
+      const s = await window.KavariDB?.getCurrentSession?.();
+      return s?.user?.id || null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  async function supabaseLoadHistory(userId) {
+    if (!userId) return null;
+    try {
+      const client = window.KavariDB?.getSupabaseClient?.();
+      if (!client) return null;
+      const { data, error } = await client
+        .from('chat_messages')
+        .select('role, content, created_at')
+        .eq('user_id', userId)
+        .eq('session_key', contextKey())
+        .order('created_at', { ascending: true })
+        .limit(MAX_HISTORY);
+      if (error || !data || !data.length) return null;
+      return data.map(r => ({ role: r.role === 'model' ? 'model' : 'user', text: r.content }));
+    } catch (_) {
+      return null;
+    }
+  }
+
+  async function supabaseSaveTurn(userId, role, text) {
+    if (!userId) return;
+    try {
+      const client = window.KavariDB?.getSupabaseClient?.();
+      if (!client) return;
+      await client.from('chat_messages').insert({
+        user_id: userId,
+        session_key: contextKey(),
+        role,
+        content: String(text).slice(0, 4000)
+      });
+    } catch (_) { /* sin tabla todavía: no rompe nada */ }
+  }
+
+  function pushTurn(role, text) {
+    if (!text || !String(text).trim()) return;
+    const hist = loadHistory();
+    hist.push({ role, text: String(text).trim() });
+    saveHistory(hist);
+    getUserId().then(id => { if (id) supabaseSaveTurn(id, role, String(text).trim()); });
+  }
+
+  function userInfo() {
+    const info = { name: null, plan: null, favorites: [] };
+    try {
+      const u = JSON.parse(localStorage.getItem('kavari-user') || 'null');
+      if (u && u.name) info.name = String(u.name).slice(0, 60);
+    } catch (_) { /* sin sesión local */ }
+    try {
+      info.plan = localStorage.getItem('kavari-plan') || null;
+    } catch (_) { /* noop */ }
+    try {
+      const likes = JSON.parse(localStorage.getItem('kavari-pais-likes') || '{}');
+      info.favorites = Object.keys(likes || {});
+    } catch (_) { /* noop */ }
+    return info;
   }
 
   /* ═══════════════════ construcción del widget ═══════════════════ */
@@ -102,18 +211,15 @@
       if (e.key === 'Enter') sendFromInput();
     });
 
-    // Cerrar con Esc
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && opened) close();
     });
 
-    // Cerrar al hacer clic fuera del panel (pero no sobre el botón flotante)
     document.addEventListener('click', e => {
       if (!opened) return;
       const root = document.getElementById('kavari-chat-root');
       if (root && !root.contains(e.target)) close();
     });
-    // Evita que el clic dentro del panel burbujee y cierre el propio chat
     panel.addEventListener('click', e => e.stopPropagation());
 
     window.addEventListener('kavari:langchange', refreshUI);
@@ -143,9 +249,8 @@
     document.getElementById('kavari-asistente').classList.add('activo');
     document.getElementById('kavari-chat-btn').classList.add('activo');
     document.getElementById('kavari-chat-btn').setAttribute('aria-expanded', 'true');
-    if (!welcomeShown) showWelcome();
+    restoreMemory();
     renderQuestions();
-    // Enfocar el input al abrir, sin robar el foco de forma agresiva
     setTimeout(() => {
       const input = document.getElementById('kavari-chat-input');
       if (input) input.focus({ preventScroll: true });
@@ -160,6 +265,45 @@
     document.getElementById('kavari-chat-btn').classList.remove('activo');
     document.getElementById('kavari-chat-btn').setAttribute('aria-expanded', 'false');
     setTimeout(() => panel.classList.remove('cerrando'), 300);
+  }
+
+  /* ═══════════════════ memoria visual ═══════════════════ */
+  // Muestra el historial guardado (memoria) del contexto actual.
+  function restoreMemory() {
+    const box = document.getElementById('kavari-mensajes');
+    if (!box) return;
+    welcomeShown = false;
+    box.innerHTML = '';
+
+    const hist = loadHistory();
+    hist.forEach(m => {
+      if (m.role === 'model') {
+        addBotMessage(renderBotText(m.text), false);
+      } else {
+        addUserMessage(m.text);
+      }
+    });
+    box.scrollTop = box.scrollHeight;
+
+    // Si hay sesión, intentamos recuperar desde Supabase (memoria en la nube).
+    getUserId().then(async userId => {
+      if (!userId) {
+        if (!hist.length) showWelcome();
+        return;
+      }
+      const cloud = await supabaseLoadHistory(userId);
+      if (cloud && cloud.length) {
+        saveHistory(cloud);
+        box.innerHTML = '';
+        cloud.forEach(m => {
+          if (m.role === 'model') addBotMessage(renderBotText(m.text), false);
+          else addUserMessage(m.text);
+        });
+        box.scrollTop = box.scrollHeight;
+      } else if (!hist.length) {
+        showWelcome();
+      }
+    });
   }
 
   /* ═══════════════════ mensajes ═══════════════════ */
@@ -221,10 +365,34 @@
       .replace(/>/g, '&gt;');
   }
 
+  // Convierte markdown simple de la IA en HTML seguro (texto escapado).
+  function renderBotText(text) {
+    let html = escapeHtml(text || '');
+    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    const lines = html.split('\n');
+    const out = [];
+    let inList = false;
+    for (const line of lines) {
+      const m = line.match(/^\s*[-*]\s+(.*)$/);
+      if (m) {
+        if (!inList) { out.push('<ul>'); inList = true; }
+        out.push('<li>' + m[1].trim() + '</li>');
+      } else {
+        if (inList) { out.push('</ul>'); inList = false; }
+        out.push(line);
+      }
+    }
+    if (inList) out.push('</ul>');
+    html = out.join('\n')
+      .replace(/\n{2,}/g, '<br><br>')
+      .replace(/\n/g, '<br>');
+    return html;
+  }
+
   function addUserMessage(text) {
     const div = document.createElement('div');
     div.className = 'kb-msg-user';
-    div.textContent = text; // textContent evita inyección de HTML
+    div.textContent = text;
     const box = document.getElementById('kavari-mensajes');
     box.appendChild(div);
     box.scrollTop = box.scrollHeight;
@@ -233,7 +401,7 @@
   function addBotMessage(html, isWelcome) {
     const div = document.createElement('div');
     div.className = isWelcome ? 'kb-msg-welcome' : 'kb-msg-bot';
-    div.innerHTML = html; // html viene solo de nuestras propias funciones (chat-brain.js)
+    div.innerHTML = html;
     const box = document.getElementById('kavari-mensajes');
     box.appendChild(div);
     box.scrollTop = box.scrollHeight;
@@ -265,66 +433,66 @@
   }
 
   /* ═══════════════════ envío y respuesta ═══════════════════ */
-  function lang() {
-    return (localStorage.getItem('kavari-idioma') || 'es') === 'en';
-  }
-
   async function handleQuestion(text) {
     if (thinking || !text || !text.trim()) return;
     addUserMessage(text);
+    pushTurn('user', text);
     setThinking(true);
     showTyping();
 
+    let aiReply = null;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 35000);
     try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3000);
-      const res = await fetch('http://localhost:3007/api/chat', {
+      const res = await fetch(CHAT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: text,
-          context: { ...ctx, lang: lang() ? 'en' : 'es' }
+          context: { ...ctx, lang: lang() ? 'en' : 'es' },
+          history: loadHistory().slice(-14),
+          user: userInfo()
         }),
         signal: controller.signal
       });
-      clearTimeout(timeoutId);
       if (res.ok) {
         const data = await res.json();
-        hideTyping();
-        addBotMessage(data.reply);
-        setThinking(false);
-        const input = document.getElementById('kavari-chat-input');
-        if (input) input.focus({ preventScroll: true });
-        return;
+        if (data && data.reply) aiReply = data.reply;
       }
     } catch (_) {
-      // API no disponible, usamos el motor local
+      // Servidor no disponible → motor local
     }
+    clearTimeout(timeoutId);
 
-    // Fallback al motor local (misma lógica que antes)
-    const delay = Math.min(900, 350 + text.length * 6);
-    setTimeout(() => {
-      let response;
+    hideTyping();
+
+    let html;
+    if (aiReply) {
+      html = renderBotText(aiReply);
+    } else {
       try {
         const q = text.toLowerCase();
         if (ctx.country?.nombre && typeof generateChatResponse === 'function') {
-          response = generateChatResponse(q, ctx);
+          html = generateChatResponse(q, ctx);
         } else if (typeof generateGeneralResponse === 'function') {
-          response = generateGeneralResponse(q);
+          html = generateGeneralResponse(q);
         } else {
-          response = lang() ? 'How can I help you?' : '¿En qué puedo ayudarte?';
+          html = lang() ? 'How can I help you?' : '¿En qué puedo ayudarte?';
         }
       } catch (err) {
-        response = lang()
+        html = lang()
           ? 'Sorry, something went wrong answering that. Try rephrasing your question.'
           : 'Lo siento, algo falló al responder eso. Intenta reformular tu pregunta.';
       }
-      hideTyping();
-      addBotMessage(response);
-      setThinking(false);
-      const input = document.getElementById('kavari-chat-input');
-      if (input) input.focus({ preventScroll: true });
-    }, delay);
+    }
+
+    addBotMessage(html);
+    // Guardar en memoria el texto plano (sin HTML) para el historial.
+    const plainForMemory = aiReply ? aiReply : html.replace(/<[^>]+>/g, ' ');
+    pushTurn('model', plainForMemory);
+    setThinking(false);
+    const input = document.getElementById('kavari-chat-input');
+    if (input) input.focus({ preventScroll: true });
   }
 
   function sendFromInput() {
@@ -348,7 +516,7 @@
     const msgs = document.getElementById('kavari-mensajes');
     if (msgs) msgs.innerHTML = '';
     refreshUI();
-    if (opened) showWelcome();
+    if (opened) restoreMemory();
   }
 
   window.KavariChatbot = { setContext, open, close, toggle };
@@ -374,7 +542,6 @@
         hospedajes: d.hospedajes || []
       });
     } catch (e) {
-      // No rompe el widget: simplemente queda en modo general.
       console.warn('KAVARI chatbot: no se pudo cargar data.json', e);
     }
   }

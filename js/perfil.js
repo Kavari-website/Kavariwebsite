@@ -91,7 +91,7 @@
   };
 
   /* ─── Constantes ─── */
-  const GOOGLE_CLIENT_ID = '103720820760-f0l3vlt07d1c1nitrhpg92van43078cv.apps.googleusercontent.com';
+  const GOOGLE_CLIENT_ID = '103720820760-fi091rq34tik6dgbevv8j37v8mtt86q1.apps.googleusercontent.com';
 
   /* ─── Helpers ─── */
   const lang = () => localStorage.getItem('kavariIdioma') || localStorage.getItem('idioma') || 'es';
@@ -105,6 +105,12 @@
   function showView(viewName) {
     Object.values(views).forEach(v => { if (v) v.style.display = 'none'; });
     if (views[viewName]) views[viewName].style.display = 'block';
+    // Renderizar el botón de Google una vez que su vista es visible
+    if (viewName === 'authRequired') {
+      setTimeout(() => renderGoogleButton(els.googleLoginBtn), 0);
+    } else if (viewName === 'registerForm') {
+      setTimeout(() => renderGoogleButton(els.googleRegisterBtn), 0);
+    }
   }
 
   function setStatus(el, msg, isError = false) {
@@ -139,7 +145,7 @@
 
   /* ─── Renderizar perfil del usuario ─── */
   function renderProfile(user, profile) {
-    const displayName = profile?.full_name || user?.user_metadata?.full_name || user?.email?.split('@')[0] || '—';
+    const displayName = profile?.full_name || user?.user_metadata?.full_name || user?.name || user?.email?.split('@')[0] || '—';
     const email = profile?.email || user?.email || '—';
     const avatarUrl = profile?.avatar_url || user?.user_metadata?.avatar_url;
     const plan = localStorage.getItem('kavari-plan') || 'viajero';
@@ -184,6 +190,314 @@
     if (els.settingsThemeToggle) {
       const theme = document.documentElement.getAttribute('data-theme') || 'light';
       els.settingsThemeToggle.textContent = theme === 'dark' ? 'ON' : 'OFF';
+    }
+
+    // Favoritos: mostrar los países con «me gusta» guardados en la cuenta
+    renderFavorites();
+  }
+
+  /* ─── Favoritos: países con «me gusta» guardados en la cuenta ─── */
+  let _dataJsonCache = null;
+
+  async function getDataJson() {
+    if (_dataJsonCache) return _dataJsonCache;
+    try {
+      const res = await fetch('data/data.json');
+      _dataJsonCache = await res.json();
+    } catch (e) {
+      console.error('[KAVARI Perfil] Error cargando data.json:', e);
+      _dataJsonCache = {};
+    }
+    return _dataJsonCache;
+  }
+
+  function getLocalLikes() {
+    try { return JSON.parse(localStorage.getItem('kavari-pais-likes')) || {}; } catch (_) { return {}; }
+  }
+
+  function saveLocalLikes(likes) {
+    try { localStorage.setItem('kavari-pais-likes', JSON.stringify(likes)); } catch (_) { /* noop */ }
+  }
+
+  const ORDER_KEY = 'kavari-pais-likes-order';
+  const SORT_KEY = 'kavari-pais-likes-sort';
+  const TIME_KEY = 'kavari-pais-likes-time';
+
+  function getSavedOrder() {
+    try { return JSON.parse(localStorage.getItem(ORDER_KEY)) || []; } catch (_) { return []; }
+  }
+
+  function saveSavedOrder(codes) {
+    try { localStorage.setItem(ORDER_KEY, JSON.stringify(codes)); } catch (_) { /* noop */ }
+  }
+
+  /* Modo de ordenación: manual (arrastre) | alpha (alfabético) | recent */
+  function getSavedSort() {
+    const m = localStorage.getItem(SORT_KEY);
+    return (m === 'manual' || m === 'alpha' || m === 'recent') ? m : 'manual';
+  }
+
+  function saveSavedSort(mode) {
+    try { localStorage.setItem(SORT_KEY, mode); } catch (_) { /* noop */ }
+  }
+
+  function getLocalTimes() {
+    try { return JSON.parse(localStorage.getItem(TIME_KEY)) || {}; } catch (_) { return {}; }
+  }
+
+  function saveLocalTimes(times) {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(times)); } catch (_) { /* noop */ }
+  }
+
+  function esc(value) {
+    return String(value ?? '').replace(/[&<>'"]/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+    })[c]);
+  }
+
+  /* Códigos de países favoritos en orden de visualización:
+     la cuenta de Supabase es la fuente autoritativa de los likes y de su
+     orden; se combina con los likes locales del navegador (cuentas locales
+     sin Supabase) y con el último orden arrastrado por el usuario. */
+  async function getFavoriteCodes() {
+    const codes = new Set();
+    const local = getLocalLikes();
+    Object.keys(local).forEach(c => { if (local[c]) codes.add(c); });
+    let serverOrder = [];
+    try {
+      const session = await window.KavariDB.getCurrentSession();
+      if (session?.user && window.KavariAuth?.getUserLikes) {
+        serverOrder = (await window.KavariAuth.getUserLikes(session.user.id)) || [];
+        serverOrder.forEach(c => codes.add(c));
+      }
+    } catch (_) { /* noop */ }
+
+    // Prioridad: orden arrastrado por el usuario → orden del servidor → resto
+    const ordered = [];
+    const push = (c) => { if (codes.has(c) && !ordered.includes(c)) ordered.push(c); };
+    getSavedOrder().forEach(push);
+    serverOrder.forEach(push);
+    codes.forEach(push);
+    return ordered;
+  }
+
+  /* Nombre del país: data.json guarda una clave de traducción (p. ej.
+     paisPanama_nombre) o un nombre directo; aquí resolvemos ambos. */
+  function paisFavoritoNombre(entry, code) {
+    const raw = entry?.nombre || code || '';
+    const translated = raw && window.t ? window.t(raw) : raw;
+    return (translated && translated !== raw) ? translated : raw;
+  }
+
+  function renderFavorites() {
+    const grid = $('#favGrid');
+    if (!grid) return;
+    const empty = $('#favEmpty');
+    const sortbar = $('#favSortbar');
+
+    getDataJson().then(async (data) => {
+      let codes = await getFavoriteCodes();
+
+      // Aplicar el modo de ordenación elegido
+      const mode = getSavedSort();
+      if (mode === 'alpha') {
+        codes = codes.slice().sort((a, b) => {
+          const na = paisFavoritoNombre(data[a], a);
+          const nb = paisFavoritoNombre(data[b], b);
+          return na.localeCompare(nb, 'es');
+        });
+      } else if (mode === 'recent') {
+        const times = await buildTimeMap();
+        const idx = {};
+        codes.forEach((c, i) => { idx[c] = i; });
+        codes = codes.slice().sort((a, b) => {
+          const ta = times[a] || 0;
+          const tb = times[b] || 0;
+          if (ta && tb) return tb - ta;
+          if (ta) return -1;
+          if (tb) return 1;
+          return idx[a] - idx[b];
+        });
+      }
+
+      grid.innerHTML = '';
+
+      if (!codes.length) {
+        if (empty) empty.style.display = 'block';
+        if (sortbar) sortbar.style.display = 'none';
+        return;
+      }
+      if (empty) empty.style.display = 'none';
+      if (sortbar) sortbar.style.display = '';
+
+      codes.forEach(code => {
+        const entry = data[code] || {};
+        const nombre = paisFavoritoNombre(entry, code);
+        const img = entry.hero_img || entry.page_header_img || '';
+
+        const card = document.createElement('a');
+        card.className = 'perfil-fav-card';
+        card.href = 'destino.html';
+        card.setAttribute('aria-label', nombre);
+        card.dataset.code = code;
+
+        card.innerHTML =
+          `<div class="perfil-fav-img-wrap">` +
+            (img
+              ? `<img src="${esc(img)}" alt="${esc(nombre)}" loading="lazy" decoding="async">`
+              : `<span class="perfil-fav-fallback">${esc(nombre.slice(0, 2).toUpperCase())}</span>`) +
+            `<span class="perfil-fav-heart" aria-hidden="true">♥</span>` +
+            `<span class="perfil-fav-drag" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><circle cx="9" cy="6" r="1.7"/><circle cx="15" cy="6" r="1.7"/><circle cx="9" cy="12" r="1.7"/><circle cx="15" cy="12" r="1.7"/><circle cx="9" cy="18" r="1.7"/><circle cx="15" cy="18" r="1.7"/></svg></span>` +
+          `</div>` +
+          `<div class="perfil-fav-name">${esc(nombre)}</div>`;
+
+        // El handle de arrastre no debe disparar la navegación del enlace
+        const dragHandle = card.querySelector('.perfil-fav-drag');
+        if (dragHandle) {
+          dragHandle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          });
+        }
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'perfil-fav-remove';
+        removeBtn.innerHTML = '&times;';
+        removeBtn.title = t('perfilFavoritosQuitar') !== 'perfilFavoritosQuitar'
+          ? t('perfilFavoritosQuitar') : 'Quitar de favoritos';
+        removeBtn.setAttribute('aria-label', removeBtn.title);
+        removeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          quitarFavorito(code, card);
+        });
+        card.appendChild(removeBtn);
+
+        // Guardar el país seleccionado y dejar que el enlace navegue
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.perfil-fav-remove')) return;
+          if (e.target.closest('.perfil-fav-drag')) return;
+          localStorage.setItem('paisSeleccionado', code);
+        });
+
+        grid.appendChild(card);
+      });
+
+      initFavSortable(grid);
+      updateFavSortUI();
+    });
+  }
+
+  /* Fechas de like para "Más reciente": si hay sesión se usa SIEMPRE la
+     fecha REAL de la cuenta (created_at de Supabase); la fecha local solo
+     se usa como respaldo (cuentas locales sin Supabase). */
+  async function buildTimeMap() {
+    const times = getLocalTimes();
+    try {
+      const session = await window.KavariDB.getCurrentSession();
+      if (session?.user && window.KavariAuth?.getUserLikesWithTime) {
+        const rows = (await window.KavariAuth.getUserLikesWithTime(session.user.id)) || [];
+        rows.forEach(r => {
+          if (r.created_at) times[r.pais_code] = Date.parse(r.created_at);
+        });
+      }
+    } catch (_) { /* noop */ }
+    return times;
+  }
+
+  /* Actualiza la UI de la barra de ordenación y el estado del arrastre */
+  function updateFavSortUI() {
+    const mode = getSavedSort();
+    document.querySelectorAll('.perfil-fav-sortbtn').forEach(btn => {
+      const active = btn.dataset.sort === mode;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    const hint = $('#favHint');
+    if (hint) hint.style.display = mode === 'manual' ? '' : 'none';
+    const grid = $('#favGrid');
+    if (grid) {
+      grid.classList.toggle('perfil-fav-grid--sorted', mode !== 'manual');
+      if (grid.__sortable) grid.__sortable.option('disabled', mode !== 'manual');
+    }
+  }
+
+  /* Barra "Ordenar por": cambia el modo y re-renderiza los favoritos */
+  function initFavSortbar() {
+    document.querySelectorAll('.perfil-fav-sortbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        saveSavedSort(btn.dataset.sort);
+        renderFavorites();
+      });
+    });
+  }
+
+  /* ─── Arrastrar para reordenar los favoritos ─── */
+  function initFavSortable(grid) {
+    if (!window.Sortable) return; // CDN no disponible: sin arrastre
+    if (grid.__sortable) grid.__sortable.destroy();
+    grid.__sortable = window.Sortable.create(grid, {
+      animation: 200,
+      handle: '.perfil-fav-drag',
+      ghostClass: 'perfil-fav-ghost',
+      chosenClass: 'perfil-fav-chosen',
+      dragClass: 'perfil-fav-dragging',
+      onEnd: () => persistFavOrder(grid)
+    });
+  }
+
+  /* Guarda el nuevo orden (local + cuenta de Supabase). */
+  function persistFavOrder(grid) {
+    const codes = Array.from(grid.querySelectorAll('.perfil-fav-card'))
+      .map(c => c.dataset.code)
+      .filter(Boolean);
+    saveSavedOrder(codes);
+
+    (async () => {
+      try {
+        const session = await window.KavariDB.getCurrentSession();
+        if (session?.user && window.KavariAuth?.setLikeOrder) {
+          await window.KavariAuth.setLikeOrder(session.user.id, codes);
+        }
+      } catch (e) {
+        console.warn('[KAVARI Perfil] No se pudo guardar el orden en la cuenta:', e);
+      }
+    })();
+  }
+
+  /* Quita un favorito (local y, si hay sesión, en Supabase). */
+  async function quitarFavorito(code, cardEl) {
+    const likes = getLocalLikes();
+    delete likes[code];
+    saveLocalLikes(likes);
+    // Limpiar también el orden y la fecha guardados
+    saveSavedOrder(getSavedOrder().filter(c => c !== code));
+    const times = getLocalTimes();
+    delete times[code];
+    saveLocalTimes(times);
+    try {
+      const session = await window.KavariDB.getCurrentSession();
+      if (session?.user && window.KavariAuth?.setUserLike) {
+        await window.KavariAuth.setUserLike(session.user.id, code, false);
+      }
+    } catch (e) {
+      console.warn('[KAVARI Perfil] No se pudo quitar el favorito de la cuenta:', e);
+    }
+    if (cardEl) {
+      cardEl.style.transition = 'opacity .25s ease, transform .25s ease';
+      cardEl.style.opacity = '0';
+      cardEl.style.transform = 'scale(.92)';
+      setTimeout(() => {
+        cardEl.remove();
+        const grid = $('#favGrid');
+        const empty = $('#favEmpty');
+        const sortbar = $('#favSortbar');
+        if (grid && !grid.children.length) {
+          if (empty) empty.style.display = 'block';
+          if (sortbar) sortbar.style.display = 'none';
+        }
+      }, 250);
     }
   }
 
@@ -294,32 +608,109 @@
     els.registerSubmitBtn.textContent = t('cuentaBtnCrear');
   }
 
-  /* ─── Google Login (Google Identity Services) ─── */
+  /* ─── Google Login (Google Identity Services + fallback OAuth) ─── */
+
+  /**
+   * Renderiza el botón de Google SOLO cuando su vista está visible.
+   * GIS no dibuja el botón dentro de elementos con display:none (falla en silencio).
+   * Si GIS no está disponible o falla, se restaura el contenido original del botón
+   * y el click cae en handleGoogleClick() → OAuth redirect (igual que GitHub).
+   */
+  /**
+   * GIS solo funciona en https o en localhost (http). En file:// u orígenes
+   * no autorizados, Google lo rechaza con '[GSI_LOGGER]: origin not allowed'.
+   * En ese caso dejamos el botón personalizado y el click usa OAuth redirect
+   * de Supabase (el mismo flujo que ya funciona para GitHub).
+   */
+  function gisOriginAllowed() {
+    if (window.location.protocol === 'https:') return true;
+    if (window.location.protocol === 'http:') {
+      const host = window.location.hostname;
+      return host === 'localhost' || host === '127.0.0.1';
+    }
+    return false;
+  }
+
   function renderGoogleButton(btn) {
-    if (!btn || !window.google?.accounts?.id) return;
-    window.google.accounts.id.renderButton(btn, {
-      type: 'standard',
-      theme: 'outline',
-      size: 'large',
-      shape: 'rectangular',
-      text: 'continue_with'
-    });
+    if (!btn) return;
+    if (btn.dataset.gisRendered === 'true') return; // ya renderizado
+    if (!gisOriginAllowed()) {
+      // Origen no válido para GIS → usar OAuth redirect (como GitHub)
+      btn.dataset.gisRendered = 'false';
+      return;
+    }
+    if (!window.google?.accounts?.id) return;
+    // No renderizar si el botón (o su contenedor) está oculto
+    if (btn.offsetParent === null) return;
+
+    // Guardamos el HTML original para poder restaurarlo si GIS falla
+    if (!btn.dataset.originalHtml) {
+      btn.dataset.originalHtml = btn.innerHTML;
+    }
+
+    try {
+      window.google.accounts.id.renderButton(btn, {
+        type: 'standard',
+        theme: 'outline',
+        size: 'large',
+        shape: 'rectangular',
+        text: 'continue_with',
+        width: btn.clientWidth || 320
+      });
+      btn.dataset.gisRendered = 'true';
+    } catch (e) {
+      console.warn('[KAVARI Perfil] No se pudo renderizar el botón de Google, se usará redirección:', e);
+      btn.dataset.gisRendered = 'false';
+      if (btn.dataset.originalHtml) btn.innerHTML = btn.dataset.originalHtml;
+    }
   }
 
   function initGoogleIdentity() {
     if (!window.google?.accounts?.id) {
-      console.warn('[KAVARI Perfil] Google Identity Services no cargado.');
+      console.warn('[KAVARI Perfil] Google Identity Services no cargado. Se usará OAuth redirect (como GitHub).');
       return;
     }
 
-    window.google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
-      callback: handleGoogleCredential,
-      ux_mode: 'popup',
-      auto_select: false
-    });
+    try {
+      window.google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleGoogleCredential,
+        ux_mode: 'popup',
+        auto_select: false
+      });
+    } catch (e) {
+      console.warn('[KAVARI Perfil] No se pudo inicializar Google Identity Services:', e);
+    }
 
-    renderGoogleButton(els.googleLoginBtn);
+    // El botón se renderiza cuando la vista esté visible (ver showView)
+  }
+
+  /**
+   * Flujo de redirección OAuth de Supabase (el mismo que usa GitHub).
+   * Redirige a Google y al volver, detectSessionInUrl de Supabase completa el login.
+   */
+  async function startGoogleRedirect() {
+    if (!window.KavariAuth?.signInWithGoogle) return;
+
+    showAuthError('');
+    const result = await window.KavariAuth.signInWithGoogle();
+    if (result.error) {
+      console.error('[KAVARI Perfil] Google login error:', result.error);
+      showAuthError(result.error);
+    }
+  }
+
+  /**
+   * Click del botón de Google. Si GIS renderizó su iframe, GIS maneja el evento
+   * y NO llega aquí (el iframe intercepta el click). Si llegamos aquí, GIS no
+   * está disponible o el origen no es válido, así que usamos el flujo de
+   * redirección de Supabase (el mismo que ya funciona para GitHub).
+   */
+  async function handleGoogleClick() {
+    if (els.googleLoginBtn?.querySelector('iframe') || els.googleRegisterBtn?.querySelector('iframe')) {
+      return;
+    }
+    await startGoogleRedirect();
   }
 
   function showAuthError(message) {
@@ -341,7 +732,16 @@
     const result = await window.KavariAuth.signInWithGoogleToken(credential);
     if (result.error) {
       console.error('[KAVARI Perfil] Google login error:', result.error);
-      showAuthError(result.error);
+      // Fallback solo ante errores de configuración (Client ID no coincide con
+      // Supabase, proveedor deshabilitado, etc.). Si es un error de negocio
+      // (correo ya registrado), mostramos el mensaje y no abrimos otro flujo.
+      const raw = String(result.error);
+      if (/jwt|invalid_client|audience|id_token|provider.*not.*enabled|disabled/i.test(raw)) {
+        console.warn('[KAVARI Perfil] Reintentando con OAuth redirect…');
+        await startGoogleRedirect();
+      } else {
+        showAuthError(result.error);
+      }
       return;
     }
 
@@ -411,7 +811,12 @@
 
   /* ─── Logout Handler ─── */
   async function handleLogout() {
-    await window.KavariAuth.signOut();
+    // Cerrar sesión (Supabase y/o cuenta local)
+    if (window.KavariAccount && typeof window.KavariAccount.logout === 'function') {
+      window.KavariAccount.logout();
+    } else if (window.KavariAuth && window.KavariAuth.signOut) {
+      await window.KavariAuth.signOut();
+    }
     showView('authRequired');
   }
 
@@ -428,6 +833,8 @@
       els.perfilAvatarImg.src = url;
       els.perfilAvatarImg.style.display = 'block';
       els.perfilAvatarInitials.style.display = 'none';
+      // Actualizar la foto en el navbar de todas las páginas
+      window.dispatchEvent(new CustomEvent('kavari:profileupdate'));
     }
   }
 
@@ -449,6 +856,8 @@
     if (result !== null) {
       setStatus(els.perfilInfoStatus, 'Perfil actualizado correctamente', false);
       els.perfilFullName.textContent = updates.full_name || '—';
+      // Refrescar el nombre en el navbar de todas las páginas
+      window.dispatchEvent(new CustomEvent('kavari:profileupdate'));
     } else {
       setStatus(els.perfilInfoStatus, 'Error al guardar', true);
     }
@@ -526,14 +935,12 @@
 
     if (showRegisterBtn) {
       showRegisterBtn.addEventListener('click', () => {
-        showView('registerForm');
-        renderGoogleButton(els.googleRegisterBtn);
+        showView('registerForm'); // showView ya renderiza el botón de Google
       });
     }
     if (showLoginBtn) {
       showLoginBtn.addEventListener('click', () => {
-        showView('authRequired');
-        renderGoogleButton(els.googleLoginBtn);
+        showView('authRequired'); // showView ya renderiza el botón de Google
       });
     }
   }
@@ -597,9 +1004,18 @@
       const profile = await window.KavariAuth.getProfileWithRetry(session.user.id);
       renderProfile(session.user, profile);
       showView('perfilView');
-    } else {
-      showView('authRequired');
+      return;
     }
+    // Sesión local (localStorage, sin Supabase)
+    if (window.KavariAccount && typeof window.KavariAccount.getUser === 'function') {
+      const localUser = window.KavariAccount.getUser();
+      if (localUser) {
+        renderProfile({ name: localUser.name, email: localUser.email }, null);
+        showView('perfilView');
+        return;
+      }
+    }
+    showView('authRequired');
   }
 
   /* ─── Init ─── */
@@ -608,6 +1024,10 @@
     if (els.registerForm) els.registerForm.addEventListener('submit', handleRegister);
     if (els.githubLoginBtn) els.githubLoginBtn.addEventListener('click', handleGitHubLogin);
     if (els.githubRegisterBtn) els.githubRegisterBtn.addEventListener('click', handleGitHubLogin);
+    // Google: GIS renderiza su propio botón cuando está disponible; si no,
+    // el click cae aquí y usa OAuth redirect (mismo flujo que GitHub).
+    if (els.googleLoginBtn) els.googleLoginBtn.addEventListener('click', handleGoogleClick);
+    if (els.googleRegisterBtn) els.googleRegisterBtn.addEventListener('click', handleGoogleClick);
     if (els.showOtpBtn) els.showOtpBtn.addEventListener('click', () => {
       els.otpSection.style.display = els.otpSection.style.display === 'none' ? 'flex' : 'none';
     });
@@ -625,6 +1045,12 @@
     initSettingsToggles();
     initAuthListener();
     initGoogleIdentity();
+    initFavSortbar();
+
+    // Re-traducir los nombres de los favoritos al cambiar de idioma
+    window.addEventListener('kavari:langchange', () => {
+      if (views.perfilView.style.display !== 'none') renderFavorites();
+    });
 
     // Estado inicial
     checkInitialAuth();

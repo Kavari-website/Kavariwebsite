@@ -19,16 +19,20 @@
   <script src="js/theme.js"></script>
   <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
+  <script src="js/img-fallback.js"></script>
 </head>
 <body class="auth-page">
-  <header class="navbar" id="navbar">
+  <nav class="navbar nav-glass home-nav" id="navbar">
       <div class="logo">
           <a href="index.html" style="color: inherit; text-decoration: none;">KAVARI</a>
       </div>
       <ul class="nav-links" id="navLinks">
           <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
           <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
-          <li><a href="planes.html">Planes</a></li>
+          <li><a href="planes.html" data-i18n="planesNavPlanes">Planes</a></li>
+          <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
+          <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
+          <li><a href="contacto.html" data-i18n="contacto">Contacto</a></li>
       </ul>
       <div class="nav-actions">
           <button class="nav-btn-tutorial" id="btnTutorial" onclick="startTutorial(true)" aria-label="Tutorial" data-i18n="tutorial">Tutorial</button>
@@ -38,7 +42,7 @@
       <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menú">
           <span></span><span></span><span></span>
       </button>
-  </header>
+  </nav>
 
   <main class="auth-main">
     <section class="auth-shell">
@@ -67,6 +71,5 @@
 
   <script src="js/account.js"></script>
   <script src="js/tutorial.js"></script>
-  <script src="js/cuenta-view.js"></script>
 </body>
 </html>

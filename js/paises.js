@@ -83,6 +83,191 @@ function irAPais(codigoPais) {
 }
 
 // ============================================
+// LIKES DE PAÍSES (persistidos por usuario en Supabase)
+// ============================================
+const LIKES_KEY = 'kavari-pais-likes';
+const LIKES_TIME_KEY = 'kavari-pais-likes-time';
+
+function getPaisCode(card) {
+  const btn = card.querySelector('.dest-btn');
+  if (!btn) return null;
+  const m = (btn.getAttribute('onclick') || '').match(/irAPais\('([^']+)'\)/);
+  return m ? m[1] : null;
+}
+
+function getLikes() {
+  try { return JSON.parse(localStorage.getItem(LIKES_KEY)) || {}; } catch (_) { return {}; }
+}
+
+function saveLikes(likes) {
+  try { localStorage.setItem(LIKES_KEY, JSON.stringify(likes)); } catch (_) { /* noop */ }
+}
+
+/* Timestamps (fecha del like) para el orden "Más reciente" del perfil */
+function getLikesTimes() {
+  try { return JSON.parse(localStorage.getItem(LIKES_TIME_KEY)) || {}; } catch (_) { return {}; }
+}
+
+function saveLikesTimes(times) {
+  try { localStorage.setItem(LIKES_TIME_KEY, JSON.stringify(times)); } catch (_) { /* noop */ }
+}
+
+/* Usuario actual (Supabase o local) para asociar los likes a su cuenta */
+async function getCurrentUserId() {
+  try {
+    if (window.KavariDB && typeof window.KavariDB.getCurrentUser === 'function') {
+      const user = await window.KavariDB.getCurrentUser();
+      if (user && user.id) return user.id;
+    }
+  } catch (_) { /* noop */ }
+  return null;
+}
+
+/* Carga los likes del usuario desde Supabase y actualiza la vista */
+async function syncLikesFromServer() {
+  const userId = await getCurrentUserId();
+  if (!userId) return;
+  try {
+    if (window.KavariAuth && typeof window.KavariAuth.getUserLikesWithTime === 'function') {
+      const rows = await window.KavariAuth.getUserLikesWithTime(userId);
+      const likes = {};
+      const times = {};
+      (rows || []).forEach(r => {
+        likes[r.pais_code] = 1;
+        if (r.created_at) times[r.pais_code] = Date.parse(r.created_at);
+      });
+      saveLikes(likes);
+      saveLikesTimes(times);
+    } else if (window.KavariAuth && typeof window.KavariAuth.getUserLikes === 'function') {
+      const codes = await window.KavariAuth.getUserLikes(userId);
+      const likes = {};
+      codes.forEach(code => { likes[code] = 1; });
+      saveLikes(likes);
+    }
+  } catch (_) { /* noop */ }
+}
+
+/* Guarda (o quita) un like en Supabase si hay sesión. Al dar like,
+   sincroniza la fecha local con la fecha REAL de la cuenta (created_at
+   que Supabase registró), para que "Más reciente" use siempre la fecha
+   del servidor y no la del reloj del navegador. */
+async function persistLikeToServer(code, liked) {
+  const userId = await getCurrentUserId();
+  if (!userId) return;
+  try {
+    if (window.KavariAuth && typeof window.KavariAuth.setUserLike === 'function') {
+      const result = await window.KavariAuth.setUserLike(userId, code, liked);
+      if (result && result.ok && result.created_at) {
+        const times = getLikesTimes();
+        times[code] = Date.parse(result.created_at);
+        saveLikesTimes(times);
+      }
+    }
+  } catch (e) {
+    console.warn('[KAVARI] No se pudo sincronizar el like con la cuenta:', e);
+  }
+}
+
+// Sube las tarjetas con like al inicio de la fila (después del label de región)
+function orderCardsByLikes() {
+  const grid = document.getElementById('destinosGrid');
+  if (!grid) return;
+  const likes = getLikes();
+  const cards = Array.from(grid.querySelectorAll('.dest-card'));
+  cards.sort((a, b) => (likes[getPaisCode(b)] || 0) - (likes[getPaisCode(a)] || 0));
+  // Reordenar solo las tarjetas, dejando los labels de región en su sitio
+  cards.forEach(card => grid.appendChild(card));
+  const labels = grid.querySelectorAll('.region-label');
+  if (labels.length) {
+    grid.insertBefore(labels[0], grid.firstChild);
+    for (let i = 1; i < labels.length; i++) {
+      grid.insertBefore(labels[i], labels[i - 1].nextSibling);
+    }
+  }
+}
+
+function updateLikeBtn(btn, count) {
+  const liked = count > 0;
+  btn.classList.toggle('liked', liked);
+  const num = btn.querySelector('.dest-like-count');
+  if (num) num.textContent = count || '';
+  btn.setAttribute('aria-label', liked ? 'Quitar like' : 'Me gusta');
+}
+
+function toggleLike(card) {
+  const code = getPaisCode(card);
+  if (!code) return;
+  const likes = getLikes();
+  const count = likes[code] || 0;
+  const liked = count === 0;
+  const times = getLikesTimes();
+  if (liked) {
+    likes[code] = 1;
+    times[code] = Date.now();
+  } else {
+    delete likes[code];
+    delete times[code];
+  }
+  saveLikes(likes);
+  saveLikesTimes(times);
+  persistLikeToServer(code, liked); // sincronizar con la cuenta (Supabase)
+  const btn = card.querySelector('.dest-like');
+  if (btn) updateLikeBtn(btn, likes[code] || 0);
+  card.classList.remove('like-bump');
+  void card.offsetWidth; // reinicia la animación
+  card.classList.add('like-bump');
+  orderCardsByLikes();
+}
+
+function refreshLikesUI() {
+  const likes = getLikes();
+  document.querySelectorAll('.dest-card').forEach(card => {
+    const code = getPaisCode(card);
+    const btn = card.querySelector('.dest-like');
+    if (code && btn) updateLikeBtn(btn, likes[code] || 0);
+  });
+  orderCardsByLikes();
+}
+
+function initLikes() {
+  const likes = getLikes();
+  document.querySelectorAll('.dest-card').forEach(card => {
+    const code = getPaisCode(card);
+    if (!code) return;
+    const thumb = card.querySelector('.dest-thumb');
+    if (!thumb) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'dest-like';
+    btn.setAttribute('aria-label', 'Me gusta');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-8-4.9-8-11a4.6 4.6 0 0 1 8-3.2A4.6 4.6 0 0 1 20 10c0 6.1-8 11-8 11z"/></svg><span class="dest-like-count"></span>';
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleLike(card);
+    });
+    thumb.appendChild(btn);
+    updateLikeBtn(btn, likes[code] || 0);
+  });
+  orderCardsByLikes();
+  // Si hay sesión, cargar los likes guardados de la cuenta
+  syncLikesFromServer();
+}
+
+document.addEventListener('DOMContentLoaded', initLikes);
+
+// Al iniciar sesión: cargar likes de la cuenta · Al cerrar sesión: limpiar locales
+window.addEventListener('kavari:authchange', function (e) {
+  if (e.detail && e.detail.user) {
+    syncLikesFromServer();
+  } else {
+    localStorage.removeItem(LIKES_KEY);
+    localStorage.removeItem(LIKES_TIME_KEY);
+    refreshLikesUI();
+  }
+});
+
+// ============================================
 // TRADUCCIÓN DE DESCRIPCIONES DE PAÍSES
 // ============================================
 function aplicarTraduccionesPaises() {

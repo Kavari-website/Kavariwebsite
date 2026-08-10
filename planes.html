@@ -22,19 +22,29 @@
   <script src="js/theme.js"></script>
   <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
+  <script src="js/img-fallback.js"></script>
 </head>
 <body class="pricing-page">
-  <nav class="portal-nav" aria-label="Navegación de planes">
-    <div class="portal-nav-start">
-      <button class="portal-back" type="button" onclick="history.length > 1 ? history.back() : location.href='index.html'">← Volver</button>
-      <a href="index.html" class="portal-brand">KAVARI</a>
+  <nav class="navbar nav-glass home-nav" id="navbar">
+    <div class="logo">
+      <a href="index.html" style="color: inherit; text-decoration: none;">KAVARI</a>
     </div>
-    <div class="portal-nav-actions">
-      <a href="cuenta.html">Mi cuenta</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
+      <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
+      <li><a href="planes.html" class="active" data-i18n="planesNavPlanes">Planes</a></li>
+      <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
+      <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
+      <li><a href="contacto.html" data-i18n="contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
       <button class="nav-btn-tutorial" id="btnTutorial" onclick="startTutorial(true)">Tutorial</button>
       <button class="btn-lang-nav" id="btnLang" onclick="toggleLang()"><span id="langLabel">ES</span></button>
       <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()">Oscuro</button>
     </div>
+    <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
   <main class="pricing-section" id="pricing">
     <header class="pricing-header">

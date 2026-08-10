@@ -32,6 +32,7 @@
 
 <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
+  <script src="js/img-fallback.js"></script>
 </head>
 <body class="page-index">
 
@@ -54,7 +55,6 @@
             <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
             <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
             <li><a href="contacto.html" data-i18n="contacto">Contacto</a></li>
-            <li><a href="perfil.html" class="nav-perfil" data-i18n="navMiPerfil">Mi Perfil</a></li>
         </ul>
         <div class="nav-actions">
             <button class="nav-btn-tutorial" id="btnTutorial" onclick="startTutorial(true)" aria-label="Tutorial" data-i18n="tutorial">Tutorial</button>
@@ -386,20 +386,7 @@
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
     <div class="footer-inner">
-        <div class="footer-logo">
-            <span class="logo-globe"></span> KAVARI
-        </div>
-        <div class="footer-links">
-            <a href="index.html" data-i18n="navInicio">Inicio</a>
-            <a href="paises.html" data-i18n="navDestinos">Destinos</a>
-            <a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a>
-            <a href="ayuda.html" data-i18n="ayuda">Ayuda</a>
-            <a href="contacto.html" data-i18n="contacto">Contacto</a>
-        </div>
-        <div class="footer-social">
-            <a href="https://www.instagram.com/kavari.travel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">✈</a>
-        </div>
-        <p class="textfooter" data-i18n="footerTexto">© 2025 Kavari — Fundación Emanuel González-Revilla · Supérate Promo 2027</p>
+        <p class="textfooter" data-i18n="footerTexto">© 2025 Kavari — Todos los derechos reservados.</p>
     </div>
 </footer>
 
@@ -532,9 +519,9 @@
                 <div class="paquete-modal-precio" id="paqueteModalPrecio"></div>
             </div>
             <div class="paquete-modal-desc" id="paqueteModalDesc"></div>
-            <div class="paquete-modal-section-title" data-i18n="featureVuelo">¿Qué incluye el paquete?</div>
+            <div class="paquete-modal-section-title" data-i18n="paqueteModalIncluye">¿Qué incluye el paquete?</div>
             <div class="paquete-modal-includes" id="paqueteModalIncludes"></div>
-            <div class="paquete-modal-section-title">Itinerario sugerido</div>
+            <div class="paquete-modal-section-title" data-i18n="itinerarioSugerido">Itinerario sugerido</div>
             <div class="paquete-modal-itinerary" id="paqueteModalItinerary"></div>
             <div class="paquete-modal-cta">
                 <button class="btn-modal-cerrar" onclick="cerrarModalPaquete()" data-i18n="volverAtras">Volver atrás</button>

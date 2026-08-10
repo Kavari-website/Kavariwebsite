@@ -826,8 +826,6 @@ function renderAllSections(d) {
     // Guías título
     const guiasTitle = document.getElementById('guiasSectionTitle');
     if (guiasTitle) guiasTitle.textContent = `Guías turísticos en ${_t(d.nombre)}`;
-    const footerCopy = document.getElementById('footerCopy');
-    if (footerCopy) footerCopy.textContent = `© 2025 KAVARI · ${_t('footerCopyDestino')} ${_t(d.nombre)}`;
 }
 
 // ============================================================

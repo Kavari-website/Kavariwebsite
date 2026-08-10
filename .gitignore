@@ -1,0 +1,10 @@
+# Seguridad: la clave de Gemini NUNCA debe subirse a git
+server/.env
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Sistema
+.DS_Store
+Thumbs.db

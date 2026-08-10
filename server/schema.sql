@@ -20,6 +20,18 @@ CREATE TABLE IF NOT EXISTS profiles (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- Tabla de likes de países por usuario
+CREATE TABLE IF NOT EXISTS pais_likes (
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  pais_code TEXT NOT NULL,
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  PRIMARY KEY (user_id, pais_code)
+);
+
+-- Índice para consultas por usuario
+CREATE INDEX IF NOT EXISTS idx_pais_likes_user ON pais_likes(user_id);
+
 -- Tabla de registro de guías
 CREATE TABLE IF NOT EXISTS guide_registrations (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -47,6 +59,7 @@ CREATE INDEX IF NOT EXISTS idx_guide_user ON guide_registrations(user_id);
 -- Políticas RLS (Row Level Security)
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE guide_registrations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE pais_likes ENABLE ROW LEVEL SECURITY;
 
 -- Política: Los usuarios pueden ver su propio perfil
 CREATE POLICY "Users can view own profile" ON profiles
@@ -59,6 +72,23 @@ CREATE POLICY "Users can update own profile" ON profiles
 -- Política: Los usuarios pueden insertar su propio perfil
 CREATE POLICY "Users can insert own profile" ON profiles
   FOR INSERT WITH CHECK (auth.uid() = id);
+
+-- Política: Los usuarios pueden ver sus propios likes
+CREATE POLICY "Users can view own likes" ON pais_likes
+  FOR SELECT USING (auth.uid() = user_id);
+
+-- Política: Los usuarios pueden insertar sus propios likes
+CREATE POLICY "Users can insert own likes" ON pais_likes
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+-- Política: Los usuarios pueden actualizar sus propios likes
+-- (necesaria para que el upsert de setUserLike funcione con RLS)
+CREATE POLICY "Users can update own likes" ON pais_likes
+  FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
+-- Política: Los usuarios pueden eliminar sus propios likes
+CREATE POLICY "Users can delete own likes" ON pais_likes
+  FOR DELETE USING (auth.uid() = user_id);
 
 -- Política: Cualquiera puede ver guías aprobados
 CREATE POLICY "Anyone can view approved guides" ON guide_registrations
@@ -88,6 +118,33 @@ CREATE POLICY "Users can upload guide documents" ON storage.objects
 
 CREATE POLICY "Users can view own guide documents" ON storage.objects
   FOR SELECT USING (bucket_id = 'guide-documents' AND auth.uid()::text = (storage.foldername(name))[1]);
+
+-- ============================================
+-- MEMORIA DEL ASISTENTE (chat)
+-- Guarda el historial de conversación por usuario (opcional: RLS por auth.uid())
+-- ============================================
+CREATE TABLE IF NOT EXISTS chat_messages (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  session_key TEXT NOT NULL,
+  role TEXT NOT NULL CHECK (role IN ('user','model')),
+  content TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_chat_messages_user_session ON chat_messages(user_id, session_key, created_at);
+
+ALTER TABLE chat_messages ENABLE ROW LEVEL SECURITY;
+
+-- Los usuarios solo ven/insertan/borran sus propios mensajes
+CREATE POLICY "Users can view own chat messages" ON chat_messages
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert own chat messages" ON chat_messages
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete own chat messages" ON chat_messages
+  FOR DELETE USING (auth.uid() = user_id);
 
 -- ============================================
 -- FIN DEL SCHEMA

@@ -19,11 +19,12 @@
   <script src="https://accounts.google.com/gsi/client"></script>
   <script src="js/idioma.js"></script>
   <script src="js/theme.js"></script>
+  <script src="js/img-fallback.js"></script>
 </head>
 <body class="auth-page">
 
   <!-- ===== NAVBAR ===== -->
-  <header class="navbar" id="navbar">
+  <nav class="navbar nav-glass home-nav" id="navbar">
     <div class="logo">
       <a href="index.html" style="color: inherit; text-decoration: none;">KAVARI</a>
     </div>
@@ -31,6 +32,9 @@
       <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
       <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
       <li><a href="planes.html" data-i18n="planesNavPlanes">Planes</a></li>
+      <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
+      <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
+      <li><a href="contacto.html" data-i18n="contacto">Contacto</a></li>
     </ul>
     <div class="nav-actions">
       <button class="nav-btn-tutorial" id="btnTutorial" onclick="startTutorial(true)" aria-label="Tutorial" data-i18n="tutorial">Tutorial</button>
@@ -40,7 +44,7 @@
     <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
-  </header>
+  </nav>
 
   <!-- ===== CONTENIDO PRINCIPAL ===== -->
   <main class="auth-main">
@@ -86,7 +90,7 @@
           <div class="perfil-divider"><span>o</span></div>
 
           <!-- Google Login -->
-          <button class="perfil-google-btn" id="googleLoginBtn" type="button" data-client_id="103720820760-f0l3vlt07d1c1nitrhpg92van43078cv.apps.googleusercontent.com">
+          <button class="perfil-google-btn" id="googleLoginBtn" type="button" data-client_id="103720820760-fi091rq34tik6dgbevv8j37v8mtt86q1.apps.googleusercontent.com">
             <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
             <span data-i18n="perfilGoogleBtn">Continuar con Google</span>
           </button>
@@ -226,6 +230,7 @@
         <div class="perfil-tabs" role="tablist">
           <button class="perfil-tab active" data-tab="info" role="tab" aria-selected="true" data-i18n="perfilTabInfo">Información personal</button>
           <button class="perfil-tab" data-tab="travel" role="tab" aria-selected="false" data-i18n="perfilTabViaje">Preferencias de viaje</button>
+          <button class="perfil-tab" data-tab="favoritos" role="tab" aria-selected="false" data-i18n="perfilTabFavoritos">Favoritos</button>
           <button class="perfil-tab" data-tab="settings" role="tab" aria-selected="false" data-i18n="perfilTabConfig">Configuración</button>
         </div>
 
@@ -323,6 +328,33 @@
           </form>
         </div>
 
+        <!-- Tab: Favoritos -->
+        <div class="perfil-tab-content" id="tabFavoritos">
+          <div class="perfil-fav-header">
+            <h3 data-i18n="perfilFavoritosTitulo">Mis países favoritos</h3>
+            <p data-i18n="perfilFavoritosDesc">Los países a los que les diste «me gusta» se guardan aquí en tu cuenta.</p>
+            <p class="perfil-fav-hint" id="favHint" data-i18n="perfilFavoritosDrag">Arrastra las tarjetas para cambiar el orden</p>
+
+            <!-- Barra de ordenación -->
+            <div class="perfil-fav-sortbar" id="favSortbar" role="group" aria-labelledby="favSortLabel">
+              <span class="perfil-fav-sortlabel" id="favSortLabel" data-i18n="perfilFavoritosSortLabel">Ordenar por</span>
+              <button type="button" class="perfil-fav-sortbtn is-active" data-sort="manual" aria-pressed="true" data-i18n="perfilFavoritosSortManual">Manual</button>
+              <button type="button" class="perfil-fav-sortbtn" data-sort="alpha" aria-pressed="false" data-i18n="perfilFavoritosSortAlpha">Alfabético</button>
+              <button type="button" class="perfil-fav-sortbtn" data-sort="recent" aria-pressed="false" data-i18n="perfilFavoritosSortRecent">Más reciente</button>
+            </div>
+          </div>
+
+          <!-- Estado vacío -->
+          <div class="perfil-fav-empty" id="favEmpty" style="display:none;">
+            <div class="perfil-fav-empty-icon" aria-hidden="true">♥</div>
+            <p data-i18n="perfilFavoritosVacio">Aún no tienes países favoritos. Explora los destinos y dale «me gusta» a los que más te gusten.</p>
+            <a class="perfil-fav-explore-btn" href="paises.html" data-i18n="perfilFavoritosExplorar">Explorar destinos</a>
+          </div>
+
+          <!-- Grilla de favoritos -->
+          <div class="perfil-fav-grid" id="favGrid"></div>
+        </div>
+
         <!-- Tab: Configuración -->
         <div class="perfil-tab-content" id="tabSettings">
           <div class="perfil-settings-section">
@@ -362,28 +394,16 @@
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-logo">
-        <span class="logo-globe"></span> KAVARI
-      </div>
-      <div class="footer-links">
-        <a href="index.html" data-i18n="navInicio">Inicio</a>
-        <a href="paises.html" data-i18n="navDestinos">Destinos</a>
-        <a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a>
-        <a href="ayuda.html" data-i18n="ayuda">Ayuda</a>
-        <a href="contacto.html" data-i18n="contacto">Contacto</a>
-      </div>
-      <div class="footer-social">
-        <a href="https://www.instagram.com/kavari.travel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">✈</a>
-      </div>
-      <p class="textfooter" data-i18n="footerTexto">© 2025 Kavari — Fundación Emanuel González-Revilla · Supérate Promo 2027</p>
+      <p class="textfooter" data-i18n="footerTexto">© 2025 Kavari — Todos los derechos reservados.</p>
     </div>
   </footer>
 
   <!-- ===== SCRIPTS ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
   <script src="js/supabase-client.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/account.js"></script>
   <script src="js/perfil.js"></script>
   <script src="js/tutorial.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </body>
 </html>

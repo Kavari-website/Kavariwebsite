@@ -93,6 +93,17 @@
     }
   }
 
+  /* ─── Helper: URL de retorno para OAuth ─── */
+  function getOAuthRedirectUrl() {
+    // En file:// (abrir el HTML directo) origin es "null" y rompe el redirect.
+    // En ese caso no pasamos redirectTo y Supabase usa su Site URL configurada.
+    const origin = window.location.origin;
+    if (origin && origin !== 'null' && /^https?:/i.test(origin)) {
+      return origin + window.location.pathname;
+    }
+    return undefined;
+  }
+
   /* ─── Auth: Login con Google ─── */
   async function signInWithGoogle() {
     const client = window.KavariDB?.getSupabaseClient();
@@ -104,7 +115,7 @@
       const { data, error } = await client.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: window.location.origin + window.location.pathname
+          redirectTo: getOAuthRedirectUrl()
         }
       });
 
@@ -119,14 +130,16 @@
   /* ─── Auth: Login con Google usando credential de Google Identity Services ─── */
   function normalizeGoogleAuthError(error) {
     const raw = error?.message || error?.error_description || String(error || '');
+    // Mantener visible el error técnico original para facilitar el diagnóstico
+    const detail = raw ? ` (${String(raw).slice(0, 220)})` : '';
     if (/JWT|invalid_client|audience|id_token/i.test(raw)) {
-      return 'El token de Google no fue aceptado. Revisa que el Client ID coincida en Supabase (Authentication → Providers → Google).';
+      return `El token de Google no fue aceptado. Revisa que el Client ID coincida en Supabase (Authentication → Providers → Google).${detail}`;
     }
     if (/already registered|already exists/i.test(raw)) {
-      return 'Este correo de Google ya está registrado con otra cuenta. Usa "Ingresar" o recupera tu contraseña.';
+      return `Este correo de Google ya está registrado con otra cuenta. Usa "Ingresar" o recupera tu contraseña.${detail}`;
     }
     if (/provider.*not.*enabled|email.*not.*confirmed|disabled/i.test(raw)) {
-      return 'El proveedor de Google no está habilitado en Supabase. Actívalo en Authentication → Providers → Google.';
+      return `El proveedor de Google no está habilitado en Supabase. Actívalo en Authentication → Providers → Google.${detail}`;
     }
     return raw || 'Error al conectar con Google. Intenta de nuevo.';
   }
@@ -205,7 +218,7 @@
       const { data, error } = await client.auth.signInWithOAuth({
         provider: 'github',
         options: {
-          redirectTo: window.location.origin + window.location.pathname
+          redirectTo: getOAuthRedirectUrl()
         }
       });
 
@@ -271,6 +284,9 @@
     localStorage.removeItem(PROFILE_KEY);
     localStorage.removeItem('kavari-user');
     localStorage.removeItem('kavari-plan');
+    localStorage.removeItem('kavari-pais-likes'); // datos locales del usuario (likes)
+    localStorage.removeItem('kavari-pais-likes-order'); // orden de favoritos del usuario
+    localStorage.removeItem('kavari-pais-likes-time'); // fechas de los likes del usuario
     window.dispatchEvent(new CustomEvent('kavari:authchange', { detail: { user: null } }));
   }
 
@@ -499,6 +515,100 @@
     }
   }
 
+  /* ─── Likes: Obtener likes del usuario ─── */
+  async function getUserLikes(userId) {
+    const client = window.KavariDB?.getSupabaseClient();
+    if (!client || !userId) return [];
+
+    try {
+      const { data, error } = await client
+        .from('pais_likes')
+        .select('pais_code')
+        .eq('user_id', userId)
+        .order('sort_order', { ascending: true })
+        .order('created_at', { ascending: true });
+
+      if (error) throw error;
+      return (data || []).map(row => row.pais_code);
+    } catch (e) {
+      console.error('[KAVARI Auth] Error obteniendo likes:', e);
+      return [];
+    }
+  }
+
+  /* ─── Likes: Obtener likes del usuario con su fecha (para ordenar por recencia) ─── */
+  async function getUserLikesWithTime(userId) {
+    const client = window.KavariDB?.getSupabaseClient();
+    if (!client || !userId) return [];
+
+    try {
+      const { data, error } = await client
+        .from('pais_likes')
+        .select('pais_code, created_at')
+        .eq('user_id', userId);
+
+      if (error) throw error;
+      return data || [];
+    } catch (e) {
+      console.error('[KAVARI Auth] Error obteniendo likes con fecha:', e);
+      return [];
+    }
+  }
+
+  /* ─── Likes: Guardar el orden de los favoritos de un usuario ─── */
+  async function setLikeOrder(userId, orderedCodes) {
+    const client = window.KavariDB?.getSupabaseClient();
+    if (!client || !userId || !Array.isArray(orderedCodes)) return false;
+
+    try {
+      const rows = orderedCodes
+        .filter(Boolean)
+        .map((code, i) => ({ user_id: userId, pais_code: code, sort_order: i + 1 }));
+      if (!rows.length) return true;
+
+      const { error } = await client
+        .from('pais_likes')
+        .upsert(rows, { onConflict: 'user_id,pais_code' });
+      if (error) throw error;
+      return true;
+    } catch (e) {
+      console.error('[KAVARI Auth] Error guardando orden de likes:', e);
+      return false;
+    }
+  }
+
+  /* ─── Likes: Guardar/quitar un like de un país ───
+     Al dar like devuelve { ok, created_at } con la fecha REAL registrada por
+     Supabase (el servidor pone NOW()), para que el orden "Más reciente"
+     siempre use la fecha de la cuenta y no la del reloj del navegador. */
+  async function setUserLike(userId, paisCode, liked) {
+    const client = window.KavariDB?.getSupabaseClient();
+    if (!client || !userId || !paisCode) return { ok: false, created_at: null };
+
+    try {
+      if (liked) {
+        const { data, error } = await client
+          .from('pais_likes')
+          .upsert({ user_id: userId, pais_code: paisCode }, { onConflict: 'user_id,pais_code' })
+          .select('pais_code, created_at')
+          .single();
+        if (error) throw error;
+        return { ok: true, created_at: data?.created_at || null };
+      } else {
+        const { error } = await client
+          .from('pais_likes')
+          .delete()
+          .eq('user_id', userId)
+          .eq('pais_code', paisCode);
+        if (error) throw error;
+        return { ok: true, created_at: null };
+      }
+    } catch (e) {
+      console.error('[KAVARI Auth] Error guardando like:', e);
+      return { ok: false, created_at: null };
+    }
+  }
+
   /* ─── Listener de cambios de autenticación ─── */
   function initAuthListener() {
     const client = window.KavariDB?.getSupabaseClient();
@@ -508,7 +618,23 @@
       console.log('[KAVARI Auth] Evento:', event);
 
       if (session?.user) {
-        const profile = await getProfile(session.user.id);
+        let profile = await getProfile(session.user.id);
+        // Flujo OAuth (Google/GitHub): la tabla profiles no tiene trigger, así
+        // que creamos la fila aquí la primera vez (igual que en signInWithGoogleToken).
+        if (!profile) {
+          const meta = session.user.user_metadata || {};
+          try {
+            await createProfile(session.user.id, {
+              email: session.user.email,
+              full_name: meta.full_name || meta.name || session.user.email?.split('@')[0] || 'Usuario',
+              phone: null,
+              avatar_url: meta.avatar_url || meta.picture || null
+            });
+            profile = await getProfile(session.user.id);
+          } catch (err) {
+            console.warn('[KAVARI Auth] No se pudo crear el perfil:', err);
+          }
+        }
         if (profile) {
           localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
         }
@@ -548,6 +674,10 @@
     registerGuide,
     uploadGuideDocument,
     getGuidesByCountry,
+    getUserLikes,
+    getUserLikesWithTime,
+    setUserLike,
+    setLikeOrder,
     escapeHtml
   };
 })();
