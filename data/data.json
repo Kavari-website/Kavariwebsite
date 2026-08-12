@@ -1,4 +1,4 @@
-{
+﻿{
     "top10": {
         "obelisco": {
             "img": "img/Obelisco.jpg",
@@ -7474,7 +7474,7 @@
         "nombre": "paisCuba_cultura_items_carnavales_nombre",
         "tag": "paisCuba_cultura_items_carnavales_tag",
         "descripcion": "paisCuba_cultura_items_carnavales_descripcion",
-        "imagen": "img/cuba/carnaval.jpg",
+        "imagen": "img/Cuba/carnaval cubano.jpg",
         "detalle": "paisCuba_cultura_items_carnavales_detalle"
       }
     ],
@@ -7497,70 +7497,70 @@
         "nombre": "paisCuba_gastronomia_platos_0_nombre",
         "categoria": "paisCuba_gastronomia_platos_0_categoria",
         "descripcion": "paisCuba_gastronomia_platos_0_descripcion",
-        "imagen": "img/cuba/ropavieja.jpg",
+        "imagen": "img/Cuba/Ropa Vieja.webp",
         "nota": "paisCuba_gastronomia_platos_0_nota"
       },
       {
         "nombre": "paisCuba_gastronomia_platos_1_nombre",
         "categoria": "paisCuba_gastronomia_platos_1_categoria",
         "descripcion": "paisCuba_gastronomia_platos_1_descripcion",
-        "imagen": "img/cuba/moros.jpg",
+        "imagen": "img/Cuba/Moros y Cristianos.jpg",
         "nota": "paisCuba_gastronomia_platos_1_nota"
       },
       {
         "nombre": "paisCuba_gastronomia_platos_2_nombre",
         "categoria": "paisCuba_gastronomia_platos_2_categoria",
         "descripcion": "paisCuba_gastronomia_platos_2_descripcion",
-        "imagen": "img/cuba/lechon.jpg",
+        "imagen": "img/Cuba/Lechon asado.webp",
         "nota": "paisCuba_gastronomia_platos_2_nota"
       },
       {
         "nombre": "paisCuba_gastronomia_platos_3_nombre",
         "categoria": "paisCuba_gastronomia_platos_3_categoria",
         "descripcion": "paisCuba_gastronomia_platos_3_descripcion",
-        "imagen": "img/cuba/tostones.jpg",
+        "imagen": "img/Cuba/Tostones.jpg",
         "nota": "paisCuba_gastronomia_platos_3_nota"
       },
       {
         "nombre": "paisCuba_gastronomia_platos_4_nombre",
         "categoria": "paisCuba_gastronomia_platos_4_categoria",
         "descripcion": "paisCuba_gastronomia_platos_4_descripcion",
-        "imagen": "img/cuba/yuca.jpg",
+        "imagen": "img/Cuba/Yuca con mojo.webp",
         "nota": "paisCuba_gastronomia_platos_4_nota"
       },
       {
         "nombre": "paisCuba_gastronomia_platos_5_nombre",
         "categoria": "paisCuba_gastronomia_platos_5_categoria",
         "descripcion": "paisCuba_gastronomia_platos_5_descripcion",
-        "imagen": "img/cuba/ajiaco.jpg",
+        "imagen": "img/Cuba/Ajaico cubano.jpg",
         "nota": "paisCuba_gastronomia_platos_5_nota"
       },
       {
         "nombre": "paisCuba_gastronomia_platos_6_nombre",
         "categoria": "paisCuba_gastronomia_platos_6_categoria",
         "descripcion": "paisCuba_gastronomia_platos_6_descripcion",
-        "imagen": "img/cuba/tamales.jpg",
+        "imagen": "img/Cuba/Tamales cubanos.jpg",
         "nota": "paisCuba_gastronomia_platos_6_nota"
       },
       {
         "nombre": "paisCuba_gastronomia_platos_7_nombre",
         "categoria": "paisCuba_gastronomia_platos_7_categoria",
         "descripcion": "paisCuba_gastronomia_platos_7_descripcion",
-        "imagen": "img/cuba/congri.jpg",
+        "imagen": "img/Cuba/Arroz cubano.webp",
         "nota": "paisCuba_gastronomia_platos_7_nota"
       },
       {
         "nombre": "paisCuba_gastronomia_platos_8_nombre",
         "categoria": "paisCuba_gastronomia_platos_8_categoria",
         "descripcion": "paisCuba_gastronomia_platos_8_descripcion",
-        "imagen": "img/cuba/guayaba.jpg",
+        "imagen": "img/Cuba/Dulce de guayaba.jpg",
         "nota": "paisCuba_gastronomia_platos_8_nota"
       },
       {
         "nombre": "paisCuba_gastronomia_platos_9_nombre",
         "categoria": "paisCuba_gastronomia_platos_9_categoria",
         "descripcion": "paisCuba_gastronomia_platos_9_descripcion",
-        "imagen": "img/cuba/flan.jpg",
+        "imagen": "img/Cuba/flan cubano.webp",
         "nota": "paisCuba_gastronomia_platos_9_nota"
       }
     ]
