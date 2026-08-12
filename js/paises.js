@@ -79,7 +79,11 @@ document.querySelectorAll('.dest-card').forEach((c, i) => {
 // Redirige a la página de información del país seleccionado
 function irAPais(codigoPais) {
   localStorage.setItem('paisSeleccionado', codigoPais);
-  window.location.href = 'destino.html';
+  if (window.kavariNavigate) {
+    window.kavariNavigate('destino.html');
+  } else {
+    window.location.href = 'destino.html';
+  }
 }
 
 // ============================================

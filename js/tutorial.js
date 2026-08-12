@@ -9,7 +9,7 @@ const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 const tutorialStepsIndex = [
   { targetId: null, titleKey: 'tutorialIndexTitulo_0', descKey: 'tutorialIndexDesc_0', position: 'center', arrow: false },
   { targetId: 'navbar', titleKey: 'tutorialIndexTitulo_1', descKey: 'tutorialIndexDesc_1', position: 'bottom', arrow: true },
-  { targetSelector: '.nav-links a[href="guias.html"]', titleKey: 'tutorialIndexTitulo_2', descKey: 'tutorialIndexDesc_2', position: 'bottom', arrow: true },
+  { targetSelector: '#guiasNavBtn', titleKey: 'tutorialIndexTitulo_2', descKey: 'tutorialIndexDesc_2', position: 'bottom', arrow: true },
   { targetId: 'btnTutorial', titleKey: 'tutorialIndexTitulo_3', descKey: 'tutorialIndexDesc_3', position: 'bottom', arrow: true },
   { targetId: 'btnLang', titleKey: 'tutorialIndexTitulo_4', descKey: 'tutorialIndexDesc_4', position: 'bottom', arrow: true },
   { targetId: 'btnTheme', titleKey: 'tutorialIndexTitulo_5', descKey: 'tutorialIndexDesc_5', position: 'bottom', arrow: true },
@@ -78,8 +78,8 @@ const tutorialStepsContacto = [
   { targetId: 'btnTheme', titleKey: 'tutorialContactoTitulo_4', descKey: 'tutorialContactoDesc_4', position: 'bottom', arrow: true },
   { targetSelector: '.contact-float', titleKey: 'tutorialContactoTitulo_5', descKey: 'tutorialContactoDesc_5', position: 'bottom', arrow: true },
   { targetSelector: '.contact-ig', titleKey: 'tutorialContactoTitulo_6', descKey: 'tutorialContactoDesc_6', position: 'center', arrow: true },
-  { targetSelector: '#seccion-superarte', titleKey: 'tutorialContactoTitulo_7', descKey: 'tutorialContactoDesc_7', position: 'top', arrow: true },
-  { targetSelector: '#seccion-correos', titleKey: 'tutorialContactoTitulo_8', descKey: 'tutorialContactoDesc_8', position: 'top', arrow: true },
+  { targetSelector: '#sede', titleKey: 'tutorialContactoTitulo_7', descKey: 'tutorialContactoDesc_7', position: 'top', arrow: true },
+  { targetSelector: '#correos', titleKey: 'tutorialContactoTitulo_8', descKey: 'tutorialContactoDesc_8', position: 'top', arrow: true },
   { targetSelector: '.back-btn-wrap', titleKey: 'tutorialContactoTitulo_9', descKey: 'tutorialContactoDesc_9', position: 'top', arrow: true },
   { targetId: 'kavari-chat-btn', titleKey: 'tutorialContactoTitulo_10', descKey: 'tutorialContactoDesc_10', position: 'center', arrow: true },
   { targetId: null, titleKey: 'tutorialContactoTitulo_11', descKey: 'tutorialContactoDesc_11', position: 'center', arrow: false, isLast: true }

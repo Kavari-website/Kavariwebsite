@@ -57,6 +57,52 @@ function loadGuidesForCountry(countryCode, dataGuides) {
     return merged;
 }
 
+const GUIDE_PRICES = { diamond: 50, gold: 35, silver: 20 };
+
+function isDemoGuide(g) {
+    return [1, 2, 3, 4, 5, 6, 7, 8, 9001, 9002].includes(Number(g.id));
+}
+
+async function loadApprovedGuidesFromSupabase(countryCode) {
+    if (!window.KavariAuth || !window.KavariDB) return [];
+    try {
+        const rows = await window.KavariAuth.getGuidesByCountry(countryCode);
+        return (rows || []).map(row => ({
+            id: row.id,
+            name: row.full_name,
+            description: row.description || '',
+            languages: row.languages || '',
+            location: '',
+            country: row.country_code,
+            rank: (row.membership_tier || 'silver'),
+            price: GUIDE_PRICES[row.membership_tier] || 20,
+            photo: row.photo_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(row.full_name || 'G')}&background=0050a0&color=fff`,
+            phone: row.phone || '',
+            email: row.email || '',
+            disponible: true,
+            especialidades: String(row.specialties || '').split(',').map(s => s.trim()).filter(Boolean)
+        }));
+    } catch (e) {
+        console.warn('[KAVARI] No se pudieron cargar guías de Supabase:', e);
+        return [];
+    }
+}
+
+function mergeGuideSources(localList, remoteList) {
+    const seen = new Set(localList.map(g => (g.email || '').toLowerCase()).filter(Boolean));
+    const merged = [...localList];
+    remoteList.forEach(g => {
+        const key = (g.email || '').toLowerCase();
+        if (!key || seen.has(key)) {
+            if (!key) merged.push(g);
+            return;
+        }
+        seen.add(key);
+        merged.push(g);
+    });
+    return merged;
+}
+
 function enrichCountryData(codigo, d) {
     if (!d) return d;
     const capital = d.capital || d.nombre;
@@ -129,6 +175,13 @@ function renderGuideFilters() {
 
 function setGuideFilter(f) { currentGuideFilter = f; renderGuideFilters(); }
 
+function contactarGuia(name, phone, email) {
+    let msg = _t('contactGuide') + ': ' + name;
+    if (phone) msg += '\n📞 ' + phone;
+    if (email) msg += '\n✉️ ' + email;
+    alert(msg);
+}
+
 function renderGuidesList() {
     let list = guiasPanama.filter(g => currentGuideFilter === 'all' || g.rank === currentGuideFilter);
     const order = { diamond: 0, gold: 1, silver: 2 };
@@ -159,15 +212,15 @@ function renderGuidesList() {
                 </div>
                 <p class="guide-desc">${g.description}</p>
                 <div class="guide-meta">
-                    <span>${g.languages}</span>
-                    <span>${g.location}</span>
+                    ${g.languages ? `<span>${g.languages}</span>` : ''}
+                    ${g.location ? `<span>${g.location}</span>` : ''}
                 </div>
                 ${g.especialidades ? `<div class="guide-tags">${g.especialidades.map(e => `<span class="guide-tag">${e}</span>`).join('')}</div>` : ''}
             </div>
             <div class="guide-price-col">
                 <div class="price-num">$${g.price}</div>
                 <div class="price-unit">${precioHora}</div>
-                <button class="btn-sm" onclick="alert('${_t('contactGuide').replace('{name}', g.name)}')">${btnContratar}</button>
+                <button class="btn-sm" onclick="contactarGuia('${g.name.replace(/'/g, "\\'")}', '${(g.phone || '').replace(/'/g, "\\'")}', '${(g.email || '').replace(/'/g, "\\'")}')">${btnContratar}</button>
             </div>
         </div>
     `).join('');
@@ -286,40 +339,53 @@ function renderSouvenirs(d) {
         grid.innerHTML = `<p style="padding:40px;text-align:center;opacity:.6">${_t('cargandoTiendas')}</p>`;
         return;
     }
-    grid.innerHTML = souvenirsTiendas.map(tienda => `
-        <div class="souvenir-card-v2">
+
+    const totalProductos = souvenirsTiendas.reduce((n, t) => n + (t.productos ? t.productos.length : 0), 0);
+    const meta = document.getElementById('souvenirsMeta');
+    if (meta) meta.innerHTML = `<strong>${souvenirsTiendas.length}</strong> ${_t('souvenirsTiendasLabel')} · <strong>${totalProductos}</strong> ${_t('souvenirsProductosLabel')}`;
+
+    grid.innerHTML = souvenirsTiendas.map(tienda => {
+        const prod = tienda.productos || [];
+        const portada = (prod[0] && prod[0].img) || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400';
+        let precioDesde = Infinity;
+        prod.forEach(p => { const n = parseInt(p.precio); if (!isNaN(n) && n < precioDesde) precioDesde = n; });
+        const precioHtml = isFinite(precioDesde)
+            ? `<div class="souv-price-tag">${_t('desde')} $${precioDesde}</div>`
+            : '';
+        const mini = prod.slice(0, 3).map(p => `
+            <div class="souv-mini-item" onclick="openSouvenirModal(${tienda.id})" title="${_t('verTodosLosProductos')}">
+                <img src="${p.img}" alt="${_t(p.nombre)}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100'">
+                <span>${_t(p.nombre)}</span>
+                ${p.precio ? `<span class="souv-mini-price">${_t(p.precio) || p.precio}</span>` : ''}
+            </div>`).join('');
+
+        return `
+        <article class="souvenir-card-v2" onclick="openSouvenirModal(${tienda.id})" role="button" tabindex="0" aria-label="${_t(tienda.nombre)}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openSouvenirModal(${tienda.id})}">
             <div class="souv-img-wrap">
-                <img class="souv-main-img" src="${tienda.productos[0]?.img || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400'}" alt="${_t(tienda.nombre)}" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400'">
+                <img class="souv-main-img" src="${portada}" alt="${_t(tienda.nombre)}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400'">
                 <div class="souv-overlay"></div>
-                <div class="souv-product-count">${tienda.productos.length} ${_t('articulos')}</div>
-            </div>
-            <div class="souv-body">
-                <div class="souv-location">
+                ${precioHtml}
+                <div class="souv-product-count">${prod.length} ${_t('articulos')}</div>
+                <div class="souv-location-badge">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     ${_t(tienda.ubicacion) || tienda.ubicacion}
                 </div>
+            </div>
+            <div class="souv-body">
                 <h4 class="souv-nombre">${_t(tienda.nombre)}</h4>
                 <p class="souv-desc">${_t(tienda.descripcion) || tienda.descripcion}</p>
                 ${tienda.horario ? `<div class="souv-horario"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ${_t(tienda.horario) || tienda.horario}</div>` : ''}
-                <div class="souv-products-preview">
-                    ${tienda.productos.slice(0, 3).map(p => `
-                        <div class="souv-mini-item">
-                            <img src="${p.img}" alt="${_t(p.nombre)}" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100'">
-                            <span>${_t(p.nombre)}</span>
-                            ${p.precio ? `<span class="souv-mini-price">${_t(p.precio) || p.precio}</span>` : ''}
-                        </div>
-                    `).join('')}
-                </div>
+                <div class="souv-products-preview">${mini}</div>
             </div>
             <div class="souv-footer">
-                <a href="https://www.google.com/maps/search/?api=1&query=${tienda.coords}" target="_blank" class="souv-map-btn">
+                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(tienda.coords)}" target="_blank" rel="noopener" class="souv-map-btn" onclick="event.stopPropagation()">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     ${_t('verEnMapa')}
                 </a>
-                <button class="btn-sm" onclick="openSouvenirModal(${tienda.id})">${_t('verTodosLosProductos')}</button>
+                <button class="btn-sm" onclick="event.stopPropagation();openSouvenirModal(${tienda.id})">${_t('verTodosLosProductos')}</button>
             </div>
-        </div>
-    `).join('');
+        </article>`;
+    }).join('');
     const headerBg = document.getElementById('souvenirsHeaderBg');
     if (headerBg && d) headerBg.style.backgroundImage = `url('${d.page_header_img}')`;
     
@@ -337,25 +403,48 @@ function renderSouvenirs(d) {
 function openSouvenirModal(shopId) {
     const tienda = souvenirsTiendas.find(t => t.id === shopId);
     if (!tienda) return;
+    const modal = document.getElementById('souvenirModal');
     document.getElementById('modalShopName').innerText = _t(tienda.nombre);
-    let productsHtml = '<div class="product-list">';
+    const loc = document.getElementById('modalShopLocation');
+    if (loc) loc.textContent = _t(tienda.ubicacion) || tienda.ubicacion;
+    const count = document.getElementById('modalShopCount');
+    if (count) count.textContent = `${tienda.productos.length} ${_t('articulos')}`;
+    let productsHtml = '<div class="product-grid">';
     tienda.productos.forEach(p => {
         productsHtml += `
-            <div class="product-item">
-                <img class="product-img" src="${p.img}" alt="${_t(p.nombre)}" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200'">
-                <div class="product-info">
-                    <strong>${_t(p.nombre)}</strong>
-                    <span>${_t(p.descripcion) || p.descripcion}</span>
-                    ${p.precio ? `<span class="product-price">${_t(p.precio) || p.precio}</span>` : ''}
+            <div class="product-card">
+                <div class="product-card-img-wrap">
+                    <img class="product-card-img" src="${p.img}" alt="${_t(p.nombre)}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300'">
+                </div>
+                <div class="product-card-body">
+                    <strong class="product-card-name">${_t(p.nombre)}</strong>
+                    <span class="product-card-desc">${_t(p.descripcion) || p.descripcion}</span>
+                    ${p.precio ? `<span class="product-price-chip">${_t(p.precio) || p.precio}</span>` : ''}
                 </div>
             </div>`;
     });
     productsHtml += '</div>';
     document.getElementById('modalProducts').innerHTML = productsHtml;
-    document.getElementById('modalMapLink').href = `https://www.google.com/maps/search/?api=1&query=${tienda.coords}`;
-    document.getElementById('souvenirModal').classList.add('active');
+    document.getElementById('modalMapLink').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(tienda.coords)}`;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    const closeBtn = document.getElementById('souvenirModalClose');
+    if (closeBtn) closeBtn.focus();
 }
-function closeSouvenirModal() { document.getElementById('souvenirModal').classList.remove('active'); }
+function closeSouvenirModal() {
+    document.getElementById('souvenirModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+(function initSouvenirModal() {
+    const modal = document.getElementById('souvenirModal');
+    if (!modal) return;
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeSouvenirModal();
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) closeSouvenirModal();
+    });
+})();
 
 // ============================================================
 // 6. COUNTRY SELECTOR CUSTOM (sin cambios)
@@ -522,6 +611,11 @@ async function cargarPais(codigoPais) {
         document.title = _t(d.nombre) + ' · KAVARI';
 
         guiasPanama = loadGuidesForCountry(codigoPais, enriched.guias);
+        const supabaseGuides = await loadApprovedGuidesFromSupabase(codigoPais);
+        if (supabaseGuides.length > 0) {
+            guiasPanama = guiasPanama.filter(g => !isDemoGuide(g));
+        }
+        guiasPanama = mergeGuideSources(guiasPanama, supabaseGuides);
         souvenirsTiendas = enriched.souvenirs || [];
         aerolineasData = enriched.aerolineas || [];
         hospedajesData = enriched.hospedajes || [];
@@ -573,12 +667,6 @@ function renderAllSections(d) {
     if (heroTitulo) heroTitulo.innerHTML = _t(d.nombre) + '<span id="heroSubtitulo">' + (_t(d.subtitulo) || '') + '</span>';
     const heroDesc = document.getElementById('heroDesc');
     if (heroDesc) heroDesc.textContent = _t(d.descripcion) || '';
-    const heroStats = document.getElementById('heroStats');
-    if (heroStats && d.stats) {
-        heroStats.innerHTML = d.stats.slice(0, 3).map(s =>
-            `<div class="hstat"><span class="hstat-n">${s.numero}</span><span class="hstat-l">${_t(s.label) || s.label}</span></div>`
-        ).join('');
-    }
 
     // Ticker
     const tickerInner = document.getElementById('tickerInner');
@@ -825,7 +913,7 @@ function renderAllSections(d) {
 
     // Guías título
     const guiasTitle = document.getElementById('guiasSectionTitle');
-    if (guiasTitle) guiasTitle.textContent = `Guías turísticos en ${_t(d.nombre)}`;
+    if (guiasTitle) guiasTitle.textContent = `${_t('guiasSectionTitle')} — ${_t(d.nombre)}`;
 }
 
 // ============================================================

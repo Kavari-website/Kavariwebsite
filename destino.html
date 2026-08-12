@@ -115,16 +115,19 @@
     <div class="hero-overlay"></div>
     <div class="hero-deco"><span></span><span></span><span></span><span></span></div>
     <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-dot"></span>
-        <span id="heroContinente" data-i18n="heroContinente">Tu próximo destino</span>
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-dot"></span>
+          <span id="heroContinente" data-i18n="heroContinente">Tu próximo destino</span>
+        </div>
+        <h1 id="heroTitulo"><span data-i18n="heroTitulo">Descubre el Mundo</span><span id="heroSubtitulo" data-i18n="heroSubtitulo">con KAVARI</span></h1>
       </div>
-      <h1 id="heroTitulo"><span data-i18n="heroTitulo">Descubre el Mundo</span><span id="heroSubtitulo" data-i18n="heroSubtitulo">con KAVARI</span></h1>
-      <p class="hero-desc" id="heroDesc" data-i18n="heroDesc">Viajes que transforman, experiencias que perduran.</p>
-      <div class="hero-stats" id="heroStats"></div>
-      <div class="hero-actions">
-        <button class="btn-hero" onclick="showSection('lugares')"><span data-i18n="heroExplorarDestinos">Explorar destinos</span></button>
-        <button class="btn-hero-outline" onclick="showSection('aerolineas')" data-i18n="heroVerVuelosDisponibles">Ver vuelos disponibles</button>
+      <div class="hero-right">
+        <p class="hero-desc" id="heroDesc" data-i18n="heroDesc">Viajes que transforman, experiencias que perduran.</p>
+        <div class="hero-actions">
+          <button class="btn-hero" onclick="showSection('lugares')"><span data-i18n="heroExplorarDestinos">Explorar destinos</span></button>
+          <button class="btn-hero-outline" onclick="showSection('aerolineas')" data-i18n="heroVerVuelosDisponibles">Ver vuelos disponibles</button>
+        </div>
       </div>
     </div>
     <div class="hero-scroll">
@@ -292,6 +295,7 @@
     </div>
   </div>
   <div class="souvenirs-section reveal">
+    <div class="souvenirs-meta" id="souvenirsMeta"></div>
     <div class="souvenirs-grid-3" id="souvenirsGrid"></div>
   </div>
 </div>
@@ -325,14 +329,23 @@
 </div>
 
 <!-- MODAL SOUVENIRS -->
-<div id="souvenirModal" class="modal-overlay-souvenirs">
+<div id="souvenirModal" class="modal-overlay-souvenirs" role="dialog" aria-modal="true" aria-labelledby="modalShopName">
   <div class="modal-content-souvenirs">
-    <button class="modal-close-sm" onclick="closeSouvenirModal()">
+    <button class="modal-close-sm" id="souvenirModalClose" onclick="closeSouvenirModal()" aria-label="Cerrar">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <h3 id="modalShopName"></h3>
+    <div class="souvenir-modal-head">
+      <div>
+        <h3 id="modalShopName"></h3>
+        <div class="souv-shop-loc">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span id="modalShopLocation"></span>
+        </div>
+      </div>
+      <div class="souv-shop-count" id="modalShopCount"></div>
+    </div>
     <div id="modalProducts"></div>
-    <a id="modalMapLink" href="#" target="_blank" class="map-link">
+    <a id="modalMapLink" href="#" target="_blank" rel="noopener" class="map-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
       <span data-i18n="verEnGoogleMaps">Ver en Google Maps</span>
     </a>
@@ -340,7 +353,7 @@
 </div>
 
 <!-- FOOTER -->
-<footer>
+<footer class="footer">
   <div class="footer-inner">
     <div class="footer-copy">© 2025 KAVARI — Todos los derechos reservados.</div>
   </div>
@@ -353,6 +366,7 @@
 <script src="js/traveler-registration.js"></script>
 <script src="js/destino.js"></script>
 <script src="js/tutorial.js"></script>
+<script src="js/page-transitions.js"></script>
 <script src="js/mobile-nav.js"></script>
 </body>
 </html>

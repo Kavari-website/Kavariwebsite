@@ -19,7 +19,6 @@
    11 · Modales y tarjetas flotantes
    12 · Pie de página
    ========================================================================== */
-
 /* ══════════════════════════════════════════════════════════════════════════
    01 · BASE GLOBAL MÓVIL
    ══════════════════════════════════════════════════════════════════════════ */
@@ -28,24 +27,20 @@ body {
   max-width: 100%;
   overflow-x: hidden;
 }
-
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
-
 img,
 video,
 svg,
 iframe {
   max-width: 100%;
 }
-
 /* Fondo sólido del menú móvil bloquea el scroll del body */
 body.menu-open {
   overflow: hidden;
 }
-
 /* Objetivos táctiles cómodos en pantallas táctiles */
 @media (hover: none) and (max-width: 900px) {
   .nav-links.open a,
@@ -61,11 +56,9 @@ body.menu-open {
     min-height: 46px;
   }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    02 · NAVBAR MÓVIL (todas las páginas con .nav-glass)
    ══════════════════════════════════════════════════════════════════════════ */
-
 /* Botón hamburguesa: base visual para TODAS las páginas
    (algunas páginas no tenían estilos propios y se veía sin forma) */
 .navbar .hamburger {
@@ -88,12 +81,10 @@ body.menu-open {
   z-index: 3;
   transition: background .25s ease, border-color .25s ease, transform .25s cubic-bezier(.34, 1.56, .64, 1);
 }
-
 [data-theme="dark"] .navbar .hamburger {
   background: rgba(255, 255, 255, .08);
   border-color: rgba(255, 255, 255, .18);
 }
-
 .navbar .hamburger span {
   display: block;
   width: 22px;
@@ -102,14 +93,17 @@ body.menu-open {
   background: #fff;
   transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), opacity .25s ease;
 }
-
 /* Hamburgesa → X */
-.navbar .hamburger.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-.navbar .hamburger.active span:nth-child(2) { opacity: 0; }
-.navbar .hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
-
+.navbar .hamburger.active span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+.navbar .hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.navbar .hamburger.active span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
 @media (max-width: 900px) {
-
   /* Barra compacta: logo | acciones | hamburguesa en una sola fila */
   .navbar.nav-glass {
     flex-direction: row !important;
@@ -122,19 +116,16 @@ body.menu-open {
     /* Eliminamos will-change para que el menú fixed cubra toda la pantalla */
     will-change: auto;
   }
-
   .navbar.nav-glass .logo {
     font-size: 20px;
     letter-spacing: .28em;
     margin: 0;
     line-height: 1;
   }
-
   .navbar.nav-glass .nav-actions {
     gap: 6px;
     margin-left: 0;
   }
-
   .navbar.nav-glass .nav-actions .btn-lang-nav,
   .navbar.nav-glass .nav-actions .btn-theme-nav {
     width: 36px !important;
@@ -144,18 +135,15 @@ body.menu-open {
     font-size: .68rem !important;
     min-width: 0 !important;
   }
-
   .navbar.nav-glass .nav-btn-tutorial {
     display: none !important;
   }
-
   /* Botón de tema compacto: compensa el recorrido del "knob" oscuro
      (la versión original es de 56px con translateX(26px); en 36px el
      knob debe recorrer 11px para no salirse del botón) */
   [data-theme="dark"] .btn-theme-nav::before {
     transform: translateX(11px) !important;
   }
-
   /* ── Menú desplegable a pantalla completa ── */
   .nav-glass .nav-links.open {
     position: fixed;
@@ -184,7 +172,6 @@ body.menu-open {
     z-index: 1;
     animation: kvMenuIn .28s cubic-bezier(.22, 1, .36, 1) both;
   }
-
   .nav-glass .nav-links.open::before {
     content: 'KAVARI';
     display: block;
@@ -196,24 +183,41 @@ body.menu-open {
     color: rgba(255, 255, 255, .38);
     margin: 0 0 10px;
   }
-
   .nav-glass .nav-links.open li {
     margin: 0;
     list-style: none;
     animation: kvMenuLink .35s cubic-bezier(.22, 1, .36, 1) both;
   }
-
-  .nav-glass .nav-links.open li:nth-child(1) { animation-delay: .04s; }
-  .nav-glass .nav-links.open li:nth-child(2) { animation-delay: .07s; }
-  .nav-glass .nav-links.open li:nth-child(3) { animation-delay: .10s; }
-  .nav-glass .nav-links.open li:nth-child(4) { animation-delay: .13s; }
-  .nav-glass .nav-links.open li:nth-child(5) { animation-delay: .16s; }
-  .nav-glass .nav-links.open li:nth-child(6) { animation-delay: .19s; }
-  .nav-glass .nav-links.open li:nth-child(7) { animation-delay: .22s; }
-  .nav-glass .nav-links.open li:nth-child(8) { animation-delay: .25s; }
-  .nav-glass .nav-links.open li:nth-child(9) { animation-delay: .28s; }
-  .nav-glass .nav-links.open li:nth-child(10) { animation-delay: .31s; }
-
+  .nav-glass .nav-links.open li:nth-child(1) {
+    animation-delay: .04s;
+  }
+  .nav-glass .nav-links.open li:nth-child(2) {
+    animation-delay: .07s;
+  }
+  .nav-glass .nav-links.open li:nth-child(3) {
+    animation-delay: .10s;
+  }
+  .nav-glass .nav-links.open li:nth-child(4) {
+    animation-delay: .13s;
+  }
+  .nav-glass .nav-links.open li:nth-child(5) {
+    animation-delay: .16s;
+  }
+  .nav-glass .nav-links.open li:nth-child(6) {
+    animation-delay: .19s;
+  }
+  .nav-glass .nav-links.open li:nth-child(7) {
+    animation-delay: .22s;
+  }
+  .nav-glass .nav-links.open li:nth-child(8) {
+    animation-delay: .25s;
+  }
+  .nav-glass .nav-links.open li:nth-child(9) {
+    animation-delay: .28s;
+  }
+  .nav-glass .nav-links.open li:nth-child(10) {
+    animation-delay: .31s;
+  }
   .nav-glass .nav-links.open a {
     display: flex;
     align-items: center;
@@ -232,41 +236,44 @@ body.menu-open {
     border-radius: 14px;
     transition: background .2s ease, transform .15s ease, border-color .2s ease;
   }
-
   .nav-glass .nav-links.open a:hover,
   .nav-glass .nav-links.open a:focus-visible {
     background: rgba(255, 255, 255, .14);
     color: #fff;
     border-color: rgba(255, 255, 255, .22);
   }
-
   .nav-glass .nav-links.open a:active {
     transform: scale(.98);
   }
-
   .nav-glass .nav-links.open a.active {
     background: linear-gradient(135deg, #2e6edc, #1d4f9e);
     border-color: rgba(122, 172, 255, .5);
     box-shadow: 0 8px 22px rgba(46, 110, 220, .35);
   }
-
   .nav-glass .nav-links.open a.nav-register {
     background: linear-gradient(135deg, #19a08c, #0f7a6e);
     border-color: rgba(60, 220, 190, .35);
     box-shadow: 0 8px 22px rgba(0, 194, 168, .25);
   }
 }
-
 @keyframes kvMenuIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-
 @keyframes kvMenuLink {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    03 · PÁGINA DE INICIO (index.html)
    ══════════════════════════════════════════════════════════════════════════ */
@@ -275,100 +282,78 @@ body.menu-open {
     margin-top: 88px;
   }
 }
-
 @media (max-width: 600px) {
   .hero-content {
     padding: 0 14px;
   }
-
   .hero-content h1 {
     font-size: clamp(30px, 9.5vw, 42px);
   }
-
   .hero-content p {
     font-size: 15px;
     padding: 0 6px;
   }
-
   .search-box {
     padding: 28px 14px;
   }
-
   .search-content {
     gap: 16px;
   }
-
   .search-content h2 {
     font-size: 22px;
   }
-
   .search-content button {
     width: 100%;
     padding: 15px 24px;
     font-size: 15px;
   }
-
   .featured-section {
     padding: 46px 14px;
   }
-
   .featured-section h2 {
     font-size: clamp(22px, 6.8vw, 28px);
   }
-
   .cards-container {
     gap: 14px;
   }
-
   .card img {
     height: 190px;
   }
-
   .card-content {
     padding: 18px 16px 20px;
   }
-
   .card-content h3 {
     font-size: 1.05rem;
   }
-
   .card-content p {
     font-size: .88rem;
   }
-
   /* Paquetes de viaje */
   .paquete-card {
     border-radius: 20px;
     margin-bottom: 18px;
   }
-
   .paquete-img-wrap {
     height: 200px;
   }
-
   .paquete-info {
     padding: 20px 18px 22px;
   }
-
   .paquete-features {
     gap: 7px;
   }
-
   .paquete-feature {
     font-size: .7rem;
     padding: 6px 10px;
   }
-
   .paquete-bottom {
     gap: 14px;
   }
-
   .paquete-btns {
     flex-direction: column;
     width: 100%;
     gap: 8px;
   }
-
   .paquete-btns a,
   .paquete-btns button {
     width: 100%;
@@ -376,7 +361,6 @@ body.menu-open {
     text-align: center;
   }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    04 · PAÍSES (paises.html)
    ══════════════════════════════════════════════════════════════════════════ */
@@ -386,79 +370,62 @@ body.menu-open {
     padding: 108px 16px 56px;
     border-radius: 0 0 28px 28px;
   }
-
   .page-hero-content h1 {
     font-size: clamp(26px, 7.5vw, 34px);
   }
-
   .hero-eyebrow {
     font-size: .68rem;
     padding: 6px 14px;
   }
-
   .hero-sub {
     font-size: .95rem;
   }
-
   .controls-wrap {
     padding: 18px 14px;
   }
-
   .controls-inner {
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
   }
-
   .search-wrap {
     width: 100%;
   }
-
   .stats-row {
     width: 100%;
   }
-
   .page-body {
     padding: 26px 14px 56px;
   }
-
   .destinos-grid {
     gap: 16px;
   }
-
   .dest-thumb {
     height: 190px;
   }
-
   .dest-info {
     padding: 18px 16px 20px;
   }
-
   .dest-info h3 {
     font-size: 1.15rem;
   }
-
   .dest-info p {
     font-size: .88rem;
   }
-
   .dest-btn {
     width: 100%;
   }
-
   .region-label {
     font-size: .8rem;
     margin: 22px 0 14px;
   }
 }
-
 @media (max-width: 480px) {
   .page-hero {
     min-height: 300px;
     padding: 100px 14px 48px;
   }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    05 · DESTINO (destino.html)
    ══════════════════════════════════════════════════════════════════════════ */
@@ -468,22 +435,18 @@ body.menu-open {
     padding: 0 12px;
     gap: 8px;
   }
-
   .page-destino .logo {
     font-size: 17px;
     letter-spacing: .24em;
   }
-
   .page-destino .nav-hamburger {
     width: 40px;
     height: 40px;
   }
-
   .page-destino .country-trigger {
     padding: 8px 10px;
     font-size: 12px;
   }
-
   .page-utilities {
     right: 12px;
     bottom: 12px;
@@ -491,36 +454,29 @@ body.menu-open {
     gap: 6px;
   }
 }
-
 @media (max-width: 600px) {
   .page-destino .navbar {
     grid-template-columns: auto minmax(0, 1fr) auto;
     padding: 0 10px;
   }
-
   .page-destino .country-trigger-name {
     max-width: 88px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
   .page-destino .hero {
     min-height: 480px;
   }
-
   .page-destino .hero-content {
     padding: 0 18px;
   }
-
   .page-destino .hero-content h1 {
     font-size: clamp(26px, 9vw, 36px);
   }
-
   .page-destino .hero-desc {
     font-size: 15px;
   }
-
   .page-destino .hero-actions {
     flex-direction: column;
     align-items: stretch;
@@ -528,95 +484,74 @@ body.menu-open {
     max-width: 320px;
     margin: 0 auto;
   }
-
   .page-destino .hero-actions .btn-hero,
   .page-destino .hero-actions .btn-hero-outline {
     width: 100%;
     justify-content: center;
     text-align: center;
   }
-
   .page-header-content {
     padding: 28px 16px 24px;
   }
-
   .page-header-content h2 {
     font-size: clamp(24px, 7vw, 32px);
   }
-
   .ph-tag {
     font-size: .68rem;
     padding: 5px 12px;
   }
-
   .cards-section {
     padding: 30px 16px;
   }
-
   .cards-section h4 {
     font-size: 18px;
   }
-
   .sec-title {
     padding: 30px 16px 24px;
   }
-
   .sec-title h3 {
     font-size: 20px;
   }
-
   /* Estadísticas en 2 columnas */
   .stats-bar {
     grid-template-columns: repeat(2, 1fr);
     gap: 1px;
   }
-
   .stat-cell {
     padding: 16px 10px;
   }
-
   .stat-num {
     font-size: 1.6rem;
   }
-
   /* Franja de característica: apilada (imagen arriba, texto abajo) */
   .feature-band {
     grid-template-columns: 1fr;
     min-height: 0;
   }
-
   .feature-band.rev {
     direction: ltr;
   }
-
   .feature-img {
     min-height: 220px;
   }
-
   .feature-text {
     padding: 28px 20px;
   }
-
   .feature-text h3 {
     font-size: 20px;
   }
-
   .quick-facts {
     padding: 40px 16px;
   }
-
   .quick-facts > h4 {
     font-size: 20px;
   }
-
   .quote-bar {
     padding: 34px 18px;
   }
-
   .quote-bar blockquote {
     font-size: 1.05rem;
   }
-
   /* Aerolíneas / Guías: tarjeta apilada */
   .airline-card,
   .guide-card {
@@ -625,11 +560,9 @@ body.menu-open {
     gap: 14px;
     padding: 18px;
   }
-
   .guide-price-col {
     text-align: left;
   }
-
   .airline-grid,
   .hospedajes-grid,
   .souvenirs-grid-3 {
@@ -637,32 +570,26 @@ body.menu-open {
     gap: 16px;
     margin-top: 16px;
   }
-
   .guides-section,
   .souvenirs-section {
     padding: 36px 16px;
   }
-
   .ticker {
     padding: 10px 0;
   }
-
   .two-col-itin .itin-col,
   .two-col .col-block {
     padding: 28px 18px;
   }
-
   .info-grid {
     grid-template-columns: 1fr;
     padding: 28px 16px;
     gap: 18px;
   }
-
   .act-list {
     padding: 0 16px 32px;
   }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    06 · PLANES / PRECIOS (planes.html)
    ══════════════════════════════════════════════════════════════════════════ */
@@ -671,36 +598,29 @@ body.menu-open {
     padding-top: calc(64px + 30px);
   }
 }
-
 @media (max-width: 600px) {
   .pricing-section {
     padding: calc(64px + 24px) 16px 48px;
   }
-
   .pricing-header h1 {
     font-size: clamp(26px, 7.5vw, 34px);
   }
-
   .pricing-card {
     padding: 24px 18px;
     border-radius: 20px;
   }
-
   .pricing-cta {
     width: 100%;
   }
-
   .pricing-features li {
     font-size: .88rem;
     padding: 9px 0;
   }
-
   .pricing-note {
     font-size: .8rem;
     padding: 0 4px;
   }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    07 · CUENTA Y PERFIL (cuenta.html / perfil.html)
    ══════════════════════════════════════════════════════════════════════════ */
@@ -708,55 +628,44 @@ body.menu-open {
   .auth-main {
     padding: calc(64px + 24px) 14px 44px;
   }
-
   .auth-shell {
     border-radius: 22px;
   }
 }
-
 @media (max-width: 600px) {
   .auth-shell {
     border-radius: 18px;
   }
-
   .perfil-container {
     width: 100%;
   }
-
   .perfil-auth-card {
     padding: 30px 20px;
     border-radius: 18px;
   }
-
   .perfil-header {
     padding: 22px 18px;
   }
-
   .perfil-tab-content {
     padding: 22px 18px;
   }
-
   .perfil-fav-sortbar {
     gap: 6px;
   }
-
   .perfil-fav-sortlabel {
     width: 100%;
   }
-
   .perfil-settings-item {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
-
   .perfil-settings-item .perfil-settings-link,
   .perfil-settings-item .perfil-settings-toggle {
     width: 100%;
     text-align: center;
   }
 }
-
 /* ─── Perfil / autenticación en móvil (medidas ajustadas) ─── */
 @media (max-width: 640px) {
   /* Evita que iOS haga zoom automático al enfocar los campos */
@@ -765,125 +674,99 @@ body.menu-open {
   .perfil-container textarea {
     font-size: 16px;
   }
-
   .auth-field label {
     font-size: .82rem;
   }
-
   .auth-input-wrap input {
     padding: 12px 14px;
   }
 }
-
 @media (max-width: 480px) {
   .perfil-container {
     padding: 0 2px;
   }
-
   .perfil-auth-card {
     padding: 26px 16px;
     border-radius: 16px;
   }
-
   .perfil-auth-card h2 {
     font-size: 1.35rem;
   }
-
   .perfil-header {
     padding: 20px 16px;
   }
-
   .perfil-avatar {
     width: 68px;
     height: 68px;
   }
-
   .perfil-avatar-initials {
     font-size: 1.5rem;
   }
-
   .perfil-header-info h1 {
     font-size: 1.2rem;
   }
-
   .perfil-tab {
     padding: 10px 14px;
     font-size: .84rem;
   }
-
   .perfil-tab-content {
     padding: 20px 16px;
   }
-
   .perfil-form-grid {
     gap: 14px;
   }
-
   .perfil-fav-sortbar {
     gap: 6px;
   }
-
   .perfil-fav-sortbtn {
     flex: 1;
     min-width: 0;
     padding: 8px 10px;
     font-size: .76rem;
   }
-
   .perfil-fav-sortlabel {
     width: 100%;
   }
-
   .perfil-settings-item {
     padding: 13px 14px;
   }
-
   .perfil-container .auth-submit {
     padding: 14px 20px;
   }
-
   .perfil-google-btn {
     padding: 12px 14px;
   }
-
   .perfil-divider {
     margin: 16px 0;
   }
 }
-
 @media (max-width: 480px) {
   /* Cuenta: aprovechar mejor el ancho en pantallas pequeñas */
   .auth-copy,
   .auth-panel {
     padding: 28px 18px;
   }
-
   .auth-user .ticket-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 }
-
 @media (max-width: 360px) {
   .perfil-auth-card {
     padding: 22px 12px;
   }
-
   .perfil-avatar-section {
     gap: 12px;
   }
-
   .perfil-fav-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
-
   .perfil-fav-name {
     padding: 9px 10px;
     font-size: .82rem;
   }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    08 · AYUDA (ayuda.html)
    ══════════════════════════════════════════════════════════════════════════ */
@@ -891,63 +774,50 @@ body.menu-open {
   .help-hero {
     padding: 118px 16px 64px;
   }
-
   .help-hero h1 {
     font-size: clamp(28px, 7vw, 38px);
   }
-
   .help-hero p {
     font-size: 1rem;
   }
-
   .help-main {
     padding: 44px 16px;
   }
 }
-
 @media (max-width: 560px) {
   .help-categories {
     grid-template-columns: 1fr;
     gap: 12px;
     margin-bottom: 44px;
   }
-
   .help-cat-card {
     padding: 22px 18px;
   }
-
   .help-cat-card h3 {
     font-size: 1.05rem;
   }
-
   .faq-question {
     font-size: .9rem;
     padding: 16px 14px;
   }
-
   .faq-answer-inner {
     padding: 2px 14px 16px;
   }
-
   .faq-answer-inner p,
   .faq-answer-inner li {
     font-size: .88rem;
   }
-
   .help-cta {
     padding: 40px 18px;
     border-radius: 20px;
   }
-
   .help-cta h2 {
     font-size: 1.5rem;
   }
-
   .cta-btns {
     flex-direction: column;
     width: 100%;
   }
-
   .cta-btns a,
   .cta-btns button {
     width: 100%;
@@ -955,7 +825,6 @@ body.menu-open {
     justify-content: center;
   }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    09 · CONTACTO (contacto.html)
    ══════════════════════════════════════════════════════════════════════════ */
@@ -963,24 +832,19 @@ body.menu-open {
   .contact-hero-content {
     padding: 108px 16px 40px;
   }
-
   .contact-hero-title {
     font-size: clamp(34px, 9vw, 52px);
   }
-
   .contact-hero-tagline {
     font-size: 1rem;
     max-width: 300px;
   }
-
   .contact-main {
     padding: 0 0 56px;
   }
-
   .contact-float h2 {
     font-size: 22px;
   }
-
   /* Grids de 2-3 columnas → 1 columna en móvil (no quedan apretados) */
   .contact-grid,
   .quick-links,
@@ -988,46 +852,37 @@ body.menu-open {
     grid-template-columns: 1fr;
   }
 }
-
 @media (max-width: 560px) {
   /* La órbita decorativa puede desbordar en pantallas pequeñas */
   .contact-orbit {
     display: none;
   }
-
   .contact-float {
     padding: 26px 18px;
   }
-
   .superatebar {
     flex-direction: column;
     text-align: center;
     gap: 12px;
   }
-
   .contact-card,
   .wide-card {
     padding: 26px 18px;
   }
-
   .contact-card h2,
   .wide-card h2 {
     font-size: 1.35rem;
   }
-
   .email-main-address {
     font-size: .9rem;
   }
-
   .ig-item-text {
     font-size: .85rem;
   }
-
   .email-team-grid {
     gap: 10px;
   }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    10 · SOBRE NOSOTROS (sobrenosotros.html)
    ══════════════════════════════════════════════════════════════════════════ */
@@ -1036,62 +891,49 @@ body.menu-open {
     height: auto;
     min-height: 520px;
   }
-
   .about-hero-content {
     padding: 110px 16px 30px;
   }
-
   .about-hero-tagline {
     font-size: 1rem;
     padding: 0 10px;
   }
-
   .about-hero-logo {
     width: 104px;
     height: 104px;
   }
-
   .about-intro {
     width: 92%;
     padding: 36px 22px;
     border-radius: 20px;
   }
-
   .about-intro h1 {
     font-size: clamp(24px, 6.5vw, 32px);
   }
-
   .about-intro p {
     font-size: .95rem;
   }
-
   .mv-section {
     width: 92%;
     gap: 16px;
     grid-template-columns: 1fr;
   }
-
   .team-section-title h2 {
     font-size: clamp(28px, 7vw, 36px);
   }
-
   .mv-card {
     padding: 26px 20px;
   }
-
   .team-section {
     width: 92%;
     margin-top: 44px;
   }
-
   .team-grid {
     gap: 16px;
   }
-
   .member-card {
     padding: 28px 18px;
   }
-
   .about-stats-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1099,26 +941,21 @@ body.menu-open {
     text-align: center;
     padding-top: 24px;
   }
-
   .about-divider {
     margin: 40px 16px;
   }
 }
-
 @media (max-width: 480px) {
   .about-hero {
     min-height: 460px;
   }
-
   .hero-marquee-track span {
     font-size: .72rem;
   }
-
   .about-stats-row {
     gap: 20px 10px;
   }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    11 · MODALES Y TARJETAS FLOTANTES (hojas inferiores en móvil)
    ══════════════════════════════════════════════════════════════════════════ */
@@ -1131,7 +968,6 @@ body.menu-open {
     padding: 0;
     align-items: flex-end;
   }
-
   .top10-modal,
   .paquete-modal,
   .modal-content,
@@ -1145,25 +981,21 @@ body.menu-open {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
-
   .top10-modal-img,
   .paquete-modal-img {
     height: 180px;
     border-radius: 0;
   }
-
   .top10-modal-body,
   .paquete-modal-body {
     padding: 18px 18px 24px;
     max-height: none;
   }
-
   .top10-modal-actions {
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
   }
-
   .top10-modal-actions a,
   .top10-modal-actions button,
   .paquete-modal-cta a,
@@ -1172,15 +1004,24 @@ body.menu-open {
     justify-content: center;
     text-align: center;
   }
-
   .traveler-card {
     padding: 26px 20px;
   }
-
+  .modal-content-souvenirs {
+    padding: 22px 18px;
+  }
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-card-img-wrap {
+    height: 120px;
+  }
+  .souv-location-badge {
+    max-width: 70%;
+  }
   .modal-content {
     padding: 26px 20px;
   }
-
   .modal-close,
   .top10-modal-close,
   .paquete-modal-close {
@@ -1189,7 +1030,6 @@ body.menu-open {
     z-index: 2;
   }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    12 · PIE DE PÁGINA
    ══════════════════════════════════════════════════════════════════════════ */
@@ -1198,23 +1038,19 @@ body.menu-open {
     padding: 22px 16px;
     text-align: center;
   }
-
   .textfooter,
   .footer-copy {
     font-size: .82rem;
     line-height: 1.5;
   }
-
   /* Espacio para la barra inferior del navegador en iOS */
   .footer {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
-
 /* ══════════════════════════════════════════════════════════════════════════
    AJUSTES FINALES DE SEGURIDAD
    ══════════════════════════════════════════════════════════════════════════ */
-
 /* Evita que las animaciones de entrada desplacen contenido en móvil */
 @media (prefers-reduced-motion: reduce) {
   .nav-glass .nav-links.open,

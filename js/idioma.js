@@ -728,6 +728,22 @@
             modalGuiasRegistroMedico: 'Registro Médico',
             modalGuiasRegistroMedicoHint: 'Sube tu certificado médico. Formatos: PDF, JPG, PNG. Máximo 10MB.',
 
+            // ===== CLAVES NUEVAS (REGISTRO DE GUÍA) =====
+            navRegistrarmeGuia: 'Ser Guía',
+            guiaRegistrateCTA: 'Regístrate como guía',
+            seleccionaPais: 'Selecciona un país',
+            modalGuiasTerminos: 'Acepto los Términos y Condiciones',
+            modalGuiasTerminosTexto: 'Al registrarte aceptas los términos del programa de guías certificados de KAVARI y la política de privacidad.',
+            guideRequeridos: 'Todos los campos son obligatorios',
+            guideCorreoInvalido: 'Ingresa un correo electrónico válido',
+            guideFaltaHistorial: 'Debes subir tu registro criminal',
+            guideAceptaTerminos: 'Debes aceptar los Términos y Condiciones',
+            guideProcesando: 'Procesando tu registro...',
+            guideSubiendoDocs: 'Subiendo documentos...',
+            guideExito: '¡Registro exitoso! Te contactaremos por correo para activar tu perfil.',
+            guideError: 'Error al enviar tu registro. Intenta de nuevo.',
+            guideErrorCargarPaises: 'No se pudieron cargar los países.',
+
             // ===== CLAVES FALTANTES (CONTACTO / SOBRE NOSOTROS) =====
             contactoEyebrow: 'Hablemos',
             contactoDestinosLabel: 'Destinos y aventuras',
@@ -760,6 +776,8 @@
             articulos: 'artículos',
             verEnMapa: 'Ver en el mapa',
             verTodosLosProductos: 'Ver todos los productos',
+            souvenirsTiendasLabel: 'tiendas',
+            souvenirsProductosLabel: 'productos',
             destinosDestacadosEn: 'Destinos destacados en',
             verMas: 'Ver más',
             explorarMas: 'Explorar más',
@@ -8286,6 +8304,22 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             modalGuiasRegistroMedico: 'Medical Record',
             modalGuiasRegistroMedicoHint: 'Upload your medical certificate. Formats: PDF, JPG, PNG. Max 10MB.',
 
+            // ===== NEW KEYS (GUIDE REGISTRATION) =====
+            navRegistrarmeGuia: 'Become a Guide',
+            guiaRegistrateCTA: 'Register as a guide',
+            seleccionaPais: 'Select a country',
+            modalGuiasTerminos: 'I accept the Terms and Conditions',
+            modalGuiasTerminosTexto: 'By registering you accept the terms of the KAVARI certified guide program and the privacy policy.',
+            guideRequeridos: 'All fields are required',
+            guideCorreoInvalido: 'Enter a valid email address',
+            guideFaltaHistorial: 'You must upload your criminal background check',
+            guideAceptaTerminos: 'You must accept the Terms and Conditions',
+            guideProcesando: 'Processing your registration...',
+            guideSubiendoDocs: 'Uploading documents...',
+            guideExito: 'Registration successful! We will contact you by email to activate your profile.',
+            guideError: 'Error sending your registration. Try again.',
+            guideErrorCargarPaises: 'Could not load countries.',
+
             // ===== MISSING KEYS (CONTACT / ABOUT US) =====
             contactoEyebrow: 'Let\'s talk',
             contactoDestinosLabel: 'Destinations & adventures',
@@ -8318,6 +8352,8 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             articulos: 'items',
             verEnMapa: 'View on map',
             verTodosLosProductos: 'View all products',
+            souvenirsTiendasLabel: 'shops',
+            souvenirsProductosLabel: 'products',
             destinosDestacadosEn: 'Featured destinations in',
             verMas: 'See more',
             explorarMas: 'Explore more',
@@ -15206,6 +15242,8 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
         if (idioma === idiomaActual) return;
         idiomaActual = idioma;
         localStorage.setItem('kavari-idioma', idioma);
+        localStorage.setItem('kavariIdioma', idioma);
+        localStorage.setItem('idioma', idioma);
         aplicarTraducciones();
     }
 

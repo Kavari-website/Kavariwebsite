@@ -16,9 +16,12 @@
     <link rel="stylesheet" href="css/traveler-registration.css">
     <link rel="stylesheet" href="css/tutorial.css">
   <link rel="stylesheet" href="css/mobile-responsive.css?v=3">
-    <script src="js/idioma.js?v=3"></script>
-    <script src="js/theme.js?v=3"></script>
-    <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
+  <script src="js/idioma.js?v=3"></script>
+  <script src="js/theme.js?v=3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
   <script src="js/img-fallback.js"></script>
 </head>
@@ -84,7 +87,7 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
             <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
-            <li><a href="#registro-viajero" class="nav-register">Registrarme</a></li>
+            <li><a href="#" data-guide-register data-i18n="navRegistrarmeGuia">Ser Guía</a></li>
             <li><a href="sobrenosotros.html" class="active" data-i18n="sobrenosotros">Sobre nosotros</a></li>
             <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
             <li><a href="contacto.html" data-i18n="contacto">Contacto</a></li>
@@ -312,6 +315,8 @@
 <script src="js/account.js"></script>
 <script src="js/tutorial.js"></script>
 <script src="js/sobrenosotros.js"></script>
+<script src="js/guide-registration.js"></script>
+<script src="js/page-transitions.js"></script>
 <script src="js/mobile-nav.js"></script>
 </body>
 </html>

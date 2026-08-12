@@ -104,9 +104,14 @@ async function abrirModalTop10(id) {
 
     // Botón "Quiero ir" guarda el país y redirige
     if (goBtn) {
-        goBtn.onclick = function() {
+        goBtn.onclick = function(e) {
+            if (e && e.preventDefault) e.preventDefault();
             localStorage.setItem('paisSeleccionado', data.pais);
-            window.location.href = 'destino.html';
+            if (window.kavariNavigate) {
+                window.kavariNavigate('destino.html');
+            } else {
+                window.location.href = 'destino.html';
+            }
         };
     }
 
@@ -177,7 +182,11 @@ async function abrirModalPaquete(id) {
         destBtn.onclick = function(e) {
             e.preventDefault();
             localStorage.setItem('paisSeleccionado', data.pais);
-            window.location.href = 'destino.html';
+            if (window.kavariNavigate) {
+                window.kavariNavigate('destino.html');
+            } else {
+                window.location.href = 'destino.html';
+            }
         };
     }
 

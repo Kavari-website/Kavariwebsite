@@ -29,8 +29,6 @@
     
      <!-- ===== FAVICON GRANDE (PNG) ===== -->
 
-<link rel="shortcut icon" href="favicon.ico">
-
 <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
   <script src="js/img-fallback.js"></script>
@@ -51,8 +49,8 @@
         </div>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
-            <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
-            <li><a href="#registro-viajero" class="nav-register">Registrarme</a></li>
+             <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
+            <li><a href="#" id="guiasNavBtn" data-i18n="navRegistrarmeGuia">Ser Guía</a></li>
             <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
             <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
             <li><a href="contacto.html" data-i18n="contacto">Contacto</a></li>
@@ -393,104 +391,6 @@
 
 <!-- ===== MODALES ===== -->
 
-<!-- Modal registro de guías -->
-<div class="modal-overlay" id="guiasModalOverlay" style="display:none;">
-    <div class="modal-content modal-guide-register">
-        <button class="modal-close" id="closeGuiasModalBtn" data-i18n="modalGuiasCerrar">Cerrar</button>
-        <h3 data-i18n="modalGuiasTitulo">Regístrate como Guía Turístico</h3>
-        <form id="guideRegisterFormIndex" enctype="multipart/form-data">
-            <!-- Información Personal -->
-            <div class="guide-form-section">
-                <h4 data-i18n="modalGuiasSeccionPersonal">Información Personal</h4>
-                <div class="field">
-                    <label for="guideName" data-i18n="modalGuiasNombre">Nombre Completo</label>
-                    <input type="text" id="guideName" required placeholder="Ej: Juan Pérez" data-i18n-placeholder="modalGuiasNombre">
-                </div>
-                <div class="field">
-                    <label for="guideEmail" data-i18n="modalGuiasCorreo">Correo Electrónico</label>
-                    <input type="email" id="guideEmail" required placeholder="tu@correo.com">
-                </div>
-                <div class="field">
-                    <label for="guidePhone" data-i18n="modalGuiasTelefono">Número de Teléfono</label>
-                    <input type="tel" id="guidePhone" required placeholder="+507 6000-0000">
-                </div>
-                <div class="field">
-                    <label for="guidePhotoFile" data-i18n="modalGuiasFoto">Foto de Perfil</label>
-                    <input type="file" id="guidePhotoFile" accept="image/*" class="field-file">
-                    <small class="field-hint" data-i18n="modalGuiasFotoHint">Formatos: JPG, PNG. Máximo 5MB.</small>
-                </div>
-            </div>
-
-            <!-- Información Profesional -->
-            <div class="guide-form-section">
-                <h4 data-i18n="modalGuiasSeccionProfesional">Información Profesional</h4>
-                <div class="field">
-                    <label for="guideDescription" data-i18n="modalGuiasDescripcion">Descripción de tus servicios</label>
-                    <textarea id="guideDescription" required placeholder="Ej: Especialista en tours ecológicos..." rows="3" data-i18n-placeholder="modalGuiasDescripcion"></textarea>
-                </div>
-                <div class="field">
-                    <label for="guideLanguages" data-i18n="modalGuiasIdiomas">Idiomas que hablas</label>
-                    <input type="text" id="guideLanguages" required placeholder="Ej: Español, Inglés" data-i18n-placeholder="modalGuiasIdiomas">
-                </div>
-                <div class="field">
-                    <label for="guideLocation" data-i18n="modalGuiasUbicacion">Ubicación / Ciudad</label>
-                    <input type="text" id="guideLocation" required placeholder="Ej: Ciudad de Panamá" data-i18n-placeholder="modalGuiasUbicacion">
-                </div>
-                <div class="field">
-                    <label for="guideSpecialties" data-i18n="modalGuiasEspecialidades">Especialidades (separadas por comas)</label>
-                    <input type="text" id="guideSpecialties" required placeholder="Ej: Historia, Senderismo, Aventura" data-i18n-placeholder="modalGuiasEspecialidades">
-                </div>
-                <div class="field">
-                    <label for="guideCountry" data-i18n="modalGuiasPais">País donde operas</label>
-                    <select id="guideCountry" required data-i18n-options="seleccionaPais">
-                        <option value="" disabled selected data-i18n="seleccionaPais">Selecciona un país</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Documentos Legales -->
-            <div class="guide-form-section">
-                <h4 data-i18n="modalGuiasSeccionDocumentos">Documentos Requeridos</h4>
-                <div class="field">
-                    <label for="guideCriminalRecord" data-i18n="modalGuiasRegistroCriminal">Registro Criminal</label>
-                    <input type="file" id="guideCriminalRecord" accept=".pdf,.jpg,.jpeg,.png" class="field-file" required>
-                    <small class="field-hint" data-i18n="modalGuiasRegistroCriminalHint">Sube tu antecedente penal. Formatos: PDF, JPG, PNG. Máximo 10MB.</small>
-                </div>
-                <div class="field">
-                    <label for="guideMedicalRecord" data-i18n="modalGuiasRegistroMedico">Registro Médico</label>
-                    <input type="file" id="guideMedicalRecord" accept=".pdf,.jpg,.jpeg,.png" class="field-file" required>
-                    <small class="field-hint" data-i18n="modalGuiasRegistroMedicoHint">Sube tu certificado médico. Formatos: PDF, JPG, PNG. Máximo 10MB.</small>
-                </div>
-            </div>
-
-            <!-- Membresía y Pago -->
-            <div class="guide-form-section">
-                <h4 data-i18n="modalGuiasSeccionMembresia">Membresía y Pago</h4>
-                <div class="field">
-                    <label data-i18n="modalGuiasMembresia">Nivel de Membresía</label>
-                    <div class="rank-selector">
-                        <label><input type="radio" name="guideRank" value="silver" checked> <span data-i18n="modalGuiasPlata">Plata ($20/mes)</span></label>
-                        <label><input type="radio" name="guideRank" value="gold"> <span data-i18n="modalGuiasOro">Oro ($35/mes)</span></label>
-                        <label><input type="radio" name="guideRank" value="diamond"> <span data-i18n="modalGuiasDiamante">Diamante ($50/mes)</span></label>
-                    </div>
-                </div>
-                <div class="field">
-                    <label for="guidePayment" data-i18n="modalGuiasPago">Método de Pago</label>
-                    <select id="guidePayment" required>
-                        <option value="" disabled selected>Selecciona una opción</option>
-                        <option value="yappy" data-i18n="modalGuiasYappy">Yappy</option>
-                        <option value="banco" data-i18n="modalGuiasBanco">Transferencia Bancaria</option>
-                        <option value="card" data-i18n="modalGuiasTarjeta">Tarjeta de Crédito/Débito</option>
-                    </select>
-                </div>
-            </div>
-
-            <button type="submit" class="btn-submit" data-i18n="modalGuiasBoton">Activar Perfil de Guía</button>
-            <p class="guide-form-status" id="guideFormStatus" role="status" aria-live="polite"></p>
-        </form>
-    </div>
-</div>
-
 <!-- Modal Top 10 -->
 <div class="top10-modal-overlay" id="top10ModalOverlay">
     <div class="top10-modal" id="top10Modal">
@@ -536,11 +436,10 @@
 <script src="js/chatbot-engine.js"></script>
 <script src="js/chatbot-widget.js"></script>
 <script src="js/account.js"></script>
-<script src="js/traveler-registration.js"></script>
 <script src="js/index.js"></script>
-<script src="js/principal.js"></script>
+<script src="js/guide-registration.js"></script>
 <script src="js/tutorial.js"></script>
-
+<script src="js/page-transitions.js"></script>
 <script src="js/mobile-nav.js"></script>
 </body>
 </html>
