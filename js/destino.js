@@ -201,29 +201,34 @@ function renderGuidesList() {
     const availNo = _t('guiaNoDisponible');
     const btnContratar = _t('contratar');
     const precioHora = _t('precioHora');
-    container.innerHTML = list.map(g => `
+    container.innerHTML = list.map(g => {
+        const gn = _t(g.name);
+        const gd = _t(g.description);
+        const gl = g.languages ? _t(g.languages) : '';
+        const goc = g.location ? _t(g.location) : '';
+        return `
         <div class="guide-card rank-${g.rank}">
-            <img class="guide-avatar" src="${g.photo}" alt="${g.name}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(g.name)}&background=0050a0&color=fff'">
+            <img class="guide-avatar" src="${g.photo}" alt="${gn}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(gn)}&background=0050a0&color=fff'">
             <div class="guide-info">
                 <div class="guide-name-row">
-                    <span class="guide-name">${g.name}</span>
+                    <span class="guide-name">${gn}</span>
                     <span class="rank-badge badge-${g.rank}">${rankLabels[g.rank] || g.rank}</span>
                     ${g.disponible !== undefined ? `<span class="guide-avail ${g.disponible ? 'avail-yes' : 'avail-no'}">${g.disponible ? availYes : availNo}</span>` : ''}
                 </div>
-                <p class="guide-desc">${g.description}</p>
+                <p class="guide-desc">${gd}</p>
                 <div class="guide-meta">
-                    ${g.languages ? `<span>${g.languages}</span>` : ''}
-                    ${g.location ? `<span>${g.location}</span>` : ''}
+                    ${g.languages ? `<span>${gl}</span>` : ''}
+                    ${g.location ? `<span>${goc}</span>` : ''}
                 </div>
-                ${g.especialidades ? `<div class="guide-tags">${g.especialidades.map(e => `<span class="guide-tag">${e}</span>`).join('')}</div>` : ''}
+                ${g.especialidades ? `<div class="guide-tags">${g.especialidades.map(e => `<span class="guide-tag">${_t(e)}</span>`).join('')}</div>` : ''}
             </div>
             <div class="guide-price-col">
                 <div class="price-num">$${g.price}</div>
                 <div class="price-unit">${precioHora}</div>
-                <button class="btn-sm" onclick="contactarGuia('${g.name.replace(/'/g, "\\'")}', '${(g.phone || '').replace(/'/g, "\\'")}', '${(g.email || '').replace(/'/g, "\\'")}')">${btnContratar}</button>
+                <button class="btn-sm" onclick="contactarGuia('${gn.replace(/'/g, "\\'")}', '${(g.phone || '').replace(/'/g, "\\'")}', '${(g.email || '').replace(/'/g, "\\'")}')">${btnContratar}</button>
             </div>
-        </div>
-    `).join('');
+        </div>`;
+    }).join('');
 }
 
 // ============================================================
@@ -449,6 +454,13 @@ function closeSouvenirModal() {
 // ============================================================
 // 6. COUNTRY SELECTOR CUSTOM (sin cambios)
 // ============================================================
+function getCountryKeys(data) {
+    return Object.keys(data || {}).filter(k => {
+        const d = data[k];
+        return d && typeof d === 'object' && typeof d.nombre === 'string';
+    });
+}
+
 function initCountrySelector() {
     const trigger = document.getElementById('countryTrigger');
     const panel = document.getElementById('countryPanel');
@@ -461,7 +473,7 @@ function initCountrySelector() {
     if (!trigger || !panel || !list || !select) return;
 
     if (datosGlobales && !countryOptionsInitialized) {
-        const paises = Object.keys(datosGlobales).sort();
+        const paises = getCountryKeys(datosGlobales).sort();
         select.innerHTML = paises.map(key => {
             const nombre = _t(datosGlobales[key]?.nombre) || key;
             const flag = getCountryFlag(key);
@@ -471,7 +483,7 @@ function initCountrySelector() {
     }
 
     function renderOptions(filter = '') {
-        const paises = Object.keys(datosGlobales || {}).sort();
+        const paises = getCountryKeys(datosGlobales).sort();
         const filtered = paises.filter(key => {
             const nombre = _t(datosGlobales[key]?.nombre) || key;
             return nombre.toLowerCase().includes(filter.toLowerCase());
@@ -586,20 +598,92 @@ function initCountrySelector() {
 // ============================================================
 // 7. CARGA Y RENDERIZADO PRINCIPAL
 // ============================================================
+const DATA_CACHE_KEY = 'kavari-data-cache-v1';
+
+function getDataCache() {
+    try {
+        const raw = sessionStorage.getItem(DATA_CACHE_KEY);
+        return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+}
+
+function setDataCache(data) {
+    try { sessionStorage.setItem(DATA_CACHE_KEY, JSON.stringify(data)); } catch (e) { /* almacenamiento lleno */ }
+}
+
+async function loadDataJson() {
+    if (datosGlobales) return datosGlobales;
+    const cache = getDataCache();
+    if (cache) {
+        datosGlobales = cache;
+        return cache;
+    }
+    const respuesta = await fetch('data/data.json');
+    if (!respuesta.ok) throw new Error(`HTTP error! status: ${respuesta.status}`);
+    const data = await respuesta.json();
+    datosGlobales = data;
+    setDataCache(data);
+    return data;
+}
+
+// Precarga de data.json en cuanto se evalúa el script (antes de DOMContentLoaded),
+// para que al entrar a la página ya esté disponible y no haya recarga visible.
+loadDataJson().catch(() => { /* se reintentará en cargarPais */ });
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ============================================================
+// 7b. TRANSICIÓN PREMIUM DE PAÍS (veil con mascota)
+// Oculta el "flash" de recarga: muestra un velo breve con el
+// nombre del país mientras se renderiza el contenido y luego
+// se desvanece suavemente.
+// ============================================================
+let _cambiandoPais = false;
+
+function getCountryVeil() {
+    let v = document.getElementById('kavariCountryVeil');
+    if (!v) {
+        v = document.createElement('div');
+        v.id = 'kavariCountryVeil';
+        v.className = 'kavari-country-veil';
+        v.innerHTML = `
+            <div class="kcv-inner">
+                <div class="kcv-mascot"><img src="img/mascota.png" alt="" onerror="this.style.display='none'"></div>
+                <div class="kcv-name" id="kcvName"></div>
+                <div class="kcv-bar"><div class="kcv-bar-fill"></div></div>
+            </div>`;
+        document.body.appendChild(v);
+    }
+    return v;
+}
+
+async function withCountryVeil(codigo, { minMs = 380 } = {}) {
+    if (_cambiandoPais) return;
+    _cambiandoPais = true;
+    const veil = getCountryVeil();
+    const nombreEl = veil.querySelector('#kcvName');
+    if (nombreEl) nombreEl.textContent = _t(datosGlobales?.[codigo]?.nombre) || codigo;
+    veil.classList.add('kcv-show');
+    const inicio = Date.now();
+    try {
+        await cargarPais(codigo);
+        const restante = minMs - (Date.now() - inicio);
+        if (restante > 0) await sleep(restante);
+    } finally {
+        veil.classList.remove('kcv-show');
+        _cambiandoPais = false;
+    }
+}
+
 async function cargarPais(codigoPais) {
     try {
         console.log('🔄 Cargando país:', codigoPais);
-        if (!datosGlobales) {
-            const respuesta = await fetch('data/data.json');
-            if (!respuesta.ok) throw new Error(`HTTP error! status: ${respuesta.status}`);
-            datosGlobales = await respuesta.json();
-            if (!window.__countrySelectorReady) {
-                initCountrySelector();
-                window.__countrySelectorReady = true;
-            }
-            console.log('✅ Datos globales cargados');
+        const data = await loadDataJson();
+        if (!window.__countrySelectorReady) {
+            initCountrySelector();
+            window.__countrySelectorReady = true;
         }
-        const d = datosGlobales[codigoPais];
+        const d = data[codigoPais];
         if (!d) {
             console.error('❌ País no encontrado:', codigoPais);
             return;
@@ -633,7 +717,8 @@ async function cargarPais(codigoPais) {
         llenarSelectorPaises(datosGlobales);
         if (window.__renderCountryOptions) window.__renderCountryOptions('');
         if (window.KavariChatbot) window.KavariChatbot.setContext({ country: enriched, guias: guiasPanama, aerolineas: aerolineasData, hospedajes: hospedajesData });
-        setTimeout(() => observeReveals(), 200);
+        window.__kavariDestinoInit = true;
+        requestAnimationFrame(() => observeReveals());
     } catch (error) {
         console.error('❌ Error al cargar data.json:', error);
         alert('No se pudo cargar la información del destino. Revisa la consola para más detalles.');
@@ -648,7 +733,7 @@ function llenarSelectorPaises(todos) {
 function cambiarPais(codigo) {
     if (!codigo || codigo === currentCountryCode) return;
     localStorage.setItem('paisSeleccionado', codigo);
-    cargarPais(codigo);
+    withCountryVeil(codigo);
     window.dispatchEvent(new CustomEvent('kavari:countrychange', { detail: { country: codigo } }));
 }
 
@@ -1020,11 +1105,11 @@ function observeReveals() {
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     const paisGuardado = localStorage.getItem('paisSeleccionado') || 'panama';
-    cargarPais(paisGuardado);
+    withCountryVeil(paisGuardado);
 });
 
 window.addEventListener('kavari:langchange', () => {
-    if (currentCountryCode) {
+    if (currentCountryCode && window.__kavariDestinoInit) {
         cargarPais(currentCountryCode);
     }
 });

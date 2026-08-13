@@ -109,10 +109,10 @@ const tutorialStepsDestino = [
 ];
 
 const tutorialStepsGeneral = [
-  { title: 'Bienvenido a KAVARI', desc: 'Este recorrido te muestra los controles principales de esta página.', position: 'center', arrow: false },
-  { targetSelector: '.portal-nav, .topbar, .page-destino .navbar', title: 'Navegación', desc: 'Aquí encuentras las opciones para moverte por KAVARI y ajustar tu experiencia.', position: 'bottom', arrow: true },
-  { targetSelector: '.pricing-grid, .auth-shell, .hero-actions', title: 'Contenido principal', desc: 'Explora esta sección paso a paso. El tutorial resaltará solo la zona relevante.', position: 'top', arrow: true },
-  { targetId: 'kavari-chat-btn', title: 'Asistente KAVARI', desc: 'Abre el asistente cuando necesites ayuda durante tu recorrido.', position: 'center', arrow: true, isLast: true }
+  { targetId: null, titleKey: 'tutorialGeneralTitulo_0', descKey: 'tutorialGeneralDesc_0', position: 'center', arrow: false },
+  { targetSelector: '.portal-nav, .topbar, .page-destino .navbar', titleKey: 'tutorialGeneralTitulo_1', descKey: 'tutorialGeneralDesc_1', position: 'center', arrow: false, forceCenter: true },
+  { targetSelector: '.pricing-grid, .auth-shell, .hero-actions', titleKey: 'tutorialGeneralTitulo_2', descKey: 'tutorialGeneralDesc_2', position: 'center', arrow: false, forceCenter: true },
+  { targetId: 'kavari-chat-btn', titleKey: 'tutorialGeneralTitulo_3', descKey: 'tutorialGeneralDesc_3', position: 'center', arrow: false, forceCenter: true, isLast: true }
 ];
 
 // ===== SELECCIÓN DE PASOS SEGÚN PÁGINA =====
@@ -160,13 +160,16 @@ function createTutorialOverlay() {
   overlay.innerHTML = `
     <div class="tut-backdrop" id="tutBackdrop"></div>
     <div class="tut-highlight" id="tutHighlight"></div>
+    <div class="tut-tag" id="tutTag"></div>
     <div class="tut-tooltip" id="tutTooltip">
-      <div class="tut-tooltip-arrow" id="tutArrow"></div>
-      <div class="tut-progress" id="tutProgress">
-        ${tutorialSteps.map((_, i) => `<div class="tut-dot" id="tutDot${i}"></div>`).join('')}
+      <div class="tut-progress-bar"><div class="tut-progress-fill" id="tutProgressFill"></div></div>
+      <div class="tut-head">
+        <div class="tut-mascot"><img src="img/mascota.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+        <div class="tut-head-text">
+          <div class="tut-step-num" id="tutStepNum"></div>
+          <h3 class="tut-title" id="tutTitle"></h3>
+        </div>
       </div>
-      <div class="tut-step-num" id="tutStepNum"></div>
-      <h3 class="tut-title" id="tutTitle"></h3>
       <p class="tut-desc" id="tutDesc"></p>
       <div class="tut-actions">
         <button class="tut-btn-skip" onclick="skipTutorial()" id="tutSkipBtn"></button>
@@ -178,7 +181,9 @@ function createTutorialOverlay() {
     </div>
   `;
   document.body.appendChild(overlay);
+  document.body.classList.add('kavari-tut-active');
   updateTutorialTexts();
+  bindTutorialKeys();
 }
 
 function updateTutorialTexts() {
@@ -204,27 +209,45 @@ function showTutorialStep(index) {
     .replace('{current}', index + 1)
     .replace('{total}', tutorialSteps.length);
 
-  document.getElementById('tutTitle').textContent = title;
-  document.getElementById('tutDesc').textContent = desc;
-  document.getElementById('tutStepNum').textContent = stepNumText;
+  const tooltip = document.getElementById('tutTooltip');
 
-  const prevBtn = document.getElementById('tutPrevBtn');
-  const nextBtn = document.getElementById('tutNextBtn');
-  const skipBtn = document.getElementById('tutSkipBtn');
-  prevBtn.style.display = index === 0 ? 'none' : '';
-  nextBtn.textContent = step.isLast ? t('tutorialComenzar') : t('tutorialSiguiente');
-  skipBtn.style.display = step.isLast ? 'none' : '';
+  // Salida suave del paso anterior (si existe)
+  const swapContent = () => {
+    document.getElementById('tutTitle').textContent = title;
+    document.getElementById('tutDesc').textContent = desc;
+    document.getElementById('tutStepNum').textContent = stepNumText;
 
-  document.querySelectorAll('.tut-dot').forEach((d, i) => {
-    d.classList.toggle('active', i === index);
-    d.classList.toggle('done', i < index);
-  });
+    const prevBtn = document.getElementById('tutPrevBtn');
+    const nextBtn = document.getElementById('tutNextBtn');
+    const skipBtn = document.getElementById('tutSkipBtn');
+    prevBtn.style.display = index === 0 ? 'none' : '';
+    nextBtn.textContent = step.isLast ? t('tutorialComenzar') : t('tutorialSiguiente');
+    skipBtn.style.display = step.isLast ? 'none' : '';
 
-  tutorialCurrentStep = index;
-  refreshTutorialHighlight(step);
+    const fill = document.getElementById('tutProgressFill');
+    if (fill) fill.style.width = ((index + 1) / tutorialSteps.length * 100) + '%';
+
+    tutorialCurrentStep = index;
+    refreshTutorialHighlight(step);
+
+    tooltip.classList.remove('tut-exit');
+    void tooltip.offsetWidth;
+    tooltip.classList.add('tut-enter');
+  };
+
+  if (tooltip.classList.contains('tut-enter') || tooltip.classList.contains('tut-exit')) {
+    tooltip.classList.add('tut-exit');
+    setTimeout(swapContent, 140);
+  } else {
+    swapContent();
+  }
 }
 
 // ------------------ Funciones auxiliares ------------------
+function prefersReducedMotion() {
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 function getTutorialTarget(step) {
   if (step.targetId) return document.getElementById(step.targetId);
   if (step.targetSelector) return document.querySelector(step.targetSelector);
@@ -232,14 +255,15 @@ function getTutorialTarget(step) {
 }
 
 function refreshTutorialHighlight(step, skipScroll = false) {
-  const targetEl = getTutorialTarget(step);
-  positionTooltip(step, targetEl);
-  highlightElement(targetEl);
+  let targetEl = getTutorialTarget(step);
+  if (step.forceCenter) targetEl = null;
+  positionTooltip(step);
+  highlightElement(targetEl, step);
 
-  if (targetEl && !skipScroll) {
+  if (targetEl && !skipScroll && !prefersReducedMotion()) {
     setTimeout(() => {
       targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 100);
+    }, 120);
   }
 }
 
@@ -249,103 +273,52 @@ window.addEventListener('scroll', () => {
   if (step) refreshTutorialHighlight(step, true);
 }, { passive: true });
 
-// ===== NUEVA FUNCIÓN positionTooltip (sin tapar el elemento) =====
-function positionTooltip(step, targetEl) {
+// ===== positionTooltip: SIEMPRE centrado en la pantalla =====
+// El tutorial aparece en el centro de la vista del usuario (su
+// computadora), sin anclarse a ningún elemento de la página.
+function positionTooltip(step) {
   const tooltip = document.getElementById('tutTooltip');
-  const arrow = document.getElementById('tutArrow');
-  arrow.style.display = step.arrow && targetEl ? '' : 'none';
-
-  if (!targetEl || step.position === 'center') {
-    tooltip.style.cssText = `
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(480px, 90vw);
-    `;
-    return;
-  }
-
-  const rect = targetEl.getBoundingClientRect();
-  const tooltipW = Math.min(380, window.innerWidth * 0.85);
-  const tooltipH = 280;
-  const margin = 20;
-
-  const spaceTop = rect.top;
-  const spaceBottom = window.innerHeight - rect.bottom;
-  const spaceLeft = rect.left;
-  const spaceRight = window.innerWidth - rect.right;
-
-  let top, left, posClass;
-
-  // Elegir la mejor posición
-  if (spaceBottom >= spaceTop && spaceBottom >= tooltipH + margin) {
-    top = rect.bottom + margin;
-    posClass = 'arrow-top';
-    left = Math.max(margin, Math.min(rect.left + rect.width / 2 - tooltipW / 2, window.innerWidth - tooltipW - margin));
-  } else if (spaceTop >= spaceBottom && spaceTop >= tooltipH + margin) {
-    top = rect.top - tooltipH - margin;
-    posClass = 'arrow-bottom';
-    left = Math.max(margin, Math.min(rect.left + rect.width / 2 - tooltipW / 2, window.innerWidth - tooltipW - margin));
-  } else if (spaceRight >= spaceLeft && spaceRight >= tooltipW + margin) {
-    top = Math.max(margin, Math.min(rect.top + rect.height / 2 - tooltipH / 2, window.innerHeight - tooltipH - margin));
-    left = rect.right + margin;
-    posClass = 'arrow-left';
-  } else if (spaceLeft >= spaceRight && spaceLeft >= tooltipW + margin) {
-    top = Math.max(margin, Math.min(rect.top + rect.height / 2 - tooltipH / 2, window.innerHeight - tooltipH - margin));
-    left = rect.left - tooltipW - margin;
-    posClass = 'arrow-right';
-  } else {
-    // Fallback: centrar en pantalla
-    tooltip.style.cssText = `
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(480px, 90vw);
-    `;
-    arrow.style.display = 'none';
-    return;
-  }
-
-  // Ajustar límites
-  left = Math.max(margin, Math.min(left, window.innerWidth - tooltipW - margin));
-  top = Math.max(margin, Math.min(top, window.innerHeight - tooltipH - margin));
-
+  if (!tooltip) return;
   tooltip.style.cssText = `
     position: fixed;
-    top: ${top}px;
-    left: ${left}px;
-    width: ${tooltipW}px;
-    transform: none;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(520px, 92vw);
   `;
-
-  if (posClass) {
-    arrow.className = 'tut-tooltip-arrow ' + posClass;
-    arrow.style.display = '';
-  } else {
-    arrow.style.display = 'none';
-  }
 }
 
-function highlightElement(el) {
+function highlightElement(el, step) {
   const highlight = document.getElementById('tutHighlight');
+  const tag = document.getElementById('tutTag');
   if (!el) {
     highlight.style.display = 'none';
+    if (tag) tag.style.display = 'none';
     return;
   }
   const rect = el.getBoundingClientRect();
   highlight.style.cssText = `
     display: block;
     position: fixed;
-    top: ${rect.top - 6}px;
-    left: ${rect.left - 6}px;
-    width: ${rect.width + 12}px;
-    height: ${rect.height + 12}px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 9999px rgba(0,0,0,0.55), 0 0 0 3px #00c2a8, 0 0 20px rgba(0,194,168,0.5);
+    top: ${rect.top - 8}px;
+    left: ${rect.left - 8}px;
+    width: ${rect.width + 16}px;
+    height: ${rect.height + 16}px;
+    border-radius: 16px;
+    box-shadow: 0 0 0 9999px rgba(8, 18, 40, 0.55), 0 0 0 3px var(--tut-highlight-border), 0 0 34px var(--tut-highlight-shadow);
     pointer-events: none;
-    transition: all 0.4s cubic-bezier(0.4,0,0.2,1);will-change:transform,box-shadow;
+    transition: all .45s cubic-bezier(.22,1,.36,1);
+    will-change: transform, box-shadow;
     z-index: 10001;
   `;
+  if (tag && step) {
+    const title = step.title || t(step.titleKey);
+    tag.textContent = '▸ ' + title;
+    tag.style.display = 'block';
+    const tagW = Math.min(300, window.innerWidth - 24);
+    const left = Math.max(8, Math.min(rect.left + rect.width / 2 - tagW / 2, window.innerWidth - tagW - 8));
+    const top = rect.top - 8 - 34;
+    tag.style.cssText = `position:fixed; top:${top < 8 ? rect.bottom + 10 : top}px; left:${left}px; width:${tagW}px; display:block;`;
+  }
 }
 
 // ------------------ Navegación del tutorial ------------------
@@ -372,11 +345,33 @@ function endTutorial() {
   else if (currentPage === 'ayuda.html') tutorialKey = 'kavariTutorialAyudaVisto';
   else if (currentPage === 'contacto.html') tutorialKey = 'kavariTutorialContactoVisto';
   localStorage.setItem(tutorialKey, '1');
+  document.body.classList.remove('kavari-tut-active');
   const overlay = document.getElementById('kavariTutorialOverlay');
   if (overlay) {
-    overlay.style.opacity = '0';
-    setTimeout(() => overlay.remove(), 300);
+    overlay.classList.add('tut-exiting');
+    setTimeout(() => overlay.remove(), 340);
   }
+}
+
+// ------------------ Atajos de teclado ------------------
+let tutorialKeysBound = false;
+function bindTutorialKeys() {
+  if (tutorialKeysBound) return;
+  tutorialKeysBound = true;
+  document.addEventListener('keydown', (e) => {
+    if (!tutorialActive) return;
+    if (e.target && e.target.closest && e.target.closest('button')) return;
+    if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      nextTutorialStep();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      prevTutorialStep();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      skipTutorial();
+    }
+  });
 }
 
 // ------------------ Escuchar cambios de idioma ------------------

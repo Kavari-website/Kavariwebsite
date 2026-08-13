@@ -252,3 +252,128 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
   background:rgba(255,255,255,.06);
   border-color:rgba(255,255,255,.12);
 }
+
+/* --------------------------------------------------------------
+   POLISH PREMIUM v2 — microinteracciones de tarjetas y botones
+   en destino.html / paises.html
+   -------------------------------------------------------------- */
+/* Tarjetas de guías: elevación con resorte */
+.guide-card {
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
+}
+.guide-card:hover {
+  transform:translateY(-6px);
+  box-shadow:0 18px 44px rgba(13,31,60,.18);
+}
+.guide-card .btn-sm {
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease,background .25s ease;
+}
+.guide-card .btn-sm:hover {
+  transform:translateY(-2px) scale(1.04);
+  box-shadow:0 8px 20px rgba(46,110,220,.35);
+}
+.guide-avatar {
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.guide-card:hover .guide-avatar {
+  transform:scale(1.06) rotate(2deg);
+}
+
+/* Hospedajes: elevación + imagen con zoom sutil */
+.hospedaje-card {
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
+}
+.hospedaje-card:hover {
+  transform:translateY(-6px);
+  box-shadow:0 18px 44px rgba(13,31,60,.18);
+}
+.hospedaje-img-wrap {
+  overflow:hidden;
+}
+.hospedaje-img {
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.hospedaje-card:hover .hospedaje-img {
+  transform:scale(1.07);
+}
+
+/* Aerolíneas */
+.airline-card {
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
+}
+.airline-card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 16px 40px rgba(13,31,60,.16);
+}
+.airline-logo {
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.airline-card:hover .airline-logo {
+  transform:scale(1.1);
+}
+
+/* Souvenirs */
+.souvenir-card-v2 {
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
+}
+.souvenir-card-v2:hover {
+  transform:translateY(-6px);
+  box-shadow:0 18px 44px rgba(13,31,60,.18);
+}
+.souv-main-img {
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.souvenir-card-v2:hover .souv-main-img {
+  transform:scale(1.07);
+}
+
+/* Cards de destinos destacados (destino.html) */
+.card {
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
+}
+.card:hover {
+  transform:translateY(-6px);
+  box-shadow:0 18px 44px rgba(13,31,60,.16);
+}
+.card-img {
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.card:hover .card-img {
+  transform:scale(1.06);
+}
+
+/* Cards de países (paises.html) */
+.dest-card {
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
+}
+.dest-card:hover {
+  transform:translateY(-6px);
+  box-shadow:0 20px 48px rgba(13,31,60,.20);
+}
+.dest-thumb img {
+  transition:transform .55s cubic-bezier(.22,1,.36,1);
+}
+.dest-card:hover .dest-thumb img {
+  transform:scale(1.08);
+}
+.dest-btn {
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease,background .25s ease;
+}
+.dest-btn:hover {
+  transform:translateY(-2px) scale(1.04);
+  box-shadow:0 10px 24px rgba(46,110,220,.4);
+}
+
+/* Botones hero de destino */
+.btn-hero {
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;
+}
+.btn-hero:hover {
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 12px 30px rgba(0,194,168,.45);
+}
+
+/* Aparición escalonada de secciones en destino.html */
+.reveal {
+  transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1);
+}

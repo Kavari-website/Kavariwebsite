@@ -137,6 +137,7 @@
       const data = await res.json();
       selectCountry.innerHTML = `<option value="" disabled selected>${t('seleccionaPais')}</option>`;
       Object.keys(data)
+        .filter(key => data[key] && typeof data[key].nombre === 'string')
         .sort((a, b) => {
           const na = t(data[a].nombre) || data[a].nombre || a;
           const nb = t(data[b].nombre) || data[b].nombre || b;

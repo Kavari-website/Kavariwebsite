@@ -576,7 +576,17 @@
             tutorialDestinoDesc_18: '¿Tienes dudas sobre este país? Pregúntale a nuestro chatbot en la esquina inferior izquierda.',
             tutorialDestinoTitulo_19: '¡Listo para descubrir!',
             tutorialDestinoDesc_19: 'Ahora conoces todas las partes de la página de destino. Explora la gastronomía, revisa los guías y maravíllate con su cultura.',
-            
+
+            // ===== TUTORIAL GUÍAS / PLANES / CUENTA (general, centrado) =====
+            tutorialGeneralTitulo_0: 'Bienvenido a KAVARI',
+            tutorialGeneralDesc_0: 'Este recorrido te muestra los controles principales de esta página, siempre en el centro de tu pantalla.',
+            tutorialGeneralTitulo_1: 'Navegación',
+            tutorialGeneralDesc_1: 'Aquí encuentras las opciones para moverte por KAVARI y ajustar tu experiencia.',
+            tutorialGeneralTitulo_2: 'Contenido principal',
+            tutorialGeneralDesc_2: 'Explora esta sección paso a paso. El tutorial te acompaña sin tapar la página.',
+            tutorialGeneralTitulo_3: 'Asistente KAVARI',
+            tutorialGeneralDesc_3: 'Abre el asistente cuando necesites ayuda durante tu recorrido. La mascota te acompaña siempre.',
+
             // ===== PLANES =====
             planesNavPlanes: 'Planes',
             planesNavMiCuenta: 'Mi cuenta',
@@ -8153,6 +8163,16 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             tutorialDestinoTitulo_19: 'Ready to discover!',
             tutorialDestinoDesc_19: 'Now you know all the parts of the destination page. Explore the gastronomy, check out the guides, and marvel at its culture.',
 
+            // ===== GENERAL TUTORIAL (guides / plans / account, centered) =====
+            tutorialGeneralTitulo_0: 'Welcome to KAVARI',
+            tutorialGeneralDesc_0: 'This tour shows you the main controls of this page, always in the center of your screen.',
+            tutorialGeneralTitulo_1: 'Navigation',
+            tutorialGeneralDesc_1: 'Here you will find the options to move around KAVARI and adjust your experience.',
+            tutorialGeneralTitulo_2: 'Main content',
+            tutorialGeneralDesc_2: 'Explore this section step by step. The tutorial accompanies you without covering the page.',
+            tutorialGeneralTitulo_3: 'KAVARI Assistant',
+            tutorialGeneralDesc_3: 'Open the assistant whenever you need help during your tour. The mascot always keeps you company.',
+
             // ===== PLANES =====
             planesNavPlanes: 'Plans',
             planesNavMiCuenta: 'My account',
@@ -15234,7 +15254,11 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
         const event = new CustomEvent('kavari:langchange', {
             detail: { idioma: idiomaActual }
         });
-        window.dispatchEvent(event);
+        if (window.__kavariLangInit) {
+            window.dispatchEvent(event);
+        } else {
+            window.__kavariLangInit = true;
+        }
     }
 
     function setIdioma(idioma) {

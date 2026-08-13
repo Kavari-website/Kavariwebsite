@@ -322,3 +322,170 @@
   backdrop-filter:blur(24px) saturate(150%);
   -webkit-backdrop-filter:blur(24px) saturate(150%);
 }
+
+/* --------------------------------------------------------------
+   KAVARI TUTORIAL PREMIUM v2 — tooltip centrado en pantalla,
+   animaciones suaves con resorte, barra de progreso, mascota,
+   etiqueta flotante sobre el elemento resaltado y guiado
+   automático de la vista del usuario.
+   -------------------------------------------------------------- */
+.tut-tooltip {
+  transition:opacity .14s ease,transform .14s ease;
+}
+.tut-tooltip.tut-enter {
+  animation:tutPopIn .52s cubic-bezier(.34,1.56,.64,1) both;
+}
+.tut-tooltip.tut-exit {
+  animation:tutPopOut .14s ease both;
+}
+@keyframes tutPopIn {
+  0% { opacity:0; transform:translate(-50%,-42%) scale(.82); }
+  60% { opacity:1; transform:translate(-50%,-51%) scale(1.03); }
+  100% { opacity:1; transform:translate(-50%,-50%) scale(1); }
+}
+@keyframes tutPopOut {
+  0% { opacity:1; transform:translate(-50%,-50%) scale(1); }
+  100% { opacity:0; transform:translate(-50%,-56%) scale(.9); }
+}
+
+/* Barra de progreso superior */
+.tut-progress-bar {
+  position:absolute;
+  top:0;
+  left:14px;
+  right:14px;
+  height:4px;
+  border-radius:99px;
+  background:rgba(148,163,184,.22);
+  overflow:hidden;
+}
+.tut-progress-fill {
+  height:100%;
+  width:0%;
+  border-radius:99px;
+  background:linear-gradient(90deg,var(--tut-accent),#3b82f6);
+  transition:width .55s cubic-bezier(.22,1,.36,1);
+}
+
+/* Cabecera con mascota + título */
+.tut-head {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:12px;
+}
+.tut-mascot {
+  flex-shrink:0;
+}
+.tut-mascot img {
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.75);
+  box-shadow:0 8px 22px rgba(5,18,43,.28);
+  animation:tutMascotFloat 3.2s ease-in-out infinite;
+}
+@keyframes tutMascotFloat {
+  0%,100% { transform:translateY(0) rotate(0deg); }
+  50% { transform:translateY(-5px) rotate(2deg); }
+}
+.tut-head-text {
+  flex:1;
+  min-width:0;
+}
+.tut-step-num {
+  text-align:left;
+  margin-bottom:3px;
+  font-size:11px;
+}
+.tut-title {
+  text-align:left;
+  font-size:21px;
+  margin:0;
+  line-height:1.25;
+}
+.tut-desc {
+  text-align:left;
+  font-size:14.5px;
+  margin-bottom:20px;
+}
+
+/* Etiqueta flotante sobre el elemento resaltado */
+.tut-tag {
+  position:fixed;
+  z-index:10002;
+  display:none;
+  padding:7px 14px;
+  border-radius:99px;
+  background:linear-gradient(135deg,var(--tut-accent),#3b82f6);
+  color:#fff;
+  font-family:'Poppins',sans-serif;
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:.02em;
+  box-shadow:0 10px 26px rgba(5,18,43,.35);
+  pointer-events:none;
+  text-align:center;
+  animation:tutTagIn .4s cubic-bezier(.34,1.56,.64,1) both;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+@keyframes tutTagIn {
+  0% { opacity:0; transform:translateY(8px) scale(.85); }
+  100% { opacity:1; transform:translateY(0) scale(1); }
+}
+
+/* Resaltado con pulso sutil */
+.tut-highlight {
+  animation:tutPulse 2.2s ease-in-out infinite;
+}
+@keyframes tutPulse {
+  0%,100% { box-shadow:0 0 0 9999px rgba(8,18,40,.55),0 0 0 3px var(--tut-highlight-border),0 0 30px var(--tut-highlight-shadow); }
+  50% { box-shadow:0 0 0 9999px rgba(8,18,40,.52),0 0 0 5px var(--tut-highlight-border),0 0 44px var(--tut-highlight-shadow); }
+}
+
+/* Salida del overlay completo */
+#kavariTutorialOverlay.tut-exiting {
+  transition:opacity .3s ease;
+  opacity:0;
+}
+
+/* Ajustes responsive del nuevo layout */
+@media (max-width:640px) {
+  .tut-head {
+    gap:12px;
+  }
+  .tut-mascot img {
+    width:52px;
+    height:52px;
+  }
+  .tut-title {
+    font-size:18px;
+  }
+  .tut-desc {
+    font-size:13.5px;
+  }
+}
+@media (max-width:400px) {
+  .tut-mascot img {
+    width:44px;
+    height:44px;
+  }
+  .tut-title {
+    font-size:16px;
+  }
+}
+
+/* El tooltip es position:fixed; si el body conserva transform/will-change
+   (animación de entrada de página), el fixed se ancla al documento y el
+   tooltip se sale de la pantalla. Mientras el tutorial está activo,
+   neutralizamos esas propiedades del body. */
+body.kavari-tut-active {
+  will-change:auto !important;
+  transform:none !important;
+  opacity:1 !important;
+}
+.tut-tooltip {
+  max-width:min(520px,92vw) !important;
+}

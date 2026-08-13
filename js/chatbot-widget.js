@@ -160,6 +160,9 @@
     const root = document.createElement('div');
     root.id = 'kavari-chat-root';
     root.innerHTML = `
+      <div id="kavari-mascot" role="button" tabindex="0" aria-label="KAVARI mascot" title="KAVARI">
+        <div class="kavari-mascot-inner"><img src="img/mascota.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+      </div>
       <button id="kavari-chat-btn" type="button" aria-label="Abrir asistente KAVARI" aria-expanded="false" aria-haspopup="dialog">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -167,9 +170,6 @@
         <span id="kavari-chat-badge" class="kb-badge" hidden>1</span>
       </button>
       <div id="kavari-asistente" role="dialog" aria-modal="false" aria-label="Asistente KAVARI">
-        <div id="kavari-mascot" aria-hidden="true">
-          <div class="kavari-mascot-inner"><img src="img/mascota.png" alt="" onerror="this.parentElement.style.display='none'"></div>
-        </div>
         <div id="kavari-chat-panel">
           <div id="kavari-chat-header">
             <div>
@@ -203,8 +203,15 @@
     const sendBtn = document.getElementById('kavari-chat-send');
     const input = document.getElementById('kavari-chat-input');
     const panel = document.getElementById('kavari-asistente');
+    const mascot = document.getElementById('kavari-mascot');
 
     btn.addEventListener('click', toggle);
+    if (mascot) {
+      mascot.addEventListener('click', toggle);
+      mascot.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    }
     closeBtn.addEventListener('click', close);
     sendBtn.addEventListener('click', sendFromInput);
     input.addEventListener('keydown', e => {
@@ -530,9 +537,17 @@
     const code = localStorage.getItem('paisSeleccionado');
     if (!code) return;
     try {
-      const res = await fetch('data/data.json');
-      if (!res.ok) throw new Error('data.json ' + res.status);
-      const all = await res.json();
+      let all = null;
+      try {
+        const cached = sessionStorage.getItem('kavari-data-cache-v1');
+        if (cached) all = JSON.parse(cached);
+      } catch (_) { /* noop */ }
+      if (!all) {
+        const res = await fetch('data/data.json');
+        if (!res.ok) throw new Error('data.json ' + res.status);
+        all = await res.json();
+        try { sessionStorage.setItem('kavari-data-cache-v1', JSON.stringify(all)); } catch (_) { /* noop */ }
+      }
       if (!all[code]) return;
       const d = all[code];
       setContext({

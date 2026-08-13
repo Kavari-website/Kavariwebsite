@@ -612,9 +612,78 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible {
    ══════════════════════════════════════════════════════════════════════════ */
 body {
   opacity:0;
-  transform:translateY(10px);
-  transition:opacity .38s ease,transform .38s ease;
+  transform:translateY(6px);
+  transition:opacity .22s ease,transform .22s ease;
   will-change:opacity,transform;
+}
+
+/* ===== Velo de transición de país (destino.html) ===== */
+.kavari-country-veil {
+  position:fixed;
+  inset:0;
+  z-index:9990;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(120% 120% at 50% 0%,rgba(10,30,60,.84),rgba(4,14,32,.95));
+  backdrop-filter:blur(10px) saturate(120%);
+  -webkit-backdrop-filter:blur(10px) saturate(120%);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .28s ease;
+}
+.kavari-country-veil.kcv-show {
+  opacity:1;
+  pointer-events:auto;
+}
+.kcv-inner {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  transform:translateY(6px);
+  transition:transform .28s ease;
+}
+.kavari-country-veil.kcv-show .kcv-inner {
+  transform:translateY(0);
+}
+.kcv-mascot img {
+  width:88px;
+  height:88px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.6);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  animation:kcvBreathe 1.6s ease-in-out infinite;
+}
+@keyframes kcvBreathe {
+  0%,100% { transform:scale(1); }
+  50% { transform:scale(1.08); }
+}
+.kcv-name {
+  color:#fff;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:.02em;
+  font-family:'Poppins',sans-serif;
+}
+.kcv-bar {
+  width:190px;
+  height:5px;
+  border-radius:99px;
+  background:rgba(255,255,255,.18);
+  overflow:hidden;
+}
+.kcv-bar-fill {
+  height:100%;
+  width:40%;
+  border-radius:99px;
+  background:linear-gradient(90deg,#00c2a8,#3b82f6,#00c2a8);
+  background-size:200% 100%;
+  animation:kcvSlide 1.1s ease-in-out infinite;
+}
+@keyframes kcvSlide {
+  0% { transform:translateX(-130%); }
+  100% { transform:translateX(320%); }
 }
 body.page-loaded {
   opacity:1;

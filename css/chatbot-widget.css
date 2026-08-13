@@ -19,11 +19,16 @@
   --kb-bot:#1d2d50;
   --kb-user:#58a6ff;
 }
-.kavari-mascot-inner {
+#kavari-mascot {
   position:fixed;
-  bottom:80px;
-  left:-60px;
-  z-index:999;
+  bottom:84px;
+  left:8px;
+  z-index:9998;
+  cursor:pointer;
+  border-radius:50%;
+}
+.kavari-mascot-inner {
+  position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -32,20 +37,24 @@
   cursor:pointer;
   animation:kavariFloatMascot 6s ease-in-out infinite;
   transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease;
+  filter:drop-shadow(0 6px 14px rgba(13,31,60,.25));
 }
 .kavari-mascot-inner img {
   width:100%;
   height:auto;
-  border-radius:90%;
+  border-radius:50%;
   object-fit:cover;
+  border:2px solid rgba(255,255,255,.75);
   box-shadow:0 4px 16px rgba(0,0,0,.15);
   transition:transform .3s ease,box-shadow .3s ease;
 }
-.kavari-mascot-inner:hover {
+.kavari-mascot-inner:hover,
+#kavari-mascot:hover .kavari-mascot-inner {
   transform:scale(1.08);
   animation-play-state:paused;
 }
-.kavari-mascot-inner:hover img {
+.kavari-mascot-inner:hover img,
+#kavari-mascot:hover .kavari-mascot-inner img {
   box-shadow:0 8px 32px rgba(46,110,220,.3);
 }
 @keyframes kavariFloatMascot {
@@ -325,8 +334,12 @@
   .kavari-mascot-inner {
     width:70px;
     height:70px;
-    bottom:72px;
-    left:8px;
+    bottom:auto;
+    left:auto;
+  }
+  #kavari-mascot {
+    bottom:74px;
+    left:4px;
   }
   #kavari-chat-btn {
     width:46px;
@@ -368,8 +381,10 @@
   .kavari-mascot-inner {
     width:60px;
     height:60px;
-    bottom:65px;
-    left:6px;
+  }
+  #kavari-mascot {
+    bottom:68px;
+    left:2px;
   }
   #kavari-chat-btn {
     width:42px;

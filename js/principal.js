@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(data => {
         selectCountry.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
         Object.keys(data)
+          .filter(key => data[key] && typeof data[key].nombre === 'string')
           .sort((a, b) => (data[a].nombre || a).localeCompare(data[b].nombre || a, lang))
           .forEach(key => {
             const country = data[key];
