@@ -9000,7 +9000,7 @@
         "nombre": "paisBolivia_gastronomia_platos_1_nombre",
         "categoria": "paisBolivia_gastronomia_platos_1_categoria",
         "descripcion": "paisBolivia_gastronomia_platos_1_descripcion",
-        "imagen": "img/bolivia/silpancho.jpg",
+        "imagen": "img/Bolivia/Silpancho.jpg",
         "nota": "paisBolivia_gastronomia_platos_1_nota"
       },
       {
@@ -9014,7 +9014,7 @@
         "nombre": "paisBolivia_gastronomia_platos_3_nombre",
         "categoria": "paisBolivia_gastronomia_platos_3_categoria",
         "descripcion": "paisBolivia_gastronomia_platos_3_descripcion",
-        "imagen": "img/bolivia/piquemacho.jpg",
+        "imagen": "img/Bolivia/Pique Macho.webp",
         "nota": "paisBolivia_gastronomia_platos_3_nota"
       },
       {
@@ -9028,7 +9028,7 @@
         "nombre": "paisBolivia_gastronomia_platos_5_nombre",
         "categoria": "paisBolivia_gastronomia_platos_5_categoria",
         "descripcion": "paisBolivia_gastronomia_platos_5_descripcion",
-        "imagen": "img/bolivia/fricase.jpg",
+        "imagen": "img/Bolivia/Fricasé.webp",
         "nota": "paisBolivia_gastronomia_platos_5_nota"
       },
       {
@@ -9042,7 +9042,7 @@
         "nombre": "paisBolivia_gastronomia_platos_7_nombre",
         "categoria": "paisBolivia_gastronomia_platos_7_categoria",
         "descripcion": "paisBolivia_gastronomia_platos_7_descripcion",
-        "imagen": "img/bolivia/api.jpg",
+        "imagen": "img/Bolivia/Api con pastel.jpg",
         "nota": "paisBolivia_gastronomia_platos_7_nota"
       },
       {
@@ -9056,7 +9056,7 @@
         "nombre": "paisBolivia_gastronomia_platos_9_nombre",
         "categoria": "paisBolivia_gastronomia_platos_9_categoria",
         "descripcion": "paisBolivia_gastronomia_platos_9_descripcion",
-        "imagen": "img/bolivia/huminta.jpg",
+        "imagen": "img/Bolivia/huminta.jpg",
         "nota": "paisBolivia_gastronomia_platos_9_nota"
       }
     ]
