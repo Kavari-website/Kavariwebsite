@@ -614,7 +614,7 @@ body {
   opacity:0;
   transform:translateY(6px);
   transition:opacity .22s ease,transform .22s ease;
-  will-change:opacity,transform;
+  will-change:opacity;
 }
 
 /* ===== Velo de transición de país (destino.html) ===== */

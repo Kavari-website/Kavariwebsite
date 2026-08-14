@@ -26,10 +26,15 @@
   <script src="js/img-fallback.js"></script>
 </head>
 <body class="page-destino">
+<a class="skip-link" href="#main">Saltar al contenido</a>
 
 <header class="navbar" id="navbar">
   <a class="logo" href="paises.html">KAVARI</a>
-  <nav class="nav-scroll-wrap">
+  <div class="dest-nav-scroll">
+    <button type="button" class="nav-arrow nav-arrow-left" id="navArrowLeft" aria-label="Ver opciones anteriores">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <nav class="nav-scroll-wrap" id="navScrollWrap">
     <ul class="nav-links" id="navLinks">
       <li><a href="paises.html" class="nav-ext" data-i18n="navPaises"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Países</a></li>
       <li><a data-sec="inicio" class="active" onclick="showSection('inicio')" data-i18n="navInicio"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Inicio</a></li>
@@ -43,7 +48,11 @@
       <li><a data-sec="souvenires" onclick="showSection('souvenires')" data-i18n="navSouvenirs"><svg viewBox="0 0 24 24"><path d="M20 7h-3.5a3.5 3.5 0 1 0-7 0H6a2 2 0 0 0-2 2v11h16V9a2 2 0 0 0-2-2z"/></svg>Souvenirs</a></li>
       <li><a data-sec="guias" onclick="showSection('guias')" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>Guías Turísticos</a></li>
     </ul>
-  </nav>
+    </nav>
+    <button type="button" class="nav-arrow nav-arrow-right" id="navArrowRight" aria-label="Ver más opciones">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+  </div>
 
   <!-- Selector de país: glass + panel animado -->
   <div class="country-switcher" id="countrySwitcher">
@@ -110,8 +119,8 @@
 
 <!-- SECCIÓN INICIO -->
 <div class="section active fly-in" id="section-inicio">
-  <section class="hero">
-    <div class="hero-bg" id="heroBg"></div>
+<section class="hero" id="main">
+<div class="hero-bg" id="heroBg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-deco"><span></span><span></span><span></span><span></span></div>
     <div class="hero-content">
@@ -311,7 +320,7 @@
       <p id="guiasDescHeader" data-i18n="guiasDescHeader">Conecta con expertos locales certificados que conocen cada rincón del destino.</p>
     </div>
   </div>
-  <div class="guides-section">
+  <div class="guides-section" id="guias">
     <h2 class="section-title" id="guiasSectionTitle" data-i18n="guiasSectionTitle">Guías turísticos</h2>
     <div id="guidesListContainer"></div>
   </div>
@@ -368,5 +377,29 @@
 <script src="js/tutorial.js"></script>
 <script src="js/page-transitions.js"></script>
 <script src="js/mobile-nav.js"></script>
+<script>
+  (function () {
+    var wrap = document.getElementById('navScrollWrap');
+    var left = document.getElementById('navArrowLeft');
+    var right = document.getElementById('navArrowRight');
+    if (!wrap || !left || !right) return;
+    function updateArrows() {
+      var max = wrap.scrollWidth - wrap.clientWidth;
+      left.classList.toggle('visible', wrap.scrollLeft > 4);
+      right.classList.toggle('visible', wrap.scrollLeft < max - 4);
+    }
+    function scrollNav(dir) {
+      wrap.scrollBy({ left: dir * Math.max(Math.round(wrap.clientWidth * 0.6), 220), behavior: 'smooth' });
+    }
+    left.addEventListener('click', function () { scrollNav(-1); });
+    right.addEventListener('click', function () { scrollNav(1); });
+    wrap.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    window.addEventListener('load', updateArrows);
+    setTimeout(updateArrows, 600);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateArrows);
+    updateArrows();
+  })();
+</script>
 </body>
 </html>

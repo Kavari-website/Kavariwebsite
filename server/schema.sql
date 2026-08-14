@@ -56,6 +56,86 @@ CREATE INDEX IF NOT EXISTS idx_guide_country ON guide_registrations(country_code
 CREATE INDEX IF NOT EXISTS idx_guide_status ON guide_registrations(verification_status);
 CREATE INDEX IF NOT EXISTS idx_guide_user ON guide_registrations(user_id);
 
+-- ============================================
+-- SOLICITUDES DE PAQUETES (index → formulario de plan de viaje)
+-- Guarda cada reserva/solicitud de paquete enviada desde el index.
+-- user_id es opcional: se rellena si el visitante tiene sesión iniciada.
+-- ============================================
+CREATE TABLE IF NOT EXISTS package_requests (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+  full_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT,
+  package_id TEXT,
+  package_name TEXT,
+  country_code TEXT,
+  travel_date DATE,
+  travelers INTEGER DEFAULT 1,
+  notes TEXT,
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending','contacted','done')),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_package_requests_status ON package_requests(status);
+CREATE INDEX IF NOT EXISTS idx_package_requests_user ON package_requests(user_id);
+
+ALTER TABLE package_requests ENABLE ROW LEVEL SECURITY;
+
+-- Cualquiera puede enviar una solicitud de paquete (público)
+CREATE POLICY "Anyone can insert package requests" ON package_requests
+  FOR INSERT WITH CHECK (true);
+
+-- Los usuarios pueden ver sus propias solicitudes (si están logueados)
+CREATE POLICY "Users can view own package requests" ON package_requests
+  FOR SELECT USING (auth.uid() = user_id);
+
+-- ============================================
+-- MENSAJES DE CONTACTO (contacto.html → formulario)
+-- Guarda cada mensaje enviado desde el formulario de contacto.
+-- ============================================
+CREATE TABLE IF NOT EXISTS contact_messages (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+  full_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  subject TEXT DEFAULT 'general',
+  message TEXT NOT NULL,
+  status TEXT DEFAULT 'new' CHECK (status IN ('new','read','answered')),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_contact_messages_status ON contact_messages(status);
+CREATE INDEX IF NOT EXISTS idx_contact_messages_user ON contact_messages(user_id);
+
+ALTER TABLE contact_messages ENABLE ROW LEVEL SECURITY;
+
+-- Cualquiera puede enviar un mensaje de contacto (público)
+CREATE POLICY "Anyone can insert contact messages" ON contact_messages
+  FOR INSERT WITH CHECK (true);
+
+-- Los usuarios pueden ver sus propios mensajes (si están logueados)
+CREATE POLICY "Users can view own contact messages" ON contact_messages
+  FOR SELECT USING (auth.uid() = user_id);
+
+-- ============================================
+-- ACCESO ADMINISTRADOR (Panel de solicitudes en perfil.html)
+-- El panel del sitio solo aparece para los emails listados abajo.
+-- Si quieres otro administrador, cambia el email en ESTAS políticas
+-- y también en la constante ADMIN_EMAILS del archivo js/admin-panel.js
+-- ============================================
+CREATE POLICY "Admin can view all package requests" ON package_requests
+  FOR SELECT USING (auth.jwt() ->> 'email' = 'kavariwebsite@gmail.com');
+
+CREATE POLICY "Admin can update all package requests" ON package_requests
+  FOR UPDATE USING (auth.jwt() ->> 'email' = 'kavariwebsite@gmail.com');
+
+CREATE POLICY "Admin can view all contact messages" ON contact_messages
+  FOR SELECT USING (auth.jwt() ->> 'email' = 'kavariwebsite@gmail.com');
+
+CREATE POLICY "Admin can update all contact messages" ON contact_messages
+  FOR UPDATE USING (auth.jwt() ->> 'email' = 'kavariwebsite@gmail.com');
+
 -- Políticas RLS (Row Level Security)
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE guide_registrations ENABLE ROW LEVEL SECURITY;

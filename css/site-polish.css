@@ -31,10 +31,26 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 }
 .page-destino .navbar,.page-destino .navbar.scrolled {
   height:78px;
-  background:rgba(255,255,255,.94);
-  border-bottom:1px solid rgba(148,163,184,.28);
-  box-shadow:0 8px 24px rgba(13,31,60,.10);
+  padding:0 20px 0 48px;
+  background:linear-gradient(135deg,rgba(14,33,67,.72),rgba(29,71,120,.54))!important;
+  backdrop-filter:blur(20px) saturate(155%);
+  -webkit-backdrop-filter:blur(20px) saturate(155%);
+  border-color:rgba(255,255,255,.28);
+  border-bottom:1px solid rgba(255,255,255,.28);
+  box-shadow:0 14px 35px rgba(8,26,56,.22),inset 0 1px 0 rgba(255,255,255,.28);
   will-change:transform;
+}
+.page-destino .logo {
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:#fff;
+  text-shadow:0 0 18px rgba(255,255,255,.25);
+}
+.page-destino .logo:hover {
+  color:#8fd3ff;
+  text-shadow:0 0 18px rgba(255,255,255,.35);
 }
 [data-theme="dark"] .nav-glass,[data-theme="dark"] .nav-glass.scrolled,[data-theme="dark"] body:not(.page-destino) .navbar:not(.nav-glass),[data-theme="dark"] body:not(.page-destino) .navbar:not(.nav-glass).scrolled,[data-theme="dark"] .page-destino .navbar,[data-theme="dark"] .page-destino .navbar.scrolled {
   background:rgba(22,27,34,.85)!important;
@@ -93,40 +109,10 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 .tut-highlight {
   border-radius:16px!important;
 }
-#kavari-chat-btn {
-  width:58px!important;
-  height:58px!important;
-  left:18px!important;
-  bottom:18px!important;
-  border:1px solid rgba(255,255,255,.65)!important;
-  border-radius:20px!important;
-  background:linear-gradient(145deg,rgba(20,62,120,.96),rgba(28,139,196,.86))!important;
-  box-shadow:0 14px 30px rgba(13,31,60,.38),inset 0 1px 0 rgba(255,255,255,.42)!important;
-  animation:none!important;
-}
-#kavari-chat-btn::after {
-  content:'';
-  width:26px;
-  height:26px;
-  border-radius:10px;
-  background:url('../img/mascota.png') center/cover;
-  box-shadow:0 2px 8px rgba(0,0,0,.22);
-}
 .kavari-mascot-inner img {
   border:2px solid rgba(255,255,255,.7);
 }
-#kavari-chat-btn svg {
-  display:none;
-}
-@media(max-width:519px) {
-  #kavari-chat-btn {
-    width:52px!important;
-    height:52px!important;
-    left:12px!important;
-    bottom:12px!important;
-    border-radius:18px!important;
-  }
-}
+
 /* ===== Navbar unificado: enlaces centrados con la MISMA separación entre todos =====
    gap fijo entre enlaces (igual en todas las páginas) + grupo centrado; así
    ningún enlace se ve más separado que otro y no se infla en pantallas anchas. */
@@ -140,6 +126,36 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 .nav-glass .nav-links a {
   font-size:18px;
 }
+/* ===== Enlaces del nav como texto (mismo diseño que el index) =====
+   Las páginas internas (ej. Países) aportan estilos de "píldora"
+   (min-height, padding, border-radius, fondo) que cambian la forma del nav.
+   Con .nav-glass se fuerza el mismo enlace de texto del index. */
+.nav-glass .nav-links a {
+  min-height:0;
+  padding:0;
+  border-radius:0;
+  background:transparent;
+  color:#fff;
+}
+.nav-glass .nav-links a:hover {
+  color:#8fd3ff;
+  background:transparent;
+}
+.nav-glass .nav-links a.active {
+  background:transparent;
+}
+.nav-glass .nav-links a:active {
+  background:transparent;
+  transform:none;
+}
+/* Quitar la capa especular extra y el z-index distintos de las páginas internas */
+.nav-glass.navbar::before,
+.nav-glass.navbar.scrolled::before {
+  content:none!important;
+}
+.nav-glass.navbar {
+  z-index:9999;
+}
 .nav-glass .logo {
   flex-shrink:0;
 }
@@ -150,13 +166,28 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 }
 @media(max-width:1100px) {
   .nav-glass .nav-links {
-    gap:36px;
+    gap: 18px;
   }
   .nav-glass .nav-links a {
-    font-size:16px;
+    font-size: 15px;
   }
   .nav-glass .nav-actions {
-    gap:10px;
+    gap: 8px;
+  }
+  .nav-glass .nav-btn-tutorial {
+    padding: 7px 12px;
+    font-size: .8rem;
+  }
+  .nav-glass .kavari-nav-account {
+    gap: 5px;
+    margin-left: 2px;
+  }
+  .nav-glass .kavari-nav-account .kavari-nav-plan {
+    display: none !important;
+  }
+  .nav-glass .kavari-nav-account a {
+    padding: 7px 9px;
+    font-size: .7rem;
   }
 }
 @media(max-width:900px) {
@@ -171,19 +202,119 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
     font-size:16px;
   }
 }
-/* Nav de Destino (pills con iconos): separación uniforme y texto un poco mayor */
+/* ===== Nav de Destino: mismo diseño glass que el index, con flechas ===== */
+.page-destino .dest-nav-scroll {
+  display:flex;
+  align-items:center;
+  gap:4px;
+  min-width:0;
+}
+.page-destino .nav-scroll-wrap {
+  flex:1 1 auto;
+  min-width:0;
+}
+.page-destino .nav-arrow {
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.32);
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  cursor:pointer;
+  opacity:0;
+  pointer-events:none;
+  transition:background .2s,transform .2s,opacity .25s,box-shadow .2s;
+}
+.page-destino .nav-arrow.visible {
+  opacity:1;
+  pointer-events:auto;
+}
+.page-destino .nav-arrow:hover {
+  background:rgba(255,255,255,.28);
+  box-shadow:0 4px 14px rgba(8,26,56,.25);
+}
+.page-destino .nav-arrow:active {
+  transform:scale(.9);
+}
+.page-destino .nav-arrow svg {
+  width:18px;
+  height:18px;
+}
 .page-destino .nav-links {
-  gap:24px;
+  gap:6px;
 }
 .page-destino .nav-links a {
-  font-size:15px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.01em;
+  color:#fff!important;
+  padding:9px 16px;
+  border-radius:50px;
+  border:1.5px solid transparent;
+  background:transparent;
+  white-space:nowrap;
+}
+.page-destino .nav-links a svg {
+  width:15px;
+  height:15px;
+  flex-shrink:0;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.page-destino .nav-links a:hover {
+  background:rgba(255,255,255,.16);
+  color:#fff!important;
+  border-color:rgba(255,255,255,.26);
+}
+.page-destino .nav-links a.active {
+  background:rgba(255,255,255,.24);
+  color:#fff!important;
+  border-color:rgba(255,255,255,.4);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.2),0 4px 14px rgba(8,26,56,.22);
+}
+[data-theme="dark"] .page-destino .nav-links a:hover {
+  background:rgba(255,255,255,.18);
+}
+/* Selector de país y hamburguesa en el mismo estilo glass blanco del index */
+.page-destino .country-trigger {
+  background:rgba(255,255,255,.14);
+  border-color:rgba(255,255,255,.3);
+  color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 4px 16px rgba(0,0,0,.14);
+}
+.page-destino .country-trigger:hover {
+  background:rgba(255,255,255,.26);
+  border-color:rgba(255,255,255,.45);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(8,26,56,.25),0 0 16px rgba(255,255,255,.15);
+}
+.page-destino .country-trigger-caret {
+  border-color:rgba(255,255,255,.9);
+}
+.page-destino .nav-hamburger {
+  background:rgba(255,255,255,.14);
+  border-color:rgba(255,255,255,.3);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4);
+}
+.page-destino .nav-hamburger span {
+  background:#fff;
 }
 @media(max-width:900px) {
+  .page-destino .nav-arrow {
+    display:none;
+  }
   .page-destino .nav-links {
     gap:4px;
-  }
-  .page-destino .nav-links a {
-    font-size:13px;
   }
 }
 /* Página de Planes: su navbar ahora es fijo como el resto */
@@ -254,10 +385,10 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 }
 
 /* --------------------------------------------------------------
-   POLISH PREMIUM v2 � microinteracciones de tarjetas y botones
+   POLISH PREMIUM v2 � microinteracciones de tarjetas y botones
    en destino.html / paises.html
    -------------------------------------------------------------- */
-/* Tarjetas de gu�as: elevaci�n con resorte */
+/* Tarjetas de gu�as: elevaci�n con resorte */
 .guide-card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
 }
@@ -279,7 +410,7 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
   transform:scale(1.06) rotate(2deg);
 }
 
-/* Hospedajes: elevaci�n + imagen con zoom sutil */
+/* Hospedajes: elevaci�n + imagen con zoom sutil */
 .hospedaje-card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
 }
@@ -297,7 +428,7 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
   transform:scale(1.07);
 }
 
-/* Aerol�neas */
+/* Aerol�neas */
 .airline-card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
 }
@@ -342,7 +473,7 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
   transform:scale(1.06);
 }
 
-/* Cards de pa�ses (paises.html) */
+/* Cards de pa�ses (paises.html) */
 .dest-card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
 }
@@ -373,7 +504,133 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
   box-shadow:0 12px 30px rgba(0,194,168,.45);
 }
 
-/* Aparici�n escalonada de secciones en destino.html */
+/* Aparici�n escalonada de secciones en destino.html */
 .reveal {
   transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1);
+}
+
+/* ===== Formulario de plan de viaje (paquetes del index) ===== */
+.traveler-form textarea {
+  width:100%;
+  padding:12px 13px;
+  border:1px solid rgba(66,104,150,.25);
+  border-radius:13px;
+  background:rgba(255,255,255,.66);
+  font:inherit;
+  color:#10233f;
+  resize:vertical;
+  min-height:72px;
+  transition:border-color .15s ease,box-shadow .15s ease;
+}
+.traveler-form textarea:focus {
+  outline:none;
+  border-color:#1e65cc;
+  box-shadow:0 0 0 3px rgba(30,101,204,.15);
+}
+.traveler-form textarea.field-error {
+  border-color:#d64545;
+  box-shadow:0 0 0 3px rgba(214,69,69,.12);
+}
+.paq-banner {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+  padding:12px 14px;
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(30,101,204,.12),rgba(0,169,160,.12));
+  border:1px solid rgba(30,101,204,.22);
+}
+.paq-banner-label {
+  display:block;
+  font-size:.72rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:#52647c;
+  margin-bottom:2px;
+}
+.paq-banner-title {
+  display:block;
+  font-size:1.02rem;
+  font-weight:900;
+  color:#10233f;
+}
+.paq-banner-country {
+  display:block;
+  margin-top:3px;
+  font-size:.82rem;
+  font-weight:600;
+  color:#1e65cc;
+}
+.paq-banner-price {
+  flex-shrink:0;
+  font-size:1.15rem;
+  font-weight:900;
+  color:#0d6b5f;
+}
+[data-theme="dark"] .traveler-form textarea {
+  background:rgba(255,255,255,.06);
+  color:#e6edf3;
+  border-color:rgba(255,255,255,.2);
+}
+[data-theme="dark"] .paq-banner {
+  background:linear-gradient(135deg,rgba(30,101,204,.22),rgba(0,169,160,.18));
+  border-color:rgba(88,166,255,.3);
+}
+[data-theme="dark"] .paq-banner-title {
+  color:#e6edf3;
+}
+[data-theme="dark"] .paq-banner-label {
+  color:#8b949e;
+}
+[data-theme="dark"] .paq-banner-country {
+  color:#58a6ff;
+}
+[data-theme="dark"] .paq-banner-price {
+  color:#4ade80;
+}
+
+/* ==============================================================
+   ACCESIBILIDAD (a11y)
+   Foco visible, salto al contenido y movimiento reducido.
+   ============================================================== */
+:focus-visible {
+  outline:3px solid #f0b429;
+  outline-offset:2px;
+}
+[data-theme="dark"] :focus-visible {
+  outline-color:#f2cc60;
+}
+
+.skip-link {
+  position:absolute;
+  left:-9999px;
+  top:0;
+  z-index:30000;
+  padding:12px 18px;
+  background:#0d1f3c;
+  color:#fff;
+  font-weight:700;
+  font-size:.95rem;
+  border-radius:0 0 14px 0;
+  text-decoration:none;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  left:0;
+  outline:3px solid #f0b429;
+  outline-offset:2px;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+    scroll-behavior:auto!important;
+  }
 }

@@ -34,6 +34,7 @@
   <script src="js/img-fallback.js"></script>
 </head>
 <body class="page-index">
+<a class="skip-link" href="#main">Saltar al contenido</a>
 
 <header class="hero">
     <!-- Video de fondo -->
@@ -50,7 +51,6 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
             <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
-            <li><a href="planes.html" data-i18n="planesNavPlanes">Planes</a></li>
             <li><a href="#" id="guiasNavBtn" data-guide-register data-i18n="navRegistrarmeGuia">Ser Guía</a></li>
             <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
             <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
@@ -76,7 +76,7 @@
 </header>
 
 <!-- ===== SEARCH BOX ===== -->
-<section class="search-box">
+<section class="search-box" id="main">
     <div class="search-content">
         <div>
             <h2 data-i18n="searchTitulo">¿Listo para tu próxima aventura?</h2>
@@ -197,7 +197,7 @@
 </section>
 
 <!-- ===== PAQUETES DE VIAJE ===== -->
-<section class="places-section">
+<section class="places-section" id="paquetes">
     <div class="featured-section">
         <h2 data-i18n="paquetesTitulo">Paquetes De Viaje</h2>
     </div>
@@ -226,7 +226,7 @@
                 </div>
                 <div class="paquete-btns">
                     <button class="btn-paquete-info" onclick="abrirModalPaquete('francia')" data-i18n="verDetalles">Ver detalles</button>
-                    <a href="paises.html" class="btn-paquete-reservar" onclick="seleccionarPais('francia')" data-i18n="reservarAhora">Reservar ahora</a>
+                    <button type="button" class="btn-paquete-reservar" onclick="PackageRequest.open('francia')" data-i18n="reservarAhora">Reservar ahora</button>
                 </div>
             </div>
         </div>
@@ -256,7 +256,7 @@
                 </div>
                 <div class="paquete-btns">
                     <button class="btn-paquete-info" onclick="abrirModalPaquete('china')" data-i18n="verDetalles">Ver detalles</button>
-                    <a href="paises.html" class="btn-paquete-reservar" data-i18n="reservarAhora">Reservar ahora</a>
+                    <button type="button" class="btn-paquete-reservar" onclick="PackageRequest.open('china')" data-i18n="reservarAhora">Reservar ahora</button>
                 </div>
             </div>
         </div>
@@ -286,7 +286,7 @@
                 </div>
                 <div class="paquete-btns">
                     <button class="btn-paquete-info" onclick="abrirModalPaquete('india')" data-i18n="verDetalles">Ver detalles</button>
-                    <a href="paises.html" class="btn-paquete-reservar" data-i18n="reservarAhora">Reservar ahora</a>
+                    <button type="button" class="btn-paquete-reservar" onclick="PackageRequest.open('india')" data-i18n="reservarAhora">Reservar ahora</button>
                 </div>
             </div>
         </div>
@@ -316,7 +316,7 @@
                 </div>
                 <div class="paquete-btns">
                     <button class="btn-paquete-info" onclick="abrirModalPaquete('italia')" data-i18n="verDetalles">Ver detalles</button>
-                    <a href="paises.html" class="btn-paquete-reservar" data-i18n="reservarAhora">Reservar ahora</a>
+                    <button type="button" class="btn-paquete-reservar" onclick="PackageRequest.open('italia')" data-i18n="reservarAhora">Reservar ahora</button>
                 </div>
             </div>
         </div>
@@ -346,7 +346,7 @@
                 </div>
                 <div class="paquete-btns">
                     <button class="btn-paquete-info" onclick="abrirModalPaquete('panama')" data-i18n="verDetalles">Ver detalles</button>
-                    <a href="paises.html" class="btn-paquete-reservar" onclick="localStorage.setItem('paisSeleccionado','panama'); return true;" data-i18n="reservarAhora">Reservar ahora</a>
+                    <button type="button" class="btn-paquete-reservar" onclick="PackageRequest.open('panama')" data-i18n="reservarAhora">Reservar ahora</button>
                 </div>
             </div>
         </div>
@@ -376,7 +376,7 @@
                 </div>
                 <div class="paquete-btns">
                     <button class="btn-paquete-info" onclick="abrirModalPaquete('el-salvador')" data-i18n="verDetalles">Ver detalles</button>
-                    <a href="paises.html" class="btn-paquete-reservar" onclick="localStorage.setItem('paisSeleccionado','el-salvador'); return true;" data-i18n="reservarAhora">Reservar ahora</a>
+                    <button type="button" class="btn-paquete-reservar" onclick="PackageRequest.open('el-salvador')" data-i18n="reservarAhora">Reservar ahora</button>
                 </div>
             </div>
         </div>
@@ -427,6 +427,7 @@
             <div class="paquete-modal-itinerary" id="paqueteModalItinerary"></div>
             <div class="paquete-modal-cta">
                 <button class="btn-modal-cerrar" onclick="cerrarModalPaquete()" data-i18n="volverAtras">Volver atrás</button>
+                <button class="btn-modal-go" onclick="cerrarModalPaquete(); PackageRequest.open(window.currentPaqueteModalId)" data-i18n="reservarAhora">Reservar ahora</button>
                 <a class="btn-modal-destino" id="paqueteModalDestBtn" href="paises.html" data-i18n="verDestinoCompleto">Ver destino completo</a>
             </div>
         </div>
@@ -438,6 +439,7 @@
 <script src="js/chatbot-widget.js"></script>
 <script src="js/account.js"></script>
 <script src="js/index.js"></script>
+<script src="js/package-request.js"></script>
 <script src="js/guide-registration.js"></script>
 <script src="js/tutorial.js"></script>
 <script src="js/page-transitions.js"></script>

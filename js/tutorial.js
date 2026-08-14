@@ -17,7 +17,7 @@ const tutorialStepsIndex = [
   { targetSelector: '.featured-section', titleKey: 'tutorialIndexTitulo_7', descKey: 'tutorialIndexDesc_7', position: 'top', arrow: true },
   { targetSelector: '.places-section', titleKey: 'tutorialIndexTitulo_8', descKey: 'tutorialIndexDesc_8', position: 'top', arrow: true },
   { targetSelector: '.footer', titleKey: 'tutorialIndexTitulo_9', descKey: 'tutorialIndexDesc_9', position: 'top', arrow: true },
-  { targetId: 'kavari-chat-btn', titleKey: 'tutorialIndexTitulo_10', descKey: 'tutorialIndexDesc_10', position: 'center', arrow: true },
+  { targetId: 'kavari-mascot', titleKey: 'tutorialIndexTitulo_10', descKey: 'tutorialIndexDesc_10', position: 'center', arrow: true },
   { targetId: null, titleKey: 'tutorialIndexTitulo_11', descKey: 'tutorialIndexDesc_11', position: 'center', arrow: false, isLast: true }
 ];
 
@@ -33,7 +33,7 @@ const tutorialStepsPaises = [
   { targetSelector: '.dest-info', titleKey: 'tutorialPaisesTitulo_7', descKey: 'tutorialPaisesDesc_7', position: 'center', arrow: true },
   { targetSelector: '.dest-btn', titleKey: 'tutorialPaisesTitulo_8', descKey: 'tutorialPaisesDesc_8', position: 'center', arrow: true },
   { targetSelector: '.region-label', titleKey: 'tutorialPaisesTitulo_9', descKey: 'tutorialPaisesDesc_9', position: 'bottom', arrow: true },
-  { targetId: 'kavari-chat-btn', titleKey: 'tutorialPaisesTitulo_10', descKey: 'tutorialPaisesDesc_10', position: 'center', arrow: true },
+  { targetId: 'kavari-mascot', titleKey: 'tutorialPaisesTitulo_10', descKey: 'tutorialPaisesDesc_10', position: 'center', arrow: true },
   { targetId: null, titleKey: 'tutorialPaisesTitulo_11', descKey: 'tutorialPaisesDesc_11', position: 'center', arrow: false, isLast: true }
 ];
 
@@ -49,7 +49,7 @@ const tutorialStepsSobrenosotros = [
   { targetSelector: '.member-card', titleKey: 'tutorialSobrenosotrosTitulo_7', descKey: 'tutorialSobrenosotrosDesc_7', position: 'center', arrow: true },
   { targetSelector: '.member-card.leader', titleKey: 'tutorialSobrenosotrosTitulo_8', descKey: 'tutorialSobrenosotrosDesc_8', position: 'bottom', arrow: true },
   { targetSelector: '.footer', titleKey: 'tutorialSobrenosotrosTitulo_9', descKey: 'tutorialSobrenosotrosDesc_9', position: 'top', arrow: true },
-  { targetId: 'kavari-chat-btn', titleKey: 'tutorialSobrenosotrosTitulo_10', descKey: 'tutorialSobrenosotrosDesc_10', position: 'center', arrow: true },
+  { targetId: 'kavari-mascot', titleKey: 'tutorialSobrenosotrosTitulo_10', descKey: 'tutorialSobrenosotrosDesc_10', position: 'center', arrow: true },
   { targetId: null, titleKey: 'tutorialSobrenosotrosTitulo_11', descKey: 'tutorialSobrenosotrosDesc_11', position: 'center', arrow: false, isLast: true }
 ];
 
@@ -65,7 +65,7 @@ const tutorialStepsAyuda = [
   { targetSelector: '.faq-section', titleKey: 'tutorialAyudaTitulo_7', descKey: 'tutorialAyudaDesc_7', position: 'top', arrow: true },
   { targetSelector: '.faq-item', titleKey: 'tutorialAyudaTitulo_8', descKey: 'tutorialAyudaDesc_8', position: 'center', arrow: true },
   { targetSelector: '.help-cta', titleKey: 'tutorialAyudaTitulo_9', descKey: 'tutorialAyudaDesc_9', position: 'top', arrow: true },
-  { targetId: 'kavari-chat-btn', titleKey: 'tutorialAyudaTitulo_10', descKey: 'tutorialAyudaDesc_10', position: 'center', arrow: true },
+  { targetId: 'kavari-mascot', titleKey: 'tutorialAyudaTitulo_10', descKey: 'tutorialAyudaDesc_10', position: 'center', arrow: true },
   { targetId: null, titleKey: 'tutorialAyudaTitulo_11', descKey: 'tutorialAyudaDesc_11', position: 'center', arrow: false, isLast: true }
 ];
 
@@ -81,7 +81,7 @@ const tutorialStepsContacto = [
   { targetSelector: '#sede', titleKey: 'tutorialContactoTitulo_7', descKey: 'tutorialContactoDesc_7', position: 'top', arrow: true },
   { targetSelector: '#correos', titleKey: 'tutorialContactoTitulo_8', descKey: 'tutorialContactoDesc_8', position: 'top', arrow: true },
   { targetSelector: '.back-btn-wrap', titleKey: 'tutorialContactoTitulo_9', descKey: 'tutorialContactoDesc_9', position: 'top', arrow: true },
-  { targetId: 'kavari-chat-btn', titleKey: 'tutorialContactoTitulo_10', descKey: 'tutorialContactoDesc_10', position: 'center', arrow: true },
+  { targetId: 'kavari-mascot', titleKey: 'tutorialContactoTitulo_10', descKey: 'tutorialContactoDesc_10', position: 'center', arrow: true },
   { targetId: null, titleKey: 'tutorialContactoTitulo_11', descKey: 'tutorialContactoDesc_11', position: 'center', arrow: false, isLast: true }
 ];
 
@@ -104,7 +104,7 @@ const tutorialStepsDestino = [
   { targetSelector: 'a[data-sec="hospedajes"]', titleKey: 'tutorialDestinoTitulo_15', descKey: 'tutorialDestinoDesc_15', position: 'bottom', arrow: true },
   { targetSelector: 'a[data-sec="souvenires"]', titleKey: 'tutorialDestinoTitulo_16', descKey: 'tutorialDestinoDesc_16', position: 'bottom', arrow: true },
   { targetSelector: 'a[data-sec="guias"]', titleKey: 'tutorialDestinoTitulo_17', descKey: 'tutorialDestinoDesc_17', position: 'bottom', arrow: true },
-  { targetId: 'kavari-chat-btn', titleKey: 'tutorialDestinoTitulo_18', descKey: 'tutorialDestinoDesc_18', position: 'center', arrow: true },
+  { targetId: 'kavari-mascot', titleKey: 'tutorialDestinoTitulo_18', descKey: 'tutorialDestinoDesc_18', position: 'center', arrow: true },
   { targetId: null, titleKey: 'tutorialDestinoTitulo_19', descKey: 'tutorialDestinoDesc_19', position: 'center', arrow: false, isLast: true }
 ];
 
@@ -112,7 +112,7 @@ const tutorialStepsGeneral = [
   { targetId: null, titleKey: 'tutorialGeneralTitulo_0', descKey: 'tutorialGeneralDesc_0', position: 'center', arrow: false },
   { targetSelector: '.portal-nav, .topbar, .page-destino .navbar', titleKey: 'tutorialGeneralTitulo_1', descKey: 'tutorialGeneralDesc_1', position: 'center', arrow: false, forceCenter: true },
   { targetSelector: '.pricing-grid, .auth-shell, .hero-actions', titleKey: 'tutorialGeneralTitulo_2', descKey: 'tutorialGeneralDesc_2', position: 'center', arrow: false, forceCenter: true },
-  { targetId: 'kavari-chat-btn', titleKey: 'tutorialGeneralTitulo_3', descKey: 'tutorialGeneralDesc_3', position: 'center', arrow: false, forceCenter: true, isLast: true }
+  { targetId: 'kavari-mascot', titleKey: 'tutorialGeneralTitulo_3', descKey: 'tutorialGeneralDesc_3', position: 'center', arrow: false, forceCenter: true, isLast: true }
 ];
 
 // ===== SELECCIÓN DE PASOS SEGÚN PÁGINA =====

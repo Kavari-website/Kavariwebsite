@@ -21,7 +21,7 @@
 }
 #kavari-mascot {
   position:fixed;
-  bottom:84px;
+  bottom:24px;
   left:8px;
   z-index:9998;
   cursor:pointer;
@@ -74,50 +74,10 @@
 [data-theme="dark"] .kavari-mascot-inner:hover img {
   box-shadow:0 8px 32px rgba(88,166,255,.3);
 }
-#kavari-chat-btn {
-  position:fixed;
-  bottom:14px;
-  left:5px;
-  width:52px;
-  height:52px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.5);
-  background:linear-gradient(135deg,rgba(13,31,60,.84),rgba(46,110,220,.72));
-  backdrop-filter:blur(16px) saturate(150%);
-  color:white;
-  cursor:pointer;
-  z-index:9999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 6px 20px rgba(13,31,60,.35);
-  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;
-  animation:kavariFloat 6s ease-in-out infinite;
-}
-#kavari-chat-btn:hover {
-  transform:scale(1.08);
-  box-shadow:0 10px 28px rgba(46,110,220,.45);
-}
-#kavari-chat-btn svg {
-  width:24px;
-  height:24px;
-}
-#kavari-chat-btn.activo {
-  animation:none;
-  border-color:var(--kb-blue-light);
-}
-@keyframes kavariFloat {
-  0%,100% {
-    transform:translateY(0);
-  }
-  50% {
-    transform:translateY(-8px);
-  }
-}
 #kavari-asistente {
   position:fixed;
-  bottom:76px;
-  left:85px;
+  bottom:152px;
+  left:8px;
   right:auto;
   display:none;
   align-items:flex-end;
@@ -291,6 +251,60 @@
 [data-theme="dark"] .kb-pregunta-btn:hover {
   background:#1d2d50;
 }
+#kavari-chat-header-actions {
+  display:flex;
+  gap:6px;
+  flex-shrink:0;
+}
+#kavari-chat-clear {
+  background:rgba(255,255,255,.15);
+  border:none;
+  color:white;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:1rem;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  transition:background .2s;
+}
+#kavari-chat-clear:hover {
+  background:rgba(255,255,255,.28);
+}
+#kavari-acciones {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  padding:0 14px 10px;
+}
+.kb-accion-btn {
+  background:color-mix(in srgb,var(--kb-blue) 12%,transparent);
+  color:var(--kb-blue);
+  border:1px solid color-mix(in srgb,var(--kb-blue) 40%,transparent);
+  padding:6px 12px;
+  border-radius:50px;
+  font-size:.74rem;
+  font-weight:700;
+  cursor:pointer;
+  font-family:inherit;
+  transition:all .2s;
+}
+.kb-accion-btn:hover {
+  background:var(--kb-blue);
+  color:white;
+  transform:translateY(-1px);
+}
+[data-theme="dark"] .kb-accion-btn {
+  color:#58a6ff;
+  border-color:#58a6ff;
+}
+[data-theme="dark"] .kb-accion-btn:hover {
+  background:#1d2d50;
+}
 #kavari-chat-input-row {
   display:flex;
   gap:8px;
@@ -338,23 +352,13 @@
     left:auto;
   }
   #kavari-mascot {
-    bottom:74px;
+    bottom:22px;
     left:4px;
   }
-  #kavari-chat-btn {
-    width:46px;
-    height:46px;
-    bottom:12px;
-    left:68px;
-  }
-  #kavari-chat-btn svg {
-    width:22px;
-    height:22px;
-  }
   #kavari-asistente {
-    left:68px;
+    left:4px;
     right:8px;
-    bottom:68px;
+    bottom:98px;
     flex-direction:column-reverse;
     align-items:stretch;
   }
@@ -383,17 +387,12 @@
     height:60px;
   }
   #kavari-mascot {
-    bottom:68px;
+    bottom:18px;
     left:2px;
   }
-  #kavari-chat-btn {
-    width:42px;
-    height:42px;
-    bottom:10px;
-    left:58px;
-  }
   #kavari-asistente {
-    left:58px;
+    left:2px;
+    bottom:84px;
   }
   @keyframes kavariFloatMascot {
     0% {

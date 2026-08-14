@@ -138,6 +138,21 @@ body.menu-open {
   .navbar.nav-glass .nav-btn-tutorial {
     display: none !important;
   }
+  /* En móvil/tablet el enlace "Planes" del bloque de cuenta se oculta:
+     evita que la fila del nav se desborde y corte la hamburguesa en
+     teléfonos de 360-400px (era un duplicado con el menú de planes).
+     El menú a pantalla completa sigue teniendo los enlaces de página. */
+  .nav-glass .kavari-nav-account .kavari-nav-plan {
+    display: none !important;
+  }
+  .nav-glass .kavari-nav-account {
+    gap: 4px;
+    margin-left: 2px;
+  }
+  .nav-glass .kavari-nav-account .kavari-nav-user {
+    padding: 6px 9px;
+    font-size: .7rem;
+  }
   /* Botón de tema compacto: compensa el recorrido del "knob" oscuro
      (la versión original es de 56px con translateX(26px); en 36px el
      knob debe recorrer 11px para no salirse del botón) */
@@ -272,6 +287,50 @@ body.menu-open {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+/* Teléfonos muy pequeños: apretar la barra para que la hamburguesa
+   quede siempre visible dentro de la pantalla */
+@media (max-width: 480px) {
+  .navbar.nav-glass .nav-actions {
+    gap: 4px;
+  }
+  .navbar.nav-glass .nav-actions .btn-lang-nav,
+  .navbar.nav-glass .nav-actions .btn-theme-nav {
+    width: 34px !important;
+    height: 30px !important;
+  }
+  [data-theme="dark"] .btn-theme-nav::before {
+    transform: translateX(9px) !important;
+  }
+  .navbar.nav-glass .hamburger {
+    width: 38px;
+    height: 38px;
+    gap: 4px;
+  }
+}
+@media (max-width: 380px) {
+  .navbar.nav-glass {
+    padding: 0 10px !important;
+    gap: 6px;
+  }
+  .navbar.nav-glass .logo {
+    font-size: 18px;
+    letter-spacing: .2em;
+  }
+}
+@media (max-width: 340px) {
+  .navbar.nav-glass .nav-actions .btn-lang-nav,
+  .navbar.nav-glass .nav-actions .btn-theme-nav {
+    width: 32px !important;
+  }
+  .navbar.nav-glass .kavari-nav-account .kavari-nav-user {
+    padding: 6px 7px;
+    font-size: .68rem;
+  }
+  .navbar.nav-glass .hamburger {
+    width: 36px;
+    height: 36px;
   }
 }
 /* ══════════════════════════════════════════════════════════════════════════
@@ -1056,5 +1115,43 @@ body.menu-open {
   .nav-glass .nav-links.open,
   .nav-glass .nav-links.open li {
     animation-duration: .001ms !important;
+  }
+}
+/* ══════════════════════════════════════════════════════════════════════════
+   VENTANAS CENTRADAS EN LA PANTALLA
+   Las ventanas/módulos (Top 10, Paquetes, logins, registros, etc.) se
+   muestran centradas en el centro de la computadora, también en móvil.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .top10-modal-overlay,
+  .paquete-modal-overlay,
+  .modal-overlay,
+  .modal-overlay-souvenirs,
+  .traveler-modal {
+    align-items: center !important;
+    justify-content: center !important;
+    place-items: center !important;
+    padding: 20px !important;
+  }
+  .top10-modal,
+  .paquete-modal,
+  .modal-content,
+  .modal-content-souvenirs,
+  .modal,
+  .traveler-card {
+    align-self: auto !important;
+    margin: 0 auto !important;
+    border: none !important;
+    border-radius: 24px;
+    width: min(580px, 100%) !important;
+    max-height: 88dvh;
+  }
+  .top10-modal-img,
+  .paquete-modal-img {
+    border-radius: 24px 24px 0 0;
+  }
+  .top10-modal-close,
+  .paquete-modal-close {
+    position: absolute;
   }
 }

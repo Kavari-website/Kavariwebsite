@@ -26,6 +26,7 @@
   <script src="js/img-fallback.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
 
 <!-- Hero con video de fondo + anillos orbitales animados -->
 <header class="hero contact-hero" id="contactHero" style="height: 74vh; min-height: 560px;">
@@ -78,7 +79,6 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
             <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
-            <li><a href="planes.html" data-i18n="planesNavPlanes">Planes</a></li>
             <li><a href="#" id="guiasNavBtn" data-guide-register data-i18n="navRegistrarmeGuia">Ser Guía</a></li>
             <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
             <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
@@ -102,7 +102,7 @@
 </header>
 
 <!-- Contenido principal -->
-<main class="contact-main">
+<main class="contact-main" id="main">
 
     <!-- Caja introductoria flotante -->
     <div class="contact-float reveal">
@@ -349,6 +349,41 @@
         </div>
     </div>
 
+    <!-- Formulario de contacto -->
+    <div class="contact-card wide-card reveal" id="formulario">
+        <div class="section-tag">Formulario de contacto</div>
+        <h2>Envíanos un mensaje</h2>
+        <p class="contact-form-intro">Cuéntanos tu consulta y el equipo KAVARI te responderá a la brevedad.</p>
+
+        <form class="contact-form" id="contactForm" novalidate>
+            <label class="cf-field">
+                <span class="cf-label">Nombre completo</span>
+                <input type="text" name="full_name" required minlength="2" autocomplete="name" placeholder="Tu nombre">
+            </label>
+            <label class="cf-field">
+                <span class="cf-label">Correo electrónico</span>
+                <input type="email" name="email" required autocomplete="email" placeholder="tucorreo@ejemplo.com">
+            </label>
+            <label class="cf-field">
+                <span class="cf-label">Asunto</span>
+                <select name="subject">
+                    <option value="general">Consulta general</option>
+                    <option value="paquetes">Paquetes de viaje</option>
+                    <option value="guias">Registro como guía</option>
+                    <option value="otros">Otro</option>
+                </select>
+            </label>
+            <label class="cf-field cf-field-full">
+                <span class="cf-label">Mensaje</span>
+                <textarea name="message" rows="5" required minlength="10" placeholder="Escribe tu mensaje aquí…"></textarea>
+            </label>
+            <div class="cf-submit">
+                <button type="submit" class="email-main-btn cf-btn" id="contactSubmit">Enviar mensaje</button>
+                <p class="contact-status" id="contactStatus" role="status" aria-live="polite"></p>
+            </div>
+        </form>
+    </div>
+
     <!-- Botón volver al inicio -->
     <div class="back-btn-wrap" style="padding-top: 48px;">
         <a href="index.html" class="back-btn" id="btn-volver-inicio">
@@ -370,6 +405,7 @@
 </footer>
 
 <script src="js/contacto.js"></script>
+<script src="js/contact-form.js"></script>
 <script src="js/account.js"></script>
 <script src="js/guide-registration.js"></script>
 <script src="js/tutorial.js"></script>

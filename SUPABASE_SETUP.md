@@ -175,6 +175,26 @@ Kavariwebsite/
 - ✅ Selección de membresía (Plata/Oro/Diamante)
 - ✅ Almacenamiento en Supabase
 
+### Solicitudes de Paquetes (index)
+- ✅ Botón "Reservar ahora" abre el formulario de plan de viaje
+- ✅ Almacenamiento en la tabla `package_requests` de Supabase
+- ✅ Rellena `user_id` automáticamente si hay sesión iniciada
+- ✅ Se puede consultar/ver la solicitud desde el panel de Supabase (Table Editor)
+
+### Formulario de Contacto (contacto.html)
+- ✅ Formulario "Envíanos un mensaje"
+- ✅ Almacenamiento en la tabla `contact_messages` de Supabase
+- ✅ Rellena `user_id` automáticamente si hay sesión iniciada
+- ✅ Se puede consultar/ver el mensaje desde el panel de Supabase (Table Editor)
+
+### Panel de Administración (perfil.html)
+- ✅ Pestaña "Panel" visible solo para el administrador
+- ✅ Lista solicitudes de paquetes (`package_requests`) y mensajes de contacto (`contact_messages`)
+- ✅ Permite cambiar el estado de cada solicitud/mensaje
+- ⚠️ El email del administrador está en dos lugares que deben coincidir:
+  - `js/admin-panel.js` → constante `ADMIN_EMAILS`
+  - `server/schema.sql` → políticas RLS `auth.jwt() ->> 'email'`
+
 ### Bilingüe
 - ✅ Todas las traducciones en español
 - ✅ Todas las traducciones en inglés

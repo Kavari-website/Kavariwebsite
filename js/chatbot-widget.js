@@ -163,12 +163,6 @@
       <div id="kavari-mascot" role="button" tabindex="0" aria-label="KAVARI mascot" title="KAVARI">
         <div class="kavari-mascot-inner"><img src="img/mascota.png" alt="" onerror="this.parentElement.style.display='none'"></div>
       </div>
-      <button id="kavari-chat-btn" type="button" aria-label="Abrir asistente KAVARI" aria-expanded="false" aria-haspopup="dialog">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        </svg>
-        <span id="kavari-chat-badge" class="kb-badge" hidden>1</span>
-      </button>
       <div id="kavari-asistente" role="dialog" aria-modal="false" aria-label="Asistente KAVARI">
         <div id="kavari-chat-panel">
           <div id="kavari-chat-header">
@@ -176,10 +170,16 @@
               <strong id="kavari-chat-title">KAVARI Asistente</strong>
               <span id="kavari-chat-subtitle">Tu guía de viaje</span>
             </div>
-            <button id="kavari-chat-close" type="button" aria-label="Cerrar">&times;</button>
+            <div id="kavari-chat-header-actions">
+              <button id="kavari-chat-clear" type="button" title="Limpiar conversación" aria-label="Limpiar conversación">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+              </button>
+              <button id="kavari-chat-close" type="button" aria-label="Cerrar">&times;</button>
+            </div>
           </div>
           <div id="kavari-mensajes" role="log" aria-live="polite" aria-relevant="additions"></div>
           <div id="kavari-preguntas"></div>
+          <div id="kavari-acciones"></div>
           <div id="kavari-chat-input-row">
             <input type="text" id="kavari-chat-input" placeholder="Escribe tu pregunta..." autocomplete="off" maxlength="300">
             <button id="kavari-chat-send" type="button" aria-label="Enviar">
@@ -198,14 +198,13 @@
   }
 
   function bindEvents() {
-    const btn = document.getElementById('kavari-chat-btn');
     const closeBtn = document.getElementById('kavari-chat-close');
     const sendBtn = document.getElementById('kavari-chat-send');
     const input = document.getElementById('kavari-chat-input');
     const panel = document.getElementById('kavari-asistente');
     const mascot = document.getElementById('kavari-mascot');
+    const clearBtn = document.getElementById('kavari-chat-clear');
 
-    btn.addEventListener('click', toggle);
     if (mascot) {
       mascot.addEventListener('click', toggle);
       mascot.addEventListener('keydown', e => {
@@ -217,6 +216,7 @@
     input.addEventListener('keydown', e => {
       if (e.key === 'Enter') sendFromInput();
     });
+    if (clearBtn) clearBtn.addEventListener('click', clearConversation);
 
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && opened) close();
@@ -254,10 +254,9 @@
     opened = true;
     hideBadge();
     document.getElementById('kavari-asistente').classList.add('activo');
-    document.getElementById('kavari-chat-btn').classList.add('activo');
-    document.getElementById('kavari-chat-btn').setAttribute('aria-expanded', 'true');
     restoreMemory();
     renderQuestions();
+    renderAcciones();
     setTimeout(() => {
       const input = document.getElementById('kavari-chat-input');
       if (input) input.focus({ preventScroll: true });
@@ -269,8 +268,6 @@
     const panel = document.getElementById('kavari-asistente');
     panel.classList.add('cerrando');
     panel.classList.remove('activo');
-    document.getElementById('kavari-chat-btn').classList.remove('activo');
-    document.getElementById('kavari-chat-btn').setAttribute('aria-expanded', 'false');
     setTimeout(() => panel.classList.remove('cerrando'), 300);
   }
 
@@ -353,7 +350,7 @@
     const title = document.getElementById('kavari-chat-title');
     const subtitle = document.getElementById('kavari-chat-subtitle');
     const input = document.getElementById('kavari-chat-input');
-    const btn = document.getElementById('kavari-chat-btn');
+    const clearBtn = document.getElementById('kavari-chat-clear');
     if (title) title.textContent = t('chatTitle');
     if (subtitle) {
       subtitle.textContent = ctx.country?.nombre
@@ -361,8 +358,115 @@
         : t('chatSubtitle');
     }
     if (input) input.placeholder = t('chatInputPlaceholder');
-    if (btn) btn.setAttribute('aria-label', t('chatBtnOpen'));
-    if (opened) renderQuestions();
+    if (clearBtn) clearBtn.title = lang() ? 'Clear conversation' : 'Limpiar conversación';
+    if (opened) { renderQuestions(); renderAcciones(); }
+  }
+
+  /* ═══════════════════ acciones rápidas ═══════════════════ */
+  function actionItems() {
+    const L = lang();
+    return [
+      { key: 'destinos', label: L ? 'Destinations' : 'Destinos' },
+      { key: 'guias', label: L ? 'Guides' : 'Guías' },
+      { key: 'paquetes', label: L ? 'Packages' : 'Paquetes' },
+      { key: 'contacto', label: L ? 'Contact' : 'Contacto' }
+    ];
+  }
+
+  function renderAcciones() {
+    const box = document.getElementById('kavari-acciones');
+    if (!box) return;
+    box.innerHTML = '';
+    actionItems().forEach(item => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'kb-accion-btn';
+      btn.textContent = item.label;
+      btn.dataset.action = item.key;
+      btn.addEventListener('click', () => doAction(item.key));
+      box.appendChild(btn);
+    });
+  }
+
+  function navigate(href) {
+    if (window.kavariNavigate) {
+      try { window.kavariNavigate(href); return; } catch (_) { /* noop */ }
+    }
+    window.location.href = href;
+  }
+
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function doAction(action) {
+    const L = lang();
+    let reply;
+    switch (action) {
+      case 'destinos':
+        reply = L ? 'Opening destinations…' : 'Abriendo destinos…';
+        addBotMessage(renderBotText(reply));
+        pushTurn('model', reply);
+        navigate('paises.html');
+        break;
+      case 'guias':
+        reply = L ? 'Opening certified guides…' : 'Abriendo guías certificados…';
+        addBotMessage(renderBotText(reply));
+        pushTurn('model', reply);
+        if (/destino\.html/i.test(location.pathname)) {
+          scrollToSection('guias');
+        } else {
+          navigate('paises.html');
+        }
+        break;
+      case 'paquetes':
+        if (/index\.html$/i.test(location.pathname) || location.pathname === '/' || /\/index$/i.test(location.pathname)) {
+          reply = L ? 'Here are our travel packages — pick the one you like.' : 'Aquí tienes nuestros paquetes de viaje — elige el que te guste.';
+          addBotMessage(renderBotText(reply));
+          pushTurn('model', reply);
+          scrollToSection('paquetes');
+        } else {
+          reply = L ? 'Opening travel packages…' : 'Abriendo paquetes de viaje…';
+          addBotMessage(renderBotText(reply));
+          pushTurn('model', reply);
+          navigate('index.html#paquetes');
+        }
+        break;
+      case 'contacto':
+        reply = L ? 'Opening the contact page…' : 'Abriendo la página de contacto…';
+        addBotMessage(renderBotText(reply));
+        pushTurn('model', reply);
+        navigate('contacto.html');
+        break;
+      default:
+        return;
+    }
+  }
+
+  function clearConversation() {
+    const L = lang();
+    try {
+      localStorage.removeItem(historyKey());
+    } catch (_) { /* noop */ }
+    getUserId().then(userId => {
+      if (!userId) return;
+      const client = window.KavariDB?.getSupabaseClient?.();
+      if (!client) return;
+      client.from('chat_messages')
+        .delete()
+        .eq('user_id', userId)
+        .eq('session_key', contextKey())
+        .then(() => {})
+        .catch(() => {});
+    });
+    const box = document.getElementById('kavari-mensajes');
+    if (box) box.innerHTML = '';
+    welcomeShown = false;
+    showWelcome();
+    setThinking(false);
+    const rep = L ? 'Conversation cleared. How can I help you?' : 'Conversación limpia. ¿En qué te ayudo?';
+    addBotMessage(renderBotText(rep));
   }
 
   function escapeHtml(str) {

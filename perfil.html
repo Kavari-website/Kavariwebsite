@@ -23,6 +23,7 @@
   <script src="js/img-fallback.js"></script>
 </head>
 <body class="auth-page">
+<a class="skip-link" href="#main">Saltar al contenido</a>
 
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar nav-glass home-nav" id="navbar">
@@ -32,7 +33,6 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
       <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
-      <li><a href="planes.html" data-i18n="planesNavPlanes">Planes</a></li>
       <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
       <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
       <li><a href="contacto.html" data-i18n="contacto">Contacto</a></li>
@@ -48,7 +48,7 @@
   </nav>
 
   <!-- ===== CONTENIDO PRINCIPAL ===== -->
-  <main class="auth-main">
+  <main class="auth-main" id="main">
     <section class="perfil-container" id="perfilContainer">
 
       <!-- Estado: No autenticado -->
@@ -232,6 +232,7 @@
           <button class="perfil-tab active" data-tab="info" role="tab" aria-selected="true" data-i18n="perfilTabInfo">Información personal</button>
           <button class="perfil-tab" data-tab="travel" role="tab" aria-selected="false" data-i18n="perfilTabViaje">Preferencias de viaje</button>
           <button class="perfil-tab" data-tab="favoritos" role="tab" aria-selected="false" data-i18n="perfilTabFavoritos">Favoritos</button>
+          <button class="perfil-tab" data-tab="admin" role="tab" aria-selected="false" id="perfilAdminTab" style="display:none;">Panel</button>
           <button class="perfil-tab" data-tab="settings" role="tab" aria-selected="false" data-i18n="perfilTabConfig">Configuración</button>
         </div>
 
@@ -387,6 +388,22 @@
             <button class="perfil-danger-btn" id="perfilDeleteAccountBtn" type="button" data-i18n="perfilEliminarCuenta">Eliminar cuenta</button>
           </div>
         </div>
+
+        <!-- Tab: Panel de administración -->
+        <div class="perfil-tab-content" id="tabAdmin" style="display:none;">
+          <div class="admin-panel">
+            <div class="admin-section">
+              <h3>Solicitudes de paquetes</h3>
+              <p class="admin-sub">Solicitudes de plan de viaje enviadas desde el index.</p>
+              <div class="admin-list" id="adminPackList"></div>
+            </div>
+            <div class="admin-section">
+              <h3>Mensajes de contacto</h3>
+              <p class="admin-sub">Mensajes enviados desde el formulario de contacto.</p>
+              <div class="admin-list" id="adminMsgList"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </section>
@@ -405,6 +422,7 @@
   <script src="js/auth.js"></script>
   <script src="js/account.js"></script>
   <script src="js/perfil.js?v=2"></script>
+  <script src="js/admin-panel.js"></script>
   <script src="js/tutorial.js"></script>
 <script src="js/guide-registration.js"></script>
 <script src="js/page-transitions.js"></script>

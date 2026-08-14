@@ -4069,9 +4069,6 @@ a:focus-visible,button:focus-visible,.filter-chip:focus-visible,.btn-hero:focus-
 [data-theme="dark"] .page-utilities .btn-lang-nav,[data-theme="dark"] .page-utilities .btn-theme-nav,[data-theme="dark"] .page-utilities .nav-btn-tutorial {
   color:#e6edf3;
 }
-#kavari-chat-btn {
-  position:relative;
-}
 .kb-badge {
   position:absolute;
   top:-4px;

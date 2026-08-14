@@ -36,8 +36,13 @@
     });
   }
 
+  function hideOverlay() {
+    if (overlay) overlay.classList.remove('kpt-shown');
+  }
+
   function revealPage() {
     document.body.classList.add('page-loaded');
+    hideOverlay();
   }
 
   function isInternalSibling(href) {
@@ -95,6 +100,16 @@
       revealPage();
       bindClicks();
     }
+
+    // Al volver atrás/adelante con el botón del navegador, la página se
+    // restaura desde la caché con el velo de transición aún visible.
+    // Lo ocultamos para que no quede negro.
+    window.addEventListener('pageshow', function (event) {
+      if (event.persisted) {
+        transitioning = false;
+        revealPage();
+      }
+    });
   }
 
   init();
