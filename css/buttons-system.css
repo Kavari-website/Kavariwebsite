@@ -1,0 +1,355 @@
+/* ================================================================
+   KAVARI · buttons-system.css
+   Sistema visual de botones de la plataforma.
+   Unifica los botones principales y secundarios de todas las
+   páginas: tamaño, bordes, radios, tipografía, hover y estados
+   activos. Se carga al final del <head> para tener prioridad.
+   No cambia enlaces, textos ni funcionalidad.
+   ================================================================ */
+
+:root {
+  --kbtn-radius:999px;
+  --kbtn-font:'Poppins',system-ui,sans-serif;
+  --kbtn-prim-bg:linear-gradient(135deg,#1d4ea3 0%,#2e6edc 100%);
+  --kbtn-prim-bg-h:linear-gradient(135deg,#2457b3 0%,#3b79e6 100%);
+  --kbtn-prim-color:#fff;
+  --kbtn-prim-border:none;
+  --kbtn-prim-shadow:0 4px 14px rgba(29,78,163,.22),inset 0 1px 0 rgba(255,255,255,.16);
+  --kbtn-sec-color:#0d1f3c;
+  --kbtn-sec-border:1.5px solid rgba(46,110,220,.4);
+  --kbtn-sec-bg:transparent;
+  --kbtn-sec-bg-h:linear-gradient(135deg,rgba(46,110,220,.09),rgba(46,110,220,.04));
+  --kbtn-sec-shadow:none;
+  --kbtn-danger-bg:#dc2626;
+  --kbtn-danger-bg-h:#b91c1c;
+}
+[data-theme="dark"] {
+  --kbtn-sec-color:#e6edf3;
+  --kbtn-sec-border:1.5px solid rgba(88,166,255,.42);
+  --kbtn-sec-bg-h:linear-gradient(135deg,rgba(88,166,255,.14),rgba(88,166,255,.06));
+}
+
+/* ---------- Base común: tamaño, radio y tipografía ---------- */
+.btn-sabemas,.dest-btn,.btn-paquete-reservar,.btn-paquete-info,
+.btn-modal-info,.btn-modal-go,.btn-modal-cerrar,.btn-modal-destino,
+.search-content button,.modal-content .btn-submit,
+.btn-primary,.btn-outline,.btn-ghost,.btn-danger,
+.btn-cta-white,.btn-cta-outline,.email-main-btn,
+.glass-primary,.glass-secondary,.plan-card button,
+.btn-hero,.btn-hero-outline,.btn-card,.btn-sm,
+.perfil-logout-btn,.perfil-danger-btn {
+  box-sizing:border-box;
+  position:relative;
+  overflow:hidden;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin:0;
+  border-radius:var(--kbtn-radius);
+  font-family:var(--kbtn-font);
+  font-size:14.5px;
+  font-weight:600;
+  letter-spacing:.01em;
+  line-height:1;
+  white-space:nowrap;
+  text-align:center;
+  text-decoration:none;
+  cursor:pointer;
+  height:46px;
+  padding:0 26px;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ---------- Variantes de color ---------- */
+/* Primario */
+.btn-sabemas,.dest-btn,.btn-paquete-reservar,.btn-modal-go,
+.search-content button,.modal-content .btn-submit,
+.btn-primary,.email-main-btn,.btn-card,.glass-primary,.plan-card button {
+  background:var(--kbtn-prim-bg);
+  color:var(--kbtn-prim-color);
+  border:var(--kbtn-prim-border);
+  box-shadow:var(--kbtn-prim-shadow);
+}
+/* Secundario */
+.btn-paquete-info,.btn-modal-info,.btn-modal-cerrar,.btn-modal-destino,
+.btn-outline,.glass-secondary {
+  background:var(--kbtn-sec-bg);
+  color:var(--kbtn-sec-color);
+  border:var(--kbtn-sec-border);
+  box-shadow:var(--kbtn-sec-shadow);
+}
+/* Claro sobre fondos oscuros (hero y CTA) */
+.btn-hero,.btn-cta-white {
+  background:#fff;
+  color:#0d1f3c;
+  border:none;
+  box-shadow:0 4px 14px rgba(0,0,0,.15);
+}
+.btn-hero-outline,.btn-cta-outline {
+  background:transparent;
+  color:#fff;
+  border:2px solid rgba(255,255,255,.6);
+}
+/* Peligro */
+.btn-danger,.perfil-danger-btn {
+  background:var(--kbtn-danger-bg);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 4px 14px rgba(220,38,38,.25);
+}
+/* Fantasma */
+.btn-ghost {
+  background:transparent;
+  color:var(--kbtn-sec-color);
+  border:none;
+}
+
+/* ---------- Tamaños ---------- */
+.btn-sm,.perfil-logout-btn,.perfil-danger-btn {
+  height:38px;
+  padding:0 18px;
+  font-size:13px;
+}
+.btn-hero,.btn-hero-outline,.btn-cta-white,.btn-cta-outline {
+  height:52px;
+  padding:0 30px;
+  font-size:15px;
+}
+.btn-sabemas,.dest-btn,.glass-primary,.glass-secondary,.plan-card button {
+  width:100%;
+}
+
+/* ---------- Hover ---------- */
+@media (hover:hover) {
+  .btn-sabemas:hover,.dest-btn:hover,.btn-paquete-reservar:hover,.btn-modal-go:hover,
+  .search-content button:hover,.modal-content .btn-submit:hover,
+  .btn-primary:hover,.email-main-btn:hover,.btn-card:hover,.glass-primary:hover,.plan-card button:hover {
+    background:var(--kbtn-prim-bg-h);
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px rgba(29,78,163,.3),inset 0 1px 0 rgba(255,255,255,.18);
+  }
+  .btn-paquete-info:hover,.btn-modal-info:hover,.btn-modal-cerrar:hover,.btn-modal-destino:hover,
+  .btn-outline:hover,.glass-secondary:hover {
+    background:var(--kbtn-sec-bg-h);
+    border-color:#2e6edc;
+    color:var(--kbtn-sec-color);
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(46,110,220,.14);
+  }
+  .btn-hero:hover,.btn-cta-white:hover {
+    background:#fff;
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(0,0,0,.22);
+  }
+  .btn-hero-outline:hover,.btn-cta-outline:hover {
+    background:rgba(255,255,255,.12);
+    border-color:#fff;
+    color:#fff;
+    transform:translateY(-2px);
+  }
+  .btn-danger:hover,.perfil-danger-btn:hover {
+    background:var(--kbtn-danger-bg-h);
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(220,38,38,.3);
+  }
+  .btn-ghost:hover {
+    background:rgba(46,110,220,.08);
+    color:var(--kbtn-sec-color);
+  }
+}
+
+/* ---------- Activo ---------- */
+.btn-sabemas:active,.dest-btn:active,
+.btn-paquete-reservar:active,.btn-paquete-info:active,
+.btn-modal-info:active,.btn-modal-go:active,.btn-modal-cerrar:active,.btn-modal-destino:active,
+.search-content button:active,.modal-content .btn-submit:active,
+.btn-primary:active,.btn-outline:active,.btn-ghost:active,.btn-danger:active,
+.btn-cta-white:active,.btn-cta-outline:active,.email-main-btn:active,
+.glass-primary:active,.glass-secondary:active,.plan-card button:active,
+.btn-hero:active,.btn-hero-outline:active,.btn-card:active,.btn-sm:active,
+.perfil-logout-btn:active,.perfil-danger-btn:active {
+  transform:translateY(1px) scale(.97);
+  box-shadow:inset 0 3px 12px rgba(0,0,0,.1),inset 0 1px 3px rgba(0,0,0,.06);
+  transition-duration:.08s;
+}
+
+/* ---------- Índice: prioridad sobre reglas previas con !important ---------- */
+.page-index .btn-sabemas,
+.page-index .btn-paquete-reservar,
+.page-index .btn-modal-go,
+.page-index .search-content button,
+.page-index .modal-content .btn-submit {
+  background:var(--kbtn-prim-bg)!important;
+  color:#fff!important;
+  border:none!important;
+  height:46px!important;
+  padding:0 26px!important;
+  font-size:14.5px!important;
+  font-weight:600!important;
+  box-shadow:var(--kbtn-prim-shadow)!important;
+}
+.page-index .btn-paquete-info,
+.page-index .btn-modal-info,
+.page-index .btn-modal-cerrar,
+.page-index .btn-modal-destino {
+  background:transparent!important;
+  color:var(--kbtn-sec-color)!important;
+  border:var(--kbtn-sec-border)!important;
+  height:46px!important;
+  padding:0 26px!important;
+  font-size:14.5px!important;
+  font-weight:600!important;
+  box-shadow:none!important;
+}
+.page-index .card-content .btn-sabemas {
+  height:46px!important;
+  padding:0 24px!important;
+}
+.page-index .btn-sabemas:hover,
+.page-index .btn-paquete-reservar:hover,
+.page-index .btn-modal-go:hover,
+.page-index .search-content button:hover,
+.page-index .modal-content .btn-submit:hover {
+  background:var(--kbtn-prim-bg-h)!important;
+  transform:translateY(-2px)!important;
+  box-shadow:0 10px 24px rgba(29,78,163,.3)!important;
+}
+.page-index .btn-paquete-info:hover,
+.page-index .btn-modal-info:hover,
+.page-index .btn-modal-cerrar:hover,
+.page-index .btn-modal-destino:hover {
+  background:var(--kbtn-sec-bg-h)!important;
+  border-color:#2e6edc!important;
+  transform:translateY(-2px)!important;
+  box-shadow:0 8px 18px rgba(46,110,220,.14)!important;
+}
+[data-theme="dark"] .page-index .btn-paquete-info,
+[data-theme="dark"] .page-index .btn-modal-info,
+[data-theme="dark"] .page-index .btn-modal-cerrar,
+[data-theme="dark"] .page-index .btn-modal-destino {
+  color:var(--kbtn-sec-color)!important;
+  border-color:var(--kbtn-sec-border)!important;
+}
+[data-theme="dark"] .page-index .btn-paquete-info:hover,
+[data-theme="dark"] .page-index .btn-modal-info:hover,
+[data-theme="dark"] .page-index .btn-modal-cerrar:hover,
+[data-theme="dark"] .page-index .btn-modal-destino:hover {
+  background:var(--kbtn-sec-bg-h)!important;
+  border-color:#58a6ff!important;
+  color:var(--kbtn-sec-color)!important;
+}
+.page-index .btn-sabemas:active,
+.page-index .btn-paquete-reservar:active,
+.page-index .btn-modal-go:active,
+.page-index .btn-modal-destino:active,
+.page-index .search-content button:active,
+.page-index .modal-content .btn-submit:active,
+.page-index .btn-paquete-info:active,
+.page-index .btn-modal-info:active,
+.page-index .btn-modal-cerrar:active {
+  transform:translateY(1px) scale(.97)!important;
+  box-shadow:inset 0 3px 12px rgba(0,0,0,.1)!important;
+  transition-duration:.08s!important;
+}
+
+/* ---------- Animación de brillo al pasar el cursor ---------- */
+.btn-gold {
+  position:relative;
+  overflow:hidden;
+}
+.btn-sabemas::after,.dest-btn::after,.btn-paquete-reservar::after,.btn-paquete-info::after,
+.btn-modal-info::after,.btn-modal-go::after,.btn-modal-cerrar::after,.btn-modal-destino::after,
+.search-content button::after,.modal-content .btn-submit::after,
+.btn-primary::after,.btn-outline::after,.btn-ghost::after,.btn-danger::after,
+.btn-cta-white::after,.btn-cta-outline::after,.email-main-btn::after,
+.glass-primary::after,.glass-secondary::after,.plan-card button::after,
+.btn-hero::after,.btn-hero-outline::after,.btn-card::after,.btn-sm::after,
+.perfil-logout-btn::after,.perfil-danger-btn::after,.btn-gold::after {
+  content:'';
+  position:absolute;
+  top:-50%;
+  left:-60%;
+  width:45%;
+  height:200%;
+  background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 100%);
+  transform:translateX(-160%) skewX(-18deg);
+  pointer-events:none;
+  z-index:1;
+}
+.btn-hero::after,.btn-cta-white::after {
+  background:linear-gradient(115deg,transparent 0%,rgba(13,31,60,.16) 45%,transparent 100%);
+}
+@media (hover:hover) {
+  .btn-sabemas:hover::after,.dest-btn:hover::after,.btn-paquete-reservar:hover::after,.btn-paquete-info:hover::after,
+  .btn-modal-info:hover::after,.btn-modal-go:hover::after,.btn-modal-cerrar:hover::after,.btn-modal-destino:hover::after,
+  .search-content button:hover::after,.modal-content .btn-submit:hover::after,
+  .btn-primary:hover::after,.btn-outline:hover::after,.btn-ghost:hover::after,.btn-danger:hover::after,
+  .btn-cta-white:hover::after,.btn-cta-outline:hover::after,.email-main-btn:hover::after,
+  .glass-primary:hover::after,.glass-secondary:hover::after,.plan-card button:hover::after,
+  .btn-hero:hover::after,.btn-hero-outline:hover::after,.btn-card:hover::after,.btn-sm:hover::after,
+  .perfil-logout-btn:hover::after,.perfil-danger-btn:hover::after,.btn-gold:hover::after {
+    animation:kbtnSheen .9s cubic-bezier(.22,1,.36,1);
+  }
+}
+@keyframes kbtnSheen {
+  to {
+    transform:translateX(300%) skewX(-18deg);
+  }
+}
+
+/* Índice: reactiva el brillo sobre reglas previas que lo ocultaban */
+.page-index .btn-sabemas::after,
+.page-index .btn-paquete-reservar::after,
+.page-index .btn-modal-go::after,
+.page-index .btn-modal-destino::after,
+.page-index .search-content button::after,
+.page-index .modal-content .btn-submit::after {
+  display:block!important;
+  content:''!important;
+  position:absolute!important;
+  top:-50%!important;
+  left:-60%!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:45%!important;
+  height:200%!important;
+  background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 100%)!important;
+  transform:translateX(-160%) skewX(-18deg)!important;
+  pointer-events:none!important;
+  z-index:1!important;
+}
+.page-index .btn-sabemas:hover::after,
+.page-index .btn-paquete-reservar:hover::after,
+.page-index .btn-modal-go:hover::after,
+.page-index .btn-modal-destino:hover::after,
+.page-index .search-content button:hover::after,
+.page-index .modal-content .btn-submit:hover::after {
+  animation:kbtnSheen .9s cubic-bezier(.22,1,.36,1)!important;
+}
+
+/* ---------- Brillo universal: todos los botones y CTAs de todas las páginas ---------- */
+button,
+a[class*="btn"] {
+  position:relative;
+  overflow:hidden;
+}
+button:not(.btn-theme-nav):not(.btn-lang-nav):not(.nav-btn-tutorial):not(.back-btn):not(.about-hero-cta):not(.hamburger):not(.btn-hero):not(.btn-cta-white)::after,
+a[class*="btn"]:not(.btn-theme-nav):not(.btn-lang-nav):not(.nav-btn-tutorial):not(.back-btn):not(.about-hero-cta):not(.hamburger):not(.btn-hero):not(.btn-cta-white)::after {
+  content:'';
+  position:absolute;
+  top:-50%;
+  left:-60%;
+  width:45%;
+  height:200%;
+  background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 100%);
+  transform:translateX(-160%) skewX(-18deg);
+  pointer-events:none;
+  z-index:1;
+}
+@media (hover:hover) {
+  button:not(.btn-theme-nav):not(.btn-lang-nav):not(.nav-btn-tutorial):not(.back-btn):not(.about-hero-cta):not(.hamburger):not(.btn-hero):not(.btn-cta-white):hover::after,
+  a[class*="btn"]:not(.btn-theme-nav):not(.btn-lang-nav):not(.nav-btn-tutorial):not(.back-btn):not(.about-hero-cta):not(.hamburger):not(.btn-hero):not(.btn-cta-white):hover::after {
+    animation:kbtnSheen .9s cubic-bezier(.22,1,.36,1);
+  }
+}

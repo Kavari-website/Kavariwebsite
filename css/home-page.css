@@ -1,0 +1,290 @@
+/* ================================================================
+   KAVARI · home-page.css
+   Rediseño visual de la página de inicio (solo .page-index).
+   Se carga al final del <head> de index.html para que sus reglas
+   tengan prioridad. No afecta a ninguna otra página.
+   ================================================================ */
+
+/* ---------- HERO: profundidad, centrado y legibilidad ---------- */
+.page-index .hero {
+  display:grid;
+  place-items:center;
+  padding-top:0;
+}
+.page-index .overlay {
+  background:linear-gradient(180deg,rgba(8,19,42,.66) 0%,rgba(8,19,42,.22) 40%,rgba(8,19,42,.45) 72%,rgba(7,16,36,.88) 100%);
+}
+.page-index .hero::after {
+  content:'';
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:140px;
+  background:linear-gradient(180deg,transparent,var(--bg-primary));
+  z-index:2;
+  pointer-events:none;
+}
+.page-index .hero-content {
+  margin:0;
+  padding-top:clamp(70px,11vh,92px);
+  padding-bottom:40px;
+  max-width:900px;
+}
+.page-index .hero-content::before {
+  content:'';
+  display:block;
+  width:58px;
+  height:4px;
+  margin:0 auto 26px;
+  border-radius:99px;
+  background:linear-gradient(90deg,#f0b429,#2e6edc);
+}
+.page-index .hero-content h1 {
+  font-size:clamp(42px,6.2vw,86px);
+  line-height:1.05;
+  letter-spacing:.005em;
+  text-shadow:0 8px 32px rgba(4,12,30,.55),0 2px 6px rgba(4,12,30,.4);
+}
+.page-index .hero-content p {
+  font-size:clamp(16px,1.5vw,22px);
+  line-height:1.6;
+  text-shadow:0 2px 14px rgba(4,12,30,.55);
+}
+
+/* ---------- PANEL DE AVENTURA (search-box) ---------- */
+.page-index .search-box {
+  width:min(980px,92%);
+  margin:-72px auto 96px;
+  padding:40px 46px;
+  border-radius:30px;
+  border:1px solid rgba(13,31,60,.06);
+  background:linear-gradient(160deg,rgba(255,255,255,.99),rgba(242,247,255,.97));
+  box-shadow:0 34px 80px rgba(13,31,60,.18),0 10px 28px rgba(13,31,60,.08);
+  overflow:hidden;
+}
+[data-theme="dark"] .page-index .search-box {
+  background:linear-gradient(160deg,rgba(24,30,41,.97),rgba(18,24,34,.97));
+  border-color:rgba(255,255,255,.08);
+  box-shadow:0 34px 80px rgba(0,0,0,.4);
+}
+.page-index .search-content {
+  flex-direction:row;
+  justify-content:space-between;
+  align-items:center;
+  text-align:left;
+  gap:30px;
+}
+.page-index .search-content > div {
+  flex:1;
+  min-width:0;
+}
+.page-index .search-content h2 {
+  font-size:clamp(24px,2.6vw,34px);
+  margin:0;
+  color:#10233f;
+}
+.page-index .search-content h2::after {
+  content:'';
+  display:block;
+  width:56px;
+  height:4px;
+  margin:14px 0 0;
+  border-radius:99px;
+  background:linear-gradient(90deg,#2e6edc,#00c2a8);
+}
+[data-theme="dark"] .page-index .search-content h2 {
+  color:#e6edf3;
+}
+.page-index .search-content p {
+  margin:12px 0 0;
+  font-size:16px;
+  color:#64748b;
+}
+[data-theme="dark"] .page-index .search-content p {
+  color:#8b949e;
+}
+.page-index .search-box button {
+  padding:18px 44px!important;
+  font-size:16px!important;
+  flex-shrink:0;
+  box-shadow:0 14px 34px rgba(46,110,220,.4),inset 0 1px 0 rgba(255,255,255,.35)!important;
+}
+
+/* ---------- ENCABEZADOS DE SECCIÓN ---------- */
+.page-index .featured-section {
+  padding-bottom:90px;
+}
+.page-index .featured-section h2,
+.page-index .places-section h2 {
+  font-size:clamp(28px,4vw,44px);
+  margin-bottom:16px;
+}
+.page-index .featured-section h2::before {
+  content:'';
+  display:block;
+  width:54px;
+  height:4px;
+  margin:0 auto 18px;
+  border-radius:99px;
+  background:linear-gradient(90deg,#2e6edc,#00c2a8);
+}
+
+/* ---------- TOP 10: tarjetas ---------- */
+.page-index .cards-container {
+  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:28px;
+  counter-reset:kvTop10;
+}
+.page-index .card {
+  position:relative;
+  border-radius:22px;
+  border:1px solid rgba(13,31,60,.06);
+  box-shadow:0 12px 34px rgba(13,31,60,.10);
+  display:flex;
+  flex-direction:column;
+}
+[data-theme="dark"] .page-index .card {
+  border-color:var(--border-color);
+  box-shadow:0 14px 40px rgba(0,0,0,.35);
+}
+.page-index .card::before {
+  counter-increment:kvTop10;
+  content:counter(kvTop10,decimal-leading-zero);
+  position:absolute;
+  top:14px;
+  left:14px;
+  z-index:2;
+  padding:5px 11px;
+  border-radius:99px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.08em;
+  color:#fff;
+  background:rgba(8,19,42,.55);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.25);
+}
+.page-index .card img {
+  height:236px;
+}
+.page-index .card-content {
+  padding:22px 24px 24px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.page-index .card-content h3 {
+  font-size:1.32rem;
+  margin-bottom:8px;
+}
+.page-index .card-content p {
+  font-size:.93rem;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+.page-index .card-content .btn-sabemas {
+  margin-top:auto;
+  width:100%;
+  padding:13px 20px!important;
+  font-size:14px!important;
+}
+
+/* ---------- PAQUETES DE VIAJE ---------- */
+.page-index .places-section {
+  padding-bottom:100px;
+}
+.page-index .places-section > .featured-section {
+  padding-bottom:26px;
+}
+.page-index .paquete-card {
+  grid-template-columns:340px 1fr;
+  border-radius:26px;
+  margin-bottom:32px;
+  border:1px solid rgba(13,31,60,.06);
+  box-shadow:0 16px 44px rgba(13,31,60,.10);
+  overflow:hidden;
+}
+[data-theme="dark"] .page-index .paquete-card {
+  border-color:var(--border-color);
+  box-shadow:0 18px 48px rgba(0,0,0,.35);
+}
+.page-index .paquete-img-wrap {
+  min-height:260px;
+}
+.page-index .paquete-info {
+  padding:36px 40px;
+}
+.page-index .paquete-region {
+  font-size:11px;
+  letter-spacing:.18em;
+}
+.page-index .paquete-info h3 {
+  font-size:28px;
+}
+.page-index .paquete-info > p {
+  font-size:14.5px;
+  line-height:1.8;
+}
+.page-index .paquete-features {
+  gap:10px;
+}
+.page-index .paquete-feature {
+  padding:7px 15px;
+  font-size:12.5px;
+}
+.page-index .paquete-precio {
+  font-size:32px;
+}
+.page-index .btn-paquete-info {
+  padding:12px 24px!important;
+  font-size:14px!important;
+}
+.page-index .btn-paquete-reservar {
+  padding:13px 30px!important;
+  font-size:14px!important;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:900px) {
+  .page-index .paquete-card {
+    grid-template-columns:1fr;
+  }
+  .page-index .paquete-img-wrap {
+    height:240px;
+    min-height:0;
+  }
+}
+@media (max-width:768px) {
+  .page-index .search-content {
+    flex-direction:column;
+    text-align:center;
+    align-items:center;
+    gap:20px;
+  }
+  .page-index .search-content h2::after {
+    margin:14px auto 0;
+  }
+  .page-index .search-box {
+    padding:30px 24px;
+    border-radius:24px;
+  }
+  .page-index .search-box button {
+    width:100%;
+  }
+}
+@media (max-width:600px) {
+  .page-index .hero-content h1 {
+    font-size:clamp(30px,9.5vw,44px);
+  }
+  .page-index .hero-content p {
+    padding:0 6px;
+  }
+  .page-index .paquete-img-wrap {
+    height:210px;
+  }
+  .page-index .paquete-info {
+    padding:24px 22px 26px;
+  }
+}

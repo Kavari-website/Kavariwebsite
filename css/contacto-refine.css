@@ -1,0 +1,308 @@
+/* ================================================================
+   KAVARI · contacto-refine.css
+   Refinamiento del diseño de la página de Contacto.
+   Organiza mejor el correo, las redes sociales, la sede y el
+   formulario para reducir la saturación visual y mejorar la
+   jerarquía: menos cajas apiladas, sombras y hovers de colores,
+   secciones con más aire y énfasis en el correo principal.
+   No elimina información ni cambia ningún enlace.
+   Se carga al final del <head> de contacto.html.
+   ================================================================ */
+
+/* ---------- Tarjetas de sección: más ligeras y ordenadas ---------- */
+.contact-card {
+  padding:44px 44px 48px;
+  border-radius:24px;
+  border:1px solid var(--gray-200);
+  box-shadow:0 10px 30px rgba(13,31,60,.06);
+  overflow:hidden;
+}
+[data-theme="dark"] .contact-card {
+  box-shadow:0 12px 34px rgba(0,0,0,.28);
+}
+.contact-card::before,
+.contact-card::after {
+  display:none;
+}
+.contact-card:hover {
+  transform:none;
+  box-shadow:0 14px 40px rgba(13,31,60,.09);
+}
+.wide-card {
+  margin:40px auto 0;
+}
+.contact-card .section-tag {
+  margin-bottom:12px;
+}
+.contact-card h2 {
+  margin-bottom:26px;
+}
+
+/* ---------- Caja introductoria: menos peso visual ---------- */
+.contact-float {
+  box-shadow:0 14px 40px rgba(13,31,60,.09);
+  border:1px solid rgba(13,31,60,.05);
+}
+[data-theme="dark"] .contact-float {
+  border-color:rgba(255,255,255,.07);
+}
+
+/* ---------- Accesos rápidos: una sola dirección de color ---------- */
+.quick-links {
+  max-width:1100px;
+}
+.quick-link {
+  background:var(--gray-100);
+  border:1px solid var(--gray-200);
+  box-shadow:none;
+}
+[data-theme="dark"] .quick-link {
+  background:rgba(255,255,255,.04);
+  border-color:rgba(255,255,255,.10);
+}
+.quick-link:hover {
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(13,31,60,.08);
+}
+[data-theme="dark"] .quick-link:hover {
+  box-shadow:0 10px 26px rgba(0,0,0,.35);
+}
+.quick-ig,
+.quick-sede,
+.quick-mail {
+  background:linear-gradient(135deg,#1d4ea3 0%,#2e6edc 100%);
+}
+.quick-link:hover .quick-link-icon {
+  transform:scale(1.08) rotate(-6deg);
+}
+
+/* ---------- Redes sociales: tarjetas suaves, sin saltos ---------- */
+.ig-list {
+  gap:14px;
+}
+.ig-item {
+  background:rgba(13,31,60,.03);
+  border:1px solid rgba(13,31,60,.06);
+  border-radius:14px;
+  box-shadow:none;
+  padding:16px 18px;
+}
+[data-theme="dark"] .ig-item {
+  background:rgba(255,255,255,.04);
+  border-color:rgba(255,255,255,.09);
+}
+.ig-item:hover,
+.ig-item.tapped {
+  background:#fff;
+  border-color:rgba(225,48,108,.35);
+  color:#e1306c;
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(13,31,60,.06);
+}
+[data-theme="dark"] .ig-item:hover,
+[data-theme="dark"] .ig-item.tapped {
+  background:rgba(23,29,41,.9);
+  box-shadow:0 8px 22px rgba(0,0,0,.3);
+}
+.ig-item:hover .ig-icon,
+.ig-item.tapped .ig-icon {
+  transform:scale(1.08) rotate(-6deg);
+}
+
+/* ---------- Sede: columnas con menos relieve ---------- */
+.superate-col {
+  box-shadow:none;
+}
+.superate-col:hover {
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(13,31,60,.06);
+}
+[data-theme="dark"] .superate-col:hover {
+  box-shadow:0 10px 26px rgba(0,0,0,.35);
+}
+.superate-col:hover .superate-col-icon {
+  transform:scale(1.08) rotate(-6deg);
+}
+
+/* ---------- Correo principal: énfasis limpio ---------- */
+.email-main {
+  border:1px solid rgba(46,110,220,.25);
+  background:rgba(46,110,220,.04);
+  box-shadow:none;
+}
+[data-theme="dark"] .email-main {
+  background:rgba(88,166,255,.06);
+  border-color:rgba(88,166,255,.25);
+}
+.email-main:hover {
+  transform:none;
+  box-shadow:0 10px 26px rgba(46,110,220,.08);
+}
+.email-main-icon {
+  background:linear-gradient(135deg,#1d4ea3 0%,#2e6edc 100%);
+}
+.email-main:hover .email-main-icon {
+  transform:scale(1.08) rotate(-6deg);
+}
+
+/* ---------- Equipo: hover unificado en un solo color ---------- */
+.email-team-item {
+  background:rgba(13,31,60,.03);
+  border:1px solid rgba(13,31,60,.06);
+  box-shadow:none;
+  padding:14px 18px;
+}
+[data-theme="dark"] .email-team-item {
+  background:rgba(255,255,255,.04);
+  border-color:rgba(255,255,255,.09);
+}
+.email-team-item:hover,
+.email-team-item.tapped {
+  transform:translateY(-2px);
+  border-color:var(--blue);
+  box-shadow:0 8px 20px rgba(46,110,220,.10);
+}
+[data-theme="dark"] .email-team-item:hover,
+[data-theme="dark"] .email-team-item.tapped {
+  border-color:#58a6ff;
+  box-shadow:0 8px 22px rgba(0,0,0,.3);
+}
+.email-team-item.member-gold:hover,
+.email-team-item.member-gold.tapped,
+.email-team-item.member-green:hover,
+.email-team-item.member-green.tapped,
+.email-team-item.member-rosado:hover,
+.email-team-item.member-rosado.tapped,
+.email-team-item.member-celeste:hover,
+.email-team-item.member-celeste.tapped {
+  border-color:var(--blue);
+  box-shadow:0 8px 20px rgba(46,110,220,.10);
+}
+[data-theme="dark"] .email-team-item.member-gold:hover,
+[data-theme="dark"] .email-team-item.member-gold.tapped,
+[data-theme="dark"] .email-team-item.member-green:hover,
+[data-theme="dark"] .email-team-item.member-green.tapped,
+[data-theme="dark"] .email-team-item.member-rosado:hover,
+[data-theme="dark"] .email-team-item.member-rosado.tapped,
+[data-theme="dark"] .email-team-item.member-celeste:hover,
+[data-theme="dark"] .email-team-item.member-celeste.tapped {
+  border-color:#58a6ff;
+  box-shadow:0 8px 22px rgba(0,0,0,.3);
+}
+.email-team-item.member-gold:hover .email-team-name,
+.email-team-item.member-gold.tapped .email-team-name,
+.email-team-item.member-green:hover .email-team-name,
+.email-team-item.member-green.tapped .email-team-name,
+.email-team-item.member-rosado:hover .email-team-name,
+.email-team-item.member-rosado.tapped .email-team-name,
+.email-team-item.member-celeste:hover .email-team-name,
+.email-team-item.member-celeste.tapped .email-team-name {
+  color:var(--blue);
+}
+[data-theme="dark"] .email-team-item.member-gold:hover .email-team-name,
+[data-theme="dark"] .email-team-item.member-gold.tapped .email-team-name,
+[data-theme="dark"] .email-team-item.member-green:hover .email-team-name,
+[data-theme="dark"] .email-team-item.member-green.tapped .email-team-name,
+[data-theme="dark"] .email-team-item.member-rosado:hover .email-team-name,
+[data-theme="dark"] .email-team-item.member-rosado.tapped .email-team-name,
+[data-theme="dark"] .email-team-item.member-celeste:hover .email-team-name,
+[data-theme="dark"] .email-team-item.member-celeste.tapped .email-team-name {
+  color:#58a6ff;
+}
+
+/* ---------- Formulario: campos con más aire ---------- */
+.contact-form-intro {
+  margin:0 0 28px;
+}
+.contact-form {
+  gap:18px;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  padding:14px 16px;
+}
+
+/* ---------- Botón volver: coherente con el sistema ---------- */
+.back-btn {
+  background:linear-gradient(135deg,#1d4ea3 0%,#2e6edc 100%);
+  box-shadow:0 6px 18px rgba(29,78,163,.25);
+}
+.back-btn::after {
+  display:none;
+}
+.back-btn:hover {
+  background:linear-gradient(135deg,#2457b3 0%,#3b79e6 100%);
+  box-shadow:0 10px 26px rgba(29,78,163,.32);
+}
+
+/* ---------- Organización en dos columnas (escritorio) ---------- */
+/* Empareja las secciones por propósito:
+   fila "Conócenos"  → redes sociales + sede
+   fila "Contáctanos" → correo + formulario
+   Reduces la pila de tarjetas anchas y mejora la jerarquía. */
+@media (min-width:901px) {
+  .contact-main {
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    column-gap:40px;
+    row-gap:44px;
+    align-items:start;
+  }
+  .contact-float {
+    grid-column:1 / -1;
+    justify-self:center;
+    width:min(620px,100%);
+    margin:0;
+  }
+  .quick-links {
+    grid-column:1 / -1;
+    width:100%;
+    max-width:none;
+  }
+  .wide-card {
+    width:100%;
+    max-width:none;
+    margin:0;
+  }
+  #sede .superate-details-grid {
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  #correos .email-team-grid {
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  }
+  .back-btn-wrap {
+    grid-column:1 / -1;
+    width:100%;
+    max-width:none;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px) {
+  .contact-main {
+    display:grid;
+    grid-template-columns:1fr;
+    row-gap:40px;
+  }
+  .contact-float,
+  .quick-links,
+  .wide-card,
+  .back-btn-wrap {
+    width:100%;
+    max-width:none;
+    margin:0;
+  }
+}
+@media (max-width:768px) {
+  .contact-card {
+    padding:28px 22px 32px;
+  }
+  .ig-item {
+    padding:14px 14px;
+  }
+  .email-main {
+    padding:18px 18px;
+  }
+}

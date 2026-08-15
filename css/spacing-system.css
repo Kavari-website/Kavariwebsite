@@ -1,0 +1,191 @@
+/* ================================================================
+   KAVARI · spacing-system.css
+   Sistema de espaciado de la plataforma.
+   Márgenes, padding y separación entre elementos: ritmo vertical
+   más aireado y consistente para reducir la sensación de saturación
+   y lograr una composición más limpia y profesional.
+   Solo espaciado: no cambia contenido, colores, imágenes ni
+   funcionalidad. Se carga al final del <head> para tener prioridad.
+   ================================================================ */
+
+:root {
+  --space-sec-x:clamp(24px,6vw,64px);
+  --space-sec-y:76px;
+  --space-grid-gap:30px;
+  --space-card-pad:26px 28px 30px;
+  --space-footer-y:48px;
+}
+
+/* ---------- Index: ritmo vertical de secciones ---------- */
+.page-index .featured-section {
+  padding-bottom:110px;
+}
+.page-index .places-section {
+  padding-bottom:120px;
+}
+.page-index .featured-section h2,
+.page-index .places-section h2 {
+  margin-bottom:28px;
+}
+.page-index .cards-container {
+  gap:30px;
+}
+.page-index .paquete-card {
+  margin-bottom:36px;
+}
+.page-index .paquete-info {
+  padding:42px 44px;
+}
+
+/* ---------- Países ---------- */
+.page-body {
+  padding:56px 0 96px;
+}
+.destinos-grid {
+  gap:30px;
+}
+.dest-info {
+  padding:22px 24px 26px;
+}
+
+/* ---------- Destino ---------- */
+.cards-section {
+  padding:76px var(--space-sec-x);
+}
+.cards-section>h4 {
+  margin-bottom:40px;
+}
+.cards-grid {
+  gap:30px;
+}
+.card-body {
+  padding:28px 28px 30px;
+}
+.sec-title {
+  padding:82px var(--space-sec-x) 54px;
+}
+.info-grid {
+  padding:72px var(--space-sec-x);
+}
+
+/* ---------- Ayuda ---------- */
+.help-main {
+  padding:80px 24px;
+}
+.help-categories {
+  margin-bottom:84px;
+}
+.help-cat-card {
+  padding:36px 26px;
+}
+.help-cta {
+  padding:60px 48px;
+}
+.help-cta .cta-btns {
+  gap:16px;
+}
+
+/* ---------- Contacto ---------- */
+.contact-main {
+  padding-bottom:96px;
+}
+.contact-float {
+  padding:52px 56px;
+}
+.contact-grid {
+  gap:30px;
+}
+.quick-links {
+  gap:24px;
+}
+.quick-link {
+  padding:20px 22px;
+}
+
+/* ---------- Sobre nosotros ---------- */
+.about-main {
+  padding-bottom:96px;
+}
+.about-intro {
+  padding:64px 68px;
+}
+.team-section {
+  margin-top:72px;
+}
+.team-grid {
+  gap:30px;
+}
+
+/* ---------- Planes ---------- */
+.pricing-section {
+  padding:80px 24px 96px;
+}
+.pricing-header {
+  margin-bottom:64px;
+}
+.pricing-grid {
+  gap:30px;
+}
+
+/* ---------- Cuenta / Perfil ---------- */
+.auth-main {
+  padding:64px 20px;
+}
+.auth-copy {
+  padding:52px 46px;
+}
+.perfil-container {
+  padding-bottom:56px;
+}
+.perfil-auth-card {
+  padding:44px 40px;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  padding:var(--space-footer-y) 24px;
+}
+.footer .footer-inner {
+  gap:16px;
+}
+.footer-links {
+  gap:24px;
+}
+
+/* ---------- Ajustes en pantallas pequeñas ---------- */
+@media (max-width:768px) {
+  .page-index .paquete-info {
+    padding:28px 26px 30px;
+  }
+  .about-intro {
+    padding:40px 28px;
+  }
+  .contact-float {
+    padding:36px 28px;
+  }
+  .auth-main {
+    padding:48px 16px;
+  }
+  .pricing-section {
+    padding:56px 20px 72px;
+  }
+  .pricing-header {
+    margin-bottom:44px;
+  }
+  .help-main {
+    padding:56px 20px;
+  }
+  .help-cta {
+    padding:44px 26px;
+  }
+  .sec-title {
+    padding:56px 22px 44px;
+  }
+  .cards-section,
+  .info-grid {
+    padding:56px 22px;
+  }
+  .page-body {
+    padding:40px 0 72px;
+  }
+}

@@ -1,0 +1,170 @@
+/* ================================================================
+   KAVARI · typography-system.css
+   Sistema tipográfico de la plataforma.
+   Establece una jerarquía clara entre títulos, subtítulos, texto,
+   botones y elementos secundarios usando solo dos familias
+   (Poppins para títulos y botones, Inter para texto de lectura).
+   Solo tipografía: no cambia colores, estructura ni funcionalidad.
+   Se carga al final del <head> para tener prioridad.
+   ================================================================ */
+
+:root {
+  /* Familias limitadas */
+  --font-display:'Poppins','Inter',system-ui,sans-serif;
+  --font-body:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --kbtn-font:var(--font-display);
+
+  /* Escala tipográfica (jerarquía) */
+  --type-hero:clamp(2.4rem,5.5vw + .9rem,4.25rem);
+  --type-h1:clamp(2rem,4.2vw + .6rem,3.25rem);
+  --type-h2:clamp(1.45rem,2.3vw + .6rem,2.2rem);
+  --type-h3:clamp(1.15rem,1.1vw + .85rem,1.45rem);
+  --type-h4:clamp(1rem,.6vw + .85rem,1.2rem);
+  --type-h5:1rem;
+  --type-h6:.875rem;
+  --type-body:1rem;
+  --type-small:.875rem;
+  --type-label:.8125rem;
+
+  /* Interlineados */
+  --leading-tight:1.15;
+  --leading-snug:1.32;
+  --leading-normal:1.65;
+
+  /* Espaciado de letras */
+  --tracking-tight:-.025em;
+  --tracking-snug:-.012em;
+  --tracking-normal:.01em;
+  --tracking-wide:.02em;
+  --tracking-wider:.07em;
+}
+
+html {
+  -webkit-text-size-adjust:100%;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ---------- Texto base (cuerpo de lectura) ---------- */
+body {
+  font-family:var(--font-body);
+  font-size:var(--type-body);
+  line-height:var(--leading-normal);
+  font-weight:400;
+  letter-spacing:var(--tracking-normal);
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ---------- Títulos (jerarquía) ---------- */
+h1,h2,h3,h4,h5,h6 {
+  font-family:var(--font-display)!important;
+  font-weight:600;
+  line-height:var(--leading-snug);
+  letter-spacing:var(--tracking-snug);
+  text-wrap:balance;
+}
+h1 {
+  font-size:var(--type-h1);
+  font-weight:700;
+  line-height:var(--leading-tight);
+  letter-spacing:var(--tracking-tight);
+}
+h2 {
+  font-size:var(--type-h2);
+  font-weight:700;
+  line-height:1.2;
+}
+h3 {
+  font-size:var(--type-h3);
+  font-weight:600;
+}
+h4 {
+  font-size:var(--type-h4);
+  font-weight:600;
+  letter-spacing:var(--tracking-wide);
+}
+h5 {
+  font-size:var(--type-h5);
+  font-weight:600;
+}
+h6 {
+  font-size:var(--type-h6);
+  font-weight:600;
+  letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;
+}
+
+/* ---------- Texto de párrafo ---------- */
+p,li,td,th,figcaption,blockquote,dd,dt {
+  letter-spacing:var(--tracking-normal);
+}
+p {
+  line-height:var(--leading-normal);
+}
+strong,b {
+  font-weight:600;
+}
+small,.small,.footnote {
+  font-size:var(--type-small);
+  line-height:1.5;
+}
+
+/* ---------- Botones ---------- */
+button,[class*="btn-"],.btn,.btn-gold,.pricing-cta,.auth-submit,
+.perfil-google-btn,.perfil-logout-btn,.perfil-danger-btn,.perfil-fav-sortbtn,
+.perfil-fav-explore-btn,.dest-btn,.mobile-drawer-close,.modal-close,
+.top10-modal-close,.paquete-modal-close,.about-hero-cta,.nav-btn-tutorial {
+  font-family:var(--font-display)!important;
+  font-weight:600;
+  letter-spacing:var(--tracking-wide);
+  line-height:1;
+}
+
+/* ---------- Subtítulos y texto destacado ---------- */
+.lead,.section-subtitle,.hero-subtitle,.page-subtitle,.about-subtitle,
+.card-subtitle,[class$="-subtitle"],[class$="-subTitulo"] {
+  font-family:var(--font-body);
+  font-weight:400;
+  line-height:var(--leading-normal);
+  letter-spacing:var(--tracking-normal);
+}
+
+/* ---------- Elementos secundarios (etiquetas y meta) ---------- */
+.eyebrow,.kicker,.section-label,.pricing-kicker,.hero-eyebrow,
+.card-tag,.card-category,.meta {
+  font-family:var(--font-body);
+  font-size:var(--type-label);
+  font-weight:500;
+  line-height:1.4;
+  letter-spacing:var(--tracking-wider);
+  text-transform:uppercase;
+}
+
+/* ---------- Formularios ---------- */
+label {
+  font-family:var(--font-body);
+  font-weight:500;
+  letter-spacing:var(--tracking-wide);
+}
+input,select,textarea {
+  font-family:var(--font-body);
+  font-size:var(--type-body);
+}
+::placeholder {
+  font-weight:400;
+  letter-spacing:var(--tracking-normal);
+}
+
+/* ---------- Ajustes en pantallas pequeñas ---------- */
+@media (max-width:768px) {
+  :root {
+    --type-hero:clamp(2rem,8vw + .4rem,2.9rem);
+    --type-h1:clamp(1.7rem,6vw + .4rem,2.4rem);
+    --type-h2:clamp(1.3rem,4vw + .4rem,1.8rem);
+    --type-h3:clamp(1.1rem,2vw + .6rem,1.3rem);
+    --type-body:.95rem;
+  }
+}

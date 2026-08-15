@@ -1,0 +1,264 @@
+/* ================================================================
+   KAVARI · audit-consistency.css
+   Correcciones de consistencia visual detectadas en auditoría:
+   alinea colores, foco, campos de formulario, tarjetas, iconos y
+   etiquetas con la paleta y los sistemas del sitio (navy/blue/gold).
+   Se carga al final del <head> de todas las páginas.
+   No cambia textos, enlaces, imágenes ni funcionalidad.
+   ================================================================ */
+
+/* ---------- 1. Paleta de marca: elimina acentos fuera del sistema ----------
+   Teal (#00c2a8), verde (#3fb950), naranja (#e68000) e índigo de planes
+   se alinean a la familia navy/blue del sitio. */
+:root {
+  --accent2:#5b93f5;
+  --ayuda-accent:#0050a0;
+  --ayuda-accent2:#2e6edc;
+  --kv-amber:#f0b429;
+  --tut-accent:#2e6edc;
+  --tut-accent-hover:#2457b3;
+  --tut-dot-active:#2e6edc;
+  --tut-dot-done:#2e6edc;
+  --tut-btn-next:#2e6edc;
+  --tut-btn-next-hover:#2457b3;
+  --tut-highlight-border:#2e6edc;
+  --tut-highlight-shadow:rgba(46,110,220,.35);
+}
+[data-theme="dark"] {
+  --accent2:#58a6ff;
+  --ayuda-accent:#58a6ff;
+  --ayuda-accent2:#58a6ff;
+}
+
+/* ---------- 2. Subrayados decorativos de títulos (teal → azul de marca) ---------- */
+.page-index .search-content h2::after,
+.page-index .featured-section h2::before {
+  background:linear-gradient(90deg,#2e6edc,#5b93f5);
+}
+
+/* ---------- 3. Botones fuera del sistema de marca ---------- */
+.nav-btn-soy-guia {
+  background:linear-gradient(135deg,#1d4ea3 0%,#2e6edc 100%);
+  color:#fff;
+  border:none;
+  box-shadow:0 4px 14px rgba(29,78,163,.22);
+}
+.nav-btn-soy-guia:hover {
+  background:linear-gradient(135deg,#2457b3 0%,#3b79e6 100%);
+  color:#fff;
+  box-shadow:0 10px 26px rgba(29,78,163,.3);
+}
+.nav-glass .nav-links.open a.nav-register {
+  background:linear-gradient(135deg,#1d4ea3,#2e6edc);
+  border-color:rgba(122,172,255,.5);
+  box-shadow:0 8px 22px rgba(46,110,220,.35);
+}
+.pricing-card.op-plan .pricing-cta {
+  background:linear-gradient(135deg,#1d4ea3,#2e6edc);
+  border-color:rgba(255,255,255,.4);
+}
+.pricing-card.op-plan .pricing-cta:hover {
+  background:linear-gradient(135deg,#2457b3,#3b79e6);
+  transform:translateY(-2px);
+}
+[data-theme="dark"] .pricing-card.op-plan .pricing-cta {
+  background:linear-gradient(135deg,#1d4ea3,#3b79e6);
+  border-color:rgba(255,255,255,.5);
+}
+:root .pricing-badge {
+  background:linear-gradient(135deg,#f0b429,#e6a800);
+  color:#3d2e0b;
+  box-shadow:0 4px 12px rgba(240,180,41,.35);
+}
+
+/* ---------- 4. Foco visible unificado en azul de marca ---------- */
+:focus-visible {
+  outline-color:rgba(91,147,245,.65);
+}
+[data-theme="dark"] :focus-visible {
+  outline-color:rgba(88,166,255,.7);
+}
+#searchInput:focus-visible {
+  outline:2px solid rgba(91,147,245,.65);
+  box-shadow:0 0 0 4px rgba(46,110,220,.12);
+}
+
+/* ---------- 5. Campos de formulario unificados ----------
+   Mismo borde, radio, fondo y foco azul para todos los campos
+   (perfil, cuenta, modal, formulario de contacto y de viajeros). */
+.auth-field input,
+.perfil-container input[type="text"],
+.perfil-container input[type="email"],
+.perfil-container input[type="password"],
+.perfil-container input[type="tel"],
+.perfil-container input[type="date"],
+.perfil-container input:not([type]),
+.perfil-container select,
+.perfil-container textarea,
+.modal-content input[type="text"],
+.modal-content textarea,
+.modal-content select,
+.traveler-form input,
+.traveler-form select,
+.traveler-form textarea,
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  border:1.5px solid #cbd5e1;
+  border-radius:12px;
+  padding:12px 16px;
+  background:#f8fafc;
+  box-shadow:none;
+}
+[data-theme="dark"] .auth-field input,
+[data-theme="dark"] .perfil-container input[type="text"],
+[data-theme="dark"] .perfil-container input[type="email"],
+[data-theme="dark"] .perfil-container input[type="password"],
+[data-theme="dark"] .perfil-container input[type="tel"],
+[data-theme="dark"] .perfil-container input[type="date"],
+[data-theme="dark"] .perfil-container input:not([type]),
+[data-theme="dark"] .perfil-container select,
+[data-theme="dark"] .perfil-container textarea,
+[data-theme="dark"] .modal-content input[type="text"],
+[data-theme="dark"] .modal-content textarea,
+[data-theme="dark"] .modal-content select,
+[data-theme="dark"] .traveler-form input,
+[data-theme="dark"] .traveler-form select,
+[data-theme="dark"] .traveler-form textarea,
+[data-theme="dark"] .contact-form input,
+[data-theme="dark"] .contact-form select,
+[data-theme="dark"] .contact-form textarea {
+  background:#161b22;
+  border-color:#30363d;
+  color:#e6edf3;
+}
+.auth-field input:focus,
+.perfil-container input:focus,
+.perfil-container select:focus,
+.perfil-container textarea:focus,
+.modal-content input[type="text"]:focus,
+.modal-content textarea:focus,
+.modal-content select:focus,
+.traveler-form input:focus,
+.traveler-form select:focus,
+.traveler-form textarea:focus,
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color:#2e6edc;
+  outline:none;
+  box-shadow:0 0 0 4px rgba(46,110,220,.15);
+  transform:none;
+}
+[data-theme="dark"] .auth-field input:focus,
+[data-theme="dark"] .perfil-container input:focus,
+[data-theme="dark"] .perfil-container select:focus,
+[data-theme="dark"] .perfil-container textarea:focus,
+[data-theme="dark"] .modal-content input[type="text"]:focus,
+[data-theme="dark"] .modal-content textarea:focus,
+[data-theme="dark"] .modal-content select:focus,
+[data-theme="dark"] .traveler-form input:focus,
+[data-theme="dark"] .traveler-form select:focus,
+[data-theme="dark"] .traveler-form textarea:focus,
+[data-theme="dark"] .contact-form input:focus,
+[data-theme="dark"] .contact-form select:focus,
+[data-theme="dark"] .contact-form textarea:focus {
+  border-color:#58a6ff;
+  box-shadow:0 0 0 4px rgba(88,166,255,.18);
+}
+
+/* ---------- 6. Radios de tarjetas unificados ----------
+   24px para tarjetas principales; 16px para tarjetas utilitarias pequeñas. */
+.page-index .card,
+.page-index .paquete-card,
+.dest-card,
+.card,
+.info-card,
+.guide-card,
+.hospedaje-card,
+.souvenir-card-v2,
+.souvenir-card,
+.airline-card,
+.season-card,
+.fact-item,
+.modal-content,
+.modal-content-souvenirs,
+.chatbot-container,
+.mv-card,
+.pricing-card,
+.contact-card,
+.perfil-auth-card {
+  border-radius:24px;
+}
+.help-cat-card {
+  border-radius:16px;
+}
+
+/* ---------- 7. Etiquetas eyebrow/kicker unificadas ---------- */
+.hero-eyebrow {
+  font-size:11px;
+  letter-spacing:.22em;
+  border-radius:999px;
+}
+.paquete-region {
+  font-size:11px;
+}
+
+/* ---------- 8. Iconos de dato unificados (52px, svg 26px) ---------- */
+.info-icon,
+.fact-icon,
+.mv-icon {
+  width:52px;
+  min-width:52px;
+  height:52px;
+}
+.info-icon svg,
+.fact-icon svg,
+.mv-icon svg {
+  width:26px;
+  height:26px;
+}
+
+/* ---------- 9. Navegación: azules coherentes ---------- */
+.nav-links a:hover {
+  color:#58a6ff;
+}
+.nav-links a::after {
+  background-color:#58a6ff;
+}
+.navbar.scrolled .logo {
+  color:#2e6edc;
+}
+.navbar.scrolled .nav-links a:hover {
+  color:#2e6edc;
+}
+
+/* ---------- 10. CTA "Regístrate como guía" (.btn-gold) ----------
+   No tenía fondo ni tamaño definidos (botón invisible). Se le da el
+   aspecto de botón pill dorado, acento secundario de la marca. */
+.btn-gold {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:14px 30px;
+  border-radius:999px;
+  font-family:var(--kbtn-font,'Poppins',system-ui,sans-serif);
+  font-size:15px;
+  font-weight:600;
+  line-height:1;
+  white-space:nowrap;
+  text-align:center;
+  text-decoration:none;
+  cursor:pointer;
+  background:linear-gradient(135deg,#f0b429 0%,#e6a800 100%);
+  color:#0d1f3c;
+  border:none;
+  box-shadow:0 4px 14px rgba(240,180,41,.4);
+}
+.btn-gold:hover {
+  background:linear-gradient(135deg,#e6a800 0%,#d99a00 100%);
+  color:#0d1f3c;
+  transform:translateY(-2px);
+  box-shadow:0 10px 26px rgba(240,180,41,.45);
+}
