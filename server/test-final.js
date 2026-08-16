@@ -1,7 +1,9 @@
 const { spawn } = require('child_process');
 const http = require('http');
 
-const child = spawn('node', ['index.js'], { cwd: __dirname, env: { ...process.env, GEMINI_API_KEY: 'AQ.Ab8RN6JQeUAlh3pa-xIH-0VHIR12zO_XaV2h8Kbj7uzcby7esA', GEMINI_MODEL: 'gemini-1.5-flash' }, stdio: ['pipe', 'pipe', 'pipe'] });
+const apiKey = process.env.GCP_API_KEY;
+
+const child = spawn('node', ['index.js'], { cwd: __dirname, env: { ...process.env, GEMINI_API_KEY: apiKey, GEMINI_MODEL: 'gemini-1.5-flash' }, stdio: ['pipe', 'pipe', 'pipe'] });
 
 let ready = false;
 child.stdout.on('data', data => {

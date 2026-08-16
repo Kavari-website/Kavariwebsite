@@ -1,4 +1,5 @@
 # Seguridad: la clave de Gemini NUNCA debe subirse a git
+.env
 server/.env
 
 # Node
