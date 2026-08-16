@@ -14,14 +14,6 @@
   --ayuda-accent:#0050a0;
   --ayuda-accent2:#2e6edc;
   --kv-amber:#f0b429;
-  --tut-accent:#2e6edc;
-  --tut-accent-hover:#2457b3;
-  --tut-dot-active:#2e6edc;
-  --tut-dot-done:#2e6edc;
-  --tut-btn-next:#2e6edc;
-  --tut-btn-next-hover:#2457b3;
-  --tut-highlight-border:#2e6edc;
-  --tut-highlight-shadow:rgba(46,110,220,.35);
 }
 [data-theme="dark"] {
   --accent2:#58a6ff;

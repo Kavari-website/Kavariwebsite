@@ -82,33 +82,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
     height:70px;
   }
 }
-.tut-backdrop {
-  background:rgba(5,15,35,.46)!important;
-  backdrop-filter:blur(7px) saturate(125%);
-  -webkit-backdrop-filter:blur(7px) saturate(125%);
-}
-.tut-tooltip {
-  background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(224,241,255,.72))!important;
-  border:1px solid rgba(255,255,255,.78)!important;
-  border-radius:26px!important;
-  box-shadow:0 24px 70px rgba(5,18,43,.30),inset 0 1px 0 rgba(255,255,255,.8)!important;
-  backdrop-filter:blur(26px) saturate(165%);
-  -webkit-backdrop-filter:blur(26px) saturate(165%);
-}
-[data-theme="dark"] .tut-tooltip {
-  background:linear-gradient(145deg,rgba(20,35,58,.91),rgba(12,22,38,.82))!important;
-  border-color:rgba(148,163,184,.25)!important;
-}
-.tut-btn-prev,.tut-btn-next,.tut-btn-skip {
-  min-height:40px;
-  border-radius:12px!important;
-}
-.tut-btn-prev,.tut-btn-next {
-  padding:9px 16px!important;
-}
-.tut-highlight {
-  border-radius:16px!important;
-}
 .kavari-mascot-inner img {
   border:2px solid rgba(255,255,255,.7);
 }

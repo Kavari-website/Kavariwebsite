@@ -1,104 +1,107 @@
+/* ============================================================
+   KAVARI TUTORIAL PREMIUM v3
+   - Fondo con "ventana": el elemento resaltado se ve nítido.
+   - Tooltip al lado del objetivo con flecha (no lo tapa).
+   - Texto de alto contraste y animaciones fluidas con resorte.
+   ============================================================ */
+
 :root {
-  --tut-backdrop:rgba(15,23,42,.42);
-  --tut-tooltip-bg:rgba(255,255,255,.72);
-  --tut-tooltip-border:rgba(255,255,255,.72);
-}
-[data-theme="dark"] {
-  --tut-tooltip-bg:rgba(22,27,34,.78);
-}
-:root {
-  --tut-backdrop:rgba(0,0,0,.35);
-  --tut-tooltip-bg:#FFFFFF;
-  --tut-tooltip-text:#1e293b;
-  --tut-tooltip-border:#e2e8f0;
-  --tut-shadow:0 20px 60px rgba(0,0,0,.25);
-  --tut-accent:#00c2a8;
-  --tut-accent-hover:#00a890;
-  --tut-dot-inactive:#cbd5e1;
-  --tut-dot-active:#00c2a8;
-  --tut-dot-done:#00c2a8;
-  --tut-btn-skip:#94a3b8;
-  --tut-btn-skip-hover:#64748b;
-  --tut-btn-prev:#94a3b8;
-  --tut-btn-prev-hover:#64748b;
-  --tut-btn-next:#00c2a8;
-  --tut-btn-next-hover:#00a890;
+  --tut-mask:rgba(7,13,30,.62);
+  --tut-tooltip-bg:#ffffff;
+  --tut-tooltip-text:#0f172a;
+  --tut-tooltip-border:#dbe4f0;
+  --tut-desc:#3b4a63;
+  --tut-shadow:0 24px 60px rgba(5,18,43,.28);
+  --tut-accent:#03235e;
+  --tut-accent-2:#0a3d7a;
+  --tut-accent-hover:#0a3d7a;
+  --tut-glow:rgba(79,195,247,.55);
+  --tut-highlight-border:#4fc3f7;
+  --tut-highlight-shadow:rgba(79,195,247,.4);
+  --tut-progress-track:rgba(148,163,184,.25);
+  --tut-btn-skip:#64748b;
+  --tut-btn-skip-hover:#334155;
+  --tut-btn-prev:#475569;
+  --tut-btn-prev-hover:#1e293b;
+  --tut-btn-next:#03235e;
+  --tut-btn-next-hover:#0a3d7a;
   --tut-btn-next-text:#fff;
-  --tut-highlight-border:#00c2a8;
-  --tut-highlight-shadow:rgba(0,194,168,.35);
+  --tut-btn-skip-bg:rgba(15,23,42,.05);
+  --tut-btn-prev-bg:rgba(15,23,42,.04);
+  --tut-tag-shadow:rgba(3,35,94,.4);
 }
-:root {
-  --tut-backdrop:rgba(15,23,42,.42);
-  --tut-tooltip-bg:rgba(255,255,255,.72);
-  --tut-tooltip-border:rgba(255,255,255,.72);
-}
+
 [data-theme="dark"] {
-  --tut-tooltip-bg:rgba(22,27,34,.78);
-}
-.tut-backdrop {
-  backdrop-filter:blur(5px) saturate(120%);
-  -webkit-backdrop-filter:blur(5px) saturate(120%);
-}
-.tut-tooltip {
-  backdrop-filter:blur(24px) saturate(150%);
-  -webkit-backdrop-filter:blur(24px) saturate(150%);
-}
-[data-theme="dark"] {
-  --tut-backdrop:rgba(0,0,0,.5);
+  --tut-mask:rgba(3,6,14,.68);
   --tut-tooltip-bg:#161b22;
-  --tut-tooltip-text:#e6edf3;
+  --tut-tooltip-text:#f1f5f9;
   --tut-tooltip-border:#30363d;
-  --tut-shadow:0 20px 60px rgba(0,0,0,.7);
+  --tut-desc:#c9d4e3;
+  --tut-shadow:0 24px 60px rgba(0,0,0,.7);
   --tut-accent:#58a6ff;
+  --tut-accent-2:#79b8ff;
   --tut-accent-hover:#3b8fd9;
-  --tut-dot-inactive:#30363d;
-  --tut-dot-active:#58a6ff;
-  --tut-dot-done:#58a6ff;
-  --tut-btn-skip:#8b949e;
-  --tut-btn-skip-hover:#b1b9c3;
-  --tut-btn-prev:#8b949e;
-  --tut-btn-prev-hover:#b1b9c3;
-  --tut-btn-next:#58a6ff;
-  --tut-btn-next-hover:#3b8fd9;
-  --tut-btn-next-text:#0d1117;
+  --tut-glow:rgba(88,166,255,.5);
   --tut-highlight-border:#58a6ff;
-  --tut-highlight-shadow:rgba(88,166,255,.35);
+  --tut-highlight-shadow:rgba(88,166,255,.45);
+  --tut-progress-track:rgba(148,163,184,.2);
+  --tut-btn-skip:#94a3b8;
+  --tut-btn-skip-hover:#cbd5e1;
+  --tut-btn-prev:#8b949e;
+  --tut-btn-prev-hover:#c9d4e3;
+  --tut-btn-next:#58a6ff;
+  --tut-btn-next-hover:#79b8ff;
+  --tut-btn-next-text:#0d1117;
+  --tut-btn-skip-bg:rgba(255,255,255,.06);
+  --tut-btn-prev-bg:rgba(255,255,255,.05);
+  --tut-tag-shadow:rgba(0,0,0,.5);
 }
+
+/* Fondo: solo oscurece la página (el resaltado abre la "ventana").
+   SIN blur para que el contenido resaltado se vea nítido. */
 .tut-backdrop {
   position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background:var(--tut-backdrop);
+  top:0; left:0; right:0; bottom:0;
+  background:transparent;
   z-index:9999;
   pointer-events:auto;
-  transition:opacity .4s ease;
 }
+
+/* Ventana de resaltado: caja que recorta la máscara oscura */
 .tut-highlight {
   position:fixed;
   z-index:10001;
-  pointer-events:none;
-  border-radius:12px;
-  box-shadow:0 0 0 9999px var(--tut-backdrop),0 0 0 3px var(--tut-highlight-border),0 0 30px var(--tut-highlight-shadow);
-  transition:all .4s cubic-bezier(.4,0,.2,1);
+  pointer-events:auto;
+  border-radius:16px;
   display:none;
+  transition:top .5s cubic-bezier(.22,1,.36,1),
+             left .5s cubic-bezier(.22,1,.36,1),
+             width .5s cubic-bezier(.22,1,.36,1),
+             height .5s cubic-bezier(.22,1,.36,1);
+  animation:tutPulse 2.4s ease-in-out infinite;
 }
+@keyframes tutPulse {
+  0%,100% { box-shadow:0 0 0 9999px var(--tut-mask),0 0 0 3px var(--tut-highlight-border),0 0 26px var(--tut-highlight-shadow); }
+  50%     { box-shadow:0 0 0 9999px var(--tut-mask),0 0 0 5px var(--tut-highlight-border),0 0 42px var(--tut-highlight-shadow); }
+}
+
+/* Tooltip */
 .tut-tooltip {
   position:fixed;
   z-index:10002;
   background:var(--tut-tooltip-bg);
   color:var(--tut-tooltip-text);
   border:1px solid var(--tut-tooltip-border);
-  border-radius:24px;
-  padding:28px 30px 24px;
-  max-width:440px;
-  width:min(440px,90vw);
+  border-radius:22px;
+  padding:24px 26px 20px;
+  max-width:460px;
   box-shadow:var(--tut-shadow);
-  transition:opacity .3s ease,transform .3s ease;
   font-family:'Poppins',sans-serif;
   box-sizing:border-box;
+  max-width:min(460px,92vw);
 }
+
+/* Flecha que apunta al objetivo */
 .tut-tooltip-arrow {
   position:absolute;
   width:16px;
@@ -108,90 +111,101 @@
   border-top:1px solid var(--tut-tooltip-border);
   transform:rotate(45deg);
   display:none;
+  pointer-events:none;
 }
-.tut-tooltip-arrow.arrow-top {
-  bottom:-9px;
-  left:50%;
-  transform:translateX(-50%) rotate(45deg);
-  border-top:none;
-  border-left:none;
-  border-right:1px solid var(--tut-tooltip-border);
-  border-bottom:1px solid var(--tut-tooltip-border);
+.tut-tooltip-arrow.arrow-top { bottom:-9px; left:50%; border-top:none; border-left:none; border-right:1px solid var(--tut-tooltip-border); border-bottom:1px solid var(--tut-tooltip-border); }
+.tut-tooltip-arrow.arrow-bottom { top:-9px; left:50%; border-bottom:none; border-right:none; border-left:1px solid var(--tut-tooltip-border); border-top:1px solid var(--tut-tooltip-border); }
+.tut-tooltip-arrow.arrow-left { right:-9px; top:50%; border-left:none; border-top:none; border-right:1px solid var(--tut-tooltip-border); border-bottom:1px solid var(--tut-tooltip-border); }
+.tut-tooltip-arrow.arrow-right { left:-9px; top:50%; border-right:none; border-bottom:none; border-left:1px solid var(--tut-tooltip-border); border-top:1px solid var(--tut-tooltip-border); }
+
+/* Contenido interno (recibe la animación de entrada/salida) */
+.tut-tooltip-inner.tut-enter {
+  animation:tutPopIn .5s cubic-bezier(.34,1.56,.64,1) both;
 }
-.tut-tooltip-arrow.arrow-bottom {
-  top:-9px;
-  left:50%;
-  transform:translateX(-50%) rotate(45deg);
-  border-bottom:none;
-  border-right:none;
-  border-left:1px solid var(--tut-tooltip-border);
-  border-top:1px solid var(--tut-tooltip-border);
+.tut-tooltip-inner.tut-exit {
+  animation:tutPopOut .18s ease both;
 }
-.tut-tooltip-arrow.arrow-left {
-  right:-9px;
-  top:50%;
-  transform:translateY(-50%) rotate(45deg);
-  border-left:none;
-  border-top:none;
-  border-right:1px solid var(--tut-tooltip-border);
-  border-bottom:1px solid var(--tut-tooltip-border);
+@keyframes tutPopIn {
+  0%   { opacity:0; transform:translateY(16px) scale(.92); }
+  60%  { opacity:1; transform:translateY(-3px) scale(1.02); }
+  100% { opacity:1; transform:translateY(0) scale(1); }
 }
-.tut-tooltip-arrow.arrow-right {
-  left:-9px;
-  top:50%;
-  transform:translateY(-50%) rotate(45deg);
-  border-right:none;
-  border-bottom:none;
-  border-left:1px solid var(--tut-tooltip-border);
-  border-top:1px solid var(--tut-tooltip-border);
+@keyframes tutPopOut {
+  0%   { opacity:1; transform:translateY(0) scale(1); }
+  100% { opacity:0; transform:translateY(-10px) scale(.95); }
 }
-.tut-progress {
+
+/* Barra de progreso superior */
+.tut-progress-bar {
+  position:absolute;
+  top:10px;
+  left:16px;
+  right:16px;
+  height:4px;
+  border-radius:99px;
+  background:var(--tut-progress-track);
+  overflow:hidden;
+}
+.tut-progress-fill {
+  height:100%;
+  width:0%;
+  border-radius:99px;
+  background:linear-gradient(90deg,var(--tut-accent),var(--tut-accent-2));
+  transition:width .55s cubic-bezier(.22,1,.36,1);
+}
+
+/* Cabecera con mascota + título */
+.tut-head {
   display:flex;
-  gap:8px;
-  margin-bottom:18px;
-  justify-content:center;
+  align-items:center;
+  gap:16px;
+  margin-bottom:12px;
 }
-.tut-dot {
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:var(--tut-dot-inactive);
-  transition:all .3s ease;
+.tut-mascot {
   flex-shrink:0;
 }
-.tut-dot.active {
-  background:var(--tut-dot-active);
-  transform:scale(1.3);
-  box-shadow:0 0 12px var(--tut-dot-active);
+.tut-mascot img {
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  border:2px solid var(--tut-highlight-border);
+  box-shadow:0 8px 22px var(--tut-tag-shadow);
+  animation:tutMascotFloat 3.2s ease-in-out infinite;
 }
-.tut-dot.done {
-  background:var(--tut-dot-done);
-  opacity:.6;
+@keyframes tutMascotFloat {
+  0%,100% { transform:translateY(0) rotate(0deg); }
+  50%     { transform:translateY(-5px) rotate(2deg); }
+}
+.tut-head-text {
+  flex:1;
+  min-width:0;
 }
 .tut-step-num {
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:.08em;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.1em;
   text-transform:uppercase;
-  color:var(--tut-btn-skip);
-  text-align:center;
-  margin-bottom:6px;
+  color:var(--tut-accent);
+  text-align:left;
+  margin-bottom:3px;
 }
 .tut-title {
-  font-size:22px;
+  font-size:21px;
   font-weight:700;
-  margin:0 0 10px 0;
-  line-height:1.3;
+  margin:0;
+  line-height:1.28;
   color:var(--tut-tooltip-text);
-  text-align:center;
+  text-align:left;
 }
 .tut-desc {
   font-size:15px;
-  line-height:1.7;
-  color:var(--tut-btn-skip);
-  margin:0 0 22px 0;
-  text-align:center;
+  line-height:1.75;
+  color:var(--tut-desc);
+  margin:0 0 20px;
+  text-align:left;
 }
+
+/* Acciones */
 .tut-actions {
   display:flex;
   justify-content:space-between;
@@ -205,231 +219,55 @@
   border:none;
   color:var(--tut-btn-skip);
   font-size:13px;
-  font-weight:500;
+  font-weight:600;
   cursor:pointer;
   padding:6px 12px;
   border-radius:8px;
-  transition:all .2s;
+  transition:all .22s ease;
   font-family:'Poppins',sans-serif;
 }
 .tut-btn-skip:hover {
   color:var(--tut-btn-skip-hover);
-  background:rgba(0,0,0,.04);
-}
-[data-theme="dark"] .tut-btn-skip:hover {
-  background:rgba(255,255,255,.06);
+  background:var(--tut-btn-skip-bg);
 }
 .tut-nav-btns {
   display:flex;
-  gap:8px;
+  gap:10px;
 }
 .tut-btn-prev,.tut-btn-next {
   padding:10px 22px;
   border:none;
   border-radius:50px;
   font-size:14px;
-  font-weight:600;
+  font-weight:700;
   cursor:pointer;
-  transition:all .25s;
+  transition:all .25s cubic-bezier(.34,1.56,.64,1);
   font-family:'Poppins',sans-serif;
 }
 .tut-btn-prev {
-  background:transparent;
+  background:var(--tut-btn-prev-bg);
   color:var(--tut-btn-prev);
   border:1px solid var(--tut-tooltip-border);
 }
 .tut-btn-prev:hover {
   color:var(--tut-btn-prev-hover);
   border-color:var(--tut-btn-prev-hover);
-  background:rgba(0,0,0,.04);
-}
-[data-theme="dark"] .tut-btn-prev:hover {
-  background:rgba(255,255,255,.06);
+  transform:translateY(-2px);
 }
 .tut-btn-next {
-  background:var(--tut-btn-next);
+  background:linear-gradient(135deg,var(--tut-accent),var(--tut-accent-2));
   color:var(--tut-btn-next-text);
-  box-shadow:0 4px 14px rgba(0,194,168,.3);
-}
-[data-theme="dark"] .tut-btn-next {
-  box-shadow:0 4px 14px rgba(88,166,255,.3);
+  box-shadow:0 6px 18px var(--tut-glow);
 }
 .tut-btn-next:hover {
-  background:var(--tut-btn-next-hover);
+  filter:brightness(1.1);
   transform:translateY(-2px);
-  box-shadow:0 8px 24px rgba(0,194,168,.4);
+  box-shadow:0 10px 26px var(--tut-glow);
 }
-[data-theme="dark"] .tut-btn-next:hover {
-  box-shadow:0 8px 24px rgba(88,166,255,.4);
+.tut-btn-next:active,.tut-btn-prev:active {
+  transform:scale(.96);
 }
-@media (max-width:640px) {
-  .tut-tooltip {
-    padding:20px 18px 18px;
-    width:min(360px,94vw);
-    max-width:94vw;
-  }
-  .tut-title {
-    font-size:18px;
-  }
-  .tut-desc {
-    font-size:14px;
-  }
-  .tut-actions {
-    flex-direction:column;
-    align-items:stretch;
-    gap:8px;
-  }
-  .tut-btn-skip {
-    align-self:center;
-    padding:4px 10px;
-  }
-  .tut-nav-btns {
-    justify-content:center;
-  }
-  .tut-btn-prev,.tut-btn-next {
-    padding:8px 16px;
-    font-size:13px;
-  }
-  .tut-dot {
-    width:8px;
-    height:8px;
-  }
-}
-@media (max-width:400px) {
-  .tut-tooltip {
-    padding:16px 14px 14px;
-  }
-  .tut-title {
-    font-size:16px;
-  }
-  .tut-desc {
-    font-size:13px;
-  }
-}
-:root {
-  --tut-backdrop:rgba(15,23,42,.42);
-  --tut-tooltip-bg:rgba(255,255,255,.72);
-  --tut-tooltip-border:rgba(255,255,255,.72);
-}
-[data-theme="dark"] {
-  --tut-tooltip-bg:rgba(22,27,34,.78);
-}
-.tut-backdrop {
-  backdrop-filter:blur(5px) saturate(120%);
-  -webkit-backdrop-filter:blur(5px) saturate(120%);
-}
-.tut-tooltip {
-  backdrop-filter:blur(24px) saturate(150%);
-  -webkit-backdrop-filter:blur(24px) saturate(150%);
-}
-/* --------------------------------------------------------------
 
-   KAVARI TUTORIAL PREMIUM v2 — tooltip centrado en pantalla,
-
-   animaciones suaves con resorte, barra de progreso, mascota,
-
-   etiqueta flotante sobre el elemento resaltado y guiado
-
-   automático de la vista del usuario.
-
-   -------------------------------------------------------------- */
-.tut-tooltip {
-  transition:opacity .14s ease,transform .14s ease;
-}
-.tut-tooltip.tut-enter {
-  animation:tutPopIn .52s cubic-bezier(.34,1.56,.64,1) both;
-}
-.tut-tooltip.tut-exit {
-  animation:tutPopOut .14s ease both;
-}
-@keyframes tutPopIn {
-  0% {
-    opacity:0;
-    transform:translate(-50%,-42%) scale(.82);
-  }
-  60% {
-    opacity:1;
-    transform:translate(-50%,-51%) scale(1.03);
-  }
-  100% {
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1);
-  }
-}
-@keyframes tutPopOut {
-  0% {
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1);
-  }
-  100% {
-    opacity:0;
-    transform:translate(-50%,-56%) scale(.9);
-  }
-}
-/* Barra de progreso superior */
-.tut-progress-bar {
-  position:absolute;
-  top:0;
-  left:14px;
-  right:14px;
-  height:4px;
-  border-radius:99px;
-  background:rgba(148,163,184,.22);
-  overflow:hidden;
-}
-.tut-progress-fill {
-  height:100%;
-  width:0%;
-  border-radius:99px;
-  background:linear-gradient(90deg,var(--tut-accent),#3b82f6);
-  transition:width .55s cubic-bezier(.22,1,.36,1);
-}
-/* Cabecera con mascota + título */
-.tut-head {
-  display:flex;
-  align-items:center;
-  gap:16px;
-  margin-bottom:12px;
-}
-.tut-mascot {
-  flex-shrink:0;
-}
-.tut-mascot img {
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  border:2px solid rgba(255,255,255,.75);
-  box-shadow:0 8px 22px rgba(5,18,43,.28);
-  animation:tutMascotFloat 3.2s ease-in-out infinite;
-}
-@keyframes tutMascotFloat {
-  0%,100% {
-    transform:translateY(0) rotate(0deg);
-  }
-  50% {
-    transform:translateY(-5px) rotate(2deg);
-  }
-}
-.tut-head-text {
-  flex:1;
-  min-width:0;
-}
-.tut-step-num {
-  text-align:left;
-  margin-bottom:3px;
-  font-size:11px;
-}
-.tut-title {
-  text-align:left;
-  font-size:21px;
-  margin:0;
-  line-height:1.25;
-}
-.tut-desc {
-  text-align:left;
-  font-size:14.5px;
-  margin-bottom:20px;
-}
 /* Etiqueta flotante sobre el elemento resaltado */
 .tut-tag {
   position:fixed;
@@ -437,13 +275,13 @@
   display:none;
   padding:7px 14px;
   border-radius:99px;
-  background:linear-gradient(135deg,var(--tut-accent),#3b82f6);
+  background:linear-gradient(135deg,var(--tut-accent),var(--tut-accent-2));
   color:#fff;
   font-family:'Poppins',sans-serif;
   font-size:12.5px;
   font-weight:600;
   letter-spacing:.02em;
-  box-shadow:0 10px 26px rgba(5,18,43,.35);
+  box-shadow:0 10px 26px var(--tut-tag-shadow);
   pointer-events:none;
   text-align:center;
   animation:tutTagIn .4s cubic-bezier(.34,1.56,.64,1) both;
@@ -451,70 +289,46 @@
   overflow:hidden;
   text-overflow:ellipsis;
 }
+[data-theme="dark"] .tut-tag {
+  color:#0d1117;
+}
 @keyframes tutTagIn {
-  0% {
-    opacity:0;
-    transform:translateY(8px) scale(.85);
-  }
-  100% {
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
+  0%   { opacity:0; transform:translateY(8px) scale(.85); }
+  100% { opacity:1; transform:translateY(0) scale(1); }
 }
-/* Resaltado con pulso sutil */
-.tut-highlight {
-  animation:tutPulse 2.2s ease-in-out infinite;
-}
-@keyframes tutPulse {
-  0%,100% {
-    box-shadow:0 0 0 9999px rgba(8,18,40,.55),0 0 0 3px var(--tut-highlight-border),0 0 30px var(--tut-highlight-shadow);
-  }
-  50% {
-    box-shadow:0 0 0 9999px rgba(8,18,40,.52),0 0 0 5px var(--tut-highlight-border),0 0 44px var(--tut-highlight-shadow);
-  }
-}
+
 /* Salida del overlay completo */
 #kavariTutorialOverlay.tut-exiting {
   transition:opacity .3s ease;
   opacity:0;
 }
-/* Ajustes responsive del nuevo layout */
-@media (max-width:640px) {
-  .tut-head {
-    gap:12px;
-  }
-  .tut-mascot img {
-    width:52px;
-    height:52px;
-  }
-  .tut-title {
-    font-size:18px;
-  }
-  .tut-desc {
-    font-size:13.5px;
-  }
-}
-@media (max-width:400px) {
-  .tut-mascot img {
-    width:44px;
-    height:44px;
-  }
-  .tut-title {
-    font-size:16px;
-  }
-}
-/* El tooltip es position:fixed; si el body conserva transform/will-change
 
-   (animación de entrada de página), el fixed se ancla al documento y el
-
-   tooltip se sale de la pantalla. Mientras el tutorial está activo,
-
-   neutralizamos esas propiedades del body. */
+/* Si el body conserva transform/will-change (animación de entrada de
+   página), el position:fixed se ancla al documento. Lo neutralizamos. */
 body.kavari-tut-active {
   will-change:auto !important;
   transform:none !important;
   opacity:1 !important;
 }
-.tut-tooltip {
-  max-width:min(520px,92vw) !important;
+
+/* Responsive */
+@media (max-width:640px) {
+  .tut-tooltip {
+    padding:20px 18px 16px;
+    max-width:94vw;
+  }
+  .tut-head { gap:12px; }
+  .tut-mascot img { width:50px; height:50px; }
+  .tut-title { font-size:18px; }
+  .tut-desc { font-size:14px; }
+  .tut-actions { flex-direction:column; align-items:stretch; gap:8px; }
+  .tut-btn-skip { align-self:center; padding:4px 10px; }
+  .tut-nav-btns { justify-content:center; }
+  .tut-btn-prev,.tut-btn-next { padding:8px 16px; font-size:13px; }
+}
+@media (max-width:400px) {
+  .tut-tooltip { padding:16px 14px 14px; }
+  .tut-mascot img { width:44px; height:44px; }
+  .tut-title { font-size:16px; }
+  .tut-desc { font-size:13.5px; }
 }
