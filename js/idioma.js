@@ -5,47 +5,47 @@
 // El portugués vive en idioma-pt.js.
 // --------------------------------------------------------------------------
 // ESPAÑOL (diccionario es):
-//    912  ===== PAÍS PANAMÁ
-//   1242  ===== COSTA RICA
-//   1790  ===== MÉXICO
-//   2119  ===== PERÚ
-//   2449  ===== REPÚBLICA DOMINICANA
-//   2776  ===== ARGENTINA
-//   3108  ===== BRASIL
-//   3440  ===== CHILE
-//   3772  ===== ECUADOR
-//   4102  ===== CUBA
-//   4431  ===== GUATEMALA
-//   4759  ===== BOLIVIA
-//   5085  ===== VENEZUELA
-//   5413  ===== URUGUAY
-//   5740  ===== PARAGUAY
-//   6069  ===== HONDURAS
-//   6396  ===== NICARAGUA
-//   6723  ===== EL SALVADOR
-//   7049  ===== BELICE
-//   7370  ===== GUYANA
+//    925  ===== PAÍS PANAMÁ
+//   1255  ===== COSTA RICA
+//   1803  ===== MÉXICO
+//   2132  ===== PERÚ
+//   2462  ===== REPÚBLICA DOMINICANA
+//   2789  ===== ARGENTINA
+//   3121  ===== BRASIL
+//   3453  ===== CHILE
+//   3785  ===== ECUADOR
+//   4115  ===== CUBA
+//   4444  ===== GUATEMALA
+//   4772  ===== BOLIVIA
+//   5098  ===== VENEZUELA
+//   5426  ===== URUGUAY
+//   5753  ===== PARAGUAY
+//   6082  ===== HONDURAS
+//   6409  ===== NICARAGUA
+//   6736  ===== EL SALVADOR
+//   7062  ===== BELICE
+//   7383  ===== GUYANA
 // --------------------------------------------------------------------------
 // INGLÉS (diccionario en):
-//   9096  ===== COLOMBIA
-//   9422  ===== MEXICO
-//   9752  ===== PERU
-//  10081  ===== DOMINICAN REPUBLIC
-//  10408  ===== ARGENTINA
-//  10740  ===== BRAZIL
-//  11072  ===== CHILE
-//  11404  ===== ECUADOR
-//  11734  ===== CUBA
-//  12063  ===== GUATEMALA
-//  12391  ===== BOLIVIA
-//  12716  ===== VENEZUELA
-//  13044  ===== URUGUAY
-//  13371  ===== PARAGUAY
-//  13700  ===== HONDURAS
-//  14027  ===== NICARAGUA
-//  14354  ===== EL SALVADOR
-//  14680  ===== BELIZE
-//  15001  ===== GUYANA
+//   9122  ===== COLOMBIA
+//   9448  ===== MEXICO
+//   9778  ===== PERU
+//  10107  ===== DOMINICAN REPUBLIC
+//  10434  ===== ARGENTINA
+//  10766  ===== BRAZIL
+//  11098  ===== CHILE
+//  11430  ===== ECUADOR
+//  11760  ===== CUBA
+//  12089  ===== GUATEMALA
+//  12417  ===== BOLIVIA
+//  12742  ===== VENEZUELA
+//  13070  ===== URUGUAY
+//  13397  ===== PARAGUAY
+//  13726  ===== HONDURAS
+//  14053  ===== NICARAGUA
+//  14380  ===== EL SALVADOR
+//  14706  ===== BELIZE
+//  15027  ===== GUYANA
 // ==========================================================================
 (function() {
     'use strict';
@@ -423,6 +423,26 @@
             ayudaSubtitulo: 'Encuentra respuestas rápidas sobre cómo usar KAVARI y planificar tu próximo viaje.',
             ayudaBuscar: 'Buscar en el centro de ayuda...',
             ayudaNoResultados: 'No se encontraron preguntas que coincidan con tu búsqueda.',
+            ayudaBadge: 'Soporte oficial KAVARI',
+            ayudaLimpiar: 'Limpiar búsqueda',
+            ayudaResultados: 'preguntas encontradas',
+            ayudaPasosTitulo: 'Empieza en 3 pasos',
+            ayudaPaso1Titulo: 'Explora los destinos',
+            ayudaPaso1Desc: 'Navega por los 36 países y descubre cultura, gastronomía, aventura, aerolíneas y hospedajes de cada destino.',
+            ayudaPaso2Titulo: 'Consulta el Asistente IA',
+            ayudaPaso2Desc: 'Pregunta sobre clima, visas, seguridad, costos y transporte con el asistente especializado de cada país.',
+            ayudaPaso3Titulo: 'Planifica y contacta',
+            ayudaPaso3Desc: 'Reserva vuelos y hoteles, contrata guías certificados o escríbenos para armar tu paquete completo.',
+            ayudaAtajosTitulo: 'Accesos rápidos',
+            ayudaAtajoDestinos: 'Explorar destinos',
+            ayudaAtajoGuias: 'Ver guías turísticos',
+            ayudaAtajoIA: 'Preguntar al asistente',
+            ayudaAtajoTutorial: 'Iniciar tutorial',
+            ayudaExpandir: 'Expandir todo',
+            ayudaContraer: 'Contraer todo',
+            ayudaCopiar: 'Copiar respuesta',
+            ayudaCopiado: '¡Copiado!',
+            ayudaVolverArriba: 'Volver arriba',
 
             catViajeros: 'Para viajeros',
             catViajerosDesc: 'Cómo buscar destinos, reservar paquetes y usar la plataforma.',
@@ -909,6 +929,19 @@
             paqueteModalIncluye: '¿Qué incluye el paquete?',
 
             footerTexto: '© 2025 Kavari — Todos los derechos reservados.',
+            footerSub1: 'Tu próxima aventura empieza aquí.',
+            footerLinksTitle: 'Enlaces rápidos',
+            footerLinkInicio: 'Inicio',
+            footerLinkDestinos: 'Destinos',
+            footerLinkSobre: 'Sobre nosotros',
+            footerLinkGuias: 'Guías locales',
+            footerLinkContacto: 'Contacto',
+            footerNewsTitle: 'Newsletter',
+            footerNewsSub: 'Recibe ofertas y novedades de viajes.',
+            footerNewsLabel: 'Tu correo electrónico',
+            footerNewsPlaceholder: 'Tu correo electrónico',
+            footerNewsBtn: 'Suscribirse',
+            footerNewsOk: '¡Gracias!',
           // ===== PAÍS PANAMÁ =====
 paisPanama_nombre: 'Panamá',
 paisPanama_subtitulo: 'Infinita',
@@ -8067,6 +8100,26 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             ayudaSubtitulo: 'Find quick answers about how to use KAVARI and plan your next trip.',
             ayudaBuscar: 'Search the help center...',
             ayudaNoResultados: 'No questions found matching your search.',
+            ayudaBadge: 'KAVARI Official Support',
+            ayudaLimpiar: 'Clear search',
+            ayudaResultados: 'questions found',
+            ayudaPasosTitulo: 'Start in 3 steps',
+            ayudaPaso1Titulo: 'Explore the destinations',
+            ayudaPaso1Desc: 'Browse the 36 countries and discover culture, gastronomy, adventure, airlines, and accommodations for each destination.',
+            ayudaPaso2Titulo: 'Ask the AI Assistant',
+            ayudaPaso2Desc: 'Ask about weather, visas, safety, costs, and transportation with each country\'s specialized assistant.',
+            ayudaPaso3Titulo: 'Plan and get in touch',
+            ayudaPaso3Desc: 'Book flights and hotels, hire certified guides, or write to us to build your complete package.',
+            ayudaAtajosTitulo: 'Quick access',
+            ayudaAtajoDestinos: 'Explore destinations',
+            ayudaAtajoGuias: 'View tour guides',
+            ayudaAtajoIA: 'Ask the assistant',
+            ayudaAtajoTutorial: 'Start tutorial',
+            ayudaExpandir: 'Expand all',
+            ayudaContraer: 'Collapse all',
+            ayudaCopiar: 'Copy answer',
+            ayudaCopiado: 'Copied!',
+            ayudaVolverArriba: 'Back to top',
 
             catViajeros: 'For travelers',
             catViajerosDesc: 'How to search destinations, book packages, and use the platform.',
@@ -8553,6 +8606,19 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             paqueteModalIncluye: 'What does the package include?',
 
             footerTexto: '© 2025 Kavari — All rights reserved.',
+            footerSub1: 'Your next adventure starts here.',
+            footerLinksTitle: 'Quick links',
+            footerLinkInicio: 'Home',
+            footerLinkDestinos: 'Destinations',
+            footerLinkSobre: 'About us',
+            footerLinkGuias: 'Local guides',
+            footerLinkContacto: 'Contact',
+            footerNewsTitle: 'Newsletter',
+            footerNewsSub: 'Get travel deals and news.',
+            footerNewsLabel: 'Your email address',
+            footerNewsPlaceholder: 'Your email address',
+            footerNewsBtn: 'Subscribe',
+            footerNewsOk: 'Thanks!',
             // ===== COUNTRY PANAMA =====
 paisPanama_nombre: 'Panama',
 paisPanama_subtitulo: 'Infinite',

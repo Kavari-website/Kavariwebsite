@@ -1,0 +1,253 @@
+/* ═══════════════════════════════════════════════════════════
+   KAVARI · Footer principal (diseño sobrio y profesional)
+   Fondo oscuro del sitio (#0d1117) en claro y oscuro, con acento
+   dorado sutil (#ffb800). Sin paletas llamativas.
+   Los selectores van prefijados con .footer para ganar siempre a
+   los estilos base de cada página (.footer p, .footer a, etc.)
+   sin importar el orden de carga.
+   ═══════════════════════════════════════════════════════════ */
+.footer.kv-footer {
+  --kv-bg: #0d1117;
+  --kv-bg-soft: #111820;
+  --kv-border: #21262d;
+  --kv-gold: #ffb800;
+  --kv-white: #ffffff;
+  --kv-muted: #c9d1d9;
+  --kv-faint: #8b949e;
+
+  background: var(--kv-bg);
+  color: var(--kv-muted);
+  font-family: 'Poppins', 'Inter', Arial, sans-serif;
+  padding: 56px 24px 24px;
+  border-top: 1px solid var(--kv-border);
+  text-align: left;
+}
+
+[data-theme="dark"] .footer.kv-footer {
+  background: #0d1117;
+  border-top-color: #21262d;
+}
+
+/* ── Rejilla de columnas ── */
+.footer .kv-footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px;
+}
+
+.footer .kv-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Marca ── */
+.footer .kv-footer-brand {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--kv-white);
+  letter-spacing: 4px;
+  margin: 0;
+}
+
+.footer .kv-footer-sub {
+  font-size: .85rem;
+  color: var(--kv-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Redes sociales ── */
+.footer .kv-footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.footer .kv-social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid #30363d;
+  color: var(--kv-muted);
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: color .25s ease, border-color .25s ease, background .25s ease, transform .25s ease;
+}
+
+.footer .kv-social-icon:hover {
+  color: var(--kv-gold);
+  border-color: var(--kv-gold);
+  background: rgba(255, 184, 0, .08);
+  transform: translateY(-2px);
+}
+
+.footer .kv-social-icon:active {
+  transform: translateY(0) scale(.98);
+}
+
+/* ── Títulos de columna ── */
+.footer .kv-footer-title {
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--kv-white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--kv-border);
+}
+
+/* ── Enlaces rápidos (navegación) ── */
+.footer .kv-footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 12px;
+  row-gap: 8px;
+}
+
+.footer .kv-footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--kv-muted);
+  text-decoration: none;
+  font-size: .88rem;
+  transition: color .25s ease, transform .25s ease;
+}
+
+.footer .kv-footer-link::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #30363d;
+  border-right: 2px solid #30363d;
+  transform: rotate(45deg);
+  transition: border-color .25s ease;
+  flex-shrink: 0;
+}
+
+.footer .kv-footer-link:hover {
+  color: var(--kv-white);
+  transform: translateX(4px);
+}
+
+.footer .kv-footer-link:hover::before {
+  border-color: var(--kv-gold);
+}
+
+/* ── Newsletter ── */
+.footer .kv-footer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer .kv-footer-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: var(--kv-bg-soft);
+  color: var(--kv-white);
+  font-family: inherit;
+  font-size: .9rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color .25s ease, background .25s ease;
+}
+
+.footer .kv-footer-input::placeholder { color: var(--kv-faint); }
+
+.footer .kv-footer-input:focus {
+  border-color: var(--kv-gold);
+  background: #161b22;
+}
+
+.footer .kv-footer-btn {
+  padding: 12px 14px;
+  border: 1px solid #58a6ff;
+  border-radius: 8px;
+  background: #58a6ff;
+  color: #ffffff;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: .9rem;
+  cursor: pointer;
+  transition: background .25s ease, transform .2s ease;
+}
+
+.footer .kv-footer-btn:hover {
+  background: #79b8ff;
+  transform: translateY(-1px);
+}
+
+.footer .kv-footer-btn:active { transform: scale(.98); }
+
+/* ── Barra inferior ── */
+.footer .kv-footer-bottom {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--kv-border);
+  text-align: center;
+}
+
+.footer .kv-footer-copy {
+  font-size: .8rem;
+  color: var(--kv-faint);
+  margin: 0;
+  letter-spacing: .3px;
+}
+
+/* ── Utilidad accesible ── */
+.footer .kv-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .footer .kv-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer.kv-footer {
+    padding: 40px 20px 20px;
+  }
+
+  .footer .kv-footer-col {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer .kv-footer-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Accesibilidad: respetar movimiento reducido ── */
+@media (prefers-reduced-motion: reduce) {
+  .footer .kv-social-icon,
+  .footer .kv-footer-link,
+  .footer .kv-footer-btn {
+    transition: none;
+  }
+}

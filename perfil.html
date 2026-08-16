@@ -33,6 +33,11 @@
   <link rel="stylesheet" href="css/universal-shine.css">
   <script src="js/lang-dropdown.js"></script>
 
+  <!-- ===== FOOTER (estilos, iconos y script) ===== -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/footer.css">
+  <script src="js/footer.js"></script>
+
   <!-- ===== OPTIMIZACIÓN DE CARGA (performance.js) ===== -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -426,11 +431,53 @@
   </main>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <p class="textfooter" data-i18n="footerTexto">© 2025 Kavari — Todos los derechos reservados.</p>
+    <!-- ===== FOOTER ===== -->
+<footer class="footer kv-footer">
+  <div class="kv-footer-grid">
+
+    <!-- Columna 1 · Marca + Redes sociales -->
+    <div class="kv-footer-col">
+      <p class="kv-footer-brand">KAVARI</p>
+      <p class="kv-footer-sub" data-i18n="footerSub1">Tu próxima aventura empieza aquí.</p>
+      <div class="kv-footer-social" aria-label="Redes sociales">
+        <a class="kv-social-icon" href="https://www.tiktok.com/@kavari.travel" target="_blank" rel="noopener" aria-label="TikTok de KAVARI"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+        <a class="kv-social-icon" href="https://www.facebook.com/kavari" target="_blank" rel="noopener" aria-label="Facebook de KAVARI"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+        <a class="kv-social-icon" href="https://www.instagram.com/kavari.travel/" target="_blank" rel="noopener" aria-label="Instagram de KAVARI"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a class="kv-social-icon" href="https://github.com/kavari" target="_blank" rel="noopener" aria-label="GitHub de KAVARI"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+      </div>
     </div>
-  </footer>
+
+    <!-- Columna 2 · Enlaces rápidos -->
+    <nav class="kv-footer-col" aria-label="Enlaces rápidos">
+      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces rápidos</p>
+      <ul class="kv-footer-links">
+        <li><a class="kv-footer-link" href="index.html" data-i18n="footerLinkInicio">Inicio</a></li>
+        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkDestinos">Destinos</a></li>
+        <li><a class="kv-footer-link" href="sobrenosotros.html" data-i18n="footerLinkSobre">Sobre nosotros</a></li>
+        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">Guías locales</a></li>
+        <li><a class="kv-footer-link" href="contacto.html" data-i18n="footerLinkContacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <!-- Columna 3 · Newsletter -->
+    <div class="kv-footer-col">
+      <p class="kv-footer-title" data-i18n="footerNewsTitle">Newsletter</p>
+      <p class="kv-footer-sub" data-i18n="footerNewsSub">Recibe ofertas y novedades de viajes.</p>
+      <form class="kv-footer-form" id="kvNewsletterForm" novalidate>
+        <label class="kv-sr-only" for="kvNewsletterEmail" data-i18n="footerNewsLabel">Tu correo electrónico</label>
+        <input class="kv-footer-input" id="kvNewsletterEmail" name="email" type="email"
+               placeholder="Tu correo electrónico" data-i18n-placeholder="footerNewsPlaceholder"
+               required autocomplete="email">
+        <button class="kv-footer-btn" type="submit" data-i18n="footerNewsBtn">Suscribirse</button>
+      </form>
+    </div>
+
+  </div>
+
+  <div class="kv-footer-bottom">
+    <p class="kv-footer-copy" data-i18n="footerTexto">© 2025 Kavari — Todos los derechos reservados.</p>
+  </div>
+</footer>
 
   <!-- ===== SCRIPTS ===== -->
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
