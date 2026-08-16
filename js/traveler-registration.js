@@ -98,9 +98,9 @@
 
       fetch('data/data.json').then(r=>r.json()).then(data=>{
         const s=m.querySelector('[name=country]');
-        s.innerHTML='<option value="">Selecciona un país</option>'+Object.entries(data)
+        s.innerHTML='<option value="">'+(window.t?window.t('seleccionaPais'):'Selecciona un país')+'</option>'+Object.entries(data)
           .filter(([,v])=>v&&v.nombre)
-          .map(([k,v])=>`<option value="${esc(k)}">${esc(v.nombre)}</option>`).join('');
+          .map(([k,v])=>{const n=(window.paisNombre?window.paisNombre(k,v.nombre):v.nombre)||v.nombre;return '<option value="'+esc(k)+'">'+esc(n)+'</option>';}).join('');
         s.value=localStorage.getItem('paisSeleccionado')||'';
         s.addEventListener('change',function(){showGuidesForCountry(this.value)});
         showGuidesForCountry(s.value);

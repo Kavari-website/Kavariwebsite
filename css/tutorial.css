@@ -322,12 +322,16 @@
   backdrop-filter:blur(24px) saturate(150%);
   -webkit-backdrop-filter:blur(24px) saturate(150%);
 }
-
 /* --------------------------------------------------------------
-   KAVARI TUTORIAL PREMIUM v2 ó tooltip centrado en pantalla,
+
+   KAVARI TUTORIAL PREMIUM v2 ‚Äî tooltip centrado en pantalla,
+
    animaciones suaves con resorte, barra de progreso, mascota,
+
    etiqueta flotante sobre el elemento resaltado y guiado
-   autom·tico de la vista del usuario.
+
+   autom√°tico de la vista del usuario.
+
    -------------------------------------------------------------- */
 .tut-tooltip {
   transition:opacity .14s ease,transform .14s ease;
@@ -339,15 +343,29 @@
   animation:tutPopOut .14s ease both;
 }
 @keyframes tutPopIn {
-  0% { opacity:0; transform:translate(-50%,-42%) scale(.82); }
-  60% { opacity:1; transform:translate(-50%,-51%) scale(1.03); }
-  100% { opacity:1; transform:translate(-50%,-50%) scale(1); }
+  0% {
+    opacity:0;
+    transform:translate(-50%,-42%) scale(.82);
+  }
+  60% {
+    opacity:1;
+    transform:translate(-50%,-51%) scale(1.03);
+  }
+  100% {
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+  }
 }
 @keyframes tutPopOut {
-  0% { opacity:1; transform:translate(-50%,-50%) scale(1); }
-  100% { opacity:0; transform:translate(-50%,-56%) scale(.9); }
+  0% {
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+  }
+  100% {
+    opacity:0;
+    transform:translate(-50%,-56%) scale(.9);
+  }
 }
-
 /* Barra de progreso superior */
 .tut-progress-bar {
   position:absolute;
@@ -366,8 +384,7 @@
   background:linear-gradient(90deg,var(--tut-accent),#3b82f6);
   transition:width .55s cubic-bezier(.22,1,.36,1);
 }
-
-/* Cabecera con mascota + tÌtulo */
+/* Cabecera con mascota + t√≠tulo */
 .tut-head {
   display:flex;
   align-items:center;
@@ -386,8 +403,12 @@
   animation:tutMascotFloat 3.2s ease-in-out infinite;
 }
 @keyframes tutMascotFloat {
-  0%,100% { transform:translateY(0) rotate(0deg); }
-  50% { transform:translateY(-5px) rotate(2deg); }
+  0%,100% {
+    transform:translateY(0) rotate(0deg);
+  }
+  50% {
+    transform:translateY(-5px) rotate(2deg);
+  }
 }
 .tut-head-text {
   flex:1;
@@ -409,7 +430,6 @@
   font-size:14.5px;
   margin-bottom:20px;
 }
-
 /* Etiqueta flotante sobre el elemento resaltado */
 .tut-tag {
   position:fixed;
@@ -432,25 +452,32 @@
   text-overflow:ellipsis;
 }
 @keyframes tutTagIn {
-  0% { opacity:0; transform:translateY(8px) scale(.85); }
-  100% { opacity:1; transform:translateY(0) scale(1); }
+  0% {
+    opacity:0;
+    transform:translateY(8px) scale(.85);
+  }
+  100% {
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
 }
-
 /* Resaltado con pulso sutil */
 .tut-highlight {
   animation:tutPulse 2.2s ease-in-out infinite;
 }
 @keyframes tutPulse {
-  0%,100% { box-shadow:0 0 0 9999px rgba(8,18,40,.55),0 0 0 3px var(--tut-highlight-border),0 0 30px var(--tut-highlight-shadow); }
-  50% { box-shadow:0 0 0 9999px rgba(8,18,40,.52),0 0 0 5px var(--tut-highlight-border),0 0 44px var(--tut-highlight-shadow); }
+  0%,100% {
+    box-shadow:0 0 0 9999px rgba(8,18,40,.55),0 0 0 3px var(--tut-highlight-border),0 0 30px var(--tut-highlight-shadow);
+  }
+  50% {
+    box-shadow:0 0 0 9999px rgba(8,18,40,.52),0 0 0 5px var(--tut-highlight-border),0 0 44px var(--tut-highlight-shadow);
+  }
 }
-
 /* Salida del overlay completo */
 #kavariTutorialOverlay.tut-exiting {
   transition:opacity .3s ease;
   opacity:0;
 }
-
 /* Ajustes responsive del nuevo layout */
 @media (max-width:640px) {
   .tut-head {
@@ -476,10 +503,12 @@
     font-size:16px;
   }
 }
-
 /* El tooltip es position:fixed; si el body conserva transform/will-change
-   (animaciÛn de entrada de p·gina), el fixed se ancla al documento y el
-   tooltip se sale de la pantalla. Mientras el tutorial est· activo,
+
+   (animaci√≥n de entrada de p√°gina), el fixed se ancla al documento y el
+
+   tooltip se sale de la pantalla. Mientras el tutorial est√° activo,
+
    neutralizamos esas propiedades del body. */
 body.kavari-tut-active {
   will-change:auto !important;

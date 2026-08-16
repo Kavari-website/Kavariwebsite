@@ -27,6 +27,33 @@ function _t(valor) {
 }
 
 // ============================================================
+// 2b. RESOLVER NOMBRE DE PAÍS (slug → paisX_nombre)
+// ============================================================
+const PAIS_NOMBRE_KEY = {
+    panama: 'paisPanama_nombre', colombia: 'paisColombia_nombre', mexico: 'paisMexico_nombre',
+    'costa-rica': 'paisCostaRica_nombre', peru: 'paisPeru_nombre', 'republica-dominicana': 'paisRepublicaDominicana_nombre',
+    argentina: 'paisArgentina_nombre', brasil: 'paisBrasil_nombre', chile: 'paisChile_nombre',
+    ecuador: 'paisEcuador_nombre', cuba: 'paisCuba_nombre', guatemala: 'paisGuatemala_nombre',
+    bolivia: 'paisBolivia_nombre', venezuela: 'paisVenezuela_nombre', uruguay: 'paisUruguay_nombre',
+    paraguay: 'paisParaguay_nombre', honduras: 'paisHonduras_nombre', nicaragua: 'paisNicaragua_nombre',
+    'el-salvador': 'paisElSalvador_nombre', belice: 'paisBelice_nombre', guyana: 'paisGuyana_nombre',
+    'trinidad-y-tobago': 'paisTrinidadTobago_nombre', jamaica: 'paisJamaica_nombre', 'puerto-rico': 'paisPuertoRico_nombre',
+    bahamas: 'paisBahamas_nombre', haiti: 'paisHaiti_nombre', espana: 'paisEspana_nombre',
+    portugal: 'paisPortugal_nombre', italia: 'paisItalia_nombre', francia: 'paisFrancia_nombre',
+    japon: 'paisJapon_nombre', tailandia: 'paisTailandia_nombre', marruecos: 'paisMarruecos_nombre',
+    turquia: 'paisTurquia_nombre', grecia: 'paisGrecia_nombre', sudafrica: 'paisSudafrica_nombre'
+};
+
+function nombrePais(slug, fallback) {
+    const key = PAIS_NOMBRE_KEY[slug];
+    if (key) {
+        const tr = _t(key);
+        return tr !== key ? tr : fallback;
+    }
+    return fallback;
+}
+
+// ============================================================
 // 3. FUNCIONES AUXILIARES DE DATOS (sin cambios)
 // ============================================================
 function getDefaultGuides() {
@@ -270,13 +297,13 @@ function renderAerolineas(d) {
     const titulo = document.getElementById('aerolineasTitulo');
     if (titulo && d) {
         // Usa la clave 'aerolineasTitulo' que SÍ existe en el diccionario
-        titulo.textContent = `${_t('aerolineasTitulo')} — ${_t(d.nombre)}`;
+        titulo.textContent = `${_t('aerolineasTitulo')} — ${nombrePais(currentCountryCode, d.nombre)}`;
         // O también podrías usar: titulo.textContent = _t('aerolineasTitulo');
     }
     const desc = document.getElementById('aerolineasDesc');
     if (desc && d) {
         // Usa la clave 'aerolineasDesc' que SÍ existe en el diccionario
-        desc.textContent = `${_t('aerolineasDesc')} ${_t(d.nombre)}.`;
+        desc.textContent = `${_t('aerolineasDesc')} ${nombrePais(currentCountryCode, d.nombre)}.`;
     }
 }
 
@@ -329,11 +356,11 @@ function renderHospedajes(d) {
     // ✅ CORRECCIÓN: Usar claves existentes del diccionario
     const titulo = document.getElementById('hospedajesTitulo');
     if (titulo && d) {
-        titulo.textContent = `${_t('hospedajesTitulo')} — ${_t(d.nombre)}`;
+        titulo.textContent = `${_t('hospedajesTitulo')} — ${nombrePais(currentCountryCode, d.nombre)}`;
     }
     const desc = document.getElementById('hospedajesDesc');
     if (desc && d) {
-        desc.textContent = `${_t('hospedajesDesc')} ${_t(d.nombre)}.`;
+        desc.textContent = `${_t('hospedajesDesc')} ${nombrePais(currentCountryCode, d.nombre)}.`;
     }
 }
 
@@ -397,11 +424,11 @@ function renderSouvenirs(d) {
     // ✅ CORRECCIÓN: Usar claves existentes del diccionario
     const titulo = document.getElementById('souvenirsTitulo');
     if (titulo && d) {
-        titulo.textContent = `${_t('souvenirsTitulo')} — ${_t(d.nombre)}`;
+        titulo.textContent = `${_t('souvenirsTitulo')} — ${nombrePais(currentCountryCode, d.nombre)}`;
     }
     const desc = document.getElementById('souvenirsDesc');
     if (desc && d) {
-        desc.textContent = `${_t('souvenirsDesc')} ${_t(d.nombre)}.`;
+        desc.textContent = `${_t('souvenirsDesc')} ${nombrePais(currentCountryCode, d.nombre)}.`;
     }
 }
 
@@ -475,7 +502,7 @@ function initCountrySelector() {
     if (datosGlobales && !countryOptionsInitialized) {
         const paises = getCountryKeys(datosGlobales).sort();
         select.innerHTML = paises.map(key => {
-            const nombre = _t(datosGlobales[key]?.nombre) || key;
+            const nombre = nombrePais(key, datosGlobales[key]?.nombre) || key;
             const flag = getCountryFlag(key);
             return `<option value="${key}" ${key === currentCountryCode ? 'selected' : ''}>${flag} ${nombre}</option>`;
         }).join('');
@@ -485,11 +512,11 @@ function initCountrySelector() {
     function renderOptions(filter = '') {
         const paises = getCountryKeys(datosGlobales).sort();
         const filtered = paises.filter(key => {
-            const nombre = _t(datosGlobales[key]?.nombre) || key;
+            const nombre = nombrePais(key, datosGlobales[key]?.nombre) || key;
             return nombre.toLowerCase().includes(filter.toLowerCase());
         });
         list.innerHTML = filtered.map(key => {
-            const nombre = _t(datosGlobales[key]?.nombre) || key;
+            const nombre = nombrePais(key, datosGlobales[key]?.nombre) || key;
             const flag = getCountryFlag(key);
             const isSelected = key === currentCountryCode;
             return `<div class="country-option ${isSelected ? 'selected' : ''}" data-value="${key}" data-name="${nombre}">
@@ -526,7 +553,7 @@ function initCountrySelector() {
 
     function updateTrigger() {
         if (datosGlobales && datosGlobales[currentCountryCode]) {
-            const nombre = _t(datosGlobales[currentCountryCode]?.nombre) || currentCountryCode;
+            const nombre = nombrePais(currentCountryCode, datosGlobales[currentCountryCode]?.nombre) || currentCountryCode;
             const flag = getCountryFlag(currentCountryCode);
             triggerName.textContent = nombre;
             triggerFlag.textContent = flag;
@@ -662,7 +689,7 @@ async function withCountryVeil(codigo, { minMs = 380 } = {}) {
     _cambiandoPais = true;
     const veil = getCountryVeil();
     const nombreEl = veil.querySelector('#kcvName');
-    if (nombreEl) nombreEl.textContent = _t(datosGlobales?.[codigo]?.nombre) || codigo;
+    if (nombreEl) nombreEl.textContent = nombrePais(codigo, datosGlobales?.[codigo]?.nombre) || codigo;
     veil.classList.add('kcv-show');
     const inicio = Date.now();
     try {
@@ -692,7 +719,7 @@ async function cargarPais(codigoPais) {
         const enriched = enrichCountryData(codigoPais, JSON.parse(JSON.stringify(d)));
         countryData = enriched;
         currentCountryCode = codigoPais;
-        document.title = _t(d.nombre) + ' · KAVARI';
+        document.title = nombrePais(codigoPais, d.nombre) + ' · KAVARI';
 
         guiasPanama = loadGuidesForCountry(codigoPais, enriched.guias);
         const supabaseGuides = await loadApprovedGuidesFromSupabase(codigoPais);
@@ -716,7 +743,7 @@ async function cargarPais(codigoPais) {
 
         llenarSelectorPaises(datosGlobales);
         if (window.__renderCountryOptions) window.__renderCountryOptions('');
-        if (window.KavariChatbot) window.KavariChatbot.setContext({ country: enriched, guias: guiasPanama, aerolineas: aerolineasData, hospedajes: hospedajesData });
+        if (window.KavariChatbot) window.KavariChatbot.setContext({ country: Object.assign({}, enriched, { code: codigoPais }), guias: guiasPanama, aerolineas: aerolineasData, hospedajes: hospedajesData });
         window.__kavariDestinoInit = true;
         requestAnimationFrame(() => observeReveals());
     } catch (error) {
@@ -749,7 +776,7 @@ function renderAllSections(d) {
     const heroContinente = document.getElementById('heroContinente');
     if (heroContinente) heroContinente.textContent = _t(d.continente) || 'América';
     const heroTitulo = document.getElementById('heroTitulo');
-    if (heroTitulo) heroTitulo.innerHTML = _t(d.nombre) + '<span id="heroSubtitulo">' + (_t(d.subtitulo) || '') + '</span>';
+    if (heroTitulo) heroTitulo.innerHTML = nombrePais(currentCountryCode, d.nombre) + '<span id="heroSubtitulo">' + (_t(d.subtitulo) || '') + '</span>';
     const heroDesc = document.getElementById('heroDesc');
     if (heroDesc) heroDesc.textContent = _t(d.descripcion) || '';
 
@@ -773,7 +800,7 @@ function renderAllSections(d) {
 
     // Destinos inicio
     const destinosTitulo = document.getElementById('destinosTitulo');
-    if (destinosTitulo) destinosTitulo.textContent = `${_t('destinosDestacadosEn')} ${_t(d.nombre)}`;
+    if (destinosTitulo) destinosTitulo.textContent = `${_t('destinosDestacadosEn')} ${nombrePais(currentCountryCode, d.nombre)}`;
     const destinosInicio = document.getElementById('destinosInicio');
     if (destinosInicio && d.destinos) {
         destinosInicio.innerHTML = d.destinos.slice(0, 4).map((dest, i) => `
@@ -808,7 +835,7 @@ function renderAllSections(d) {
     const quickFacts = document.getElementById('quickFacts');
     if (quickFacts && d.quick_facts) {
         quickFacts.innerHTML = `
-            <h4>${_t('datosSobre')} ${_t(d.nombre)}</h4>
+            <h4>${_t('datosSobre')} ${nombrePais(currentCountryCode, d.nombre)}</h4>
             <div class="facts-grid">
                 ${d.quick_facts.map(f => `
                     <div class="fact-item">
@@ -872,7 +899,7 @@ function renderAllSections(d) {
     const lugaresHeaderBg = document.getElementById('lugaresHeaderBg');
     if (lugaresHeaderBg) lugaresHeaderBg.style.backgroundImage = `url('${d.page_header_img}')`;
     const lugaresTitulo = document.getElementById('lugaresTitulo');
-    if (lugaresTitulo) lugaresTitulo.textContent = `${_t('destinosImprescindiblesEn')} ${_t(d.nombre)}`;
+    if (lugaresTitulo) lugaresTitulo.textContent = `${_t('destinosImprescindiblesEn')} ${nombrePais(currentCountryCode, d.nombre)}`;
     const lugaresSubTitulo = document.getElementById('lugaresSubTitulo');
     if (lugaresSubTitulo) lugaresSubTitulo.textContent = _t('losDestinosQueDefinen');
     const todosDestinos = document.getElementById('todosDestinos');
@@ -998,7 +1025,7 @@ function renderAllSections(d) {
 
     // Guías título
     const guiasTitle = document.getElementById('guiasSectionTitle');
-    if (guiasTitle) guiasTitle.textContent = `${_t('guiasSectionTitle')} — ${_t(d.nombre)}`;
+    if (guiasTitle) guiasTitle.textContent = `${_t('guiasSectionTitle')} — ${nombrePais(currentCountryCode, d.nombre)}`;
 }
 
 // ============================================================

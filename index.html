@@ -1,9 +1,26 @@
 <!DOCTYPE html>
+<!-- ==========================================================================
+     KAVARI · ÍNDICE DE SECCIONES DE ESTA PÁGINA (index.html)
+     ==========================================================================
+     Busca rápido con Ctrl+F: escribe "SECCIÓN:" y salta a cualquier bloque.
+
+     Línea  Sección
+     -----  ---------------------------------------------------------------
+     74     SECCIÓN: HERO / VIDEO DE FONDO (header.hero, video fondo.mp4)
+     81     SECCIÓN: NAVBAR (menú de navegación)
+     106    SECCIÓN: HERO CONTENT (título y descripción)
+     113    SECCIÓN: CAJA DE BÚSQUEDA (search-box)
+     126    SECCIÓN: TOP 10 LUGARES (featured-section)
+     234    SECCIÓN: PAQUETES DE VIAJE (places-section)
+     421    SECCIÓN: PIE DE PÁGINA (footer)
+     428    SECCIÓN: MODALES (Top 10 y Paquetes)
+     472    SECCIÓN: SCRIPTS DE FIN DE PÁGINA
+     ========================================================================== -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAVARI Travel — Descubre el Mundo</title>
+    <title data-i18n="tituloIndex">KAVARI Travel — Descubre el Mundo</title>
     <meta name="description" content="Descubre los mejores destinos del mundo con KAVARI. Guías turísticos certificados, paquetes de viaje, aerolíneas y hospedajes en una sola plataforma.">
     <meta name="keywords" content="turismo, viajes, guías turísticos, destinos, Panamá, Colombia, América Latina">
     <meta property="og:title" content="KAVARI Travel">
@@ -32,6 +49,7 @@
     <script src="js/supabase-client.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/idioma.js?v=3"></script>
+    <script src="js/idioma-pt.js?v=1"></script>
     <script src="js/theme.js?v=3"></script>
     
      <!-- ===== FAVICON GRANDE (PNG) ===== -->
@@ -39,6 +57,16 @@
 <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
   <script src="js/img-fallback.js"></script>
+
+  <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
+  <link rel="stylesheet" href="css/lang-dropdown.css">
+  <link rel="stylesheet" href="css/universal-shine.css">
+  <script src="js/lang-dropdown.js"></script>
+
+  <!-- ===== OPTIMIZACIÓN DE CARGA (performance.js) ===== -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <script src="js/performance.js"></script>
 </head>
 <body class="page-index">
 <a class="skip-link" href="#main">Saltar al contenido</a>

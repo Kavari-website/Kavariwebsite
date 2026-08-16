@@ -22,11 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
     return key;
   }
 
+  function msg(es, en, pt) {
+    const l = getLang();
+    return l === 'en' ? en : l === 'pt' ? pt : es;
+  }
+
   /* ─── Cargar países en el select ─── */
   function loadTouristCountries() {
     if (!selectCountry || selectCountry.dataset.loaded === '1') return;
     const lang = getLang();
-    const placeholder = lang === 'en' ? 'Select a country' : 'Selecciona un país';
+    const placeholder = msg('Selecciona un país', 'Select a country', 'Selecione um país');
     fetch('data/data.json')
       .then(res => res.json())
       .then(data => {
@@ -38,13 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const country = data[key];
             const opt = document.createElement('option');
             opt.value = key;
-            opt.textContent = country.nombre || key;
+            opt.textContent = (window.paisNombre ? window.paisNombre(key, country.nombre) : country.nombre) || key;
             selectCountry.appendChild(opt);
           });
         selectCountry.dataset.loaded = '1';
       })
       .catch(() => {
-        selectCountry.innerHTML = `<option value="" disabled selected>${lang === 'en' ? 'Error loading countries' : 'Error al cargar países'}</option>`;
+        selectCountry.innerHTML = `<option value="" disabled selected>${msg('Error al cargar países', 'Error loading countries', 'Erro ao carregar países')}</option>`;
       });
   }
 
@@ -128,9 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Validación básica
       if (!guideData.fullName || !guideData.email || !guideData.country) {
         if (formStatus) {
-          formStatus.textContent = lang === 'en'
-            ? 'Please fill in all required fields.'
-            : 'Por favor completa todos los campos requeridos.';
+          formStatus.textContent = msg('Por favor completa todos los campos requeridos.', 'Please fill in all required fields.', 'Preencha todos os campos obrigatórios.');
           formStatus.classList.add('is-error');
         }
         return;
@@ -138,9 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!guideData.paymentMethod) {
         if (formStatus) {
-          formStatus.textContent = lang === 'en'
-            ? 'Please select a payment method.'
-            : 'Por favor selecciona un método de pago.';
+          formStatus.textContent = msg('Por favor selecciona un método de pago.', 'Please select a payment method.', 'Selecione um método de pagamento.');
           formStatus.classList.add('is-error');
         }
         return;
@@ -148,9 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Deshabilitar botón
       submitBtn.disabled = true;
-      submitBtn.textContent = lang === 'en' ? 'Processing…' : 'Procesando…';
+      submitBtn.textContent = msg('Procesando…', 'Processing…', 'Processando…');
       if (formStatus) {
-        formStatus.textContent = lang === 'en' ? 'Uploading documents…' : 'Subiendo documentos…';
+        formStatus.textContent = msg('Subiendo documentos…', 'Uploading documents…', 'Enviando documentos…');
         formStatus.classList.remove('is-error');
       }
 
@@ -194,9 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (result.error) {
           if (formStatus) {
-            formStatus.textContent = lang === 'en'
-              ? 'Error registering guide. Please try again.'
-              : 'Error al registrar guía. Por favor intenta de nuevo.';
+            formStatus.textContent = msg('Error al registrar guía. Por favor intenta de nuevo.', 'Error registering guide. Please try again.', 'Erro ao registrar guia. Tente novamente.');
             formStatus.classList.add('is-error');
           }
           submitBtn.disabled = false;
@@ -226,9 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (_) {}
 
       // Éxito
-      const successMsg = lang === 'en'
-        ? 'Registration successful! Your guide profile has been submitted for review. We will contact you soon.'
-        : '¡Registro exitoso! Tu perfil de guía ha sido enviado para revisión. Nos pondremos en contacto contigo pronto.';
+      const successMsg = msg(
+        '¡Registro exitoso! Tu perfil de guía ha sido enviado para revisión. Nos pondremos en contacto contigo pronto.',
+        'Registration successful! Your guide profile has been submitted for review. We will contact you soon.',
+        'Registro bem-sucedido! Seu perfil de guia foi enviado para revisão. Entraremos em contato em breve.'
+      );
 
       if (formStatus) {
         formStatus.textContent = successMsg;

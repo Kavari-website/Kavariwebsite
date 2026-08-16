@@ -139,15 +139,15 @@
       Object.keys(data)
         .filter(key => data[key] && typeof data[key].nombre === 'string')
         .sort((a, b) => {
-          const na = t(data[a].nombre) || data[a].nombre || a;
-          const nb = t(data[b].nombre) || data[b].nombre || b;
+          const na = (window.paisNombre ? window.paisNombre(a, data[a].nombre) : data[a].nombre) || data[a].nombre || a;
+          const nb = (window.paisNombre ? window.paisNombre(b, data[b].nombre) : data[b].nombre) || data[b].nombre || b;
           return na.localeCompare(nb, getLangBucket());
         })
         .forEach(key => {
           const country = data[key];
           const opt = document.createElement('option');
           opt.value = key;
-          opt.textContent = t(country.nombre) || country.nombre || key;
+          opt.textContent = (window.paisNombre ? window.paisNombre(key, country.nombre) : country.nombre) || country.nombre || key;
           selectCountry.appendChild(opt);
         });
       selectCountry.dataset.loaded = '1';

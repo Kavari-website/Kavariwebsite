@@ -4,7 +4,6 @@
    Se carga al final del <head> de index.html para que sus reglas
    tengan prioridad. No afecta a ninguna otra página.
    ================================================================ */
-
 /* ---------- HERO: profundidad, centrado y legibilidad ---------- */
 .page-index .hero {
   display:grid;
@@ -51,7 +50,6 @@
   line-height:1.6;
   text-shadow:0 2px 14px rgba(4,12,30,.55);
 }
-
 /* ---------- PANEL DE AVENTURA (search-box) ---------- */
 .page-index .search-box {
   width:min(980px,92%);
@@ -110,7 +108,6 @@
   flex-shrink:0;
   box-shadow:0 14px 34px rgba(46,110,220,.4),inset 0 1px 0 rgba(255,255,255,.35)!important;
 }
-
 /* ---------- ENCABEZADOS DE SECCIÓN ---------- */
 .page-index .featured-section {
   padding-bottom:90px;
@@ -129,7 +126,6 @@
   border-radius:99px;
   background:linear-gradient(90deg,#2e6edc,#00c2a8);
 }
-
 /* ---------- TOP 10: tarjetas ---------- */
 .page-index .cards-container {
   grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
@@ -190,7 +186,6 @@
   padding:13px 20px!important;
   font-size:14px!important;
 }
-
 /* ---------- PAQUETES DE VIAJE ---------- */
 .page-index .places-section {
   padding-bottom:100px;
@@ -245,7 +240,6 @@
   padding:13px 30px!important;
   font-size:14px!important;
 }
-
 /* ---------- RESPONSIVE ---------- */
 @media (max-width:900px) {
   .page-index .paquete-card {

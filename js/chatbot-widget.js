@@ -28,7 +28,12 @@
   const MAX_HISTORY = 24;
 
   function lang() {
-    return (localStorage.getItem('kavari-idioma') || 'es') === 'en';
+    return localStorage.getItem('kavari-idioma') || 'es';
+  }
+
+  function msg(es, en, pt) {
+    const l = lang();
+    return l === 'en' ? en : l === 'pt' ? pt : es;
   }
 
   const generalQuestions = [
@@ -42,8 +47,12 @@
     { qKey: 'chatQContacto', key: 'contacto' }
   ];
 
+  function cname(d) {
+    return (window.paisNombre && d?.code) ? (window.paisNombre(d.code, d.nombre) || d.nombre) : (d?.nombre || '');
+  }
+
   function getDestinationQuestions(d) {
-    const n = d.nombre;
+    const n = cname(d);
     const t = window.t || (k => k);
     return [
       { q: t('chatBtnDestinoEpoca').replace('{nombre}', n), text: t('chatQDestinoEpoca').replace('{nombre}', n) },
@@ -63,8 +72,8 @@
   }
 
   function contextKey() {
-    if (ctx.country?.nombre) return 'pais-' + slugify(ctx.country.nombre);
     if (ctx.country?.code) return 'pais-' + String(ctx.country.code);
+    if (ctx.country?.nombre) return 'pais-' + slugify(ctx.country.nombre);
     return 'general';
   }
 
@@ -317,7 +326,7 @@
     const d = ctx.country;
     let html;
     if (d?.nombre) {
-      html = t('chatWelcomeDestino').replace('{nombre}', escapeHtml(d.nombre));
+      html = t('chatWelcomeDestino').replace('{nombre}', escapeHtml(cname(d)));
     } else {
       html = t('chatWelcomeGeneral');
     }
@@ -354,22 +363,21 @@
     if (title) title.textContent = t('chatTitle');
     if (subtitle) {
       subtitle.textContent = ctx.country?.nombre
-        ? t('chatSubtitleDestino').replace('{nombre}', ctx.country.nombre)
+        ? t('chatSubtitleDestino').replace('{nombre}', cname(ctx.country))
         : t('chatSubtitle');
     }
     if (input) input.placeholder = t('chatInputPlaceholder');
-    if (clearBtn) clearBtn.title = lang() ? 'Clear conversation' : 'Limpiar conversación';
+    if (clearBtn) clearBtn.title = msg('Limpiar conversación', 'Clear conversation', 'Limpar conversa');
     if (opened) { renderQuestions(); renderAcciones(); }
   }
 
   /* ═══════════════════ acciones rápidas ═══════════════════ */
   function actionItems() {
-    const L = lang();
     return [
-      { key: 'destinos', label: L ? 'Destinations' : 'Destinos' },
-      { key: 'guias', label: L ? 'Guides' : 'Guías' },
-      { key: 'paquetes', label: L ? 'Packages' : 'Paquetes' },
-      { key: 'contacto', label: L ? 'Contact' : 'Contacto' }
+      { key: 'destinos', label: msg('Destinos', 'Destinations', 'Destinos') },
+      { key: 'guias', label: msg('Guías', 'Guides', 'Guias') },
+      { key: 'paquetes', label: msg('Paquetes', 'Packages', 'Pacotes') },
+      { key: 'contacto', label: msg('Contacto', 'Contact', 'Contato') }
     ];
   }
 
@@ -401,17 +409,16 @@
   }
 
   function doAction(action) {
-    const L = lang();
     let reply;
     switch (action) {
       case 'destinos':
-        reply = L ? 'Opening destinations…' : 'Abriendo destinos…';
+        reply = msg('Abriendo destinos…', 'Opening destinations…', 'Abrindo destinos…');
         addBotMessage(renderBotText(reply));
         pushTurn('model', reply);
         navigate('paises.html');
         break;
       case 'guias':
-        reply = L ? 'Opening certified guides…' : 'Abriendo guías certificados…';
+        reply = msg('Abriendo guías certificados…', 'Opening certified guides…', 'Abrindo guias certificados…');
         addBotMessage(renderBotText(reply));
         pushTurn('model', reply);
         if (/destino\.html/i.test(location.pathname)) {
@@ -422,19 +429,19 @@
         break;
       case 'paquetes':
         if (/index\.html$/i.test(location.pathname) || location.pathname === '/' || /\/index$/i.test(location.pathname)) {
-          reply = L ? 'Here are our travel packages — pick the one you like.' : 'Aquí tienes nuestros paquetes de viaje — elige el que te guste.';
+          reply = msg('Aquí tienes nuestros paquetes de viaje — elige el que te guste.', 'Here are our travel packages — pick the one you like.', 'Aqui estão nossos pacotes de viagem — escolha o que você gosta.');
           addBotMessage(renderBotText(reply));
           pushTurn('model', reply);
           scrollToSection('paquetes');
         } else {
-          reply = L ? 'Opening travel packages…' : 'Abriendo paquetes de viaje…';
+          reply = msg('Abriendo paquetes de viaje…', 'Opening travel packages…', 'Abrindo pacotes de viagem…');
           addBotMessage(renderBotText(reply));
           pushTurn('model', reply);
           navigate('index.html#paquetes');
         }
         break;
       case 'contacto':
-        reply = L ? 'Opening the contact page…' : 'Abriendo la página de contacto…';
+        reply = msg('Abriendo la página de contacto…', 'Opening the contact page…', 'Abrindo a página de contato…');
         addBotMessage(renderBotText(reply));
         pushTurn('model', reply);
         navigate('contacto.html');
@@ -445,7 +452,6 @@
   }
 
   function clearConversation() {
-    const L = lang();
     try {
       localStorage.removeItem(historyKey());
     } catch (_) { /* noop */ }
@@ -465,7 +471,7 @@
     welcomeShown = false;
     showWelcome();
     setThinking(false);
-    const rep = L ? 'Conversation cleared. How can I help you?' : 'Conversación limpia. ¿En qué te ayudo?';
+    const rep = msg('Conversación limpia. ¿En qué te ayudo?', 'Conversation cleared. How can I help you?', 'Conversa limpa. Como posso ajudá-lo?');
     addBotMessage(renderBotText(rep));
   }
 
@@ -560,7 +566,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: text,
-          context: { ...ctx, lang: lang() ? 'en' : 'es' },
+          context: { ...ctx, lang: lang() },
           history: loadHistory().slice(-14),
           user: userInfo()
         }),
@@ -588,12 +594,14 @@
         } else if (typeof generateGeneralResponse === 'function') {
           html = generateGeneralResponse(q);
         } else {
-          html = lang() ? 'How can I help you?' : '¿En qué puedo ayudarte?';
+          html = msg('¿En qué puedo ayudarte?', 'How can I help you?', 'Como posso ajudá-lo?');
         }
       } catch (err) {
-        html = lang()
-          ? 'Sorry, something went wrong answering that. Try rephrasing your question.'
-          : 'Lo siento, algo falló al responder eso. Intenta reformular tu pregunta.';
+        html = msg(
+          'Lo siento, algo falló al responder eso. Intenta reformular tu pregunta.',
+          'Sorry, something went wrong answering that. Try rephrasing your question.',
+          'Desculpe, algo deu errado ao responder isso. Tente reformular a sua pergunta.'
+        );
       }
     }
 

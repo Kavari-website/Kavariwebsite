@@ -8,7 +8,6 @@
    No elimina información ni cambia ningún enlace.
    Se carga al final del <head> de contacto.html.
    ================================================================ */
-
 /* ---------- Tarjetas de sección: más ligeras y ordenadas ---------- */
 .contact-card {
   padding:44px 44px 48px;
@@ -37,7 +36,6 @@
 .contact-card h2 {
   margin-bottom:26px;
 }
-
 /* ---------- Caja introductoria: menos peso visual ---------- */
 .contact-float {
   box-shadow:0 14px 40px rgba(13,31,60,.09);
@@ -46,7 +44,6 @@
 [data-theme="dark"] .contact-float {
   border-color:rgba(255,255,255,.07);
 }
-
 /* ---------- Accesos rápidos: una sola dirección de color ---------- */
 .quick-links {
   max-width:1100px;
@@ -75,7 +72,6 @@
 .quick-link:hover .quick-link-icon {
   transform:scale(1.08) rotate(-6deg);
 }
-
 /* ---------- Redes sociales: tarjetas suaves, sin saltos ---------- */
 .ig-list {
   gap:14px;
@@ -108,7 +104,6 @@
 .ig-item.tapped .ig-icon {
   transform:scale(1.08) rotate(-6deg);
 }
-
 /* ---------- Sede: columnas con menos relieve ---------- */
 .superate-col {
   box-shadow:none;
@@ -123,7 +118,6 @@
 .superate-col:hover .superate-col-icon {
   transform:scale(1.08) rotate(-6deg);
 }
-
 /* ---------- Correo principal: énfasis limpio ---------- */
 .email-main {
   border:1px solid rgba(46,110,220,.25);
@@ -144,7 +138,6 @@
 .email-main:hover .email-main-icon {
   transform:scale(1.08) rotate(-6deg);
 }
-
 /* ---------- Equipo: hover unificado en un solo color ---------- */
 .email-team-item {
   background:rgba(13,31,60,.03);
@@ -209,7 +202,6 @@
 [data-theme="dark"] .email-team-item.member-celeste.tapped .email-team-name {
   color:#58a6ff;
 }
-
 /* ---------- Formulario: campos con más aire ---------- */
 .contact-form-intro {
   margin:0 0 28px;
@@ -222,7 +214,6 @@
 .contact-form textarea {
   padding:14px 16px;
 }
-
 /* ---------- Botón volver: coherente con el sistema ---------- */
 .back-btn {
   background:linear-gradient(135deg,#1d4ea3 0%,#2e6edc 100%);
@@ -235,7 +226,6 @@
   background:linear-gradient(135deg,#2457b3 0%,#3b79e6 100%);
   box-shadow:0 10px 26px rgba(29,78,163,.32);
 }
-
 /* ---------- Organización en dos columnas (escritorio) ---------- */
 /* Empareja las secciones por propósito:
    fila "Conócenos"  → redes sociales + sede
@@ -278,7 +268,6 @@
     max-width:none;
   }
 }
-
 /* ---------- Responsive ---------- */
 @media (max-width:900px) {
   .contact-main {

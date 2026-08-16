@@ -244,9 +244,12 @@ function updateLangButton(idioma) {
     if (btnLang) {
         const langLabel = document.getElementById('langLabel');
         if (langLabel) {
-            langLabel.textContent = idioma === 'en' ? 'EN' : 'ES';
+            langLabel.textContent = (idioma || 'es').toUpperCase();
         }
-        btnLang.setAttribute('aria-label', idioma === 'en' ? 'Switch to Spanish' : 'Cambiar a Inglés');
+        const orden = ['es', 'en', 'pt'];
+        const idx = orden.indexOf(idioma);
+        const nextIdioma = orden[(idx + 1) % orden.length];
+        btnLang.setAttribute('aria-label', 'Cambiar a ' + nextIdioma.toUpperCase());
     }
 }
 

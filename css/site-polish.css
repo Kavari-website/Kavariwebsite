@@ -112,7 +112,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 .kavari-mascot-inner img {
   border:2px solid rgba(255,255,255,.7);
 }
-
 /* ===== Navbar unificado: enlaces centrados con la MISMA separación entre todos =====
    gap fijo entre enlaces (igual en todas las páginas) + grupo centrado; así
    ningún enlace se ve más separado que otro y no se infla en pantallas anchas. */
@@ -383,7 +382,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
   background:rgba(255,255,255,.06);
   border-color:rgba(255,255,255,.12);
 }
-
 /* --------------------------------------------------------------
    POLISH PREMIUM v2 � microinteracciones de tarjetas y botones
    en destino.html / paises.html
@@ -409,7 +407,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 .guide-card:hover .guide-avatar {
   transform:scale(1.06) rotate(2deg);
 }
-
 /* Hospedajes: elevaci�n + imagen con zoom sutil */
 .hospedaje-card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
@@ -427,7 +424,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 .hospedaje-card:hover .hospedaje-img {
   transform:scale(1.07);
 }
-
 /* Aerol�neas */
 .airline-card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
@@ -442,7 +438,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 .airline-card:hover .airline-logo {
   transform:scale(1.1);
 }
-
 /* Souvenirs */
 .souvenir-card-v2 {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
@@ -457,7 +452,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 .souvenir-card-v2:hover .souv-main-img {
   transform:scale(1.07);
 }
-
 /* Cards de destinos destacados (destino.html) */
 .card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
@@ -472,7 +466,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 .card:hover .card-img {
   transform:scale(1.06);
 }
-
 /* Cards de pa�ses (paises.html) */
 .dest-card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
@@ -494,7 +487,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
   transform:translateY(-2px) scale(1.04);
   box-shadow:0 10px 24px rgba(46,110,220,.4);
 }
-
 /* Botones hero de destino */
 .btn-hero {
   transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;
@@ -503,12 +495,10 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
   transform:translateY(-3px) scale(1.03);
   box-shadow:0 12px 30px rgba(0,194,168,.45);
 }
-
 /* Aparici�n escalonada de secciones en destino.html */
 .reveal {
   transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1);
 }
-
 /* ===== Formulario de plan de viaje (paquetes del index) ===== */
 .traveler-form textarea {
   width:100%;
@@ -591,7 +581,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 [data-theme="dark"] .paq-banner-price {
   color:#4ade80;
 }
-
 /* ==============================================================
    ACCESIBILIDAD (a11y)
    Foco visible, salto al contenido y movimiento reducido.
@@ -603,7 +592,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 [data-theme="dark"] :focus-visible {
   outline-color:#f2cc60;
 }
-
 .skip-link {
   position:absolute;
   left:-9999px;
@@ -623,7 +611,6 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
   outline:3px solid #f0b429;
   outline-offset:2px;
 }
-
 @media (prefers-reduced-motion:reduce) {
   *,
   *::before,

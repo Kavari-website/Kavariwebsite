@@ -7,7 +7,6 @@
    Solo espaciado: no cambia contenido, colores, imágenes ni
    funcionalidad. Se carga al final del <head> para tener prioridad.
    ================================================================ */
-
 :root {
   --space-sec-x:clamp(24px,6vw,64px);
   --space-sec-y:76px;
@@ -15,7 +14,6 @@
   --space-card-pad:26px 28px 30px;
   --space-footer-y:48px;
 }
-
 /* ---------- Index: ritmo vertical de secciones ---------- */
 .page-index .featured-section {
   padding-bottom:110px;
@@ -36,7 +34,6 @@
 .page-index .paquete-info {
   padding:42px 44px;
 }
-
 /* ---------- Países ---------- */
 .page-body {
   padding:56px 0 96px;
@@ -47,7 +44,6 @@
 .dest-info {
   padding:22px 24px 26px;
 }
-
 /* ---------- Destino ---------- */
 .cards-section {
   padding:76px var(--space-sec-x);
@@ -67,7 +63,6 @@
 .info-grid {
   padding:72px var(--space-sec-x);
 }
-
 /* ---------- Ayuda ---------- */
 .help-main {
   padding:80px 24px;
@@ -84,7 +79,6 @@
 .help-cta .cta-btns {
   gap:16px;
 }
-
 /* ---------- Contacto ---------- */
 .contact-main {
   padding-bottom:96px;
@@ -101,7 +95,6 @@
 .quick-link {
   padding:20px 22px;
 }
-
 /* ---------- Sobre nosotros ---------- */
 .about-main {
   padding-bottom:96px;
@@ -115,7 +108,6 @@
 .team-grid {
   gap:30px;
 }
-
 /* ---------- Planes ---------- */
 .pricing-section {
   padding:80px 24px 96px;
@@ -126,7 +118,6 @@
 .pricing-grid {
   gap:30px;
 }
-
 /* ---------- Cuenta / Perfil ---------- */
 .auth-main {
   padding:64px 20px;
@@ -140,7 +131,6 @@
 .perfil-auth-card {
   padding:44px 40px;
 }
-
 /* ---------- Footer ---------- */
 .footer {
   padding:var(--space-footer-y) 24px;
@@ -151,7 +141,6 @@
 .footer-links {
   gap:24px;
 }
-
 /* ---------- Ajustes en pantallas pequeñas ---------- */
 @media (max-width:768px) {
   .page-index .paquete-info {

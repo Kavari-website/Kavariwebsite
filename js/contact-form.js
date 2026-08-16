@@ -11,6 +11,10 @@
   var submitBtn = document.getElementById('contactSubmit');
   if (!form) return;
 
+  var tt = function (key, fallback) {
+    return (window.t && window.t(key) !== key) ? window.t(key) : fallback;
+  };
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (statusEl) statusEl.classList.remove('is-error');
@@ -37,7 +41,7 @@
         if (el) el.classList.add('field-error');
       });
       if (statusEl) {
-        statusEl.textContent = 'Revisa los campos marcados.';
+        statusEl.textContent = tt('contactoRevisa', 'Revisa los campos marcados.');
         statusEl.classList.add('is-error');
       }
       return;
@@ -45,7 +49,7 @@
 
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando…';
+      submitBtn.textContent = tt('contactoEnviando', 'Enviando…');
     }
     if (statusEl) statusEl.textContent = '';
 
@@ -53,12 +57,12 @@
       window.KavariDB.getSupabaseClient() : null;
     if (!client) {
       if (statusEl) {
-        statusEl.textContent = 'No se pudo enviar el mensaje. Intenta de nuevo.';
+        statusEl.textContent = tt('contactoNoPudo', 'No se pudo enviar el mensaje. Intenta de nuevo.');
         statusEl.classList.add('is-error');
       }
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Enviar mensaje';
+        submitBtn.textContent = tt('contactoEnviar', 'Enviar mensaje');
       }
       return;
     }
@@ -80,22 +84,22 @@
       if (res && res.error) throw res.error;
       form.reset();
       if (statusEl) {
-        statusEl.textContent = '¡Mensaje enviado! Te responderemos pronto.';
+        statusEl.textContent = tt('contactoEnviado', '¡Mensaje enviado! Te responderemos pronto.');
         statusEl.classList.remove('is-error');
       }
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Enviar mensaje';
+        submitBtn.textContent = tt('contactoEnviar', 'Enviar mensaje');
       }
     }).catch(function (err) {
       console.error('[KAVARI] Error guardando mensaje de contacto:', err);
       if (statusEl) {
-        statusEl.textContent = 'No se pudo enviar el mensaje. Intenta de nuevo.';
+        statusEl.textContent = tt('contactoNoPudo', 'No se pudo enviar el mensaje. Intenta de nuevo.');
         statusEl.classList.add('is-error');
       }
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Enviar mensaje';
+        submitBtn.textContent = tt('contactoEnviar', 'Enviar mensaje');
       }
     });
   });

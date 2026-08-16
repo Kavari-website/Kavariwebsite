@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KAVARI – Explora 36 Destinos del Mundo</title>
-  <meta name="description" content="Explora 36 destinos turísticos con KAVARI: Latinoamérica, Europa, Asia y África. Información completa de cultura, gastronomía, hospedajes y guías certificados."/>
+  <title data-i18n="tituloPaises">KAVARI – Explora 36 Destinos del Mundo</title>
+  <meta name="description" content="Explora 21 destinos turísticos con KAVARI: Latinoamérica, Europa, Asia y África. Información completa de cultura, gastronomía, hospedajes y guías certificados."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="css/style.css"/>
@@ -23,10 +23,21 @@
   <link rel="stylesheet" href="css/spacing-system.css">
   <link rel="stylesheet" href="css/audit-consistency.css">
   <script src="js/idioma.js?v=3"></script>
+  <script src="js/idioma-pt.js?v=1"></script>
   <script src="js/theme.js?v=3"></script>
   <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
   <script src="js/img-fallback.js"></script>
+
+  <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
+  <link rel="stylesheet" href="css/lang-dropdown.css">
+  <link rel="stylesheet" href="css/universal-shine.css">
+  <script src="js/lang-dropdown.js"></script>
+
+  <!-- ===== OPTIMIZACIÓN DE CARGA (performance.js) ===== -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <script src="js/performance.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -59,7 +70,7 @@
   <div class="page-hero-content">
     <p class="hero-eyebrow" data-i18n="paisesEyebrow">Tu Próxima Aventura Te Espera</p>
     <h1 data-i18n="paisesTitulo">Explora Nuestros Destinos</h1>
-    <p class="hero-sub" data-i18n="paisesSub">36 países a tu disposición</p>
+    <p class="hero-sub" data-i18n="paisesSub">21 países a tu disposición</p>
     <div class="hero-cta" style="margin-top:18px;">
       <a href="#" class="btn btn-gold" data-guide-register data-i18n="guiaRegistrateCTA">Regístrate como guía</a>
     </div>
@@ -386,12 +397,16 @@
     var code=m[1];
     var countryGuides=guides.filter(function(g){return g.country===code});
     if(!countryGuides.length)return;
+    var n=countryGuides.length;
+    var L=(localStorage.getItem('kavari-idioma')||'es');
+    var w=(n===1? (L==='en'?'guide':L==='pt'?'guia':'guía') : (L==='en'?'guides':L==='pt'?'guias':'guías'));
+    var txt=n+' '+w;
     var badge=card.querySelector('.thumb-badge');
-    if(badge)badge.textContent=countryGuides.length+' guía'+(countryGuides.length>1?'s':'');
+    if(badge)badge.textContent=txt;
     else{
       var b=document.createElement('div');
       b.className='thumb-badge';
-      b.textContent=countryGuides.length+' guía'+(countryGuides.length>1?'s':'');
+      b.textContent=txt;
       card.querySelector('.dest-thumb')?.appendChild(b);
     }
   });

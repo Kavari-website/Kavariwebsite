@@ -6,7 +6,6 @@
    activos. Se carga al final del <head> para tener prioridad.
    No cambia enlaces, textos ni funcionalidad.
    ================================================================ */
-
 :root {
   --kbtn-radius:999px;
   --kbtn-font:'Poppins',system-ui,sans-serif;
@@ -28,7 +27,6 @@
   --kbtn-sec-border:1.5px solid rgba(88,166,255,.42);
   --kbtn-sec-bg-h:linear-gradient(135deg,rgba(88,166,255,.14),rgba(88,166,255,.06));
 }
-
 /* ---------- Base común: tamaño, radio y tipografía ---------- */
 .btn-sabemas,.dest-btn,.btn-paquete-reservar,.btn-paquete-info,
 .btn-modal-info,.btn-modal-go,.btn-modal-cerrar,.btn-modal-destino,
@@ -60,7 +58,6 @@
   padding:0 26px;
   -webkit-tap-highlight-color:transparent;
 }
-
 /* ---------- Variantes de color ---------- */
 /* Primario */
 .btn-sabemas,.dest-btn,.btn-paquete-reservar,.btn-modal-go,
@@ -104,7 +101,6 @@
   color:var(--kbtn-sec-color);
   border:none;
 }
-
 /* ---------- Tamaños ---------- */
 .btn-sm,.perfil-logout-btn,.perfil-danger-btn {
   height:38px;
@@ -119,7 +115,6 @@
 .btn-sabemas,.dest-btn,.glass-primary,.glass-secondary,.plan-card button {
   width:100%;
 }
-
 /* ---------- Hover ---------- */
 @media (hover:hover) {
   .btn-sabemas:hover,.dest-btn:hover,.btn-paquete-reservar:hover,.btn-modal-go:hover,
@@ -158,7 +153,6 @@
     color:var(--kbtn-sec-color);
   }
 }
-
 /* ---------- Activo ---------- */
 .btn-sabemas:active,.dest-btn:active,
 .btn-paquete-reservar:active,.btn-paquete-info:active,
@@ -173,7 +167,6 @@
   box-shadow:inset 0 3px 12px rgba(0,0,0,.1),inset 0 1px 3px rgba(0,0,0,.06);
   transition-duration:.08s;
 }
-
 /* ---------- Índice: prioridad sobre reglas previas con !important ---------- */
 .page-index .btn-sabemas,
 .page-index .btn-paquete-reservar,
@@ -252,7 +245,6 @@
   box-shadow:inset 0 3px 12px rgba(0,0,0,.1)!important;
   transition-duration:.08s!important;
 }
-
 /* ---------- Animación de brillo al pasar el cursor ---------- */
 .btn-gold {
   position:relative;
@@ -297,7 +289,6 @@
     transform:translateX(300%) skewX(-18deg);
   }
 }
-
 /* Índice: reactiva el brillo sobre reglas previas que lo ocultaban */
 .page-index .btn-sabemas::after,
 .page-index .btn-paquete-reservar::after,
@@ -327,7 +318,6 @@
 .page-index .modal-content .btn-submit:hover::after {
   animation:kbtnSheen .9s cubic-bezier(.22,1,.36,1)!important;
 }
-
 /* ---------- Brillo universal: todos los botones y CTAs de todas las páginas ---------- */
 button,
 a[class*="btn"] {

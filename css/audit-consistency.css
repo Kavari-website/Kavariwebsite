@@ -6,7 +6,6 @@
    Se carga al final del <head> de todas las páginas.
    No cambia textos, enlaces, imágenes ni funcionalidad.
    ================================================================ */
-
 /* ---------- 1. Paleta de marca: elimina acentos fuera del sistema ----------
    Teal (#00c2a8), verde (#3fb950), naranja (#e68000) e índigo de planes
    se alinean a la familia navy/blue del sitio. */
@@ -29,13 +28,11 @@
   --ayuda-accent:#58a6ff;
   --ayuda-accent2:#58a6ff;
 }
-
 /* ---------- 2. Subrayados decorativos de títulos (teal → azul de marca) ---------- */
 .page-index .search-content h2::after,
 .page-index .featured-section h2::before {
   background:linear-gradient(90deg,#2e6edc,#5b93f5);
 }
-
 /* ---------- 3. Botones fuera del sistema de marca ---------- */
 .nav-btn-soy-guia {
   background:linear-gradient(135deg,#1d4ea3 0%,#2e6edc 100%);
@@ -70,7 +67,6 @@
   color:#3d2e0b;
   box-shadow:0 4px 12px rgba(240,180,41,.35);
 }
-
 /* ---------- 4. Foco visible unificado en azul de marca ---------- */
 :focus-visible {
   outline-color:rgba(91,147,245,.65);
@@ -82,7 +78,6 @@
   outline:2px solid rgba(91,147,245,.65);
   box-shadow:0 0 0 4px rgba(46,110,220,.12);
 }
-
 /* ---------- 5. Campos de formulario unificados ----------
    Mismo borde, radio, fondo y foco azul para todos los campos
    (perfil, cuenta, modal, formulario de contacto y de viajeros). */
@@ -166,7 +161,6 @@
   border-color:#58a6ff;
   box-shadow:0 0 0 4px rgba(88,166,255,.18);
 }
-
 /* ---------- 6. Radios de tarjetas unificados ----------
    24px para tarjetas principales; 16px para tarjetas utilitarias pequeñas. */
 .page-index .card,
@@ -193,7 +187,6 @@
 .help-cat-card {
   border-radius:16px;
 }
-
 /* ---------- 7. Etiquetas eyebrow/kicker unificadas ---------- */
 .hero-eyebrow {
   font-size:11px;
@@ -203,7 +196,6 @@
 .paquete-region {
   font-size:11px;
 }
-
 /* ---------- 8. Iconos de dato unificados (52px, svg 26px) ---------- */
 .info-icon,
 .fact-icon,
@@ -218,7 +210,6 @@
   width:26px;
   height:26px;
 }
-
 /* ---------- 9. Navegación: azules coherentes ---------- */
 .nav-links a:hover {
   color:#58a6ff;
@@ -232,7 +223,6 @@
 .navbar.scrolled .nav-links a:hover {
   color:#2e6edc;
 }
-
 /* ---------- 10. CTA "Regístrate como guía" (.btn-gold) ----------
    No tenía fondo ni tamaño definidos (botón invisible). Se le da el
    aspecto de botón pill dorado, acento secundario de la marca. */

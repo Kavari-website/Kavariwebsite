@@ -127,13 +127,13 @@
       const res = await fetch('data/data.json');
       const data = await res.json();
       const currentVal = selectEl.value;
-      selectEl.innerHTML = '<option value="">Selecciona un país</option>';
+      selectEl.innerHTML = '<option value="">' + (window.t ? window.t('seleccionaPais') : 'Selecciona un país') + '</option>';
       Object.keys(data)
         .sort((a, b) => (data[a].nombre || a).localeCompare(data[b].nombre || b))
         .forEach(key => {
           const opt = document.createElement('option');
           opt.value = key;
-          opt.textContent = data[key].nombre || key;
+          opt.textContent = (window.paisNombre ? window.paisNombre(key, data[key].nombre) : data[key].nombre) || key;
           selectEl.appendChild(opt);
         });
       if (currentVal) selectEl.value = currentVal;
@@ -662,7 +662,7 @@
         shape: 'pill',
         text: 'continue_with',
         width: btn.clientWidth || 320,
-        locale: (lang() === 'en') ? 'en' : 'es'
+        locale: lang() === 'en' ? 'en' : (lang() === 'pt' ? 'pt-BR' : 'es')
       });
       btn.dataset.gisRendered = 'true';
       // El iframe de GIS se inyecta de forma (casi) síncrona. Si al cabo de
@@ -984,7 +984,9 @@
   function initSettingsToggles() {
     if (els.settingsLangToggle) {
       els.settingsLangToggle.addEventListener('click', () => {
-        const newLang = lang() === 'es' ? 'en' : 'es';
+        const orden = ['es', 'en', 'pt'];
+        const actual = orden.indexOf(lang());
+        const newLang = orden[(actual + 1) % orden.length];
         if (typeof cambiarIdioma === 'function') {
           cambiarIdioma(newLang);
         }

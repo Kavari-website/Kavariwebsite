@@ -4172,7 +4172,6 @@ a:focus-visible,button:focus-visible,.filter-chip:focus-visible,.btn-hero:focus-
   box-shadow:var(--shadow-lg);
   border-color:var(--blue);
 }
-
 /* ══════════════════════════════════════════════════════════════
    HERO DESTINO — composición horizontal limpia
    ══════════════════════════════════════════════════════════════ */
@@ -4231,7 +4230,6 @@ a:focus-visible,button:focus-visible,.filter-chip:focus-visible,.btn-hero:focus-
 .page-destino .hero-scroll {
   bottom:34px;
 }
-
 @media (max-width:900px) {
   .hero-content {
     grid-template-columns:1fr;

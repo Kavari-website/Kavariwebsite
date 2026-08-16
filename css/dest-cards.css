@@ -9,14 +9,12 @@
    tener prioridad.
    No cambia estructura HTML, información ni funcionalidad.
    ================================================================ */
-
 /* ---------- Rejillas: proporciones y espaciado iguales ---------- */
 .page-index .cards-container,
 .destinos-grid {
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:26px;
 }
-
 /* ---------- Tarjeta: base consistente ---------- */
 .page-index .card,
 .dest-card {
@@ -36,7 +34,6 @@
   border-color:rgba(255,255,255,.10);
   box-shadow:0 14px 40px rgba(0,0,0,.35);
 }
-
 /* ---------- Imagen: proporción 4:3 e igual altura ---------- */
 .page-index .card img {
   width:100%;
@@ -61,7 +58,6 @@
   object-position:center;
   display:block;
 }
-
 /* ---------- Hover: elevación e imagen ---------- */
 @media (hover:hover) {
   .page-index .card:hover,
@@ -84,7 +80,6 @@
 .dest-card:active {
   transform:scale(.98);
 }
-
 /* ---------- Contenido: tipografía y espaciado comunes ---------- */
 .page-index .card-content,
 .dest-info {
@@ -120,7 +115,6 @@
 [data-theme="dark"] .dest-info p {
   color:#8b949e;
 }
-
 /* ---------- Botones: idénticos en ambas tarjetas ---------- */
 .page-index .card-content .btn-sabemas,
 .dest-btn {
@@ -155,7 +149,6 @@
     box-shadow:0 8px 18px rgba(29,78,163,.22);
   }
 }
-
 /* ---------- Responsive: tarjetas cómodas en móvil ---------- */
 @media (max-width:768px) {
   .page-index .cards-container,

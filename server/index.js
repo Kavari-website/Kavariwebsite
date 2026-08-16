@@ -44,20 +44,20 @@ try {
 } catch (e) {
   console.error('No se pudo cargar data.json:', e.message);
 }
-const COUNTRY_CODES = Object.keys(data).filter(k => data[k] && data[k].nombre);
+const COUNTRY_CODES = Object.keys(data).filter(k => data[k] && data[k].nombre && !hasPlaceholder(data[k].nombre));
 
-/* ───────────── clave Gemini (solo servidor) ───────────── */
-function loadGeminiKey() {
-  if (process.env.GEMINI_API_KEY) return String(process.env.GEMINI_API_KEY).trim();
+/* ───────────── clave y modelo Gemini (solo servidor) ───────────── */
+function loadEnvVar(name) {
+  if (process.env[name]) return String(process.env[name]).trim();
   try {
     const raw = fs.readFileSync(path.join(__dirname, '.env'), 'utf8');
-    const m = raw.match(/^\s*GEMINI_API_KEY\s*=\s*(.+?)\s*$/m);
+    const m = raw.match(new RegExp('^\\s*' + name + '\\s*=\\s*(.+?)\\s*$', 'm'));
     if (m) return m[1].replace(/^["']|["']$/g, '').trim();
   } catch (_) { /* sin .env */ }
   return null;
 }
-const GEMINI_API_KEY = loadGeminiKey();
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const GEMINI_API_KEY = loadEnvVar('GEMINI_API_KEY');
+const GEMINI_MODEL = loadEnvVar('GEMINI_MODEL') || 'gemini-flash-latest';
 
 /* ══════════════════════════════════════════════════════════════
    BASE DE CONOCIMIENTO (RAG)
@@ -65,9 +65,17 @@ const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
    ══════════════════════════════════════════════════════════════ */
 const KB = [];
 
+// Detecta texto con placeholders corruptos tipo "paisColombia_nombre"
+function hasPlaceholder(text) {
+  return /pais[A-Za-z]+_[A-Za-z_]+/.test(String(text || '')) ||
+         /^\{\{.*\}\}$/.test(String(text || '').trim());
+}
+
 function addChunk(code, country, section, title, text) {
   const txt = clean(text).replace(/\s+/g, ' ').trim();
   if (!txt) return;
+  // descarta datos corruptos (nombre/país/título/texto con placeholders)
+  if (hasPlaceholder(txt) || hasPlaceholder(country) || hasPlaceholder(title)) return;
   const kws = tokens(`${country || ''} ${title} ${txt}`);
   KB.push({ id: KB.length, code, country, section, title: clean(title) || section, text: txt, kws });
 }
@@ -293,21 +301,47 @@ async function askGemini({ system, history, userMessage, contextText }) {
 }
 
 /* ───────────── prompt de sistema ───────────── */
-function buildSystemPrompt(ctx, userInfo) {
+function buildSystemPrompt(ctx, userInfo, hasContext) {
   const lang = ctx.lang === 'en' ? 'English' : 'Spanish';
   const name = userInfo?.name ? `The user's name is ${userInfo.name}. Address them by name naturally.` : '';
   const plan = userInfo?.plan ? `Their KAVARI plan is "${userInfo.plan}".` : '';
   const favs = userInfo?.favorites?.length ? `Their favorite countries in KAVARI are: ${userInfo.favorites.join(', ')}.` : '';
+  const rules = hasContext
+    ? [
+        'Answer ONLY using the information in "CONTEXTO KAVARI" included in the last user message. Never invent prices, places, dates or data that are not in that context.',
+        'If the context does not cover the question, say honestly that KAVARI does not have that specific information and suggest 2 related topics you CAN help with.'
+      ]
+    : [
+        'There is no KAVARI context available for this question. You can answer using general, well-known tourism knowledge, but NEVER invent specific prices, exact dates, contact details or KAVARI memberships.',
+        'If the user asks about a specific country or plan, give helpful general travel guidance and note you can share KAVARI details once they select that destination.'
+      ];
   return [
     'You are Kari, the friendly travel assistant of KAVARI, a platform with detailed tourism information for 37 countries (culture, food, places, adventure, practical info, guides, flights, stays, history, souvenirs).',
     `Always respond in ${lang} (match the language the website is showing).`,
-    'Answer ONLY using the information in "CONTEXTO KAVARI" included in the last user message. Never invent prices, places, dates or data that are not in that context.',
-    'If the context does not cover the question, say honestly that KAVARI does not have that information and suggest 2 related topics you CAN help with.',
+    ...rules,
     'If the user asks about another country, use the context available for that country.',
     'Be concise: 3-6 short lines, warm and professional. Use simple formatting: **bold** for names/places and "-" for lists. No markdown headers.',
     name, plan, favs,
     'End with one short follow-up question or suggestion related to their trip.'
   ].filter(Boolean).join('\n');
+}
+
+/* ---------- funciones de ayuda para detección de intenciones ---------- */
+function isGeneralKAVARIQuestion(q) {
+  const qNorm = normalize(q);
+  const generalKeywords = [
+    'que es kavari', 'que es kavari', 'what is kavari', 'what is kavari',
+    'como funciona kavari', 'how does kavari work', 'que es kari', 'who is kari', 'who is kavi',
+    'para que sirve kari',
+    'what is kavi', 'kavari 소개', 'kavari nedir'
+  ];
+  return generalKeywords.some(kw => qNorm.includes(kw));
+}
+
+/* ---------- respuesta general sobre KAVARI ---------- */
+function getGeneralKAVARIReply(en) {
+  if (en) return `KAVARI es una plataforma de viajes con información detallada sobre 37 países, incluyendo cultura, gastronomía, actividades, guías locales certificados, vuelos, hospedajes, historia, souvenirs y planes de membresía. Puedo ayudarte con información sobre destinos específicos, requisitos de entrada, clima, presupuesto y más. ¿En qué destino te interesa o sobre qué tema quieres saber?`;
+  return `KAVARI es una plataforma de viajes con información detallada sobre 37 países, incluyendo cultura, gastronomía, actividades, guías locales certificados, vuelos, hospedajes, historia, souvenirs y planes de membresía. Puedo ayudarte con información sobre destinos específicos, requisitos de entrada, clima, presupuesto y más. ¿En qué destino te interesa o sobre qué tema quieres saber?`;
 }
 
 /* ───────────── fallback local (sin IA) ───────────── */
@@ -366,19 +400,25 @@ app.post('/api/chat', async (req, res) => {
       .filter(h => h.text.trim());
 
     let reply = null;
-    if (GEMINI_API_KEY) {
-      try {
-        reply = await askGemini({
-          system: buildSystemPrompt(ctx, userInfo),
-          history: historyArr,
-          userMessage: String(message).slice(0, 2000),
-          contextText: buildContextText(results)
-        });
-      } catch (err) {
-        console.error('⚠️ Gemini error, usando fallback local:', err.message);
+    // Detectar preguntas generales sobre Kari/KAVARI al inicio
+    if (isGeneralKAVARIQuestion(String(message))) {
+      reply = getGeneralKAVARIReply(ctx.lang === 'en');
+    } else {
+      // Flujo normal: Gemini primero, luego fallback a base de conocimientos KAVARI
+      if (GEMINI_API_KEY) {
+        try {
+          reply = await askGemini({
+            system: buildSystemPrompt(ctx, userInfo, results.length > 0),
+            history: historyArr,
+            userMessage: String(message).slice(0, 2000),
+            contextText: buildContextText(results)
+          });
+        } catch (err) {
+          console.error('⚠️ Gemini error, usando fallback local:', err.message);
+        }
       }
+      if (!reply) reply = fallbackAnswer(String(message), ctx, results);
     }
-    if (!reply) reply = fallbackAnswer(String(message), ctx, results);
 
     res.json({ reply, intent: 'ai' });
   } catch (err) {

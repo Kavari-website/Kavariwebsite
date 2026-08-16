@@ -332,6 +332,40 @@ function aplicarTraduccionesPaises() {
                     descripcion.textContent = traduccion;
                 }
             }
+            const nombreKey = 'pais' + key.slice(4) + '_nombre';
+            const nombreEl = card.querySelector('.dest-info h3');
+            if (nombreEl) {
+                const traduccion = t(nombreKey);
+                if (traduccion !== nombreKey) {
+                    nombreEl.textContent = traduccion;
+                }
+            }
+        }
+
+        const badge = card.querySelector('.thumb-badge');
+        if (badge) {
+            const raw = (badge.textContent || '').trim();
+            const countMatch = raw.match(/^(\d+)\s+(.+)$/);
+            if (countMatch) {
+                const n = countMatch[1];
+                const isPlural = n !== '1';
+                const wordKey = isPlural ? 'badgeGuiasPlural' : 'badgeGuiaSingular';
+                const word = t(wordKey);
+                badge.textContent = n + ' ' + (word !== wordKey ? word : countMatch[2]);
+            } else {
+                const badgeMap = {
+                    'guía disponible': 'badgeGuiaDisponible',
+                    'guia disponible': 'badgeGuiaDisponible',
+                    'popular': 'badgePopular',
+                    'trending': 'badgeTrending',
+                    'patrimonio unesco': 'badgePatrimonio'
+                };
+                const badgeKey = badgeMap[raw.toLowerCase()];
+                if (badgeKey) {
+                    const tr = t(badgeKey);
+                    if (tr !== badgeKey) badge.textContent = tr;
+                }
+            }
         }
     });
 }

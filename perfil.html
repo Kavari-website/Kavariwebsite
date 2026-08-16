@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Perfil · KAVARI</title>
+  <title data-i18n="tituloPerfil">Mi Perfil · KAVARI</title>
   <meta name="description" content="Gestiona tu perfil de KAVARI, preferencias de viaje y configuración de cuenta.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,8 +24,19 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://accounts.google.com/gsi/client"></script>
   <script src="js/idioma.js"></script>
+  <script src="js/idioma-pt.js?v=1"></script>
   <script src="js/theme.js"></script>
   <script src="js/img-fallback.js"></script>
+
+  <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
+  <link rel="stylesheet" href="css/lang-dropdown.css">
+  <link rel="stylesheet" href="css/universal-shine.css">
+  <script src="js/lang-dropdown.js"></script>
+
+  <!-- ===== OPTIMIZACIÓN DE CARGA (performance.js) ===== -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <script src="js/performance.js"></script>
 </head>
 <body class="auth-page">
 <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -270,7 +281,7 @@
                 <label for="perfilCountry" data-i18n="perfilPaisResidencia">País de residencia</label>
                 <div class="auth-input-wrap">
                   <select id="perfilCountry" name="country">
-                    <option value="">Selecciona un país</option>
+                    <option value="" data-i18n="seleccionaPais">Selecciona un país</option>
                   </select>
                 </div>
               </div>
@@ -288,7 +299,7 @@
               <div class="auth-field">
                 <label for="perfilDestinos" data-i18n="perfilDestinosInteres">Destinos de interés</label>
                 <div class="auth-input-wrap">
-                  <select id="perfilDestinos" name="preferred_destinations" multiple>
+                  <select id="perfilDestinos" name="preferred_destinations" multiple data-i18n-options="perfilDestinoOpc">
                     <option value="latam">Latinoamérica</option>
                     <option value="europa">Europa</option>
                     <option value="asia">Asia</option>
@@ -300,7 +311,7 @@
               <div class="auth-field">
                 <label for="perfilBudget" data-i18n="perfilPresupuesto">Presupuesto mensual viajes</label>
                 <div class="auth-input-wrap">
-                  <select id="perfilBudget" name="travel_budget">
+                  <select id="perfilBudget" name="travel_budget" data-i18n-options="perfilBudgetOpc">
                     <option value="economico">Económico</option>
                     <option value="moderado">Moderado</option>
                     <option value="premium">Premium</option>
@@ -312,7 +323,7 @@
               <div class="auth-field">
                 <label for="perfilEstilo" data-i18n="perfilEstiloViaje">Estilo de viaje</label>
                 <div class="auth-input-wrap">
-                  <select id="perfilEstilo" name="travel_style">
+                  <select id="perfilEstilo" name="travel_style" data-i18n-options="perfilEstiloOpc">
                     <option value="aventura">Aventura</option>
                     <option value="cultural">Cultural</option>
                     <option value="playa">Playa</option>

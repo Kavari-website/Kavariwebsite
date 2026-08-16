@@ -6,14 +6,12 @@
    nav, para que sus reglas tengan prioridad.
    No cambia rutas ni funcionalidad.
    ================================================================ */
-
 /* ---------- Barra: altura y padding equilibrados ---------- */
 .nav-glass,
 .nav-glass.scrolled {
   min-height:74px!important;
   padding:10px 28px!important;
 }
-
 /* ---------- Enlaces: espaciado y tipografía ---------- */
 .nav-glass .nav-links {
   gap:44px;
@@ -23,18 +21,15 @@
   font-weight:600;
   letter-spacing:.01em;
 }
-
 /* ---------- Logo: presencia de marca ---------- */
 .nav-glass .logo {
   font-size:30px;
   letter-spacing:.06em;
 }
-
 /* ---------- Acciones del nav: equilibrio ---------- */
 .nav-glass .nav-actions {
   gap:10px;
 }
-
 /* ---------- Hover: resaltado sutil y uniforme (todos los estados) ---------- */
 .nav-glass .nav-links a:hover,
 .nav-glass.scrolled .nav-links a:hover {
@@ -43,7 +38,6 @@
   box-shadow:none!important;
   text-shadow:0 0 14px rgba(143,211,255,.5);
 }
-
 /* ---------- Estado activo: subrayado dorado persistente ---------- */
 .nav-glass .nav-links a.active,
 .nav-glass.scrolled .nav-links a.active {
@@ -58,7 +52,6 @@
   height:2.5px;
   box-shadow:0 0 10px rgba(240,180,41,.5);
 }
-
 /* ---------- Menú móvil: sin subrayado y activo bien marcado ---------- */
 .nav-glass .nav-links.open a::after {
   display:none!important;
@@ -73,7 +66,6 @@
   outline:1.5px solid rgba(240,180,41,.55);
   outline-offset:-1.5px;
 }
-
 /* ---------- Pantallas medias: enlaces más compactos ---------- */
 @media (max-width:1100px) {
   .nav-glass .nav-links {

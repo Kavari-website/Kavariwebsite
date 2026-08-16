@@ -1,4 +1,52 @@
 // js/idioma.js
+// ==========================================================================
+// ÍNDICE DE SECCIONES de idioma.js (busca con Ctrl+F: "===== PAÍS" o la
+// línea indicada). Cada bloque PAÍS tiene las claves traducidas de ese país.
+// El portugués vive en idioma-pt.js.
+// --------------------------------------------------------------------------
+// ESPAÑOL (diccionario es):
+//    912  ===== PAÍS PANAMÁ
+//   1242  ===== COSTA RICA
+//   1790  ===== MÉXICO
+//   2119  ===== PERÚ
+//   2449  ===== REPÚBLICA DOMINICANA
+//   2776  ===== ARGENTINA
+//   3108  ===== BRASIL
+//   3440  ===== CHILE
+//   3772  ===== ECUADOR
+//   4102  ===== CUBA
+//   4431  ===== GUATEMALA
+//   4759  ===== BOLIVIA
+//   5085  ===== VENEZUELA
+//   5413  ===== URUGUAY
+//   5740  ===== PARAGUAY
+//   6069  ===== HONDURAS
+//   6396  ===== NICARAGUA
+//   6723  ===== EL SALVADOR
+//   7049  ===== BELICE
+//   7370  ===== GUYANA
+// --------------------------------------------------------------------------
+// INGLÉS (diccionario en):
+//   9096  ===== COLOMBIA
+//   9422  ===== MEXICO
+//   9752  ===== PERU
+//  10081  ===== DOMINICAN REPUBLIC
+//  10408  ===== ARGENTINA
+//  10740  ===== BRAZIL
+//  11072  ===== CHILE
+//  11404  ===== ECUADOR
+//  11734  ===== CUBA
+//  12063  ===== GUATEMALA
+//  12391  ===== BOLIVIA
+//  12716  ===== VENEZUELA
+//  13044  ===== URUGUAY
+//  13371  ===== PARAGUAY
+//  13700  ===== HONDURAS
+//  14027  ===== NICARAGUA
+//  14354  ===== EL SALVADOR
+//  14680  ===== BELIZE
+//  15001  ===== GUYANA
+// ==========================================================================
 (function() {
     'use strict';
 
@@ -100,6 +148,64 @@
             navInicio: 'Inicio',
             navDestinos: 'Destinos',
             tituloSobrenosotros: 'Sobre Nosotros — KAVARI',
+            tituloIndex: 'KAVARI Travel — Descubre el Mundo',
+            tituloPaises: 'KAVARI – Explora 36 Destinos del Mundo',
+            tituloDestino: 'Destino — KAVARI Travel',
+            tituloCuenta: 'Mi cuenta · KAVARI',
+            tituloPerfil: 'Mi Perfil · KAVARI',
+            tituloPlanes: 'Planes · KAVARI',
+            buscarPais: 'Buscar país…',
+            seleccionarPais: 'País',
+            verMasFlecha: 'Ver más ›',
+            badgePatrimonio: 'Patrimonio UNESCO',
+            badgeGuiaSingular: 'guía',
+            badgeGuiasPlural: 'guías',
+            contactoFormTitulo: 'Formulario de contacto',
+            contactoFormEncabezado: 'Envíanos un mensaje',
+            contactoFormIntro: 'Cuéntanos tu consulta y el equipo KAVARI te responderá a la brevedad.',
+            contactoNombreLabel: 'Nombre completo',
+            contactoNombrePlaceholder: 'Tu nombre',
+            contactoEmailPlaceholder: 'tucorreo@ejemplo.com',
+            contactoAsuntoLabel: 'Asunto',
+            contactoAsuntoOpcGeneral: 'Consulta general',
+            contactoAsuntoOpcPaquetes: 'Paquetes de viaje',
+            contactoAsuntoOpcGuias: 'Registro como guía',
+            contactoAsuntoOpcOtros: 'Otro',
+            contactoMensajeLabel: 'Mensaje',
+            contactoMensajePlaceholder: 'Escribe tu mensaje aquí…',
+            contactoEnviar: 'Enviar mensaje',
+            contactoRevisa: 'Revisa los campos marcados.',
+            contactoEnviando: 'Enviando…',
+            contactoNoPudo: 'No se pudo enviar el mensaje. Intenta de nuevo.',
+            contactoEnviado: '¡Mensaje enviado! Te responderemos pronto.',
+            perfilDestinoOpcLatam: 'Latinoamérica',
+            perfilDestinoOpcEuropa: 'Europa',
+            perfilDestinoOpcAsia: 'Asia',
+            perfilDestinoOpcAfrica: 'África',
+            perfilBudgetOpcEconomico: 'Económico',
+            perfilBudgetOpcModerado: 'Moderado',
+            perfilBudgetOpcPremium: 'Premium',
+            perfilBudgetOpcLujo: 'Lujo',
+            perfilEstiloOpcAventura: 'Aventura',
+            perfilEstiloOpcCultural: 'Cultural',
+            perfilEstiloOpcPlaya: 'Playa',
+            perfilEstiloOpcGastronomico: 'Gastronómico',
+            perfilEstiloOpcMixto: 'Mixto',
+            paisTrinidadTobago_nombre: 'Trinidad y Tobago',
+            paisJamaica_nombre: 'Jamaica',
+            paisPuertoRico_nombre: 'Puerto Rico',
+            paisBahamas_nombre: 'Bahamas',
+            paisHaiti_nombre: 'Haití',
+            paisEspana_nombre: 'España',
+            paisPortugal_nombre: 'Portugal',
+            paisItalia_nombre: 'Italia',
+            paisFrancia_nombre: 'Francia',
+            paisJapon_nombre: 'Japón',
+            paisTailandia_nombre: 'Tailandia',
+            paisMarruecos_nombre: 'Marruecos',
+            paisTurquia_nombre: 'Turquía',
+            paisGrecia_nombre: 'Grecia',
+            paisSudafrica_nombre: 'Sudáfrica',
 
             // ===== HERO (index) =====
             heroTitulo: 'Descubre <br> Nuevos Destinos',
@@ -351,7 +457,7 @@
             faq9q: '¿Qué métodos de pago acepta KAVARI?',
             faq9a: 'Para el pago de membresías de guía aceptamos: Yappy (banca móvil de Panamá), Transferencia bancaria (Banco General, BAC, Banistmo) y Tarjeta de crédito/débito (Visa, Mastercard, American Express). Todos los pagos están protegidos con cifrado SSL.',
             faq10q: '¿En qué idiomas está disponible KAVARI?',
-            faq10a: 'KAVARI está disponible en Español e Inglés. Puedes cambiar el idioma en cualquier momento usando el selector de idioma (ícono 🌐) disponible en la barra de navegación de todas las páginas. Tu preferencia se guarda automáticamente para tu próxima visita.',
+            faq10a: 'KAVARI está disponible en Español, Inglés y Portugués. Puedes cambiar el idioma en cualquier momento usando el selector de idioma (ícono 🌐) disponible en la barra de navegación de todas las páginas. Tu preferencia se guarda automáticamente para tu próxima visita.',
             faq11q: '¿Cómo activo el modo oscuro?',
             faq11a: 'Haz clic en el ícono 🌙 en cualquier barra de navegación de KAVARI para activar el modo oscuro. También puedes activarlo con el ícono ☀️ para volver al modo claro. Tu preferencia se guarda automáticamente y se aplica en todas las páginas de la plataforma.',
             faq12q: '¿Cómo funciona el tutorial de la plataforma?',
@@ -415,7 +521,7 @@
             tutorialIndexTitulo_3: 'Tutorial siempre disponible',
             tutorialIndexDesc_3: 'Puedes relanzar este recorrido en cualquier momento desde este botón en la barra de navegación.',
             tutorialIndexTitulo_4: 'Selector de idioma',
-            tutorialIndexDesc_4: 'Cambia entre Español e Inglés. Tu preferencia se guarda y se aplica en todas las páginas: inicio, destinos, contacto, sobre nosotros y más.',
+            tutorialIndexDesc_4: 'Cambia entre Español, Inglés y Portugués. Tu preferencia se guarda y se aplica en todas las páginas: inicio, destinos, contacto, sobre nosotros y más.',
             tutorialIndexTitulo_5: 'Modo oscuro',
             tutorialIndexDesc_5: 'Activa el modo oscuro para una lectura más cómoda. Los textos oscuros se vuelven claros automáticamente en todas las secciones.',
             tutorialIndexTitulo_6: 'Comienza tu aventura',
@@ -437,7 +543,7 @@
             tutorialPaisesTitulo_1: 'Tutorial disponible',
             tutorialPaisesDesc_1: 'Puedes relanzar este recorrido en cualquier momento haciendo clic aquí para recordar cómo usar todas las funciones de exploración de destinos.',
             tutorialPaisesTitulo_2: 'Cambiar idioma',
-            tutorialPaisesDesc_2: 'Cambia entre Español e Inglés para explorar los destinos en tu idioma preferido.',
+            tutorialPaisesDesc_2: 'Cambia entre Español, Inglés y Portugués para explorar los destinos en tu idioma preferido.',
             tutorialPaisesTitulo_3: 'Modo oscuro',
             tutorialPaisesDesc_3: 'Activa el modo oscuro para una experiencia de navegación más cómoda a cualquier hora del día.',
             tutorialPaisesTitulo_4: 'Buscador de destinos',
@@ -465,7 +571,7 @@
             tutorialSobrenosotrosTitulo_2: 'Tutorial siempre disponible',
             tutorialSobrenosotrosDesc_2: 'Puedes relanzar este recorrido en cualquier momento desde este botón en la barra de navegación.',
             tutorialSobrenosotrosTitulo_3: 'Selector de idioma',
-            tutorialSobrenosotrosDesc_3: 'Cambia entre Español e Inglés en cualquier momento. Tu preferencia se guarda para toda la plataforma.',
+            tutorialSobrenosotrosDesc_3: 'Cambia entre Español, Inglés y Portugués en cualquier momento. Tu preferencia se guarda para toda la plataforma.',
             tutorialSobrenosotrosTitulo_4: 'Modo oscuro',
             tutorialSobrenosotrosDesc_4: 'Activa el modo oscuro para una lectura más cómoda. Los colores se adaptan automáticamente.',
             tutorialSobrenosotrosTitulo_5: '¿Qué es KAVARI?',
@@ -491,7 +597,7 @@
             tutorialAyudaTitulo_2: 'Tutorial siempre disponible',
             tutorialAyudaDesc_2: 'Puedes relanzar este recorrido en cualquier momento desde este botón en la barra de navegación.',
             tutorialAyudaTitulo_3: 'Selector de idioma',
-            tutorialAyudaDesc_3: 'Cambia entre Español e Inglés. La ayuda se traduce completamente al cambiar de idioma.',
+            tutorialAyudaDesc_3: 'Cambia entre Español, Inglés y Portugués. La ayuda se traduce completamente al cambiar de idioma.',
             tutorialAyudaTitulo_4: 'Modo oscuro',
             tutorialAyudaDesc_4: 'Activa el modo oscuro para una lectura más cómoda en el centro de ayuda.',
             tutorialAyudaTitulo_5: 'Buscador de preguntas',
@@ -517,7 +623,7 @@
             tutorialContactoTitulo_2: 'Tutorial siempre disponible',
             tutorialContactoDesc_2: 'Puedes relanzar este recorrido en cualquier momento desde este botón en la barra de navegación.',
             tutorialContactoTitulo_3: 'Selector de idioma',
-            tutorialContactoDesc_3: 'Cambia entre Español e Inglés. Toda la información de contacto se traduce automáticamente.',
+            tutorialContactoDesc_3: 'Cambia entre Español, Inglés y Portugués. Toda la información de contacto se traduce automáticamente.',
             tutorialContactoTitulo_4: 'Modo oscuro',
             tutorialContactoDesc_4: 'Activa el modo oscuro para una experiencia de lectura más cómoda.',
             tutorialContactoTitulo_5: 'Información de contacto',
@@ -547,7 +653,7 @@
             tutorialDestinoTitulo_4: 'Tutorial siempre disponible',
             tutorialDestinoDesc_4: 'Puedes relanzar este recorrido en cualquier momento desde este botón.',
             tutorialDestinoTitulo_5: 'Selector de idioma',
-            tutorialDestinoDesc_5: 'Cambia entre Español e Inglés en cualquier momento. Toda la información del destino se traduce automáticamente.',
+            tutorialDestinoDesc_5: 'Cambia entre Español, Inglés y Portugués en cualquier momento. Toda la información del destino se traduce automáticamente.',
             tutorialDestinoTitulo_6: 'Modo oscuro',
             tutorialDestinoDesc_6: 'Activa el modo oscuro para leer más cómodamente sobre el país.',
             tutorialDestinoTitulo_7: 'Resumen del destino',
@@ -7686,6 +7792,64 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             navInicio: 'Home',
             navDestinos: 'Destinations',
             tituloSobrenosotros: 'About Us — KAVARI',
+            tituloIndex: 'KAVARI Travel — Discover the World',
+            tituloPaises: 'KAVARI – Explore 36 Destinations of the World',
+            tituloDestino: 'Destination — KAVARI Travel',
+            tituloCuenta: 'My account · KAVARI',
+            tituloPerfil: 'My Profile · KAVARI',
+            tituloPlanes: 'Plans · KAVARI',
+            buscarPais: 'Search country…',
+            seleccionarPais: 'Country',
+            verMasFlecha: 'See more ›',
+            badgePatrimonio: 'UNESCO Heritage',
+            badgeGuiaSingular: 'guide',
+            badgeGuiasPlural: 'guides',
+            contactoFormTitulo: 'Contact form',
+            contactoFormEncabezado: 'Send us a message',
+            contactoFormIntro: 'Tell us your question and the KAVARI team will get back to you shortly.',
+            contactoNombreLabel: 'Full name',
+            contactoNombrePlaceholder: 'Your name',
+            contactoEmailPlaceholder: 'youremail@example.com',
+            contactoAsuntoLabel: 'Subject',
+            contactoAsuntoOpcGeneral: 'General inquiry',
+            contactoAsuntoOpcPaquetes: 'Travel packages',
+            contactoAsuntoOpcGuias: 'Guide registration',
+            contactoAsuntoOpcOtros: 'Other',
+            contactoMensajeLabel: 'Message',
+            contactoMensajePlaceholder: 'Write your message here…',
+            contactoEnviar: 'Send message',
+            contactoRevisa: 'Please check the marked fields.',
+            contactoEnviando: 'Sending…',
+            contactoNoPudo: 'Could not send the message. Please try again.',
+            contactoEnviado: 'Message sent! We will get back to you soon.',
+            perfilDestinoOpcLatam: 'Latin America',
+            perfilDestinoOpcEuropa: 'Europe',
+            perfilDestinoOpcAsia: 'Asia',
+            perfilDestinoOpcAfrica: 'Africa',
+            perfilBudgetOpcEconomico: 'Budget',
+            perfilBudgetOpcModerado: 'Moderate',
+            perfilBudgetOpcPremium: 'Premium',
+            perfilBudgetOpcLujo: 'Luxury',
+            perfilEstiloOpcAventura: 'Adventure',
+            perfilEstiloOpcCultural: 'Cultural',
+            perfilEstiloOpcPlaya: 'Beach',
+            perfilEstiloOpcGastronomico: 'Culinary',
+            perfilEstiloOpcMixto: 'Mixed',
+            paisTrinidadTobago_nombre: 'Trinidad and Tobago',
+            paisJamaica_nombre: 'Jamaica',
+            paisPuertoRico_nombre: 'Puerto Rico',
+            paisBahamas_nombre: 'Bahamas',
+            paisHaiti_nombre: 'Haiti',
+            paisEspana_nombre: 'Spain',
+            paisPortugal_nombre: 'Portugal',
+            paisItalia_nombre: 'Italy',
+            paisFrancia_nombre: 'France',
+            paisJapon_nombre: 'Japan',
+            paisTailandia_nombre: 'Thailand',
+            paisMarruecos_nombre: 'Morocco',
+            paisTurquia_nombre: 'Turkey',
+            paisGrecia_nombre: 'Greece',
+            paisSudafrica_nombre: 'South Africa',
 
             // ===== HERO =====
             heroTitulo: 'Discover <br> New Destinations',
@@ -7937,7 +8101,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             faq9q: 'What payment methods does KAVARI accept?',
             faq9a: 'For guide membership payments we accept: Yappy (Panama mobile banking), Bank transfer (Banco General, BAC, Banistmo), and Credit/Debit card (Visa, Mastercard, American Express). All payments are protected with SSL encryption.',
             faq10q: 'What languages is KAVARI available in?',
-            faq10a: 'KAVARI is available in Spanish and English. You can change the language at any time using the language selector (🌐 icon) available in the navigation bar of all pages. Your preference is automatically saved for your next visit.',
+            faq10a: 'KAVARI is available in Spanish, English, and Portuguese. You can change the language at any time using the language selector (🌐 icon) available in the navigation bar of all pages. Your preference is automatically saved for your next visit.',
             faq11q: 'How do I activate dark mode?',
             faq11a: 'Click the 🌙 icon on any KAVARI navigation bar to activate dark mode. You can also click the ☀️ icon to return to light mode. Your preference is automatically saved and applied across all pages of the platform.',
             faq12q: 'How does the platform tutorial work?',
@@ -8001,7 +8165,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             tutorialIndexTitulo_3: 'Tutorial always available',
             tutorialIndexDesc_3: 'You can restart this tour at any time from this button in the navigation bar.',
             tutorialIndexTitulo_4: 'Language selector',
-            tutorialIndexDesc_4: 'Switch between Spanish and English. Your preference is saved and applied across all pages: home, destinations, contact, about us, and more.',
+            tutorialIndexDesc_4: 'Switch between Spanish, English and Portuguese. Your preference is saved and applied across all pages: home, destinations, contact, about us, and more.',
             tutorialIndexTitulo_5: 'Dark mode',
             tutorialIndexDesc_5: 'Activate dark mode for a more comfortable reading. Dark text becomes light automatically in all sections.',
             tutorialIndexTitulo_6: 'Start your adventure',
@@ -8023,7 +8187,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             tutorialPaisesTitulo_1: 'Tutorial available',
             tutorialPaisesDesc_1: 'You can restart this tour at any time by clicking here to remember how to use all the destination exploration features.',
             tutorialPaisesTitulo_2: 'Change language',
-            tutorialPaisesDesc_2: 'Switch between Spanish and English to explore destinations in your preferred language.',
+            tutorialPaisesDesc_2: 'Switch between Spanish, English and Portuguese to explore destinations in your preferred language.',
             tutorialPaisesTitulo_3: 'Dark mode',
             tutorialPaisesDesc_3: 'Activate dark mode for a more comfortable browsing experience at any time of day.',
             tutorialPaisesTitulo_4: 'Destination search',
@@ -8051,7 +8215,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             tutorialSobrenosotrosTitulo_2: 'Tutorial always available',
             tutorialSobrenosotrosDesc_2: 'You can restart this tour at any time from this button in the navigation bar.',
             tutorialSobrenosotrosTitulo_3: 'Language selector',
-            tutorialSobrenosotrosDesc_3: 'Switch between Spanish and English at any time. Your preference is saved across the entire platform.',
+            tutorialSobrenosotrosDesc_3: 'Switch between Spanish, English and Portuguese at any time. Your preference is saved across the entire platform.',
             tutorialSobrenosotrosTitulo_4: 'Dark mode',
             tutorialSobrenosotrosDesc_4: 'Activate dark mode for a more comfortable reading. Colors adapt automatically.',
             tutorialSobrenosotrosTitulo_5: 'What is KAVARI?',
@@ -8077,7 +8241,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             tutorialAyudaTitulo_2: 'Tutorial always available',
             tutorialAyudaDesc_2: 'You can restart this tour at any time from this button in the navigation bar.',
             tutorialAyudaTitulo_3: 'Language selector',
-            tutorialAyudaDesc_3: 'Switch between Spanish and English. The help center translates completely when you change the language.',
+            tutorialAyudaDesc_3: 'Switch between Spanish, English and Portuguese. The help center translates completely when you change the language.',
             tutorialAyudaTitulo_4: 'Dark mode',
             tutorialAyudaDesc_4: 'Activate dark mode for a more comfortable reading in the help center.',
             tutorialAyudaTitulo_5: 'Search questions',
@@ -8103,7 +8267,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             tutorialContactoTitulo_2: 'Tutorial always available',
             tutorialContactoDesc_2: 'You can restart this tour at any time from this button in the navigation bar.',
             tutorialContactoTitulo_3: 'Language selector',
-            tutorialContactoDesc_3: 'Switch between Spanish and English. All contact information translates automatically.',
+            tutorialContactoDesc_3: 'Switch between Spanish, English and Portuguese. All contact information translates automatically.',
             tutorialContactoTitulo_4: 'Dark mode',
             tutorialContactoDesc_4: 'Activate dark mode for a more comfortable reading experience.',
             tutorialContactoTitulo_5: 'Contact information',
@@ -8133,7 +8297,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             tutorialDestinoTitulo_4: 'Tutorial always available',
             tutorialDestinoDesc_4: 'You can restart this tour at any time from this button.',
             tutorialDestinoTitulo_5: 'Language selector',
-            tutorialDestinoDesc_5: 'Switch between Spanish and English at any time. All destination info translates automatically.',
+            tutorialDestinoDesc_5: 'Switch between Spanish, English and Portuguese at any time. All destination info translates automatically.',
             tutorialDestinoTitulo_6: 'Dark mode',
             tutorialDestinoDesc_6: 'Activate dark mode to comfortably read about the country.',
             tutorialDestinoTitulo_7: 'Destination overview',
@@ -15165,22 +15329,62 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
       
    };
 
-    // ===== LÓGICA DE IDIOMA (sin cambios) =====
+    // ===== LÓGICA DE IDIOMA =====
+    // Idiomas soportados: es, en, pt (portugués). El diccionario de pt se
+    // carga desde js/idioma-pt.js a través de window.__kavariIdiomasExtras.
+    const idiomasSoportados = ['es', 'en', 'pt'];
+    // El diccionario extra (idioma-pt.js) puede cargarse después de este archivo,
+    // así que el merge se ejecuta también de forma perezosa en t().
+    function mergeIdiomasExtras() {
+        if (window.__kavariIdiomasExtras) {
+            Object.keys(window.__kavariIdiomasExtras).forEach(function(k) {
+                if (!diccionario[k]) diccionario[k] = window.__kavariIdiomasExtras[k];
+            });
+        }
+    }
+    mergeIdiomasExtras();
     let idiomaActual = 'es';
     const idiomaGuardado = localStorage.getItem('kavari-idioma') || navigator.language.slice(0, 2) || 'es';
-    if (idiomaGuardado !== 'es' && idiomaGuardado !== 'en') {
+    if (idiomasSoportados.indexOf(idiomaGuardado) === -1) {
         idiomaActual = 'es';
     } else {
         idiomaActual = idiomaGuardado;
     }
 
     window.t = function(clave) {
-        const traduccion = diccionario[idiomaActual]?.[clave];
-        if (traduccion === undefined) {
-            console.warn(`Traducción no encontrada para: "${clave}" en idioma "${idiomaActual}"`);
-            return clave;
+        mergeIdiomasExtras();
+        const idiomasFallback = idiomasSoportados.indexOf(idiomaActual) === -1 ? ['es', 'en'] : [idiomaActual, 'en', 'es'];
+        for (let i = 0; i < idiomasFallback.length; i++) {
+            const traduccion = diccionario[idiomasFallback[i]]?.[clave];
+            if (traduccion !== undefined) {
+                return traduccion;
+            }
         }
-        return traduccion;
+        console.warn(`Traducción no encontrada para: "${clave}" en idioma "${idiomaActual}"`);
+        return clave;
+    };
+
+    window.paisNombre = function(slug, fallback) {
+        const mapa = {
+            panama: 'paisPanama_nombre', colombia: 'paisColombia_nombre', mexico: 'paisMexico_nombre',
+            'costa-rica': 'paisCostaRica_nombre', peru: 'paisPeru_nombre', 'republica-dominicana': 'paisRepublicaDominicana_nombre',
+            argentina: 'paisArgentina_nombre', brasil: 'paisBrasil_nombre', chile: 'paisChile_nombre',
+            ecuador: 'paisEcuador_nombre', cuba: 'paisCuba_nombre', guatemala: 'paisGuatemala_nombre',
+            bolivia: 'paisBolivia_nombre', venezuela: 'paisVenezuela_nombre', uruguay: 'paisUruguay_nombre',
+            paraguay: 'paisParaguay_nombre', honduras: 'paisHonduras_nombre', nicaragua: 'paisNicaragua_nombre',
+            'el-salvador': 'paisElSalvador_nombre', belice: 'paisBelice_nombre', guyana: 'paisGuyana_nombre',
+            'trinidad-y-tobago': 'paisTrinidadTobago_nombre', jamaica: 'paisJamaica_nombre', 'puerto-rico': 'paisPuertoRico_nombre',
+            bahamas: 'paisBahamas_nombre', haiti: 'paisHaiti_nombre', espana: 'paisEspana_nombre',
+            portugal: 'paisPortugal_nombre', italia: 'paisItalia_nombre', francia: 'paisFrancia_nombre',
+            japon: 'paisJapon_nombre', tailandia: 'paisTailandia_nombre', marruecos: 'paisMarruecos_nombre',
+            turquia: 'paisTurquia_nombre', grecia: 'paisGrecia_nombre', sudafrica: 'paisSudafrica_nombre'
+        };
+        const clave = mapa[slug];
+        if (clave) {
+            const tr = window.t(clave);
+            return tr !== clave ? tr : fallback;
+        }
+        return fallback;
     };
 
     function aplicarTraducciones() {
@@ -15245,9 +15449,11 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
             if (btnLang) {
                 const langLabel = document.getElementById('langLabel');
                 if (langLabel) {
-                    langLabel.textContent = idiomaActual === 'en' ? 'EN' : 'ES';
+                    langLabel.textContent = idiomaActual.toUpperCase();
                 }
-                btnLang.setAttribute('aria-label', idiomaActual === 'en' ? 'Switch to Spanish' : 'Cambiar a Inglés');
+                const idx = idiomasSoportados.indexOf(idiomaActual);
+                const nextIdioma = idiomasSoportados[(idx + 1) % idiomasSoportados.length];
+                btnLang.setAttribute('aria-label', 'Cambiar a ' + nextIdioma.toUpperCase());
             }
         }
 
@@ -15262,7 +15468,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
     }
 
     function setIdioma(idioma) {
-        if (idioma !== 'es' && idioma !== 'en') return;
+        if (idiomasSoportados.indexOf(idioma) === -1) return;
         if (idioma === idiomaActual) return;
         idiomaActual = idioma;
         localStorage.setItem('kavari-idioma', idioma);
@@ -15272,7 +15478,8 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
     }
 
     window.toggleLang = function() {
-        const nuevo = idiomaActual === 'es' ? 'en' : 'es';
+        const idx = idiomasSoportados.indexOf(idiomaActual);
+        const nuevo = idiomasSoportados[(idx + 1) % idiomasSoportados.length];
         setIdioma(nuevo);
     };
 

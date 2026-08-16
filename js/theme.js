@@ -26,8 +26,8 @@ function updateThemeButton(theme) {
   btn.textContent = label;
   const lang = localStorage.getItem('kavariIdioma') || 'es';
   btn.setAttribute('aria-label', current === 'dark'
-    ? (lang === 'en' ? 'Switch to light mode' : 'Activar modo claro')
-    : (lang === 'en' ? 'Switch to dark mode' : 'Activar modo oscuro'));
+    ? (lang === 'en' ? 'Switch to light mode' : lang === 'pt' ? 'Mudar para o modo claro' : 'Activar modo claro')
+    : (lang === 'en' ? 'Switch to dark mode' : lang === 'pt' ? 'Mudar para o modo escuro' : 'Activar modo oscuro'));
 }
 
 function applyTheme(theme) {

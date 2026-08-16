@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="css/contacto-refine.css">
   <link rel="stylesheet" href="css/audit-consistency.css">
   <script src="js/idioma.js?v=3"></script>
+  <script src="js/idioma-pt.js?v=1"></script>
   <script src="js/theme.js?v=3"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-client.js"></script>
@@ -30,6 +31,16 @@
   <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
   <script src="js/img-fallback.js"></script>
+
+  <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
+  <link rel="stylesheet" href="css/lang-dropdown.css">
+  <link rel="stylesheet" href="css/universal-shine.css">
+  <script src="js/lang-dropdown.js"></script>
+
+  <!-- ===== OPTIMIZACIÓN DE CARGA (performance.js) ===== -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <script src="js/performance.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -357,22 +368,22 @@
 
     <!-- Formulario de contacto -->
     <div class="contact-card wide-card reveal" id="formulario">
-        <div class="section-tag">Formulario de contacto</div>
-        <h2>Envíanos un mensaje</h2>
-        <p class="contact-form-intro">Cuéntanos tu consulta y el equipo KAVARI te responderá a la brevedad.</p>
+        <div class="section-tag" data-i18n="contactoFormTitulo">Formulario de contacto</div>
+        <h2 data-i18n="contactoFormEncabezado">Envíanos un mensaje</h2>
+        <p class="contact-form-intro" data-i18n="contactoFormIntro">Cuéntanos tu consulta y el equipo KAVARI te responderá a la brevedad.</p>
 
         <form class="contact-form" id="contactForm" novalidate>
             <label class="cf-field">
-                <span class="cf-label">Nombre completo</span>
-                <input type="text" name="full_name" required minlength="2" autocomplete="name" placeholder="Tu nombre">
+                <span class="cf-label" data-i18n="contactoNombreLabel">Nombre completo</span>
+                <input type="text" name="full_name" required minlength="2" autocomplete="name" placeholder="Tu nombre" data-i18n-placeholder="contactoNombrePlaceholder">
             </label>
             <label class="cf-field">
-                <span class="cf-label">Correo electrónico</span>
-                <input type="email" name="email" required autocomplete="email" placeholder="tucorreo@ejemplo.com">
+                <span class="cf-label" data-i18n="contactoCorreo">Correo electrónico</span>
+                <input type="email" name="email" required autocomplete="email" placeholder="tucorreo@ejemplo.com" data-i18n-placeholder="contactoEmailPlaceholder">
             </label>
             <label class="cf-field">
-                <span class="cf-label">Asunto</span>
-                <select name="subject">
+                <span class="cf-label" data-i18n="contactoAsuntoLabel">Asunto</span>
+                <select name="subject" data-i18n-options="contactoAsuntoOpc">
                     <option value="general">Consulta general</option>
                     <option value="paquetes">Paquetes de viaje</option>
                     <option value="guias">Registro como guía</option>
@@ -380,11 +391,11 @@
                 </select>
             </label>
             <label class="cf-field cf-field-full">
-                <span class="cf-label">Mensaje</span>
-                <textarea name="message" rows="5" required minlength="10" placeholder="Escribe tu mensaje aquí…"></textarea>
+                <span class="cf-label" data-i18n="contactoMensajeLabel">Mensaje</span>
+                <textarea name="message" rows="5" required minlength="10" placeholder="Escribe tu mensaje aquí…" data-i18n-placeholder="contactoMensajePlaceholder"></textarea>
             </label>
             <div class="cf-submit">
-                <button type="submit" class="email-main-btn cf-btn" id="contactSubmit">Enviar mensaje</button>
+                <button type="submit" class="email-main-btn cf-btn" id="contactSubmit" data-i18n="contactoEnviar">Enviar mensaje</button>
                 <p class="contact-status" id="contactStatus" role="status" aria-live="polite"></p>
             </div>
         </form>

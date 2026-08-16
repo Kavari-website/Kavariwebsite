@@ -7,13 +7,11 @@
    Solo tipografía: no cambia colores, estructura ni funcionalidad.
    Se carga al final del <head> para tener prioridad.
    ================================================================ */
-
 :root {
   /* Familias limitadas */
   --font-display:'Poppins','Inter',system-ui,sans-serif;
   --font-body:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
   --kbtn-font:var(--font-display);
-
   /* Escala tipográfica (jerarquía) */
   --type-hero:clamp(2.4rem,5.5vw + .9rem,4.25rem);
   --type-h1:clamp(2rem,4.2vw + .6rem,3.25rem);
@@ -25,12 +23,10 @@
   --type-body:1rem;
   --type-small:.875rem;
   --type-label:.8125rem;
-
   /* Interlineados */
   --leading-tight:1.15;
   --leading-snug:1.32;
   --leading-normal:1.65;
-
   /* Espaciado de letras */
   --tracking-tight:-.025em;
   --tracking-snug:-.012em;
@@ -38,14 +34,12 @@
   --tracking-wide:.02em;
   --tracking-wider:.07em;
 }
-
 html {
   -webkit-text-size-adjust:100%;
   text-rendering:optimizeLegibility;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
-
 /* ---------- Texto base (cuerpo de lectura) ---------- */
 body {
   font-family:var(--font-body);
@@ -57,7 +51,6 @@ body {
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
-
 /* ---------- Títulos (jerarquía) ---------- */
 h1,h2,h3,h4,h5,h6 {
   font-family:var(--font-display)!important;
@@ -96,7 +89,6 @@ h6 {
   letter-spacing:var(--tracking-wide);
   text-transform:uppercase;
 }
-
 /* ---------- Texto de párrafo ---------- */
 p,li,td,th,figcaption,blockquote,dd,dt {
   letter-spacing:var(--tracking-normal);
@@ -111,7 +103,6 @@ small,.small,.footnote {
   font-size:var(--type-small);
   line-height:1.5;
 }
-
 /* ---------- Botones ---------- */
 button,[class*="btn-"],.btn,.btn-gold,.pricing-cta,.auth-submit,
 .perfil-google-btn,.perfil-logout-btn,.perfil-danger-btn,.perfil-fav-sortbtn,
@@ -122,7 +113,6 @@ button,[class*="btn-"],.btn,.btn-gold,.pricing-cta,.auth-submit,
   letter-spacing:var(--tracking-wide);
   line-height:1;
 }
-
 /* ---------- Subtítulos y texto destacado ---------- */
 .lead,.section-subtitle,.hero-subtitle,.page-subtitle,.about-subtitle,
 .card-subtitle,[class$="-subtitle"],[class$="-subTitulo"] {
@@ -131,7 +121,6 @@ button,[class*="btn-"],.btn,.btn-gold,.pricing-cta,.auth-submit,
   line-height:var(--leading-normal);
   letter-spacing:var(--tracking-normal);
 }
-
 /* ---------- Elementos secundarios (etiquetas y meta) ---------- */
 .eyebrow,.kicker,.section-label,.pricing-kicker,.hero-eyebrow,
 .card-tag,.card-category,.meta {
@@ -142,7 +131,6 @@ button,[class*="btn-"],.btn,.btn-gold,.pricing-cta,.auth-submit,
   letter-spacing:var(--tracking-wider);
   text-transform:uppercase;
 }
-
 /* ---------- Formularios ---------- */
 label {
   font-family:var(--font-body);
@@ -157,7 +145,6 @@ input,select,textarea {
   font-weight:400;
   letter-spacing:var(--tracking-normal);
 }
-
 /* ---------- Ajustes en pantallas pequeñas ---------- */
 @media (max-width:768px) {
   :root {

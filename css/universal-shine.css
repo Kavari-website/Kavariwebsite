@@ -1,0 +1,61 @@
+/* ==========================================================================
+   KAVARI · REFLEJO UNIVERSAL EN TODOS LOS BOTONES (universal-shine.css)
+   ==========================================================================
+   ARCHIVO NUEVO · El sitio ya tiene una animación de reflejo (barrido de
+   luz diagonal) en buttons-system.css, pero excluye algunos botones. Este
+   archivo SOLO AGREGA el mismo reflejo a los botones que todavía no lo
+   tenían, en TODAS las páginas, sin modificar las reglas existentes.
+
+   NOTA: los botones .back-btn y .about-hero-cta ya tienen su propio brillo
+   animado (borde luminoso), y .btn-theme-nav tiene su efecto de luz; por
+   eso no se tocan aquí.
+
+   Reciben el reflejo:
+     - .btn-lang-nav    (botón de idiomas)
+     - .nav-btn-tutorial (botón Tutorial)
+     - .hamburger       (menú móvil)
+
+   Secciones (búscalas con Ctrl+F):
+   /* ===== SECCIÓN: BOTONES QUE RECIBEN EL REFLEJO ===== */
+   /* ===== SECCIÓN: BARRA DE LUZ (pseudo ::after) ===== */
+   /* ===== SECCIÓN: ANIMACIÓN AL PASAR EL CURSOR ===== */
+   ========================================================================== */
+
+/* ===== SECCIÓN: BOTONES QUE RECIBEN EL REFLEJO ===== */
+/* Necesitan posición relativa y ocultar el desborde para el barrido. */
+.btn-lang-nav,
+.nav-btn-tutorial,
+.hamburger {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== SECCIÓN: BARRA DE LUZ (pseudo ::after) ===== */
+/* La misma barra diagonal translúcida que ya usan los demás botones. */
+.btn-lang-nav::after,
+.nav-btn-tutorial::after,
+.hamburger::after {
+  content: '' !important;
+  display: block !important; /* reactiva el ::after que ui-system oculta */
+  position: absolute !important;
+  top: -50% !important;
+  left: -60% !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 45% !important;
+  height: 200% !important;
+  background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.35) 45%, transparent 100%) !important;
+  transform: translateX(-160%) skewX(-18deg) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+/* ===== SECCIÓN: ANIMACIÓN AL PASAR EL CURSOR ===== */
+/* Reutiliza la animación kbtnSheen definida en buttons-system.css. */
+@media (hover: hover) {
+  .btn-lang-nav:hover::after,
+  .nav-btn-tutorial:hover::after,
+  .hamburger:hover::after {
+    animation: kbtnSheen 0.9s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+}
