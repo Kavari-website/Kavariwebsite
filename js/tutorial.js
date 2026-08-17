@@ -19,9 +19,10 @@ const tutorialStepsIndex = [
   { targetSelector: '.search-box', titleKey: 'tutorialIndexTitulo_6', descKey: 'tutorialIndexDesc_6', position: 'top', arrow: true },
   { targetSelector: '.featured-section', titleKey: 'tutorialIndexTitulo_7', descKey: 'tutorialIndexDesc_7', position: 'top', arrow: true },
   { targetSelector: '.places-section', titleKey: 'tutorialIndexTitulo_8', descKey: 'tutorialIndexDesc_8', position: 'top', arrow: true },
-  { targetSelector: '.footer', titleKey: 'tutorialIndexTitulo_9', descKey: 'tutorialIndexDesc_9', position: 'top', arrow: true },
-  { targetId: 'kavari-mascot', titleKey: 'tutorialIndexTitulo_10', descKey: 'tutorialIndexDesc_10', position: 'center', arrow: true },
-  { targetId: null, titleKey: 'tutorialIndexTitulo_11', descKey: 'tutorialIndexDesc_11', position: 'center', arrow: false, isLast: true }
+  { targetSelector: '#planCta', titleKey: 'tutorialIndexTitulo_9', descKey: 'tutorialIndexDesc_9', position: 'top', arrow: true },
+  { targetSelector: '.footer', titleKey: 'tutorialIndexTitulo_10', descKey: 'tutorialIndexDesc_10', position: 'top', arrow: true },
+  { targetId: 'kavari-mascot', titleKey: 'tutorialIndexTitulo_11', descKey: 'tutorialIndexDesc_11', position: 'center', arrow: true },
+  { targetId: null, titleKey: 'tutorialIndexTitulo_12', descKey: 'tutorialIndexDesc_12', position: 'center', arrow: false, isLast: true }
 ];
 
 // ===== PASOS PARA PAÍSES =====

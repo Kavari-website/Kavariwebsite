@@ -1205,3 +1205,130 @@ a:focus-visible,button:focus-visible,#searchInput:focus-visible,.dest-btn:focus-
   color:#fff;
   border-color:transparent;
 }
+
+/* ============================================================
+   NUEVA PÁGINA DE DESTINOS – 36 PAÍSES
+   Cargando, filtro por continente, etiquetas y botón de paquetes
+   ============================================================ */
+.destinos-loading {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:60px 24px;
+  color:var(--text-muted);
+  font-size:1rem;
+  font-weight:500;
+  letter-spacing:.02em;
+  text-align:center;
+  transition:opacity .4s ease,transform .4s ease;
+}
+.destinos-loading::before {
+  content:'';
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  border:3px solid rgba(46,110,220,.2);
+  border-top-color:var(--blue);
+  animation:loadingSpin .8s linear infinite;
+}
+.destinos-loading.oculto {
+  opacity:0;
+  transform:translateY(-8px);
+  pointer-events:none;
+}
+@keyframes loadingSpin {
+  to { transform:rotate(360deg); }
+}
+[data-theme="dark"] .destinos-loading {
+  color:var(--ink-dark-muted);
+}
+
+.continent-wrap {
+  flex-shrink:0;
+}
+.continent-select {
+  min-height:44px;
+  padding:9px 38px 9px 16px;
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:10px;
+  font-family:var(--font-body);
+  font-size:.9rem;
+  font-weight:500;
+  color:var(--text);
+  background:rgba(118,118,128,.12) url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  cursor:pointer;
+  outline:none;
+  transition:all var(--transition);
+}
+.continent-select:hover {
+  background-color:rgba(255,255,255,.6);
+}
+.continent-select:focus {
+  background-color:rgba(255,255,255,.78);
+  border-color:rgba(46,110,220,.3);
+  box-shadow:0 0 0 2px var(--blue),var(--glow-blue);
+}
+[data-theme="dark"] .continent-select {
+  color:var(--ink-dark);
+  background-color:rgba(118,118,128,.24);
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2398999f' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  border-color:rgba(255,255,255,.12);
+}
+[data-theme="dark"] .continent-select:focus {
+  background-color:var(--navy-surface-2);
+  box-shadow:0 0 0 2px var(--blue-light),var(--glow-blue-dark);
+}
+
+/* Etiquetas (Mejor época, Idioma, Moneda) */
+.dest-tags {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:10px 12px;
+  margin:2px 0 4px;
+  background:rgba(14,30,60,.04);
+  border:1px solid rgba(14,30,60,.06);
+  border-radius:10px;
+}
+.dest-tag {
+  font-size:.78rem;
+  line-height:1.5;
+  color:var(--text-muted);
+  display:flex;
+  gap:6px;
+  align-items:baseline;
+}
+.dest-tag b {
+  color:var(--navy);
+  font-weight:700;
+  white-space:nowrap;
+}
+[data-theme="dark"] .dest-tags {
+  background:rgba(255,255,255,.05);
+  border-color:rgba(255,255,255,.08);
+}
+[data-theme="dark"] .dest-tag {
+  color:var(--ink-dark-muted);
+}
+[data-theme="dark"] .dest-tag b {
+  color:var(--ink-dark);
+}
+
+/* Acciones: Ver destino */
+.dest-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:6px;
+}
+.dest-actions .dest-btn {
+  margin-top:0;
+  flex:1 1 auto;
+  min-width:150px;
+}

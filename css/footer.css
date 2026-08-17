@@ -209,6 +209,27 @@
   letter-spacing: .3px;
 }
 
+.footer .kv-footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 22px;
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+}
+
+.footer .kv-footer-legal .kv-footer-link {
+  font-size: .78rem;
+  color: var(--kv-faint);
+  text-decoration: none;
+  transition: color .25s ease;
+}
+
+.footer .kv-footer-legal .kv-footer-link:hover {
+  color: var(--kv-gold);
+}
+
 /* ── Utilidad accesible ── */
 .footer .kv-sr-only {
   position: absolute;

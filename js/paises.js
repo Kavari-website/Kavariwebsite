@@ -8,31 +8,190 @@ document.getElementById('hamburger').addEventListener('click', function(){
   document.getElementById('navLinks').classList.toggle('open');
 });
 
-// Actualiza el contador de cuántos países se están viendo
-function updateCount() {
-  const visible = document.querySelectorAll('.dest-card:not([style*="display: none"])').length;
-  document.getElementById('countVisible').textContent = visible;
+// ============================================
+// RENDER DE LOS 21 DESTINOS (desde KAVARI_PAISES)
+// ============================================
+const PAISES = window.KAVARI_PAISES || [];
+
+const REGION_LABEL_KEYS = {
+  latam: 'paisesRegionLatam',
+  europa: 'paisesRegionEuropa',
+  asia: 'paisesRegionAsia'
+};
+
+// Badges decorativos (traducibles) por país
+const PAIS_BADGES = {
+  'panama': 'badgeGuiaDisponible',
+  'colombia': 'badgePopular',
+  'mexico': 'badgeTrending',
+  'peru': 'badgePatrimonioUNESCO',
+  'ecuador': 'badgePatrimonioUNESCO',
+  'republica-dominicana': 'badgeParaiso'
+};
+
+function getLang() {
+  const l = localStorage.getItem('kavari-idioma') || 'es';
+  return ['es', 'en', 'pt'].includes(l) ? l : 'es';
 }
 
-// Buscador: filtra los países según lo que escribe el usuario
+// Busca el texto traducido de una clave (con respaldo seguro)
+function tClave(clave) {
+  try {
+    const trad = window.t(clave);
+    return (trad && trad !== clave) ? trad : clave;
+  } catch (e) {
+    return clave;
+  }
+}
+
+// Texto por idioma con respaldo al español
+function txt(obj, lang) {
+  if (!obj) return '';
+  return obj[lang] || obj.es || '';
+}
+
+// Construye el HTML de una tarjeta de destino
+function buildCardHTML(p, lang, idx) {
+  const nombre = txt(p.nombre, lang);
+  const desc = txt(p.desc, lang);
+  const epoca = txt(p.epoca, lang);
+  const idioma = txt(p.idioma, lang);
+  const moneda = txt(p.moneda, lang);
+  const badgeKey = PAIS_BADGES[p.code];
+  const badgeHTML = badgeKey ? `<div class="thumb-badge">${tClave(badgeKey)}</div>` : '';
+
+  // Palabras buscables: nombre (ES/EN/PT), descripción, continente, idioma y moneda
+  const nombreEn = txt(p.nombre, 'en');
+  const nombrePt = txt(p.nombre, 'pt');
+  const buscaNombre = txt(p.nombre, 'es');
+  const buscaContinentes = (p.continentes || []).map(c => {
+    const key = 'paisesContinente' + c.charAt(0).toUpperCase() + c.slice(1);
+    return tClave(key);
+  }).join(' ');
+  const buscaTexto = [nombre, nombreEn, nombrePt, buscaNombre, buscaContinentes, desc, idioma, moneda].join(' ').toLowerCase();
+
+  // Alt descriptivo con el nombre + un atractivo del destino (SEO)
+  const atractivo = (desc.split('.')[0] || nombre).trim();
+  const alt = `${nombre}: ${atractivo}`.slice(0, 110);
+
+  return `
+    <div class="dest-card" data-name="${buscaTexto.replace(/"/g, '&quot;')}" data-continent="${(p.continentes || []).join(',')}" style="animation-delay:${Math.min(idx * 0.04, 0.6)}s">
+      <div class="dest-thumb">
+        <img src="${p.img}" alt="${alt}" loading="lazy" decoding="async"/>
+        ${badgeHTML}
+      </div>
+      <div class="dest-info">
+        <h3>${nombre}</h3>
+        <p>${desc}</p>
+        <div class="dest-tags">
+          <span class="dest-tag"><b>${tClave('paisesTagEpoca')}:</b> ${epoca}</span>
+          <span class="dest-tag"><b>${tClave('paisesTagIdioma')}:</b> ${idioma}</span>
+          <span class="dest-tag"><b>${tClave('paisesTagMoneda')}:</b> ${moneda}</span>
+        </div>
+        <div class="dest-actions">
+          <button type="button" class="dest-btn" onclick="irAPais('${p.code}')">${tClave('paisesVerDestino')}</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// Renderiza todas las tarjetas agrupadas por región
+function renderPaises() {
+  const grid = document.getElementById('destinosGrid');
+  if (!grid) return;
+  const lang = getLang();
+  const orden = ['latam', 'europa', 'asia'];
+  let html = '';
+
+  orden.forEach(reg => {
+    const items = PAISES.filter(p => p.region === reg);
+    if (!items.length) return;
+    html += `<div class="region-label">${tClave(REGION_LABEL_KEYS[reg])}</div>`;
+    items.forEach((p, i) => { html += buildCardHTML(p, lang, i); });
+  });
+
+  grid.innerHTML = html;
+  aplicarBadgesGuias();
+  buscar();
+  initLikes();
+}
+
+// ============================================
+// MENSAJE "CARGANDO DESTINOS..." MIENTRAS SE RENDERIZA
+// ============================================
+function ocultarCargando() {
+  const l = document.getElementById('destinosLoading');
+  if (!l) return;
+  l.classList.add('oculto');
+  setTimeout(() => { l.style.display = 'none'; }, 400);
+}
+
+// ============================================
+// BADGES DE GUÍAS DISPONIBLES (por país)
+// ============================================
+function aplicarBadgesGuias() {
+  let guides = [];
+  try { guides = JSON.parse(localStorage.getItem('kavariGuides')) || []; } catch (e) { guides = []; }
+  if (!guides.length) return;
+  document.querySelectorAll('.dest-card').forEach(card => {
+    const btn = card.querySelector('.dest-btn');
+    if (!btn) return;
+    const m = (btn.getAttribute('onclick') || '').match(/irAPais\('([^']+)'\)/);
+    if (!m) return;
+    const code = m[1];
+    const countryGuides = guides.filter(g => g.country === code);
+    if (!countryGuides.length) return;
+    const n = countryGuides.length;
+    const L = getLang();
+    const w = (n === 1 ? (L === 'en' ? 'guide' : L === 'pt' ? 'guia' : 'guía') : (L === 'en' ? 'guides' : L === 'pt' ? 'guias' : 'guías'));
+    const txtBadge = n + ' ' + w;
+    let badge = card.querySelector('.thumb-badge');
+    if (badge) badge.textContent = txtBadge;
+    else {
+      const b = document.createElement('div');
+      b.className = 'thumb-badge';
+      b.textContent = txtBadge;
+      const thumb = card.querySelector('.dest-thumb');
+      if (thumb) thumb.appendChild(b);
+    }
+  });
+}
+
+// ============================================
+// FILTRO: por nombre de país O continente
+// ============================================
+function updateCount() {
+  const visibles = document.querySelectorAll('.dest-card:not([style*="display: none"])').length;
+  document.getElementById('countVisible').textContent = visibles;
+}
+
+// Oculta las etiquetas de región cuyas tarjetas estén todas filtradas
+function updateRegionLabels() {
+  document.querySelectorAll('.region-label').forEach(label => {
+    let el = label.nextElementSibling;
+    let visible = false;
+    while (el && !el.classList.contains('region-label')) {
+      if (el.classList.contains('dest-card') && el.style.display !== 'none') { visible = true; break; }
+      el = el.nextElementSibling;
+    }
+    label.style.display = visible ? '' : 'none';
+  });
+}
+
 function buscar() {
-  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+  const cont = (document.getElementById('continentFilter').value || 'todos');
   const cards = document.querySelectorAll('.dest-card');
   let visibles = 0;
 
-  cards.forEach((card) => {
-    const nombre = card.dataset.name || '';
-    const texto  = card.innerText.toLowerCase();
-    const match  = nombre.includes(q) || texto.includes(q);
-    
+  cards.forEach(card => {
+    const nombre = (card.dataset.name || '').toLowerCase();
+    const conts = (card.dataset.continent || '').split(',');
+    const matchQ = !q || nombre.includes(q);
+    const matchC = cont === 'todos' || conts.includes(cont);
+
     card.style.animation = 'none';
-    
-    if (match) {
-      if (card.dataset.hideTimeout) {
-        clearTimeout(parseInt(card.dataset.hideTimeout));
-        card.removeAttribute('data-hide-timeout');
-      }
-      
+    if (matchQ && matchC) {
       if (card.style.display === 'none') {
         card.style.display = '';
         card.style.opacity = '0';
@@ -44,39 +203,24 @@ function buscar() {
       card.style.transform = 'translateY(0) scale(1)';
       visibles++;
     } else {
-      if (card.style.display !== 'none' && !card.dataset.hideTimeout) {
+      if (card.style.display !== 'none') {
         card.style.transition = 'opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
         card.style.opacity = '0';
         card.style.transform = 'translateY(15px) scale(0.95)';
-        
-        const timeoutId = setTimeout(() => {
-          if (card.style.opacity === '0') {
-            card.style.display = 'none';
-          }
-          card.removeAttribute('data-hide-timeout');
+        setTimeout(() => {
+          if (card.style.opacity === '0') card.style.display = 'none';
         }, 300);
-        card.setAttribute('data-hide-timeout', timeoutId);
       }
     }
   });
 
-  const noRes = document.getElementById('noResults');
-  document.getElementById('noTerm').textContent = q;
-  noRes.style.display = visibles === 0 && q !== '' ? 'flex' : 'none';
-  document.getElementById('countVisible').textContent = visibles || 36;
+  document.getElementById('countVisible').textContent = visibles;
+  updateRegionLabels();
 }
 
-// Efecto de aparición cuando haces scroll
-const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
-}, { threshold: 0.06 });
-
-document.querySelectorAll('.dest-card').forEach((c, i) => {
-  c.style.animationDelay = (i * 0.04) + 's';
-  ro.observe(c);
-});
-
-// Redirige a la página de información del país seleccionado
+// ============================================
+// LIKES DE PAÍSES (persistidos por usuario en Supabase)
+// ============================================
 function irAPais(codigoPais) {
   localStorage.setItem('paisSeleccionado', codigoPais);
   if (window.kavariNavigate) {
@@ -258,8 +402,6 @@ function initLikes() {
   syncLikesFromServer();
 }
 
-document.addEventListener('DOMContentLoaded', initLikes);
-
 // Al iniciar sesión: cargar likes de la cuenta · Al cerrar sesión: limpiar locales
 window.addEventListener('kavari:authchange', function (e) {
   if (e.detail && e.detail.user) {
@@ -271,111 +413,15 @@ window.addEventListener('kavari:authchange', function (e) {
   }
 });
 
-// ============================================
-// TRADUCCIÓN DE DESCRIPCIONES DE PAÍSES
-// ============================================
-function aplicarTraduccionesPaises() {
-    const destMap = {
-        'panama': 'destPanama',
-        'colombia': 'destColombia',
-        'mexico': 'destMexico',
-        'costa-rica': 'destCostaRica',
-        'peru': 'destPeru',
-        'republica-dominicana': 'destRepublicaDominicana',
-        'argentina': 'destArgentina',
-        'brasil': 'destBrasil',
-        'chile': 'destChile',
-        'ecuador': 'destEcuador',
-        'cuba': 'destCuba',
-        'guatemala': 'destGuatemala',
-        'bolivia': 'destBolivia',
-        'venezuela': 'destVenezuela',
-        'uruguay': 'destUruguay',
-        'paraguay': 'destParaguay',
-        'honduras': 'destHonduras',
-        'nicaragua': 'destNicaragua',
-        'el-salvador': 'destElSalvador',
-        'belice': 'destBelize',
-        'guyana': 'destGuyana',
-        'trinidad-y-tobago': 'destTrinidadTobago',
-        'jamaica': 'destJamaica',
-        'puerto-rico': 'destPuertoRico',
-        'bahamas': 'destBahamas',
-        'haiti': 'destHaiti',
-        'espana': 'destEspana',
-        'portugal': 'destPortugal',
-        'italia': 'destItalia',
-        'francia': 'destFrancia',
-        'japon': 'destJapon',
-        'tailandia': 'destTailandia',
-        'marruecos': 'destMasiaDios',
-        'turquia': 'destTurquia',
-        'grecia': 'destGrecia',
-        'sudafrica': 'destSudafrica'
-    };
-
-    document.querySelectorAll('.dest-card').forEach(card => {
-        const button = card.querySelector('.dest-btn');
-        if (!button) return;
-
-        const onclickAttr = button.getAttribute('onclick') || '';
-        const onclickMatch = onclickAttr.match(/irAPais\('([^']+)'\)/);
-        if (!onclickMatch) return;
-
-        const pais = onclickMatch[1];
-        const key = destMap[pais];
-        if (key) {
-            const descripcion = card.querySelector('.dest-info p');
-            if (descripcion) {
-                const traduccion = t(key);
-                if (traduccion !== key) {
-                    descripcion.textContent = traduccion;
-                }
-            }
-            const nombreKey = 'pais' + key.slice(4) + '_nombre';
-            const nombreEl = card.querySelector('.dest-info h3');
-            if (nombreEl) {
-                const traduccion = t(nombreKey);
-                if (traduccion !== nombreKey) {
-                    nombreEl.textContent = traduccion;
-                }
-            }
-        }
-
-        const badge = card.querySelector('.thumb-badge');
-        if (badge) {
-            const raw = (badge.textContent || '').trim();
-            const countMatch = raw.match(/^(\d+)\s+(.+)$/);
-            if (countMatch) {
-                const n = countMatch[1];
-                const isPlural = n !== '1';
-                const wordKey = isPlural ? 'badgeGuiasPlural' : 'badgeGuiaSingular';
-                const word = t(wordKey);
-                badge.textContent = n + ' ' + (word !== wordKey ? word : countMatch[2]);
-            } else {
-                const badgeMap = {
-                    'guía disponible': 'badgeGuiaDisponible',
-                    'guia disponible': 'badgeGuiaDisponible',
-                    'popular': 'badgePopular',
-                    'trending': 'badgeTrending',
-                    'patrimonio unesco': 'badgePatrimonio'
-                };
-                const badgeKey = badgeMap[raw.toLowerCase()];
-                if (badgeKey) {
-                    const tr = t(badgeKey);
-                    if (tr !== badgeKey) badge.textContent = tr;
-                }
-            }
-        }
-    });
-}
-
-// Escuchar cambios de idioma
-window.addEventListener('kavari:langchange', function() {
-    aplicarTraduccionesPaises();
+// Re-renderizar al cambiar de idioma (manteniendo el filtro aplicado)
+window.addEventListener('kavari:langchange', function () {
+  renderPaises();
 });
 
-// Al cargar la página, aplicar traducciones
-document.addEventListener('DOMContentLoaded', function() {
-    aplicarTraduccionesPaises();
+// ============================================
+// INICIO: mostrar "Cargando destinos..." y renderizar
+// ============================================
+requestAnimationFrame(function () {
+  renderPaises();
+  ocultarCargando();
 });

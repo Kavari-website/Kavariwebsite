@@ -1,30 +1,30 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!-- ==========================================================================
-     KAVARI · ÍNDICE DE SECCIONES DE ESTA PÁGINA (index.html)
+     KAVARI Â· ÃNDICE DE SECCIONES DE ESTA PÃGINA (index.html)
      ==========================================================================
-     Busca rápido con Ctrl+F: escribe "SECCIÓN:" y salta a cualquier bloque.
+     Busca rÃ¡pido con Ctrl+F: escribe "SECCIÃ“N:" y salta a cualquier bloque.
 
-     Línea  Sección
+     LÃ­nea  SecciÃ³n
      -----  ---------------------------------------------------------------
-     79     SECCIÓN: HERO / VIDEO DE FONDO (header.hero, video fondo.mp4)
-     86     SECCIÓN: NAVBAR (menú de navegación)
-     111    SECCIÓN: HERO CONTENT (título y descripción)
-     118    SECCIÓN: CAJA DE BÚSQUEDA (search-box)
-     131    SECCIÓN: TOP 10 LUGARES (featured-section)
-     239    SECCIÓN: PAQUETES DE VIAJE (places-section)
-     426    SECCIÓN: PIE DE PÁGINA (footer)
-     488    SECCIÓN: MODALES (Top 10 y Paquetes)
-     532    SECCIÓN: SCRIPTS DE FIN DE PÁGINA
+     79     SECCIÃ“N: HERO / VIDEO DE FONDO (header.hero, video fondo.mp4)
+     86     SECCIÃ“N: NAVBAR (menÃº de navegaciÃ³n)
+     111    SECCIÃ“N: HERO CONTENT (tÃ­tulo y descripciÃ³n)
+     118    SECCIÃ“N: CAJA DE BÃšSQUEDA (search-box)
+     131    SECCIÃ“N: TOP 10 LUGARES (featured-section)
+     239    SECCIÃ“N: PAQUETES DE VIAJE (places-section)
+     426    SECCIÃ“N: PIE DE PÃGINA (footer)
+     488    SECCIÃ“N: MODALES (Top 10 y Paquetes)
+     532    SECCIÃ“N: SCRIPTS DE FIN DE PÃGINA
      ========================================================================== -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="tituloIndex">KAVARI Travel — Descubre el Mundo</title>
-    <meta name="description" content="Descubre los mejores destinos del mundo con KAVARI. Guías turísticos certificados, paquetes de viaje, aerolíneas y hospedajes en una sola plataforma.">
-    <meta name="keywords" content="turismo, viajes, guías turísticos, destinos, Panamá, Colombia, América Latina">
+    <title data-i18n="tituloIndex">KAVARI Travel â€” Descubre el Mundo</title>
+    <meta name="description" content="Descubre los mejores destinos del mundo con KAVARI. GuÃ­as turÃ­sticos certificados, paquetes de viaje, aerolÃ­neas y hospedajes en una sola plataforma.">
+    <meta name="keywords" content="turismo, viajes, guÃ­as turÃ­sticos, destinos, PanamÃ¡, Colombia, AmÃ©rica Latina">
     <meta property="og:title" content="KAVARI Travel">
-    <meta property="og:description" content="Descubre los mejores destinos del mundo con guías certificados.">
+    <meta property="og:description" content="Descubre los mejores destinos del mundo con guÃ­as certificados.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/tutorial.css">
     <link rel="stylesheet" href="css/chatbot-widget.css">
@@ -48,27 +48,27 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-client.js"></script>
     <script src="js/auth.js"></script>
-    <script src="js/idioma.js?v=3"></script>
-    <script src="js/idioma-pt.js?v=1"></script>
+    <script defer src="js/idioma.js?v=3"></script>
+    <script defer src="js/idioma-pt.js?v=1"></script>
     <script src="js/theme.js?v=3"></script>
     
      <!-- ===== FAVICON GRANDE (PNG) ===== -->
 
 <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
-  <script src="js/img-fallback.js"></script>
+  <script defer src="js/img-fallback.js"></script>
 
-  <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
+  <!-- ===== MENÃš DESPLEGABLE DE IDIOMAS ===== -->
   <link rel="stylesheet" href="css/lang-dropdown.css">
   <link rel="stylesheet" href="css/universal-shine.css">
-  <script src="js/lang-dropdown.js"></script>
+  <script defer src="js/lang-dropdown.js"></script>
 
   <!-- ===== FOOTER (estilos, iconos y script) ===== -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="css/footer.css">
-  <script src="js/footer.js"></script>
+  <script defer src="js/footer.js"></script>
 
-  <!-- ===== OPTIMIZACIÓN DE CARGA (performance.js) ===== -->
+  <!-- ===== OPTIMIZACIÃ“N DE CARGA (performance.js) ===== -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <script src="js/performance.js"></script>
@@ -77,7 +77,13 @@
 <a class="skip-link" href="#main">Saltar al contenido</a>
 
 <header class="hero">
-    <!-- Video de fondo -->
+    <!-- Carrusel de fondo (fallback: video local) -->
+    <div class="hero-slides" id="heroSlides" aria-hidden="true">
+        <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1920&q=80');"></div>
+    </div>
     <video autoplay muted loop playsinline class="background-video">
         <source src="fondo.mp4" type="video/mp4">
     </video>
@@ -91,7 +97,7 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
             <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
-            <li><a href="#" id="guiasNavBtn" data-guide-register data-i18n="navRegistrarmeGuia">Ser Guía</a></li>
+            <li><a href="#" id="guiasNavBtn" data-guide-register data-i18n="navRegistrarmeGuia">Ser GuÃ­a</a></li>
             <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
             <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
             <li><a href="contacto.html" data-i18n="contacto">Contacto</a></li>
@@ -103,14 +109,14 @@
             </button>
             <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro">Oscuro</button>
         </div>
-        <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menú">
+        <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="MenÃº">
             <span></span><span></span><span></span>
         </button>
     </nav>
 
     <!-- ===== HERO CONTENT ===== -->
     <div class="hero-content">
-        <h1 data-i18n="heroTitulo">Descubre <br> Nuevos Destinos</h1>
+        <h1 data-i18n="heroTitulo">Descubre <br> el mundo con KAVARI</h1>
         <p data-i18n="heroDescripcion">Vive experiencias inolvidables alrededor del mundo.</p>
     </div>
 </header>
@@ -119,7 +125,7 @@
 <section class="search-box" id="main">
     <div class="search-content">
         <div>
-            <h2 data-i18n="searchTitulo">¿Listo para tu próxima aventura?</h2>
+            <h2 data-i18n="searchTitulo">Â¿Listo para tu prÃ³xima aventura?</h2>
             <p data-i18n="searchDescripcion">Encuentra el destino perfecto y comienza a viajar.</p>
         </div>
         <a href="paises.html">
@@ -130,16 +136,16 @@
 
 <!-- ===== TOP 10 ===== -->
 <section class="featured-section">
-    <h2 data-i18n="top10Titulo">Top 10 Lugares Más Visitados</h2>
+    <h2 data-i18n="top10Titulo">Top 10 Lugares MÃ¡s Visitados</h2>
     <div class="cards-container">
 
         <!-- Tarjeta 1 -->
         <div class="card reveal">
             <img src="img/Obelisco.jpg" alt="Obelisco" loading="lazy" decoding="async">
             <div class="card-content">
-                <h3 data-i18n="topTituloObelisco">Obelisco y Teatro Colón</h3>
-                <p data-i18n="topObelisco">Admira el icónico Obelisco de Buenos Aires y disfruta de la cultura del Teatro Colón.</p>
-                <button class="btn-sabemas" onclick="abrirModalTop10('obelisco')" data-i18n="saberMas">Saber más</button>
+                <h3 data-i18n="topTituloObelisco">Obelisco y Teatro ColÃ³n</h3>
+                <p data-i18n="topObelisco">Admira el icÃ³nico Obelisco de Buenos Aires y disfruta de la cultura del Teatro ColÃ³n.</p>
+                <button class="btn-sabemas" onclick="abrirModalTop10('obelisco')" data-i18n="saberMas">Saber mÃ¡s</button>
             </div>
         </div>
 
@@ -148,8 +154,8 @@
             <img src="img/torre_efiel.webp" alt="Torre Eiffel" loading="lazy" decoding="async">
             <div class="card-content">
                 <h3 data-i18n="topTituloTorreEiffel">Torre Eiffel</h3>
-                <p data-i18n="topTorreEiffel">El símbolo más famoso de Francia y uno de los monumentos más fotografiados del planeta.</p>
-                <button class="btn-sabemas" onclick="abrirModalTop10('torre-eiffel')" data-i18n="saberMas">Saber más</button>
+                <p data-i18n="topTorreEiffel">El sÃ­mbolo mÃ¡s famoso de Francia y uno de los monumentos mÃ¡s fotografiados del planeta.</p>
+                <button class="btn-sabemas" onclick="abrirModalTop10('torre-eiffel')" data-i18n="saberMas">Saber mÃ¡s</button>
             </div>
         </div>
 
@@ -158,8 +164,8 @@
             <img src="img/CristoRedentor.webp" alt="Cristo Redentor" loading="lazy" decoding="async">
             <div class="card-content">
                 <h3 data-i18n="topTituloCristo">Cristo Redentor</h3>
-                <p data-i18n="topCristo">Vive una experiencia inolvidable visitando una de las estatuas más famosas del mundo.</p>
-                <button class="btn-sabemas" onclick="abrirModalTop10('cristo-redentor')" data-i18n="saberMas">Saber más</button>
+                <p data-i18n="topCristo">Vive una experiencia inolvidable visitando una de las estatuas mÃ¡s famosas del mundo.</p>
+                <button class="btn-sabemas" onclick="abrirModalTop10('cristo-redentor')" data-i18n="saberMas">Saber mÃ¡s</button>
             </div>
         </div>
 
@@ -168,8 +174,8 @@
             <img src="img/Torres.webp" alt="Torres del Paine" loading="lazy" decoding="async">
             <div class="card-content">
                 <h3 data-i18n="topTituloTorresPaine">Torres del Paine</h3>
-                <p data-i18n="topTorresPaine">Descubre montañas y paisajes impresionantes en el sur de Chile.</p>
-                <button class="btn-sabemas" onclick="abrirModalTop10('torres-del-paine')" data-i18n="saberMas">Saber más</button>
+                <p data-i18n="topTorresPaine">Descubre montaÃ±as y paisajes impresionantes en el sur de Chile.</p>
+                <button class="btn-sabemas" onclick="abrirModalTop10('torres-del-paine')" data-i18n="saberMas">Saber mÃ¡s</button>
             </div>
         </div>
 
@@ -179,17 +185,17 @@
             <div class="card-content">
                 <h3 data-i18n="topTituloCartagena">Cartagena</h3>
                 <p data-i18n="topCartagena">Pasea por calles llenas de historia y arquitectura colonial.</p>
-                <button class="btn-sabemas" onclick="abrirModalTop10('cartagena')" data-i18n="saberMas">Saber más</button>
+                <button class="btn-sabemas" onclick="abrirModalTop10('cartagena')" data-i18n="saberMas">Saber mÃ¡s</button>
             </div>
         </div>
 
         <!-- Tarjeta 6 -->
         <div class="card reveal">
-            <img src="img/shuibuya.webp" alt="Japón" loading="lazy" decoding="async">
+            <img src="img/shuibuya.webp" alt="JapÃ³n" loading="lazy" decoding="async">
             <div class="card-content">
                 <h3 data-i18n="topTituloJapon">Fuji / Sensoji / Shibuya</h3>
                 <p data-i18n="topJapon">Explora la cultura japonesa entre templos y ciudades modernas.</p>
-                <button class="btn-sabemas" onclick="abrirModalTop10('japon')" data-i18n="saberMas">Saber más</button>
+                <button class="btn-sabemas" onclick="abrirModalTop10('japon')" data-i18n="saberMas">Saber mÃ¡s</button>
             </div>
         </div>
 
@@ -198,8 +204,8 @@
             <img src="img/Machipichu.webp" alt="Machu Picchu" loading="lazy" decoding="async">
             <div class="card-content">
                 <h3 data-i18n="topTituloMachuPicchu">Machu Picchu</h3>
-                <p data-i18n="topMachuPicchu">Descubre la majestuosidad de la antigua ciudad inca rodeada de montañas y paisajes impresionantes. Vive una experiencia única llena de historia y cultura.</p>
-                <button class="btn-sabemas" onclick="abrirModalTop10('machu-picchu')" data-i18n="saberMas">Saber más</button>
+                <p data-i18n="topMachuPicchu">Descubre la majestuosidad de la antigua ciudad inca rodeada de montaÃ±as y paisajes impresionantes. Vive una experiencia Ãºnica llena de historia y cultura.</p>
+                <button class="btn-sabemas" onclick="abrirModalTop10('machu-picchu')" data-i18n="saberMas">Saber mÃ¡s</button>
             </div>
         </div>
 
@@ -208,18 +214,18 @@
             <img src="img/Petra.webp" alt="Petra" loading="lazy" decoding="async">
             <div class="card-content">
                 <h3 data-i18n="topTituloPetra">Petra</h3>
-                <p data-i18n="topPetra">Contempla el majestuoso monumento excavado en roca, joya arquitectónica de Jordania.</p>
-                <button class="btn-sabemas" onclick="abrirModalTop10('petra')" data-i18n="saberMas">Saber más</button>
+                <p data-i18n="topPetra">Contempla el majestuoso monumento excavado en roca, joya arquitectÃ³nica de Jordania.</p>
+                <button class="btn-sabemas" onclick="abrirModalTop10('petra')" data-i18n="saberMas">Saber mÃ¡s</button>
             </div>
         </div>
 
         <!-- Tarjeta 9 -->
         <div class="card reveal">
-            <img src="img/ChichénItzá.webp" alt="Chichén Itzá" loading="lazy" decoding="async">
+            <img src="img/ChichénItzá.webp" alt="ChichÃ©n ItzÃ¡" loading="lazy" decoding="async">
             <div class="card-content">
-                <h3 data-i18n="topTituloChichen">Chichén Itzá</h3>
-                <p data-i18n="topChichen">Admira una de las ciudades mayas más impresionantes, famosa por su pirámide y su increíble legado arqueológico.</p>
-                <button class="btn-sabemas" onclick="abrirModalTop10('chichen-itza')" data-i18n="saberMas">Saber más</button>
+                <h3 data-i18n="topTituloChichen">ChichÃ©n ItzÃ¡</h3>
+                <p data-i18n="topChichen">Admira una de las ciudades mayas mÃ¡s impresionantes, famosa por su pirÃ¡mide y su increÃ­ble legado arqueolÃ³gico.</p>
+                <button class="btn-sabemas" onclick="abrirModalTop10('chichen-itza')" data-i18n="saberMas">Saber mÃ¡s</button>
             </div>
         </div>
 
@@ -228,8 +234,8 @@
             <img src="img/newyork.jpg" alt="Times Square" loading="lazy" decoding="async">
             <div class="card-content">
                 <h3 data-i18n="topTituloTimesSquare">Times Square</h3>
-                <p data-i18n="topTimesSquare">El corazón iluminado de Nueva York y uno de los lugares urbanos más concurridos del mundo.</p>
-                <button class="btn-sabemas" onclick="abrirModalTop10('times-square')" data-i18n="saberMas">Saber más</button>
+                <p data-i18n="topTimesSquare">El corazÃ³n iluminado de Nueva York y uno de los lugares urbanos mÃ¡s concurridos del mundo.</p>
+                <button class="btn-sabemas" onclick="abrirModalTop10('times-square')" data-i18n="saberMas">Saber mÃ¡s</button>
             </div>
         </div>
 
@@ -246,22 +252,22 @@
     <div class="paquete-card reveal">
         <div class="paquete-img-wrap">
             <img src="img/paquete francia.png" alt="Paris Francia" loading="lazy" decoding="async">
-            <span class="paquete-badge" data-i18n="tagPopular">Más popular</span>
+            <span class="paquete-badge" data-i18n="tagPopular">MÃ¡s popular</span>
         </div>
         <div class="paquete-info">
             <div class="paquete-region" data-i18n="regionEuropa">Europa</div>
             <h3 data-i18n="paqueteFranciaTitulo">Francia</h3>
-            <p data-i18n="paqueteFranciaDesc">Un paquete completo con tours guiados, hoteles céntricos y costos claros para disfrutar Francia sin preocupaciones. Desde la Torre Eiffel hasta los viñedos de Burdeos.</p>
+            <p data-i18n="paqueteFranciaDesc">Un paquete completo con tours guiados, hoteles cÃ©ntricos y costos claros para disfrutar Francia sin preocupaciones. Desde la Torre Eiffel hasta los viÃ±edos de Burdeos.</p>
             <div class="paquete-features">
                 <span class="paquete-feature" data-i18n="featureVuelo">Vuelo incluido</span>
                 <span class="paquete-feature" data-i18n="featureHotel4">Hotel 4 estrellas</span>
-                <span class="paquete-feature" data-i18n="featureDias8">8 días / 7 noches</span>
-                <span class="paquete-feature" data-i18n="featureGuia">Guía certificado</span>
+                <span class="paquete-feature" data-i18n="featureDias8">8 dÃ­as / 7 noches</span>
+                <span class="paquete-feature" data-i18n="featureGuia">GuÃ­a certificado</span>
             </div>
             <div class="paquete-bottom">
                 <div class="paquete-precio-wrap">
                     <div class="paquete-desde" data-i18n="desde">Desde</div>
-                    <div class="paquete-precio">$2,890</div>
+                    <div class="paquete-precio">$2,890 <span class="paquete-usd">USD</span></div>
                     <div class="paquete-pp" data-i18n="porPersona">por persona</div>
                 </div>
                 <div class="paquete-btns">
@@ -281,17 +287,17 @@
         <div class="paquete-info">
             <div class="paquete-region" data-i18n="regionAsia">Asia</div>
             <h3 data-i18n="paqueteChinaTitulo">China</h3>
-            <p data-i18n="paqueteChinaDesc">Explora China con guías profesionales, transporte organizado, hoteles confortables y tarifas transparentes. Visita la Gran Muralla, el Palacio Imperial y mucho más.</p>
+            <p data-i18n="paqueteChinaDesc">Explora China con guÃ­as profesionales, transporte organizado, hoteles confortables y tarifas transparentes. Visita la Gran Muralla, el Palacio Imperial y mucho mÃ¡s.</p>
             <div class="paquete-features">
                 <span class="paquete-feature" data-i18n="featureVuelo">Vuelo incluido</span>
                 <span class="paquete-feature" data-i18n="featureHotel4">Hotel 4 estrellas</span>
-                <span class="paquete-feature" data-i18n="featureDias10">10 días / 9 noches</span>
+                <span class="paquete-feature" data-i18n="featureDias10">10 dÃ­as / 9 noches</span>
                 <span class="paquete-feature" data-i18n="featureTransporte">Transporte local</span>
             </div>
             <div class="paquete-bottom">
                 <div class="paquete-precio-wrap">
                     <div class="paquete-desde" data-i18n="desde">Desde</div>
-                    <div class="paquete-precio">$2,680</div>
+                    <div class="paquete-precio">$2,680 <span class="paquete-usd">USD</span></div>
                     <div class="paquete-pp" data-i18n="porPersona">por persona</div>
                 </div>
                 <div class="paquete-btns">
@@ -311,17 +317,17 @@
         <div class="paquete-info">
             <div class="paquete-region" data-i18n="regionAsia">Asia</div>
             <h3 data-i18n="paqueteIndiaTitulo">India</h3>
-            <p data-i18n="paqueteIndiaDesc">Un combo que ofrece vuelos, traslados, guías turísticos y alojamiento económico para vivir la magia de India. El Taj Mahal, Rajastán y Goa te esperan.</p>
+            <p data-i18n="paqueteIndiaDesc">Un combo que ofrece vuelos, traslados, guÃ­as turÃ­sticos y alojamiento econÃ³mico para vivir la magia de India. El Taj Mahal, RajastÃ¡n y Goa te esperan.</p>
             <div class="paquete-features">
                 <span class="paquete-feature" data-i18n="featureVuelo">Vuelo incluido</span>
                 <span class="paquete-feature" data-i18n="featureHotel3">Hotel 3 estrellas</span>
-                <span class="paquete-feature" data-i18n="featureDias9">9 días / 8 noches</span>
-                <span class="paquete-feature" data-i18n="featureGuia">Guía certificado</span>
+                <span class="paquete-feature" data-i18n="featureDias9">9 dÃ­as / 8 noches</span>
+                <span class="paquete-feature" data-i18n="featureGuia">GuÃ­a certificado</span>
             </div>
             <div class="paquete-bottom">
                 <div class="paquete-precio-wrap">
                     <div class="paquete-desde" data-i18n="desde">Desde</div>
-                    <div class="paquete-precio">$1,890</div>
+                    <div class="paquete-precio">$1,890 <span class="paquete-usd">USD</span></div>
                     <div class="paquete-pp" data-i18n="porPersona">por persona</div>
                 </div>
                 <div class="paquete-btns">
@@ -336,22 +342,22 @@
     <div class="paquete-card reveal">
         <div class="paquete-img-wrap">
             <img src="img/paquete roma.png" alt="Italia" loading="lazy" decoding="async">
-            <span class="paquete-badge" data-i18n="tagClasico">Clásico</span>
+            <span class="paquete-badge" data-i18n="tagClasico">ClÃ¡sico</span>
         </div>
         <div class="paquete-info">
             <div class="paquete-region" data-i18n="regionEuropa">Europa</div>
             <h3 data-i18n="paqueteItaliaTitulo">Italia</h3>
-            <p data-i18n="paqueteItaliaDesc">Disfruta Italia con transporte, guías expertos, hospedaje encantador y precios justos en un solo paquete. Roma, Venecia, Florencia y la gastronomía italiana te esperan.</p>
+            <p data-i18n="paqueteItaliaDesc">Disfruta Italia con transporte, guÃ­as expertos, hospedaje encantador y precios justos en un solo paquete. Roma, Venecia, Florencia y la gastronomÃ­a italiana te esperan.</p>
             <div class="paquete-features">
                 <span class="paquete-feature" data-i18n="featureVuelo">Vuelo incluido</span>
                 <span class="paquete-feature" data-i18n="featureHotel4">Hotel 4 estrellas</span>
-                <span class="paquete-feature" data-i18n="featureDias9">9 días / 8 noches</span>
+                <span class="paquete-feature" data-i18n="featureDias9">9 dÃ­as / 8 noches</span>
                 <span class="paquete-feature" data-i18n="featureTours">Tours diarios</span>
             </div>
             <div class="paquete-bottom">
                 <div class="paquete-precio-wrap">
                     <div class="paquete-desde" data-i18n="desde">Desde</div>
-                    <div class="paquete-precio">$2,750</div>
+                    <div class="paquete-precio">$2,750 <span class="paquete-usd">USD</span></div>
                     <div class="paquete-pp" data-i18n="porPersona">por persona</div>
                 </div>
                 <div class="paquete-btns">
@@ -362,26 +368,26 @@
         </div>
     </div>
 
-    <!-- Paquete Panamá -->
+    <!-- Paquete PanamÃ¡ -->
     <div class="paquete-card reveal">
         <div class="paquete-img-wrap">
             <img src="img/paquete panama.png" alt="Panama" loading="lazy" decoding="async">
             <span class="paquete-badge" data-i18n="tagLocal">Local</span>
         </div>
         <div class="paquete-info">
-            <div class="paquete-region" data-i18n="regionCentroamerica">Centroamérica</div>
-            <h3 data-i18n="paquetePanamaTitulo">Panamá</h3>
-            <p data-i18n="paquetePanamaDesc">Disfruta Panamá con transporte, guías expertos, hospedaje frente al mar y precios justos en un solo paquete. Canal de Panamá, Casco Viejo y San Blas incluidos.</p>
+            <div class="paquete-region" data-i18n="regionCentroamerica">CentroamÃ©rica</div>
+            <h3 data-i18n="paquetePanamaTitulo">PanamÃ¡</h3>
+            <p data-i18n="paquetePanamaDesc">Disfruta PanamÃ¡ con transporte, guÃ­as expertos, hospedaje frente al mar y precios justos en un solo paquete. Canal de PanamÃ¡, Casco Viejo y San Blas incluidos.</p>
             <div class="paquete-features">
                 <span class="paquete-feature" data-i18n="featureTransporte">Transporte local</span>
                 <span class="paquete-feature" data-i18n="featureHotel4">Hotel 4 estrellas</span>
-                <span class="paquete-feature" data-i18n="featureDias5">5 días / 4 noches</span>
-                <span class="paquete-feature" data-i18n="featureGuia">Guía certificado</span>
+                <span class="paquete-feature" data-i18n="featureDias5">5 dÃ­as / 4 noches</span>
+                <span class="paquete-feature" data-i18n="featureGuia">GuÃ­a certificado</span>
             </div>
             <div class="paquete-bottom">
                 <div class="paquete-precio-wrap">
                     <div class="paquete-desde" data-i18n="desde">Desde</div>
-                    <div class="paquete-precio">$895</div>
+                    <div class="paquete-precio">$895 <span class="paquete-usd">USD</span></div>
                     <div class="paquete-pp" data-i18n="porPersona">por persona</div>
                 </div>
                 <div class="paquete-btns">
@@ -399,19 +405,19 @@
             <span class="paquete-badge" data-i18n="tagOferta">Oferta</span>
         </div>
         <div class="paquete-info">
-            <div class="paquete-region" data-i18n="regionCentroamerica">Centroamérica</div>
+            <div class="paquete-region" data-i18n="regionCentroamerica">CentroamÃ©rica</div>
             <h3 data-i18n="paqueteElSalvadorTitulo">El Salvador</h3>
-            <p data-i18n="paqueteElSalvadorDesc">Descubre El Salvador con traslados cómodos, actividades auténticas, hospedaje seleccionado y todo organizado en un solo paquete. Surf, volcanes y cultura local.</p>
+            <p data-i18n="paqueteElSalvadorDesc">Descubre El Salvador con traslados cÃ³modos, actividades autÃ©nticas, hospedaje seleccionado y todo organizado en un solo paquete. Surf, volcanes y cultura local.</p>
             <div class="paquete-features">
                 <span class="paquete-feature" data-i18n="featureTraslados">Traslados incluidos</span>
                 <span class="paquete-feature" data-i18n="featureHotel3">Hotel 3 estrellas</span>
-                <span class="paquete-feature" data-i18n="featureDias4">4 días / 3 noches</span>
+                <span class="paquete-feature" data-i18n="featureDias4">4 dÃ­as / 3 noches</span>
                 <span class="paquete-feature" data-i18n="featureActividades">Actividades incluidas</span>
             </div>
             <div class="paquete-bottom">
                 <div class="paquete-precio-wrap">
                     <div class="paquete-desde" data-i18n="desde">Desde</div>
-                    <div class="paquete-precio">$625</div>
+                    <div class="paquete-precio">$625 <span class="paquete-usd">USD</span></div>
                     <div class="paquete-pp" data-i18n="porPersona">por persona</div>
                 </div>
                 <div class="paquete-btns">
@@ -423,15 +429,81 @@
     </div>
 </section>
 
+<!-- ===== FORMULARIO CTA: SOLICITA TU PLAN DE VIAJE ===== -->
+<section class="plan-cta" id="planCta">
+    <div class="plan-cta-wrap">
+        <div class="plan-cta-head">
+            <span class="plan-cta-eyebrow" data-i18n="planCtaEyebrow">Asesoría personalizada</span>
+            <h2 data-i18n="planCtaTitulo">Solicita tu plan de viaje</h2>
+            <p data-i18n="planCtaDesc">Cuéntanos qué sueñas y un asesor KAVARI diseñará tu plan a medida, sin costo.</p>
+        </div>
+        <form class="plan-cta-form" id="planCtaForm" novalidate>
+            <div class="plan-cta-grid">
+                <div class="plan-cta-field">
+                    <label for="planNombre" data-i18n="planCtaNombreLabel">Nombre completo</label>
+                    <input type="text" id="planNombre" name="nombre" data-i18n-placeholder="planCtaNombrePH" placeholder="Ej: Ana Torres" autocomplete="name">
+                </div>
+                <div class="plan-cta-field">
+                    <label for="planEmail" data-i18n="planCtaEmailLabel">Correo electrónico</label>
+                    <input type="email" id="planEmail" name="email" data-i18n-placeholder="planCtaEmailPH" placeholder="tu@correo.com" autocomplete="email">
+                </div>
+                <div class="plan-cta-field">
+                    <label for="planTelefono" data-i18n="planCtaTelefonoLabel">Teléfono</label>
+                    <input type="tel" id="planTelefono" name="telefono" data-i18n-placeholder="planCtaTelefonoPH" placeholder="+507 6000-0000" autocomplete="tel">
+                </div>
+                <div class="plan-cta-field">
+                    <label for="planDestino" data-i18n="planCtaDestinoLabel">Destino de interés</label>
+                    <select id="planDestino" name="destino">
+                        <option value="" selected data-i18n="planCtaDestinoOpc">Selecciona un destino</option>
+                        <option value="francia">Francia</option>
+                        <option value="china">China</option>
+                        <option value="india">India</option>
+                        <option value="italia">Italia</option>
+                        <option value="panama">Panamá</option>
+                        <option value="el-salvador">El Salvador</option>
+                        <option value="otro" data-i18n="planCtaDestinoOtro">Otro destino</option>
+                    </select>
+                </div>
+                <div class="plan-cta-field">
+                    <label for="planFecha" data-i18n="planCtaFechaLabel">Fecha de viaje</label>
+                    <input type="date" id="planFecha" name="fecha">
+                </div>
+                <div class="plan-cta-field">
+                    <label for="planViajeros" data-i18n="planCtaViajerosLabel">Número de viajeros</label>
+                    <input type="number" id="planViajeros" name="viajeros" min="1" max="20" data-i18n-placeholder="planCtaViajerosPH" placeholder="2">
+                </div>
+                <div class="plan-cta-field plan-cta-field-full">
+                    <label for="planPresupuesto" data-i18n="planCtaPresupuestoLabel">Presupuesto estimado por persona (USD)</label>
+                    <select id="planPresupuesto" name="presupuesto">
+                        <option value="" selected data-i18n="planCtaPresupuestoOpc">Selecciona un rango</option>
+                        <option value="500-1000" data-i18n="planCtaPresupuestoBajo">$500 – $1,000</option>
+                        <option value="1000-2500" data-i18n="planCtaPresupuestoMedio">$1,000 – $2,500</option>
+                        <option value="2500-5000" data-i18n="planCtaPresupuestoAlto">$2,500 – $5,000</option>
+                        <option value="5000+" data-i18n="planCtaPresupuestoPremium">$5,000+</option>
+                    </select>
+                </div>
+                <div class="plan-cta-field plan-cta-field-full">
+                    <label for="planMensaje" data-i18n="planCtaMensajeLabel">Cuéntanos sobre tu viaje (opcional)</label>
+                    <textarea id="planMensaje" name="mensaje" rows="3" data-i18n-placeholder="planCtaMensajePH" placeholder="Tipo de viaje, intereses, fechas flexibles…"></textarea>
+                </div>
+                <div class="plan-cta-submit plan-cta-field-full">
+                    <button type="submit" id="planCtaBtn" data-i18n="planCtaBoton">Enviar solicitud</button>
+                </div>
+            </div>
+            <p class="plan-cta-msg" id="planCtaMsg" role="status" aria-live="polite"></p>
+        </form>
+    </div>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <!-- ===== FOOTER ===== -->
 <footer class="footer kv-footer">
   <div class="kv-footer-grid">
 
-    <!-- Columna 1 · Marca + Redes sociales -->
+    <!-- Columna 1 Â· Marca + Redes sociales -->
     <div class="kv-footer-col">
       <p class="kv-footer-brand">KAVARI</p>
-      <p class="kv-footer-sub" data-i18n="footerSub1">Tu próxima aventura empieza aquí.</p>
+      <p class="kv-footer-sub" data-i18n="footerSub1">Tu prÃ³xima aventura empieza aquÃ­.</p>
       <div class="kv-footer-social" aria-label="Redes sociales">
         <a class="kv-social-icon" href="https://www.tiktok.com/@kavari.travel" target="_blank" rel="noopener" aria-label="TikTok de KAVARI"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
         <a class="kv-social-icon" href="https://www.facebook.com/kavari" target="_blank" rel="noopener" aria-label="Facebook de KAVARI"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
@@ -440,26 +512,26 @@
       </div>
     </div>
 
-    <!-- Columna 2 · Enlaces rápidos -->
-    <nav class="kv-footer-col" aria-label="Enlaces rápidos">
-      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces rápidos</p>
+    <!-- Columna 2 Â· Enlaces rÃ¡pidos -->
+    <nav class="kv-footer-col" aria-label="Enlaces rÃ¡pidos">
+      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces rÃ¡pidos</p>
       <ul class="kv-footer-links">
         <li><a class="kv-footer-link" href="index.html" data-i18n="footerLinkInicio">Inicio</a></li>
         <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkDestinos">Destinos</a></li>
         <li><a class="kv-footer-link" href="sobrenosotros.html" data-i18n="footerLinkSobre">Sobre nosotros</a></li>
-        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">Guías locales</a></li>
+        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">GuÃ­as locales</a></li>
         <li><a class="kv-footer-link" href="contacto.html" data-i18n="footerLinkContacto">Contacto</a></li>
       </ul>
     </nav>
 
-    <!-- Columna 3 · Newsletter -->
+    <!-- Columna 3 Â· Newsletter -->
     <div class="kv-footer-col">
       <p class="kv-footer-title" data-i18n="footerNewsTitle">Newsletter</p>
       <p class="kv-footer-sub" data-i18n="footerNewsSub">Recibe ofertas y novedades de viajes.</p>
       <form class="kv-footer-form" id="kvNewsletterForm" novalidate>
-        <label class="kv-sr-only" for="kvNewsletterEmail" data-i18n="footerNewsLabel">Tu correo electrónico</label>
+        <label class="kv-sr-only" for="kvNewsletterEmail" data-i18n="footerNewsLabel">Tu correo electrÃ³nico</label>
         <input class="kv-footer-input" id="kvNewsletterEmail" name="email" type="email"
-               placeholder="Tu correo electrónico" data-i18n-placeholder="footerNewsPlaceholder"
+               placeholder="Tu correo electrÃ³nico" data-i18n-placeholder="footerNewsPlaceholder"
                required autocomplete="email">
         <button class="kv-footer-btn" type="submit" data-i18n="footerNewsBtn">Suscribirse</button>
       </form>
@@ -467,8 +539,13 @@
 
   </div>
 
-  <div class="kv-footer-bottom">
+<div class="kv-footer-bottom">
     <p class="kv-footer-copy" data-i18n="footerTexto">© 2025 Kavari — Todos los derechos reservados.</p>
+    <ul class="kv-footer-legal">
+      <li><a class="kv-footer-link" href="privacidad.html" data-i18n="footerPrivacidad">Política de privacidad</a></li>
+      <li><a class="kv-footer-link" href="terminos.html" data-i18n="footerTerminos">Términos y condiciones</a></li>
+      <li><a class="kv-footer-link" href="cookies.html" data-i18n="footerCookies">Política de cookies</a></li>
+    </ul>
   </div>
 </footer>
 
@@ -485,7 +562,7 @@
             <div class="top10-modal-desc" id="top10ModalDesc"></div>
             <div class="top10-modal-facts" id="top10ModalFacts"></div>
             <div class="top10-modal-actions">
-                <button class="btn-modal-info" onclick="cerrarModalTop10()" data-i18n="volverAtras">Volver atrás</button>
+                <button class="btn-modal-info" onclick="cerrarModalTop10()" data-i18n="volverAtras">Volver atrÃ¡s</button>
                 <a class="btn-modal-go" id="top10ModalGoBtn" href="paises.html" data-i18n="quieroIr">Quiero ir</a>
             </div>
         </div>
@@ -503,12 +580,12 @@
                 <div class="paquete-modal-precio" id="paqueteModalPrecio"></div>
             </div>
             <div class="paquete-modal-desc" id="paqueteModalDesc"></div>
-            <div class="paquete-modal-section-title" data-i18n="paqueteModalIncluye">¿Qué incluye el paquete?</div>
+            <div class="paquete-modal-section-title" data-i18n="paqueteModalIncluye">Â¿QuÃ© incluye el paquete?</div>
             <div class="paquete-modal-includes" id="paqueteModalIncludes"></div>
             <div class="paquete-modal-section-title" data-i18n="itinerarioSugerido">Itinerario sugerido</div>
             <div class="paquete-modal-itinerary" id="paqueteModalItinerary"></div>
             <div class="paquete-modal-cta">
-                <button class="btn-modal-cerrar" onclick="cerrarModalPaquete()" data-i18n="volverAtras">Volver atrás</button>
+                <button class="btn-modal-cerrar" onclick="cerrarModalPaquete()" data-i18n="volverAtras">Volver atrÃ¡s</button>
                 <button class="btn-modal-go" onclick="cerrarModalPaquete(); PackageRequest.open(window.currentPaqueteModalId)" data-i18n="reservarAhora">Reservar ahora</button>
                 <a class="btn-modal-destino" id="paqueteModalDestBtn" href="paises.html" data-i18n="verDestinoCompleto">Ver destino completo</a>
             </div>

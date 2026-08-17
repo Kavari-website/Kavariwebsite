@@ -253,3 +253,100 @@ function updateLangButton(idioma) {
     }
 }
 
+// ===== CARRUSEL DE FONDO DEL HERO =====
+(function initHeroCarousel() {
+    const slides = document.querySelectorAll('.page-index .hero-slide');
+    if (!slides.length) return;
+    let current = 0;
+    const DURACION = 6000;
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, DURACION);
+})();
+
+// ===== FORMULARIO CTA: SOLICITA TU PLAN DE VIAJE =====
+(function initPlanCtaForm() {
+    const form = document.getElementById('planCtaForm');
+    if (!form) return;
+    const msg = document.getElementById('planCtaMsg');
+    const btn = document.getElementById('planCtaBtn');
+
+    function marcarError(el, error) {
+        if (el) el.classList.toggle('error', error);
+    }
+
+    function esEmailValido(valor) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+    }
+
+    function txt(clave, fallback) {
+        return typeof t === 'function' ? t(clave) : fallback;
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nombre = document.getElementById('planNombre');
+        const email = document.getElementById('planEmail');
+        const telefono = document.getElementById('planTelefono');
+        const destino = document.getElementById('planDestino');
+        const fecha = document.getElementById('planFecha');
+        const viajeros = document.getElementById('planViajeros');
+        const presupuesto = document.getElementById('planPresupuesto');
+
+        marcarError(nombre, !nombre.value.trim());
+        marcarError(email, !esEmailValido(email.value.trim()));
+        marcarError(telefono, !telefono.value.trim());
+        marcarError(destino, !destino.value);
+        marcarError(fecha, !fecha.value);
+        marcarError(viajeros, !viajeros.value || parseInt(viajeros.value, 10) < 1);
+        marcarError(presupuesto, !presupuesto.value);
+
+        if (!nombre.value.trim() || !esEmailValido(email.value.trim()) ||
+            !telefono.value.trim() || !destino.value || !fecha.value ||
+            !viajeros.value || parseInt(viajeros.value, 10) < 1 || !presupuesto.value) {
+            msg.textContent = txt('planCtaError', 'Revisa los campos marcados e inténtalo de nuevo.');
+            msg.className = 'plan-cta-msg error';
+            return;
+        }
+
+        if (btn) btn.disabled = true;
+        msg.textContent = txt('planCtaEnviando', 'Enviando…');
+        msg.className = 'plan-cta-msg';
+
+        const cliente = window.KavariDB?.getSupabaseClient ? window.KavariDB.getSupabaseClient() : null;
+        const enviar = cliente
+            ? cliente.from('travel_plans').insert({
+                full_name: nombre.value.trim(),
+                email: email.value.trim(),
+                phone: telefono.value.trim(),
+                destination: destino.value,
+                travel_date: fecha.value,
+                travelers: parseInt(viajeros.value, 10),
+                budget_range: presupuesto.value,
+                message: (document.getElementById('planMensaje')?.value || '').trim(),
+                status: 'pending'
+            })
+            : Promise.resolve({ error: null, data: null });
+
+        enviar.then(function(res) {
+            if (res && res.error) throw res.error;
+            msg.textContent = txt('planCtaExito', '¡Gracias! Un asesor te contactará muy pronto.');
+            msg.className = 'plan-cta-msg success';
+            form.reset();
+        }).catch(function(err) {
+            console.error('[KAVARI] Error guardando plan de viaje:', err);
+            msg.textContent = txt('planCtaFallo', 'No se pudo enviar tu solicitud. Intenta de nuevo.');
+            msg.className = 'plan-cta-msg error';
+        }).finally(function() {
+            if (btn) btn.disabled = false;
+        });
+    });
+
+    form.querySelectorAll('input, select, textarea').forEach(function(el) {
+        el.addEventListener('input', function() { marcarError(el, false); });
+        el.addEventListener('change', function() { marcarError(el, false); });
+    });
+})();
+
