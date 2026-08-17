@@ -1,4 +1,4 @@
-{
+﻿{
     "top10": {
         "obelisco": {
             "img": "img/Obelisco.jpg",
@@ -11441,7 +11441,7 @@
                     "nombre": "paisBolivia_gastronomia_platos_0_nombre",
                     "categoria": "paisBolivia_gastronomia_platos_0_categoria",
                     "descripcion": "paisBolivia_gastronomia_platos_0_descripcion",
-                    "imagen": "img/bolivia/saltenias.jpg",
+                    "imagen": "img/Bolivia/Salteñas.webp",
                     "nota": "paisBolivia_gastronomia_platos_0_nota"
                 },
                 {
@@ -11455,7 +11455,7 @@
                     "nombre": "paisBolivia_gastronomia_platos_2_nombre",
                     "categoria": "paisBolivia_gastronomia_platos_2_categoria",
                     "descripcion": "paisBolivia_gastronomia_platos_2_descripcion",
-                    "imagen": "img/bolivia/sopamani.jpg",
+                    "imagen": "img/bolivia/Sopa de maní.webp",
                     "nota": "paisBolivia_gastronomia_platos_2_nota"
                 },
                 {
@@ -11469,7 +11469,7 @@
                     "nombre": "paisBolivia_gastronomia_platos_4_nombre",
                     "categoria": "paisBolivia_gastronomia_platos_4_categoria",
                     "descripcion": "paisBolivia_gastronomia_platos_4_descripcion",
-                    "imagen": "img/bolivia/anticuchos.jpg",
+                    "imagen": "img/Bolivia/Anticuchoss.png",
                     "nota": "paisBolivia_gastronomia_platos_4_nota"
                 },
                 {
@@ -11483,7 +11483,7 @@
                     "nombre": "paisBolivia_gastronomia_platos_6_nombre",
                     "categoria": "paisBolivia_gastronomia_platos_6_categoria",
                     "descripcion": "paisBolivia_gastronomia_platos_6_descripcion",
-                    "imagen": "img/bolivia/majadito.jpg",
+                    "imagen": "img/Bolivia/Majadito.jpeg",
                     "nota": "paisBolivia_gastronomia_platos_6_nota"
                 },
                 {
@@ -11497,7 +11497,7 @@
                     "nombre": "paisBolivia_gastronomia_platos_8_nombre",
                     "categoria": "paisBolivia_gastronomia_platos_8_categoria",
                     "descripcion": "paisBolivia_gastronomia_platos_8_descripcion",
-                    "imagen": "img/bolivia/saice.jpg",
+                    "imagen": "img/Bolivia/sai.jpg",
                     "nota": "paisBolivia_gastronomia_platos_8_nota"
                 },
                 {
@@ -12138,7 +12138,7 @@
         "poblacion": "paisVenezuela_poblacion",
         "zona_horaria": "paisVenezuela_zona_horaria",
         "codigo_telefonico": "paisVenezuela_codigo_telefonico",
-        "hero_img": "img/venezuela/bannervenezuela2.jpg",
+        "hero_img": "img/venezuela/Banner Venezuela.jpeg",
         "page_header_img": "img/venezuela/header.jpg",
         "stats": [
             {
