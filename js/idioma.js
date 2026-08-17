@@ -6986,6 +6986,7 @@ paisElSalvador_destinos_conchagua_nombre: 'Volcán de Conchagua',
 paisElSalvador_destinos_conchagua_tag: 'Volcán · Vistas',
 paisElSalvador_destinos_conchagua_descripcion: 'Volcán (1,225 m) en el Golfo de Fonseca (La Unión). Vistas panorámicas a las costas y al Golfo.',
 paisElSalvador_destinos_conchagua_detalle: 'Vistas del Golfo de Fonseca (El Salvador, Honduras, Nicaragua). Senderismo. Observación de aves. Comunidades locales.',
+paisElSalvador_destinos_conchagua_consejo: 'Sube temprano (antes de las 8 a. m.) para ver el amanecer sobre el Golfo de Fonseca; lleva agua, protector solar y calzado para senderismo.',
 
 // Cultura
 paisElSalvador_cultura_titulo: 'Cultura Salvadoreña',
@@ -7330,6 +7331,7 @@ paisBelice_cultura_items_punta_detalle: 'Andy Palacio y los Garifuna Collective 
 paisBelice_cultura_items_riceandbeans_nombre: 'Rice and Beans',
 paisBelice_cultura_items_riceandbeans_tag: 'Gastronomía',
 paisBelice_cultura_items_riceandbeans_descripcion: 'Plato típico con arroz y frijoles cocinados con leche de coco. Acompañado de pollo frito o pescado.',
+paisBelice_cultura_items_riceandbeans_detalle: 'Plato criollo beliceño: arroz y frijoles cocidos en leche de coco, servidos con pollo guisado o pescado frito, repollo y plátano maduro.',
 
 paisBelice_cultura_items_garifuna_nombre: 'Cultura Garífuna',
 paisBelice_cultura_items_garifuna_tag: 'Etnia · UNESCO',
@@ -14797,6 +14799,7 @@ paisElSalvador_destinos_conchagua_nombre: 'Conchagua Volcano',
 paisElSalvador_destinos_conchagua_tag: 'Volcano · Views',
 paisElSalvador_destinos_conchagua_descripcion: 'Volcano (1,225 m) in the Gulf of Fonseca (La Unión). Panoramic views of the coasts and the Gulf.',
 paisElSalvador_destinos_conchagua_detalle: 'Views of the Gulf of Fonseca (El Salvador, Honduras, Nicaragua). Hiking. Bird watching. Local communities.',
+paisElSalvador_destinos_conchagua_consejo: 'Go early (before 8 a.m.) to watch the sunrise over the Gulf of Fonseca; bring water, sunscreen and hiking shoes.',
 
 // Culture
 paisElSalvador_cultura_titulo: 'Salvadoran Culture',
@@ -15141,6 +15144,7 @@ paisBelice_cultura_items_punta_detalle: 'Andy Palacio and the Garifuna Collectiv
 paisBelice_cultura_items_riceandbeans_nombre: 'Rice and Beans',
 paisBelice_cultura_items_riceandbeans_tag: 'Gastronomy',
 paisBelice_cultura_items_riceandbeans_descripcion: 'Typical dish with rice and beans cooked in coconut milk. Served with fried chicken or fish.',
+paisBelice_cultura_items_riceandbeans_detalle: 'Belizean creole dish: rice and beans cooked in coconut milk, served with stewed chicken or fried fish, coleslaw and ripe plantain.',
 
 paisBelice_cultura_items_garifuna_nombre: 'Garífuna Culture',
 paisBelice_cultura_items_garifuna_tag: 'Ethnic group · UNESCO',
