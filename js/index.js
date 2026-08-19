@@ -6,15 +6,15 @@ window.homeDataPromise = null;
 
 const top10ModalKeyMap = {
     'obelisco': 'Obelisco',
-    'torre-eiffel': 'TorreEiffel',
+    'canal-panama': 'CanalPanama',
     'cristo-redentor': 'Cristo',
     'torres-del-paine': 'TorresPaine',
     'cartagena': 'Cartagena',
-    'japon': 'Japon',
+    'iguazu': 'Iguazu',
     'machu-picchu': 'MachuPicchu',
-    'petra': 'Petra',
+    'tikal': 'Tikal',
     'chichen-itza': 'Chichen',
-    'times-square': 'TimesSquare'
+    'galapagos': 'Galapagos'
 };
 
 const paqueteModalKeyMap = {

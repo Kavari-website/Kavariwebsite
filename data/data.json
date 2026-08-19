@@ -1,4 +1,4 @@
-﻿{
+{
     "top10": {
         "obelisco": {
             "img": "img/Obelisco.jpg",
@@ -13,18 +13,18 @@
             ],
             "pais": "argentina"
         },
-        "torre-eiffel": {
-            "img": "img/torre_efiel.webp",
-            "tag": "Francia — París",
-            "title": "Torre Eiffel",
-            "desc": "Construida en 1889 para la Exposición Universal de París, la Torre Eiffel es el monumento más visitado del mundo con más de 7 millones de visitantes al año. Con 330 metros de altura, desde su cima se puede apreciar toda la ciudad de París. Gustave Eiffel la diseñó originalmente como una estructura temporal, pero se convirtió en el símbolo eterno de Francia.",
+        "canal-panama": {
+            "img": "img/panama/canaldepanama.jpg",
+            "tag": "Panamá — Ciudad de Panamá",
+            "title": "Canal de Panamá",
+            "desc": "El Canal de Panamá es una obra de ingeniería que conecta los océanos Atlántico y Pacífico, inaugurado en 1914. Sus esclusas elevan los barcos sobre las montañas del istmo en un viaje de 82 kilómetros. El Centro de Visitantes de Miraflores permite ver de cerca el paso de los buques y conocer la historia de esta maravilla que transformó el comercio mundial.",
             "facts": [
-                "330 metros de altura",
-                "Construida en 1889",
-                "7M visitantes/año",
-                "Símbolo de Francia"
+                "82 km de longitud",
+                "Inaugurado en 1914",
+                "Une dos océanos",
+                "Esclusas de Miraflores"
             ],
-            "pais": "francia"
+            "pais": "panama"
         },
         "cristo-redentor": {
             "img": "img/CristoRedentor.webp",
@@ -65,18 +65,18 @@
             ],
             "pais": "colombia"
         },
-        "japon": {
-            "img": "img/shuibuya.webp",
-            "tag": "Japón — Tokio / Kyoto",
-            "title": "Fuji / Sensoji / Shibuya",
-            "desc": "Japón combina tradición milenaria con modernidad futurista. El Monte Fuji, volcán sagrado de 3,776 metros, es el pico más alto del país. El templo Sensoji en Tokio es el más antiguo y visitado de la capital. El cruce de Shibuya, conocido como el cruce peatonal más concurrido del mundo, simboliza el Japón contemporáneo. Una experiencia única que no tiene igual.",
+        "iguazu": {
+            "img": "img/argentina/CataratasDeIguazú.jpg",
+            "tag": "Argentina / Brasil — Misiones",
+            "title": "Cataratas del Iguazú",
+            "desc": "Las Cataratas del Iguazú, sobre la frontera entre Argentina y Brasil, son el sistema de cascadas más grande del mundo con 275 saltos que caen desde la selva subtropical. La Garganta del Diablo, su salto más imponente, estremece con su rugido. Declaradas Patrimonio de la Humanidad por la UNESCO, reciben más de 1.5 millones de visitantes al año.",
             "facts": [
-                "3.776m Monte Fuji",
-                "Templo del año 645",
-                "Cruce más famoso",
-                "Cultura milenaria"
+                "275 saltos de agua",
+                "Garganta del Diablo",
+                "Patrimonio UNESCO",
+                "1.5M visitantes/año"
             ],
-            "pais": "japon"
+            "pais": "argentina"
         },
         "machu-picchu": {
             "img": "img/Machipichu.webp",
@@ -91,18 +91,18 @@
             ],
             "pais": "peru"
         },
-        "petra": {
-            "img": "img/Petra.webp",
-            "tag": "Jordania — Petra",
-            "title": "Petra",
-            "desc": "Petra, la ciudad rosa excavada en la roca, es el tesoro arqueológico más valioso de Jordania. Construida por los nabateos alrededor del siglo IV a.C., esta ciudad fue un importante cruce de rutas comerciales. Su edificio más icónico, El Tesoro (Al Khazneh), fue tallado directamente en la roca arenisca y es una de las imágenes más reconocibles del Medio Oriente.",
+        "tikal": {
+            "img": "img/guatemala/tikal.jpg",
+            "tag": "Guatemala — Petén",
+            "title": "Tikal",
+            "desc": "Tikal fue una de las ciudades más poderosas de la civilización maya, escondida en la selva de Petén, Guatemala. Sus templos, como el Templo del Gran Jaguar, se elevan sobre el dosel selvático y fueron escenario de una película de Star Wars. Recibe alrededor de 1.2 millones de visitantes al año y es Patrimonio de la Humanidad desde 1979.",
             "facts": [
-                "Siglo IV a.C.",
-                "Ciudad en roca viva",
-                "Maravilla del Mundo",
-                "Ruta de la seda"
+                "Ciudad maya",
+                "Patrimonio UNESCO 1979",
+                "Templo del Gran Jaguar",
+                "Selva de Petén"
             ],
-            "pais": "marruecos"
+            "pais": "guatemala"
         },
         "chichen-itza": {
             "img": "img/ChichénItzá.webp",
@@ -117,18 +117,18 @@
             ],
             "pais": "mexico"
         },
-        "times-square": {
-            "img": "img/newyork.jpg",
-            "tag": "Estados Unidos — Nueva York",
-            "title": "Times Square",
-            "desc": "Times Square es el corazón palpitante de Nueva York y uno de los lugares más visitados del planeta, con más de 50 millones de visitantes al año. Conocido como \"el cruce del mundo\", sus enormes pantallas LED, teatros de Broadway, restaurantes y tiendas crean una atmósfera única a cualquier hora del día. La Nochevieja en Times Square es uno de los eventos más transmitidos del mundo.",
+        "galapagos": {
+            "img": "img/ecuador/galapagos.jpg",
+            "tag": "Ecuador — Océano Pacífico",
+            "title": "Islas Galápagos",
+            "desc": "Las Islas Galápagos, en el océano Pacífico ecuatoriano, inspiraron la teoría de la evolución de Charles Darwin. Sus tortugas gigantes, iguanas marinas y piqueros de patas azules no existen en ningún otro lugar del planeta. Este archipiélago volcánico es Patrimonio de la Humanidad y Reserva Marina, y recibe más de 270 mil visitantes al año.",
             "facts": [
-                "50M visitantes/año",
-                "Capital del entretenimiento",
-                "Broadway",
-                "Año Nuevo icónico"
+                "Inspiraron a Darwin",
+                "Tortugas gigantes",
+                "Patrimonio UNESCO 1978",
+                "270 mil visitantes/año"
             ],
-            "pais": "panama"
+            "pais": "ecuador"
         }
     },
     "paquetes": {
