@@ -44,6 +44,57 @@ try {
 } catch (e) {
   console.error('No se pudo cargar data.json:', e.message);
 }
+
+/* ───────────── diccionario ES (idioma.js) para resolver claves ─────────────
+   data.json guarda los textos como claves de traducción
+   (p. ej. "paisColombia_nombre"). Aquí se cargan los textos reales en
+   español para indexarlos en la base de conocimiento y servirlos en las API.
+   No modifica data.json: solo resuelve las claves en memoria. ───────────── */
+let TRAD = {};
+try {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'js', 'idioma.js'), 'utf8');
+  const start = src.indexOf('const diccionario = {');
+  const open = src.indexOf('{', start);
+  let depth = 0, inStr = false, strCh = '', end = -1;
+  for (let i = open; i < src.length; i++) {
+    const ch = src[i];
+    if (inStr) {
+      if (ch === '\\') { i++; continue; }
+      if (ch === strCh) inStr = false;
+      continue;
+    }
+    if (ch === '"' || ch === "'" || ch === '`') { inStr = true; strCh = ch; continue; }
+    if (ch === '{') depth++;
+    else if (ch === '}') { depth--; if (!depth) { end = i; break; } }
+  }
+  if (end > open) {
+    const dict = eval('(function(){ ' + src.slice(start, end + 1) + '; return diccionario; })()');
+    TRAD = (dict && dict.es) || {};
+  }
+} catch (e) {
+  console.error('No se pudo cargar idioma.js:', e.message);
+}
+
+function resolveValue(v) {
+  if (typeof v === 'string') {
+    const t = v.trim();
+    return TRAD[t] || v;
+  }
+  return v;
+}
+
+function resolveData(obj) {
+  if (Array.isArray(obj)) return obj.map(resolveData);
+  if (obj && typeof obj === 'object') {
+    const out = {};
+    for (const k of Object.keys(obj)) out[k] = resolveData(obj[k]);
+    return out;
+  }
+  return resolveValue(obj);
+}
+
+data = resolveData(data);
+
 const COUNTRY_CODES = Object.keys(data).filter(k => data[k] && data[k].nombre && !hasPlaceholder(data[k].nombre));
 
 /* ───────────── clave y modelo Gemini (solo servidor) ───────────── */
