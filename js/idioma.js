@@ -930,6 +930,8 @@
             chatQPaquetes: '¿Hay paquetes de viaje disponibles?',
             chatQCuenta: '¿Cómo creo mi cuenta?',
             chatQPlanes: '¿Qué planes ofrece KAVARI?',
+            chatQAyuda: '¿Cómo funciona KAVARI?',
+            chatQContacto: '¿Cómo contacto al equipo?',
             chatQDestinoEpoca: '¿Cuál es la mejor época para visitar {nombre}?',
             chatQDestinoDoc: '¿Qué documentos necesito para entrar?',
             chatQDestinoImp: '¿Cuáles son los destinos imperdibles en {nombre}?',
@@ -8756,6 +8758,8 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             chatQPaquetes: 'Are travel packages available?',
             chatQCuenta: 'How do I create my account?',
             chatQPlanes: 'Which KAVARI plans are available?',
+            chatQAyuda: 'How does KAVARI work?',
+            chatQContacto: 'How do I contact the team?',
             chatQDestinoEpoca: 'What is the best time to visit {nombre}?',
             chatQDestinoDoc: 'What documents do I need to enter?',
             chatQDestinoImp: 'What are the must-see places in {nombre}?',
@@ -15851,6 +15855,8 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
 
     document.addEventListener('DOMContentLoaded', function() {
         aplicarTraducciones();
+        // No agregar toggleLang si el dropdown de idiomas ya está activo
+        if (window.__kavariLangDropdownActive) return;
         const btnLang = document.getElementById('btnLang');
         // Si lang-dropdown.js ya convirtió el botón en menú desplegable,
         // NO añadir toggleLang: al pulsar se abriría el menú Y cambiaría

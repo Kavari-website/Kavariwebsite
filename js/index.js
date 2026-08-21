@@ -57,11 +57,130 @@ function loadHomeData() {
             top10Data = data.top10 || {};
             paquetesData = data.paquetes || {};
             window.homeDataLoaded = true;
+            renderHomeCards();
         })
         .catch(error => {
             console.error('Error cargando data de inicio:', error);
         });
     return window.homeDataPromise;
+}
+
+// ============================================
+// RENDER DINÁMICO DE TARJETAS TOP 10 Y PAQUETES
+// ============================================
+const top10CardKeys = [
+    'obelisco', 'torre-eiffel', 'cristo-redentor', 'torres-del-paine',
+    'cartagena', 'japon', 'machu-picchu', 'petra', 'chichen-itza', 'times-square'
+];
+
+const paqueteCardKeys = [
+    'francia', 'china', 'india', 'italia', 'panama', 'el-salvador'
+];
+
+// Badge de cada paquete (se traduce con data-i18n)
+const paqueteBadgeKeys = {
+    'francia': 'tagPopular',
+    'china': 'tagAventura',
+    'india': 'tagCultural',
+    'italia': 'tagClasico',
+    'panama': 'tagLocal',
+    'el-salvador': 'tagOferta'
+};
+
+// Región de cada paquete (se traduce con data-i18n)
+const paqueteRegionKeys = {
+    'francia': 'regionEuropa',
+    'china': 'regionAsia',
+    'india': 'regionAsia',
+    'italia': 'regionEuropa',
+    'panama': 'regionCentroamerica',
+    'el-salvador': 'regionCentroamerica'
+};
+
+// Features de cada paquete (se traducen con data-i18n)
+const paqueteFeaturesKeys = {
+    'francia': ['featureVuelo', 'featureHotel4', 'featureDias8', 'featureGuia'],
+    'china': ['featureVuelo', 'featureHotel4', 'featureDias10', 'featureTransporte'],
+    'india': ['featureVuelo', 'featureHotel3', 'featureDias9', 'featureGuia'],
+    'italia': ['featureVuelo', 'featureHotel4', 'featureDias9', 'featureTours'],
+    'panama': ['featureTransporte', 'featureHotel4', 'featureDias5', 'featureGuia'],
+    'el-salvador': ['featureTraslados', 'featureHotel3', 'featureDias4', 'featureActividades']
+};
+
+function renderHomeCards() {
+    renderTop10Cards();
+    renderPaquetesCards();
+}
+
+function renderTop10Cards() {
+    const container = document.getElementById('top10Container');
+    if (!container || !window.homeDataLoaded) return;
+    let html = '';
+    top10CardKeys.forEach(id => {
+        const d = top10Data[id];
+        if (!d) return;
+        const translationKey = getTop10TranslationKey(id);
+        const title = translateOrDefault('topTitulo' + translationKey, d.title);
+        const desc = translateOrDefault('top' + translationKey, d.desc);
+        html += `
+            <div class="card reveal">
+                <img src="${d.img}" alt="${title}" loading="lazy" decoding="async">
+                <div class="card-content">
+                    <h3>${title}</h3>
+                    <p>${desc}</p>
+                    <button class="btn-sabemas" onclick="abrirModalTop10('${id}')" data-i18n="saberMas">Saber más</button>
+                </div>
+            </div>`;
+    });
+    container.innerHTML = html;
+    // Re-observe new cards for reveal animation
+    container.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+function renderPaquetesCards() {
+    const container = document.getElementById('paquetesContainer');
+    if (!container || !window.homeDataLoaded) return;
+    let html = '';
+    paqueteCardKeys.forEach(id => {
+        const d = paquetesData[id];
+        if (!d) return;
+        const badgeKey = paqueteBadgeKeys[id] || '';
+        const regionKey = paqueteRegionKeys[id] || '';
+        const featuresKeys = paqueteFeaturesKeys[id] || [];
+        const paqueteKey = getPaqueteTranslationKey(id);
+        const title = translateOrDefault('paquete' + paqueteKey + 'Titulo', d.title);
+        const desc = translateOrDefault('paquete' + paqueteKey + 'Desc', d.desc);
+        const featuresHtml = featuresKeys.map(k => `<span class="paquete-feature" data-i18n="${k}">${translateOrDefault(k, '')}</span>`).join('');
+        html += `
+            <div class="paquete-card reveal">
+                <div class="paquete-img-wrap">
+                    <img src="${d.img}" alt="${title}" loading="lazy" decoding="async">
+                    <span class="paquete-badge" data-i18n="${badgeKey}">${translateOrDefault(badgeKey, '')}</span>
+                </div>
+                <div class="paquete-info">
+                    <div class="paquete-region" data-i18n="${regionKey}">${translateOrDefault(regionKey, '')}</div>
+                    <h3>${title}</h3>
+                    <p>${desc}</p>
+                    <div class="paquete-features">
+                        ${featuresHtml}
+                    </div>
+                    <div class="paquete-bottom">
+                        <div class="paquete-precio-wrap">
+                            <div class="paquete-desde" data-i18n="desde">Desde</div>
+                            <div class="paquete-precio">${d.precio}</div>
+                            <div class="paquete-pp" data-i18n="porPersona">por persona</div>
+                        </div>
+                        <div class="paquete-btns">
+                            <button class="btn-paquete-info" onclick="abrirModalPaquete('${id}')" data-i18n="verDetalles">Ver detalles</button>
+                            <button type="button" class="btn-paquete-reservar" onclick="PackageRequest.open('${id}')" data-i18n="reservarAhora">Reservar ahora</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    });
+    container.innerHTML = html;
+    // Re-observe new cards for reveal animation
+    container.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 }
 
 // Función para abrir el modal del Top 10
@@ -223,9 +342,12 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 
 
-// Listener para actualizar modales cuando cambia el idioma
+// Listener para actualizar modales y tarjetas cuando cambia el idioma
 window.addEventListener('kavari:langchange', function(e) {
     const idioma = e.detail.idioma;
+    
+    // Re-renderizar tarjetas del home con el nuevo idioma
+    if (window.homeDataLoaded) renderHomeCards();
     
     // Si hay un modal de Top 10 abierto, actualizarlo
     if (window.currentTop10ModalId && document.getElementById('top10ModalOverlay').classList.contains('active')) {
@@ -349,4 +471,7 @@ function updateLangButton(idioma) {
         el.addEventListener('change', function() { marcarError(el, false); });
     });
 })();
+
+// ===== CARGAR Y RENDERIZAR TARJETAS AL INICIAR =====
+loadHomeData();
 
