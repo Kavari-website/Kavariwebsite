@@ -591,17 +591,35 @@ button {
   flex-direction:column;
   position:relative;
   opacity:0;
-  transform:translateY(24px) scale(.97);
-  animation:cardIn .65s cubic-bezier(.22,1,.36,1) forwards;
+  /* Entrada "carta que se reparte": se inclina en 3D, sube y asienta */
+  transform:perspective(1000px) translateY(36px) rotateX(12deg) scale(.94);
+  transform-origin:center bottom;
+  animation:cardIn .7s cubic-bezier(.22,1,.36,1) forwards;
 }
 .dest-card.visible {
   opacity:1;
-  transform:translateY(0) scale(1);
+  transform:perspective(1000px) translateY(0) rotateX(0deg) scale(1);
 }
 @keyframes cardIn {
-  to {
+  0% {
+    opacity:0;
+    transform:perspective(1000px) translateY(36px) rotateX(12deg) scale(.94);
+  }
+  65% {
     opacity:1;
-    transform:translateY(0) scale(1);
+  }
+  84% {
+    transform:perspective(1000px) translateY(-4px) rotateX(-1.5deg) scale(1.006);
+  }
+  100% {
+    opacity:1;
+    transform:perspective(1000px) translateY(0) rotateX(0deg) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dest-card {
+    animation-duration:.001ms;
+    transform:none;
   }
 }
 .dest-card::before {

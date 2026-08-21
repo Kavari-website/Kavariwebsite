@@ -15703,11 +15703,15 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
     const idiomasSoportados = ['es', 'en', 'pt'];
     // El diccionario extra (idioma-pt.js) puede cargarse después de este archivo,
     // así que el merge se ejecuta también de forma perezosa en t().
+    // Se memoiza para no repetir la fusión en cada llamada a t() (rendimiento).
+    let extrasFusionados = false;
     function mergeIdiomasExtras() {
+        if (extrasFusionados) return;
         if (window.__kavariIdiomasExtras) {
             Object.keys(window.__kavariIdiomasExtras).forEach(function(k) {
                 if (!diccionario[k]) diccionario[k] = window.__kavariIdiomasExtras[k];
             });
+            extrasFusionados = true;
         }
     }
     mergeIdiomasExtras();
@@ -15763,18 +15767,24 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
             } else if (el.tagName === 'TEXTAREA') {
                 return;
             } else {
-                el.innerHTML = window.t(clave);
+                const tr = window.t(clave);
+                // Texto plano: textContent (mucho más rápido que innerHTML,
+                // evita pasar por el parser HTML). Solo si cambió.
+                if (/<[a-z/]/i.test(tr)) { if (el.innerHTML !== tr) el.innerHTML = tr; }
+                else if (el.textContent !== tr) el.textContent = tr;
             }
         });
 
         document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
             const clave = el.getAttribute('data-i18n-placeholder');
-            el.placeholder = window.t(clave);
+            const tr = window.t(clave);
+            if (el.placeholder !== tr) el.placeholder = tr;
         });
 
         document.querySelectorAll('[data-i18n-title]').forEach(el => {
             const clave = el.getAttribute('data-i18n-title');
-            el.title = window.t(clave);
+            const tr = window.t(clave);
+            if (el.title !== tr) el.title = tr;
         });
 
         document.querySelectorAll('select[data-i18n-options]').forEach(select => {

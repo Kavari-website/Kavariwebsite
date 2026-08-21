@@ -78,7 +78,7 @@ function buildCardHTML(p, lang, idx) {
   // el resto en diferido para que la página se vea antes.
   const imgAttrs = idx < 4 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
   return `
-    <div class="dest-card" data-name="${buscaTexto.replace(/"/g, '&quot;')}" data-continent="${(p.continentes || []).join(',')}" style="animation-delay:${Math.min(idx * 0.04, 0.6)}s">
+    <div class="dest-card" data-name="${buscaTexto.replace(/"/g, '&quot;')}" data-continent="${(p.continentes || []).join(',')}" style="animation-delay:${Math.min(idx * 0.05, 0.45)}s">
       <div class="dest-thumb">
         <img src="${p.img}" alt="${alt}" ${imgAttrs} decoding="async"/>
         ${badgeHTML}
@@ -416,9 +416,10 @@ window.addEventListener('kavari:authchange', function (e) {
   }
 });
 
-// Re-renderizar al cambiar de idioma (manteniendo el filtro aplicado)
+// Re-renderizar al cambiar de idioma (en el siguiente frame, para que los
+// textos estáticos se pinten primero y el cambio no se sienta pesado)
 window.addEventListener('kavari:langchange', function () {
-  renderPaises();
+  requestAnimationFrame(renderPaises);
 });
 
 // ============================================

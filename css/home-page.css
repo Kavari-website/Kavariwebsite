@@ -203,6 +203,41 @@
 .page-index .card:hover img {
   transform:scale(1.06);
 }
+/* ---------- PAQUETES: mismo lenguaje visual que Top 10 / Destinos ---------- */
+.page-index .paquete-card {
+  border:1px solid rgba(13,31,60,.08);
+  box-shadow:0 12px 32px rgba(13,31,60,.10);
+  overflow:hidden;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s ease,border-color .4s ease;
+}
+[data-theme="dark"] .page-index .paquete-card {
+  border-color:var(--border-color);
+  box-shadow:0 14px 40px rgba(0,0,0,.35);
+}
+.page-index .paquete-img-wrap img {
+  transition:transform .55s cubic-bezier(.22,1,.36,1);
+}
+.page-index .paquete-info {
+  display:flex;
+  flex-direction:column;
+}
+.page-index .paquete-bottom {
+  margin-top:auto;
+}
+@media (hover:hover) {
+  .page-index .paquete-card:hover {
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(13,31,60,.16);
+    border-color:rgba(13,31,60,.12);
+  }
+  .page-index .paquete-card:hover .paquete-img-wrap img {
+    transform:scale(1.06);
+  }
+  [data-theme="dark"] .page-index .paquete-card:hover {
+    box-shadow:0 18px 42px rgba(0,0,0,.45);
+    border-color:rgba(255,255,255,.14);
+  }
+}
 .page-index .card-content {
   padding:22px 24px 24px;
   display:flex;

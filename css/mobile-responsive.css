@@ -1277,3 +1277,12 @@ body.menu-open {
     padding: 88px 18px 32px;
   }
 }
+/* ══════════════════════════════════════════════════════════════════════════
+   16 · RENDIMIENTO · TARJETAS DE DESTINOS
+   El navegador no pinta las tarjetas fuera de la pantalla hasta que hacen
+   falta: la página se ve antes aunque haya 21 tarjetas con imágenes.
+   ══════════════════════════════════════════════════════════════════════════ */
+.dest-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 520px;
+}
