@@ -26,6 +26,11 @@
 
     burger.classList.toggle('active', open);
     body.classList.toggle('menu-open', open);
+
+    // Compatibilidad: algunos CSS antiguos de página solo revelan el menú
+    // con .open.open-active; se sincroniza también esa clase.
+    navLinks.classList.toggle('open-active', open);
+
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
 
     // Solo gestionamos aria-hidden cuando el menú de navegación es móvil;

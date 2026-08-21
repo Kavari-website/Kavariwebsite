@@ -1155,3 +1155,125 @@ body.menu-open {
     position: absolute;
   }
 }
+/* ══════════════════════════════════════════════════════════════════════════
+   13 · MENÚ MÓVIL · NEUTRALIZAR ESTILOS LEGADOS DE PÁGINA
+   Varias páginas (ayuda, contacto, sobrenosotros, paises) traen dropdowns
+   antiguos para .nav-links con colores claros/oscuros !important, borde
+   superior y sombras propias. Sobre el menú completo (.open) dejaban el
+   texto ilegible y bordes fuera de lugar. Aquí se normaliza todo.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  /* Panel cerrado: siempre oculto aunque una página insista */
+  .nav-glass .nav-links:not(.open) {
+    display: none !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  /* Menú abierto: sin restos de los dropdowns viejos */
+  .nav-glass .nav-links.open {
+    border: none !important;
+    border-top: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    max-height: none !important;
+  }
+  /* Opciones siempre legibles: texto claro sobre el fondo oscuro del menú */
+  .nav-glass .nav-links.open a,
+  .nav-glass .nav-links.open a:hover,
+  .nav-glass .nav-links.open a:focus-visible,
+  .nav-glass .nav-links.open a.active,
+  [data-theme="dark"] .nav-glass .nav-links.open a,
+  [data-theme="dark"] .nav-glass .nav-links.open a:hover {
+    color: #fff !important;
+  }
+  /* Hover y activo coherentes aunque la página defina los suyos */
+  .nav-glass .nav-links.open a:hover,
+  .nav-glass .nav-links.open a:focus-visible {
+    background: rgba(255, 255, 255, .14) !important;
+  }
+  .nav-glass .nav-links.open a.active {
+    background: linear-gradient(135deg, #2e6edc, #1d4f9e) !important;
+    outline: 1.5px solid rgba(240, 180, 41, .55);
+    outline-offset: -1.5px;
+  }
+}
+/* ══════════════════════════════════════════════════════════════════════════
+   14 · TABLET (769–1024 px)
+   Rango que antes caía entre breakpoints: grids muy anchos, tipografía de
+   escritorio y controles apretados. Se llevan a 2 columnas cómodas.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Tarjetas de países e inicio: 2 columnas grandes en vez de 3 apretadas */
+  .destinos-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .cards-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .help-categories {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* Hero del index: título proporcionado a la pantalla */
+  .hero-content h1 {
+    font-size: clamp(38px, 6vw, 52px);
+  }
+  .featured-section {
+    padding: 56px 24px;
+  }
+  /* Footer a 2 columnas en tablet (3 se ve vacío, 1 muy largo) */
+  .kv-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+  .page-body {
+    padding: 30px 22px 60px;
+  }
+  .page-hero {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+/* Buscador + filtro de continente apilados también en tablet angosta */
+@media (max-width: 900px) {
+  .controls-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+}
+/* ══════════════════════════════════════════════════════════════════════════
+   15 · MENÚ COMPLETO · DISTRIBUCIÓN MEJORADA
+   Tablet: las opciones pasan a cuadrícula de 2 columnas (menú más corto y
+   equilibrado). Teléfono: columna única centrada con ancho cómodo.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 601px) and (max-width: 900px) {
+  .nav-glass .nav-links.open {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    align-content: start;
+    padding: 96px 30px 40px;
+  }
+  .nav-glass .nav-links.open::before {
+    grid-column: 1 / -1;
+    margin-bottom: 8px;
+  }
+  .nav-glass .nav-links.open li {
+    height: 100%;
+  }
+  .nav-glass .nav-links.open a {
+    height: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .nav-glass .nav-links.open {
+    padding: 88px 18px 32px;
+  }
+}
