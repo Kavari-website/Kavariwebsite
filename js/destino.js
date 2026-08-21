@@ -1091,34 +1091,28 @@ function toggleMobileDrawer(forceClose) {
     const hamburger = document.getElementById('navHamburger');
     if (!overlay || !drawer) return;
 
-    if (typeof forceClose === 'boolean') {
-        if (forceClose) {
-            overlay.classList.remove('open');
-            drawer.classList.remove('open');
-            if (hamburger) hamburger.classList.remove('open');
-            document.body.style.overflow = '';
-            return;
+    // El CSS del drawer reacciona a '.active' (y aceptamos '.open' por
+    // compatibilidad). Cerrar de forma explícita con true; en cualquier
+    // otro caso alterna según el estado actual.
+    function setDrawer(abrir) {
+        overlay.classList.toggle('active', abrir);
+        overlay.classList.toggle('open', abrir);
+        drawer.classList.toggle('active', abrir);
+        drawer.classList.toggle('open', abrir);
+        if (hamburger) {
+            hamburger.classList.toggle('active', abrir);
+            hamburger.setAttribute('aria-expanded', abrir ? 'true' : 'false');
         }
+        document.body.style.overflow = abrir ? 'hidden' : '';
     }
 
-    const isOpen = overlay.classList.contains('open');
-    if (isOpen) {
-        overlay.classList.remove('open');
-        drawer.classList.remove('open');
-        if (hamburger) hamburger.classList.remove('open');
-        document.body.style.overflow = '';
-    } else {
-        overlay.classList.add('open');
-        drawer.classList.add('open');
-        if (hamburger) hamburger.classList.add('open');
-        document.body.style.overflow = 'hidden';
+    if (forceClose === true) {
+        setDrawer(false);
+        return;
     }
+
+    setDrawer(!overlay.classList.contains('active'));
 }
-
-document.getElementById('navHamburger')?.addEventListener('click', function(e) {
-    e.stopPropagation();
-    toggleMobileDrawer();
-});
 
 window.addEventListener('scroll', () => {
     document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 24);

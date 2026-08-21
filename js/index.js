@@ -69,8 +69,8 @@ function loadHomeData() {
 // RENDER DINÁMICO DE TARJETAS TOP 10 Y PAQUETES
 // ============================================
 const top10CardKeys = [
-    'obelisco', 'torre-eiffel', 'cristo-redentor', 'torres-del-paine',
-    'cartagena', 'japon', 'machu-picchu', 'petra', 'chichen-itza', 'times-square'
+    'obelisco', 'canal-panama', 'cristo-redentor', 'torres-del-paine',
+    'cartagena', 'iguazu', 'machu-picchu', 'tikal', 'chichen-itza', 'galapagos'
 ];
 
 const paqueteCardKeys = [
@@ -122,9 +122,11 @@ function renderTop10Cards() {
         const translationKey = getTop10TranslationKey(id);
         const title = translateOrDefault('topTitulo' + translationKey, d.title);
         const desc = translateOrDefault('top' + translationKey, d.desc);
+        const tagHtml = d.tag ? `<span class="card-tag-pill">${d.tag}</span>` : '';
         html += `
             <div class="card reveal">
                 <img src="${d.img}" alt="${title}" loading="lazy" decoding="async">
+                ${tagHtml}
                 <div class="card-content">
                     <h3>${title}</h3>
                     <p>${desc}</p>

@@ -74,10 +74,13 @@ function buildCardHTML(p, lang, idx) {
   const atractivo = (desc.split('.')[0] || nombre).trim();
   const alt = `${nombre}: ${atractivo}`.slice(0, 110);
 
+  // Las primeras tarjetas cargan su imagen con prioridad (mejor LCP);
+  // el resto en diferido para que la página se vea antes.
+  const imgAttrs = idx < 4 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
   return `
     <div class="dest-card" data-name="${buscaTexto.replace(/"/g, '&quot;')}" data-continent="${(p.continentes || []).join(',')}" style="animation-delay:${Math.min(idx * 0.04, 0.6)}s">
       <div class="dest-thumb">
-        <img src="${p.img}" alt="${alt}" loading="lazy" decoding="async"/>
+        <img src="${p.img}" alt="${alt}" ${imgAttrs} decoding="async"/>
         ${badgeHTML}
       </div>
       <div class="dest-info">
