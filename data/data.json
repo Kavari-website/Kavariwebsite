@@ -1,4 +1,4 @@
-{
+﻿{
     "top10": {
         "obelisco": {
             "img": "img/Obelisco.jpg",
@@ -11401,7 +11401,7 @@
                     "nombre": "paisBolivia_cultura_items_diablada_nombre",
                     "tag": "paisBolivia_cultura_items_diablada_tag",
                     "descripcion": "paisBolivia_cultura_items_diablada_descripcion",
-                    "imagen": "img/bolivia/diablada.jpg",
+                    "imagen": "img/bolivia/Danza de la Diablada.jpg",
                     "detalle": "paisBolivia_cultura_items_diablada_detalle"
                 },
                 {
@@ -11409,7 +11409,7 @@
                     "nombre": "paisBolivia_cultura_items_chicha_nombre",
                     "tag": "paisBolivia_cultura_items_chicha_tag",
                     "descripcion": "paisBolivia_cultura_items_chicha_descripcion",
-                    "imagen": "img/bolivia/chicha.jpg",
+                    "imagen": "img/bolivia/Chicha y Costumbres.jpg",
                     "detalle": "paisBolivia_cultura_items_chicha_detalle"
                 }
             ],
@@ -12316,7 +12316,7 @@
                     "nombre": "paisVenezuela_cultura_items_gaita_nombre",
                     "tag": "paisVenezuela_cultura_items_gaita_tag",
                     "descripcion": "paisVenezuela_cultura_items_gaita_descripcion",
-                    "imagen": "img/venezuela/gaita.jpg",
+                    "imagen": "img/venezuela/Gaita Zuliana.webp",
                     "detalle": "paisVenezuela_cultura_items_gaita_detalle"
                 },
                 {
@@ -12324,7 +12324,7 @@
                     "nombre": "paisVenezuela_cultura_items_arepa_nombre",
                     "tag": "paisVenezuela_cultura_items_arepa_tag",
                     "descripcion": "paisVenezuela_cultura_items_arepa_descripcion",
-                    "imagen": "img/venezuela/arepa.jpg",
+                    "imagen": "img/venezuela/La Arepa.jpg",
                     "detalle": "paisVenezuela_cultura_items_arepa_detalle"
                 },
                 {
@@ -12375,7 +12375,7 @@
                     "nombre": "paisVenezuela_gastronomia_platos_1_nombre",
                     "categoria": "paisVenezuela_gastronomia_platos_1_categoria",
                     "descripcion": "paisVenezuela_gastronomia_platos_1_descripcion",
-                    "imagen": "img/venezuela/pabellon.jpg",
+                    "imagen": "img/venezuela/Pabellon.jpg",
                     "nota": "paisVenezuela_gastronomia_platos_1_nota"
                 },
                 {
@@ -12396,14 +12396,14 @@
                     "nombre": "paisVenezuela_gastronomia_platos_4_nombre",
                     "categoria": "paisVenezuela_gastronomia_platos_4_categoria",
                     "descripcion": "paisVenezuela_gastronomia_platos_4_descripcion",
-                    "imagen": "img/venezuela/asadonegro.jpg",
+                    "imagen": "img/venezuela/Asado negro.jpg",
                     "nota": "paisVenezuela_gastronomia_platos_4_nota"
                 },
                 {
                     "nombre": "paisVenezuela_gastronomia_platos_5_nombre",
                     "categoria": "paisVenezuela_gastronomia_platos_5_categoria",
                     "descripcion": "paisVenezuela_gastronomia_platos_5_descripcion",
-                    "imagen": "img/venezuela/tequeños.jpg",
+                    "imagen": "img/venezuela/Tequeños.webp",
                     "nota": "paisVenezuela_gastronomia_platos_5_nota"
                 },
                 {
@@ -12417,14 +12417,14 @@
                     "nombre": "paisVenezuela_gastronomia_platos_7_nombre",
                     "categoria": "paisVenezuela_gastronomia_platos_7_categoria",
                     "descripcion": "paisVenezuela_gastronomia_platos_7_descripcion",
-                    "imagen": "img/venezuela/reinapepiada.jpg",
+                    "imagen": "img/venezuela/Reina pepiada.webp",
                     "nota": "paisVenezuela_gastronomia_platos_7_nota"
                 },
                 {
                     "nombre": "paisVenezuela_gastronomia_platos_8_nombre",
                     "categoria": "paisVenezuela_gastronomia_platos_8_categoria",
                     "descripcion": "paisVenezuela_gastronomia_platos_8_descripcion",
-                    "imagen": "img/venezuela/sancocho.jpg",
+                    "imagen": "img/venezuela/Sancocho.webp",
                     "nota": "paisVenezuela_gastronomia_platos_8_nota"
                 },
                 {
@@ -13256,7 +13256,7 @@
                     "nombre": "paisUruguay_cultura_items_carnaval_nombre",
                     "tag": "paisUruguay_cultura_items_carnaval_tag",
                     "descripcion": "paisUruguay_cultura_items_carnaval_descripcion",
-                    "imagen": "img/uruguay/carnavaluruguay.jpg",
+                    "imagen": "img/uruguay/Carnaval Uruguayo.avif",
                     "detalle": "paisUruguay_cultura_items_carnaval_detalle"
                 },
                 {
@@ -13264,7 +13264,7 @@
                     "nombre": "paisUruguay_cultura_items_tango_nombre",
                     "tag": "paisUruguay_cultura_items_tango_tag",
                     "descripcion": "paisUruguay_cultura_items_tango_descripcion",
-                    "imagen": "img/uruguay/tango.jpg",
+                    "imagen": "img/uruguay/Tango Uruguayo.webp",
                     "detalle": "paisUruguay_cultura_items_tango_detalle"
                 }
             ],
@@ -13303,7 +13303,7 @@
                     "nombre": "paisUruguay_gastronomia_platos_1_nombre",
                     "categoria": "paisUruguay_gastronomia_platos_1_categoria",
                     "descripcion": "paisUruguay_gastronomia_platos_1_descripcion",
-                    "imagen": "img/uruguay/asado.jpg",
+                    "imagen": "img/uruguay/Asado uruguayo.jpg",
                     "nota": "paisUruguay_gastronomia_platos_1_nota"
                 },
                 {
@@ -13317,7 +13317,7 @@
                     "nombre": "paisUruguay_gastronomia_platos_3_nombre",
                     "categoria": "paisUruguay_gastronomia_platos_3_categoria",
                     "descripcion": "paisUruguay_gastronomia_platos_3_descripcion",
-                    "imagen": "img/uruguay/tortasfritas.jpg",
+                    "imagen": "img/uruguay/Tortas fritas.webp",
                     "nota": "paisUruguay_gastronomia_platos_3_nota"
                 },
                 {
@@ -13331,21 +13331,21 @@
                     "nombre": "paisUruguay_gastronomia_platos_5_nombre",
                     "categoria": "paisUruguay_gastronomia_platos_5_categoria",
                     "descripcion": "paisUruguay_gastronomia_platos_5_descripcion",
-                    "imagen": "img/uruguay/pizza.jpg",
+                    "imagen": "img/uruguay/Pizza uruguaya.avif",
                     "nota": "paisUruguay_gastronomia_platos_5_nota"
                 },
                 {
                     "nombre": "paisUruguay_gastronomia_platos_6_nombre",
                     "categoria": "paisUruguay_gastronomia_platos_6_categoria",
                     "descripcion": "paisUruguay_gastronomia_platos_6_descripcion",
-                    "imagen": "img/uruguay/panm manteca.jpg",
+                    "imagen": "img/uruguay/Pan con manteca.webp",
                     "nota": "paisUruguay_gastronomia_platos_6_nota"
                 },
                 {
                     "nombre": "paisUruguay_gastronomia_platos_7_nombre",
                     "categoria": "paisUruguay_gastronomia_platos_7_categoria",
                     "descripcion": "paisUruguay_gastronomia_platos_7_descripcion",
-                    "imagen": "img/uruguay/alfajores.jpg",
+                    "imagen": "img/uruguay/Alfajores uruguayos.webp",
                     "nota": "paisUruguay_gastronomia_platos_7_nota"
                 },
                 {
@@ -13359,7 +13359,7 @@
                     "nombre": "paisUruguay_gastronomia_platos_9_nombre",
                     "categoria": "paisUruguay_gastronomia_platos_9_categoria",
                     "descripcion": "paisUruguay_gastronomia_platos_9_descripcion",
-                    "imagen": "img/uruguay/dulcedeleche.jpg",
+                    "imagen": "img/uruguay/Dulce de leche.jpg",
                     "nota": "paisUruguay_gastronomia_platos_9_nota"
                 }
             ]
@@ -15159,35 +15159,35 @@
                     "nombre": "paisHonduras_gastronomia_platos_0_nombre",
                     "categoria": "paisHonduras_gastronomia_platos_0_categoria",
                     "descripcion": "paisHonduras_gastronomia_platos_0_descripcion",
-                    "imagen": "img/honduras/baleadas.jpg",
+                    "imagen": "img/uruguay/Baleadas.webp",
                     "nota": "paisHonduras_gastronomia_platos_0_nota"
                 },
                 {
                     "nombre": "paisHonduras_gastronomia_platos_1_nombre",
                     "categoria": "paisHonduras_gastronomia_platos_1_categoria",
                     "descripcion": "paisHonduras_gastronomia_platos_1_descripcion",
-                    "imagen": "img/honduras/sopacaracol.jpg",
+                    "imagen": "img/honduras/Sopa de caracol.webp",
                     "nota": "paisHonduras_gastronomia_platos_1_nota"
                 },
                 {
                     "nombre": "paisHonduras_gastronomia_platos_2_nombre",
                     "categoria": "paisHonduras_gastronomia_platos_2_categoria",
                     "descripcion": "paisHonduras_gastronomia_platos_2_descripcion",
-                    "imagen": "img/honduras/platanosenmiel.jpg",
+                    "imagen": "img/honduras/Plátanos en miel.webp",
                     "nota": "paisHonduras_gastronomia_platos_2_nota"
                 },
                 {
                     "nombre": "paisHonduras_gastronomia_platos_3_nombre",
                     "categoria": "paisHonduras_gastronomia_platos_3_categoria",
                     "descripcion": "paisHonduras_gastronomia_platos_3_descripcion",
-                    "imagen": "img/honduras/tamales.jpg",
+                    "imagen": "img/honduras/Tamales hondureños.webp",
                     "nota": "paisHonduras_gastronomia_platos_3_nota"
                 },
                 {
                     "nombre": "paisHonduras_gastronomia_platos_4_nombre",
                     "categoria": "paisHonduras_gastronomia_platos_4_categoria",
                     "descripcion": "paisHonduras_gastronomia_platos_4_descripcion",
-                    "imagen": "img/honduras/yucachicharron.jpg",
+                    "imagen": "img/honduras/Yuca con chicharrón.webp",
                     "nota": "paisHonduras_gastronomia_platos_4_nota"
                 },
                 {
@@ -15201,7 +15201,7 @@
                     "nombre": "paisHonduras_gastronomia_platos_6_nombre",
                     "categoria": "paisHonduras_gastronomia_platos_6_categoria",
                     "descripcion": "paisHonduras_gastronomia_platos_6_descripcion",
-                    "imagen": "img/honduras/ollacarne.jpg",
+                    "imagen": "img/honduras/Olla de carne.jpg",
                     "nota": "paisHonduras_gastronomia_platos_6_nota"
                 },
                 {
@@ -15222,7 +15222,7 @@
                     "nombre": "paisHonduras_gastronomia_platos_9_nombre",
                     "categoria": "paisHonduras_gastronomia_platos_9_categoria",
                     "descripcion": "paisHonduras_gastronomia_platos_9_descripcion",
-                    "imagen": "img/honduras/pescadofrito.jpg",
+                    "imagen": "img/honduras/Pescado frito.jpg",
                     "nota": "paisHonduras_gastronomia_platos_9_nota"
                 }
             ]
