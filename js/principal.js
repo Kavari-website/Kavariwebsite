@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!selectCountry || selectCountry.dataset.loaded === '1') return;
     const lang = getLang();
     const placeholder = lang === 'en' ? 'Select a country' : 'Selecciona un país';
-    fetch('data/data.json')
+    fetch('data/data.json', { cache: 'no-cache' })
       .then(res => res.json())
       .then(data => {
         selectCountry.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;

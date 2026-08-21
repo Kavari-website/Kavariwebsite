@@ -722,7 +722,7 @@
         if (cached) all = JSON.parse(cached);
       } catch (_) { /* noop */ }
       if (!all) {
-        const res = await fetch('data/data.json');
+        const res = await fetch('data/data.json', { cache: 'no-cache' });
         if (!res.ok) throw new Error('data.json ' + res.status);
         all = await res.json();
         try { sessionStorage.setItem('kavari-data-cache-v1', JSON.stringify(all)); } catch (_) { /* noop */ }

@@ -132,7 +132,7 @@
   async function loadTouristCountries() {
     if (!selectCountry || selectCountry.dataset.loaded === '1') return;
     try {
-      const res = await fetch('data/data.json');
+      const res = await fetch('data/data.json', { cache: 'no-cache' });
       if (!res.ok) throw new Error('data.json ' + res.status);
       const data = await res.json();
       selectCountry.innerHTML = `<option value="" disabled selected>${t('seleccionaPais')}</option>`;

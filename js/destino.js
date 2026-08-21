@@ -641,16 +641,25 @@ function setDataCache(data) {
 async function loadDataJson() {
     if (datosGlobales) return datosGlobales;
     const cache = getDataCache();
-    if (cache) {
-        datosGlobales = cache;
-        return cache;
+    try {
+        // Siempre pide la copia fresca ('no-cache' evita que el navegador
+        // devuelva una versión vieja): los cambios en data.json se reflejan
+        // al recargar sin tener que cerrar la pestaña.
+        const respuesta = await fetch('data/data.json', { cache: 'no-cache' });
+        if (!respuesta.ok) throw new Error(`HTTP error! status: ${respuesta.status}`);
+        const data = await respuesta.json();
+        datosGlobales = data;
+        setDataCache(data);
+        return data;
+    } catch (e) {
+        // Sin servidor/red: usa la copia guardada de esta sesión si existe
+        if (cache) {
+            console.warn('[KAVARI] Usando data.json en caché (no se pudo recargar):', e);
+            datosGlobales = cache;
+            return cache;
+        }
+        throw e;
     }
-    const respuesta = await fetch('data/data.json');
-    if (!respuesta.ok) throw new Error(`HTTP error! status: ${respuesta.status}`);
-    const data = await respuesta.json();
-    datosGlobales = data;
-    setDataCache(data);
-    return data;
 }
 
 // Precarga de data.json en cuanto se evalúa el script (antes de DOMContentLoaded),

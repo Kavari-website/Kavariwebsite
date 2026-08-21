@@ -51,7 +51,7 @@ function translateOrDefault(key, fallback) {
 
 function loadHomeData() {
     if (window.homeDataPromise) return window.homeDataPromise;
-    window.homeDataPromise = fetch('data/data.json')
+    window.homeDataPromise = fetch('data/data.json', { cache: 'no-cache' })
         .then(res => res.json())
         .then(data => {
             top10Data = data.top10 || {};

@@ -96,7 +96,7 @@
           }).join('');
       }
 
-      fetch('data/data.json').then(r=>r.json()).then(data=>{
+      fetch('data/data.json', { cache: 'no-cache' }).then(r=>r.json()).then(data=>{
         const s=m.querySelector('[name=country]');
         s.innerHTML='<option value="">'+(window.t?window.t('seleccionaPais'):'Selecciona un país')+'</option>'+Object.entries(data)
           .filter(([,v])=>v&&v.nombre)

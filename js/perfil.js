@@ -124,7 +124,7 @@
     if (!selectEl) return;
     if (selectEl.dataset.loaded === '1') return;
     try {
-      const res = await fetch('data/data.json');
+      const res = await fetch('data/data.json', { cache: 'no-cache' });
       const data = await res.json();
       const currentVal = selectEl.value;
       selectEl.innerHTML = '<option value="">' + (window.t ? window.t('seleccionaPais') : 'Selecciona un país') + '</option>';
@@ -202,7 +202,7 @@
   async function getDataJson() {
     if (_dataJsonCache) return _dataJsonCache;
     try {
-      const res = await fetch('data/data.json');
+      const res = await fetch('data/data.json', { cache: 'no-cache' });
       _dataJsonCache = await res.json();
     } catch (e) {
       console.error('[KAVARI Perfil] Error cargando data.json:', e);
