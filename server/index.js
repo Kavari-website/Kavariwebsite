@@ -110,6 +110,42 @@ function loadEnvVar(name) {
 const GEMINI_API_KEY = loadEnvVar('GEMINI_API_KEY');
 const GEMINI_MODEL = loadEnvVar('GEMINI_MODEL') || 'gemini-flash-latest';
 
+/* ───────────── watch automático de data.json ───────────── */
+const DATA_FILE = path.join(__dirname, '..', 'data', 'data.json');
+let dataLastMtime = Number(fs.statSync(DATA_FILE).mtimeMs);
+
+function checkDataRefresh() {
+  try {
+    const stat = fs.statSync(DATA_FILE);
+    if (stat.mtimeMs !== dataLastMtime) {
+      dataLastMtime = stat.mtimeMs;
+      console.log('📡 Detectado cambio en data.json — recargando datos...');
+      try {
+        const raw = fs.readFileSync(DATA_FILE, 'utf8').replace(/^\uFEFF/, '');
+        const newData = JSON.parse(raw);
+        data = resolveData(newData);
+        COUNTRY_CODES = Object.keys(data).filter(k => data[k] && data[k].nombre && !hasPlaceholder(data[k].nombre));
+        indexData();
+        console.log(`✅ Datos actualizados: ${KB.length} fragmentos, ${COUNTRY_CODES.length} países`);
+      } catch (e) {
+        console.error('❌ Error recargando data.json:', e.message);
+      }
+    }
+  } catch (_) { /* archivo temporalmente inexistente */ }
+}
+setInterval(checkDataRefresh, 2000);
+
+/* ────────────── endpoint de recarga manual ────────────── */
+app.post('/api/refresh-data', (req, res) => {
+  try {
+    dataLastMtime = Number(fs.statSync(DATA_FILE).mtimeMs);
+    checkDataRefresh();
+    res.json({ status: 'ok', message: 'Datos recargados', chunks: KB.length });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 /* ══════════════════════════════════════════════════════════════
    BASE DE CONOCIMIENTO (RAG)
    Cada fragmento: { id, code, country, section, title, text, kws }

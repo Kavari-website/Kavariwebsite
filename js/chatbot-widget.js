@@ -36,13 +36,17 @@
     return l === 'en' ? en : l === 'pt' ? pt : es;
   }
 
-  const generalQuestions = [
+  // Preguntas principales (siempre visibles)
+  const generalQuestionsMain = [
     { qKey: 'chatQDestino', key: 'destino' },
     { qKey: 'chatQGuias', key: 'guía' },
+    { qKey: 'chatQPaquetes', key: 'paquete' }
+  ];
+  // Preguntas secundarias (colapsadas)
+  const generalQuestionsExtra = [
     { qKey: 'chatQPlanes', key: 'planes' },
     { qKey: 'chatQCuenta', key: 'cuenta' },
     { qKey: 'chatQIdioma', key: 'idioma' },
-    { qKey: 'chatQPaquetes', key: 'paquete' },
     { qKey: 'chatQAyuda', key: 'ayuda' },
     { qKey: 'chatQContacto', key: 'contacto' }
   ];
@@ -56,10 +60,17 @@
     const t = window.t || (k => k);
     return [
       { q: t('chatBtnDestinoEpoca').replace('{nombre}', n), text: t('chatQDestinoEpoca').replace('{nombre}', n) },
+      { q: t('chatBtnDestinoCosto'), text: t('chatQDestinoCosto').replace('{nombre}', n) },
+      { q: t('chatBtnDestinoPlatos'), text: t('chatQDestinoPlatos').replace('{nombre}', n) }
+    ];
+  }
+
+  function getDestinationQuestionsExtra(d) {
+    const n = cname(d);
+    const t = window.t || (k => k);
+    return [
       { q: t('chatBtnDestinoDoc'), text: t('chatQDestinoDoc') },
-      { q: t('chatBtnDestinoImp'), text: t('chatQDestinoImp').replace('{nombre}', n) },
-      { q: t('chatBtnDestinoPlatos'), text: t('chatQDestinoPlatos').replace('{nombre}', n) },
-      { q: t('chatBtnDestinoCosto'), text: t('chatQDestinoCosto').replace('{nombre}', n) }
+      { q: t('chatBtnDestinoImp'), text: t('chatQDestinoImp').replace('{nombre}', n) }
     ];
   }
 
@@ -333,16 +344,30 @@
     addBotMessage(html, true);
   }
 
+  let preguntasExpandidas = false;
+
   function renderQuestions() {
     const box = document.getElementById('kavari-preguntas');
     if (!box) return;
     box.innerHTML = '';
+    preguntasExpandidas = false;
 
     const t = window.t || (k => k);
-    const items = ctx.country?.nombre
-      ? getDestinationQuestions(ctx.country)
-      : generalQuestions.map(i => ({ q: t(i.qKey), text: t(i.qKey), key: i.key }));
 
+    if (ctx.country?.nombre) {
+      // Preguntas de destino
+      const main = getDestinationQuestions(ctx.country);
+      const extra = getDestinationQuestionsExtra(ctx.country);
+      renderQuestionButtons(box, main);
+      if (extra.length) renderToggleButton(box, extra, t);
+    } else {
+      // Preguntas generales
+      renderQuestionButtons(box, generalQuestionsMain.map(i => ({ q: t(i.qKey), text: t(i.qKey), key: i.key })));
+      renderToggleButton(box, generalQuestionsExtra.map(i => ({ q: t(i.qKey), text: t(i.qKey), key: i.key })), t);
+    }
+  }
+
+  function renderQuestionButtons(box, items) {
     items.forEach(item => {
       const btn = document.createElement('button');
       btn.type = 'button';
@@ -352,6 +377,41 @@
       btn.addEventListener('click', () => handleQuestion(item.text || item.q));
       box.appendChild(btn);
     });
+  }
+
+  function renderToggleButton(box, extraItems, t) {
+    const toggleBtn = document.createElement('button');
+    toggleBtn.type = 'button';
+    toggleBtn.className = 'kb-pregunta-toggle';
+    toggleBtn.innerHTML = '<span class="kb-toggle-text">' + msg('Más preguntas', 'More questions', 'Mais perguntas') + '</span> <span class="kb-toggle-icon">›</span>';
+
+    const extraContainer = document.createElement('div');
+    extraContainer.className = 'kb-pregunta-extra hidden';
+
+    extraItems.forEach(item => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'kb-pregunta-btn';
+      btn.textContent = item.q;
+      btn.disabled = thinking;
+      btn.addEventListener('click', () => handleQuestion(item.text || item.q));
+      extraContainer.appendChild(btn);
+    });
+
+    toggleBtn.addEventListener('click', () => {
+      preguntasExpandidas = !preguntasExpandidas;
+      extraContainer.classList.toggle('hidden', !preguntasExpandidas);
+      toggleBtn.classList.toggle('active', preguntasExpandidas);
+      const icon = toggleBtn.querySelector('.kb-toggle-icon');
+      if (icon) icon.textContent = preguntasExpandidas ? '‹' : '›';
+      const text = toggleBtn.querySelector('.kb-toggle-text');
+      if (text) text.textContent = preguntasExpandidas
+        ? msg('Menos preguntas', 'Less questions', 'Menos perguntas')
+        : msg('Más preguntas', 'More questions', 'Mais perguntas');
+    });
+
+    box.appendChild(toggleBtn);
+    box.appendChild(extraContainer);
   }
 
   function refreshUI() {
@@ -646,6 +706,13 @@
   });
 
   async function tryLoadCountryFromStorage() {
+    // No cargar país si estamos en la página principal (index.html)
+    // El chatbot debe ser general en la página de inicio
+    const isIndex = /index\.html$/i.test(location.pathname) || location.pathname === '/' || /\/index$/i.test(location.pathname);
+    if (isIndex) {
+      localStorage.removeItem('paisSeleccionado');
+      return;
+    }
     const code = localStorage.getItem('paisSeleccionado');
     if (!code) return;
     try {
