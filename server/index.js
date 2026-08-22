@@ -272,7 +272,7 @@ function indexData() {
 
     // Hospedajes
     (c.hospedajes || []).forEach(h => addChunk(code, nombre, 'hospedajes', h.nombre, joinParts([
-      h.tipo, `Barrio: ${h.barrio}`, h.descripcion,
+      h.tipo, (h.ubicacion || h.barrio) && `Ubicación: ${h.ubicacion || h.barrio}`, h.descripcion,
       h.precio_noche && `$${h.precio_noche} ${h.moneda || 'USD'} por noche`
     ])));
 
