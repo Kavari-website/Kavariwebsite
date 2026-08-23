@@ -350,22 +350,26 @@ async function persistLikeToServer(code, liked) {
   }
 }
 
-// Sube las tarjetas con like al inicio de la fila (después del label de región)
+// Sube las tarjetas con like al inicio DENTRO de su sección de región
+// (respeta la estructura .region-block > .region-grid > .dest-card.kv-v2)
 function orderCardsByLikes() {
-  const grid = document.getElementById('destinosGrid');
-  if (!grid) return;
-  const likes = getLikes();
-  const cards = Array.from(grid.querySelectorAll('.dest-card'));
-  cards.sort((a, b) => (likes[getPaisCode(b)] || 0) - (likes[getPaisCode(a)] || 0));
-  // Reordenar solo las tarjetas, dejando los labels de región en su sitio
-  cards.forEach(card => grid.appendChild(card));
-  const labels = grid.querySelectorAll('.region-label');
-  if (labels.length) {
-    grid.insertBefore(labels[0], grid.firstChild);
-    for (let i = 1; i < labels.length; i++) {
-      grid.insertBefore(labels[i], labels[i - 1].nextSibling);
-    }
+  const grids = document.querySelectorAll('.region-grid');
+  if (!grids.length) {
+    // Compatibilidad con estructura plana antigua
+    const grid = document.getElementById('destinosGrid');
+    if (!grid) return;
+    const likes0 = getLikes();
+    const cards0 = Array.from(grid.querySelectorAll('.dest-card'));
+    cards0.sort((a, b) => (likes0[getPaisCode(b)] || 0) - (likes0[getPaisCode(a)] || 0));
+    cards0.forEach(card => grid.appendChild(card));
+    return;
   }
+  const likes = getLikes();
+  grids.forEach(rg => {
+    const cards = Array.from(rg.querySelectorAll(':scope > .dest-card'));
+    cards.sort((a, b) => (likes[getPaisCode(b)] || 0) - (likes[getPaisCode(a)] || 0));
+    cards.forEach(card => rg.appendChild(card)); // reordena dentro de su región
+  });
 }
 
 function updateLikeBtn(btn, count) {
