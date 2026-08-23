@@ -78,27 +78,26 @@ function buildCardHTML(p, lang, idx) {
   // el resto en diferido para que la página se vea antes.
   const imgAttrs = idx < 4 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
   return `
-    <div class="dest-card" data-name="${buscaTexto.replace(/"/g, '&quot;')}" data-continent="${(p.continentes || []).join(',')}" style="animation-delay:${Math.min(idx * 0.05, 0.45)}s">
+    <article class="dest-card kv-v2" data-name="${buscaTexto.replace(/"/g, '&quot;')}" data-continent="${(p.continentes || []).join(',')}" style="animation-delay:${Math.min(idx * 0.05, 0.45)}s">
       <div class="dest-thumb">
         <img src="${p.img}" alt="${alt}" ${imgAttrs} decoding="async"/>
+        <div class="dest-shade"></div>
         ${badgeHTML}
+        <h3 class="dest-title">${nombre}</h3>
       </div>
       <div class="dest-info">
-        <h3>${nombre}</h3>
-        <p>${desc}</p>
-        <div class="dest-tags">
-          <span class="dest-tag"><b>${tClave('paisesTagEpoca')}:</b> ${epoca}</span>
-          <span class="dest-tag"><b>${tClave('paisesTagIdioma')}:</b> ${idioma}</span>
-          <span class="dest-tag"><b>${tClave('paisesTagMoneda')}:</b> ${moneda}</span>
+        <p class="dest-desc">${desc}</p>
+        <div class="dest-meta">
+          <span class="dest-meta-item" title="${tClave('paisesTagEpoca')}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>${epoca}</span>
+          <span class="dest-meta-item" title="${tClave('paisesTagIdioma')}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>${idioma}</span>
+          <span class="dest-meta-item" title="${tClave('paisesTagMoneda')}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>${moneda}</span>
         </div>
-        <div class="dest-actions">
-          <button type="button" class="dest-btn" onclick="irAPais('${p.code}')">${tClave('paisesVerDestino')}</button>
-        </div>
+        <button type="button" class="dest-btn" onclick="irAPais('${p.code}')">${tClave('paisesVerDestino')}<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </div>
-    </div>`;
+    </article>`;
 }
 
-// Renderiza todas las tarjetas agrupadas por región
+// Renderiza todas las tarjetas agrupadas por región (secciones con contador)
 function renderPaises() {
   const grid = document.getElementById('destinosGrid');
   if (!grid) return;
@@ -109,8 +108,17 @@ function renderPaises() {
   orden.forEach(reg => {
     const items = PAISES.filter(p => p.region === reg);
     if (!items.length) return;
-    html += `<div class="region-label">${tClave(REGION_LABEL_KEYS[reg])}</div>`;
+    html += `
+      <section class="region-block" data-region="${reg}">
+        <header class="region-head">
+          <h2 class="region-title">${tClave(REGION_LABEL_KEYS[reg])}</h2>
+          <span class="region-count">${items.length}</span>
+          <span class="region-line" aria-hidden="true"></span>
+        </header>
+        <div class="region-grid">`;
     items.forEach((p, i) => { html += buildCardHTML(p, lang, i); });
+    html += `</div>
+      </section>`;
   });
 
   grid.innerHTML = html;
@@ -170,6 +178,19 @@ function updateCount() {
 
 // Oculta las etiquetas de región cuyas tarjetas estén todas filtradas
 function updateRegionLabels() {
+  // Estructura nueva: secciones .region-block con su propio grid
+  const bloques = document.querySelectorAll('.region-block');
+  if (bloques.length) {
+    bloques.forEach(bloque => {
+      const visibles = [...bloque.querySelectorAll('.dest-card')]
+        .filter(c => c.style.display !== 'none').length;
+      bloque.style.display = visibles ? '' : 'none';
+      const count = bloque.querySelector('.region-count');
+      if (count) count.textContent = visibles;
+    });
+    return;
+  }
+  // Compatibilidad con estructura plana antigua
   document.querySelectorAll('.region-label').forEach(label => {
     let el = label.nextElementSibling;
     let visible = false;
@@ -179,6 +200,16 @@ function updateRegionLabels() {
     }
     label.style.display = visible ? '' : 'none';
   });
+}
+
+// Cambia el filtro de continente desde los chips (mantiene el select oculto como estado)
+function setContinent(valor) {
+  const select = document.getElementById('continentFilter');
+  if (select) select.value = valor;
+  document.querySelectorAll('.continent-chip').forEach(chip => {
+    chip.classList.toggle('active', chip.dataset.continent === valor);
+  });
+  buscar();
 }
 
 function buscar() {

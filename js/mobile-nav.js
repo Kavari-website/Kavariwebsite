@@ -1,79 +1,101 @@
 /* ==========================================================================
- * KAVARI · mobile-nav.js
+ * KAVARI · mobile-nav.js (v3)
  * --------------------------------------------------------------------------
- * Mejora el menú móvil de la barra de navegación unificada (.nav-glass):
+ * Control ÚNICO del menú móvil de la barra unificada (.nav-glass):
+ *  - Alterna .open en el menú y .active en la hamburguesa al pulsar
  *  - Bloquea el scroll del body mientras el menú está abierto
- *  - Cierra el menú al pulsar un enlace o la tecla Escape
- *  - Anima la hamburguesa (X) y sincroniza estados ARIA
+ *  - Cierra al pulsar un enlace, la tecla Escape o fuera del menú
+ *  - Sincroniza estados ARIA y re-sincroniza al cruzar el breakpoint
  *
- * No sustituye el onclick inline existente: observa la clase .open
- * y reacciona a ella. Es seguro cargarlo en todas las páginas.
+ * Idempotente: elimina cualquier onclick inline previo de #hamburger
+ * para evitar dobles alternancias. Seguro en todas las páginas.
  * ========================================================================== */
 (function () {
   'use strict';
 
-  var navLinks = document.getElementById('navLinks');
-  var burger = document.getElementById('hamburger');
+  function init() {
+    var navLinks = document.getElementById('navLinks');
+    var burger = document.getElementById('hamburger');
+    // La página de Destino usa su propio drawer móvil
+    if (!navLinks || !burger) return;
 
-  // La página de Destino usa su propio drawer móvil (toggleMobileDrawer)
-  if (!navLinks || !burger) return;
+    var body = document.body;
+    var mobileMedia = window.matchMedia ? window.matchMedia('(max-width: 900px)') : null;
 
-  var body = document.body;
-  var mobileMedia = window.matchMedia ? window.matchMedia('(max-width: 900px)') : null;
+    // Evita doble toggle: el onclick inline (si existiera) ya no actúa
+    burger.removeAttribute('onclick');
+    burger.onclick = null;
 
-  function syncMenu() {
-    var open = navLinks.classList.contains('open');
+    function isOpen() { return navLinks.classList.contains('open'); }
 
-    burger.classList.toggle('active', open);
-    body.classList.toggle('menu-open', open);
+    function syncMenu() {
+      var open = isOpen();
+      burger.classList.toggle('active', open);
+      body.classList.toggle('menu-open', open);
+      // Compatibilidad con CSS antiguos que revelan con .open.open-active
+      navLinks.classList.toggle('open-active', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
 
-    // Compatibilidad: algunos CSS antiguos de página solo revelan el menú
-    // con .open.open-active; se sincroniza también esa clase.
-    navLinks.classList.toggle('open-active', open);
-
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-
-    // Solo gestionamos aria-hidden cuando el menú de navegación es móvil;
-    // en escritorio el nav es visible y no debe marcarse como oculto.
-    if (mobileMedia && mobileMedia.matches) {
-      navLinks.setAttribute('aria-hidden', open ? 'false' : 'true');
-    } else {
-      navLinks.removeAttribute('aria-hidden');
+      if (mobileMedia && mobileMedia.matches) {
+        navLinks.setAttribute('aria-hidden', open ? 'false' : 'true');
+      } else {
+        navLinks.removeAttribute('aria-hidden');
+      }
     }
-  }
 
-  // Observa cambios en la clase del menú (el onclick inline alterna .open)
-  if (window.MutationObserver) {
-    var observer = new MutationObserver(syncMenu);
-    observer.observe(navLinks, { attributes: true, attributeFilter: ['class'] });
-  }
-
-  burger.addEventListener('click', function () {
-    // El onclick inline ya alternó la clase; sincronizamos tras el cambio
-    requestAnimationFrame(syncMenu);
-  });
-
-  // Cierra el menú al pulsar cualquier enlace
-  Array.prototype.forEach.call(navLinks.querySelectorAll('a'), function (link) {
-    link.addEventListener('click', function () {
-      navLinks.classList.remove('open');
+    function toggleMenu(force) {
+      var abrir = typeof force === 'boolean' ? force : !isOpen();
+      navLinks.classList.toggle('open', abrir);
       syncMenu();
+    }
+
+    // Toggle principal desde la hamburguesa
+    burger.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
     });
-  });
 
-  // Cierra con Escape
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-      navLinks.classList.remove('open');
-      syncMenu();
+    // Cerrar al pulsar cualquier enlace del menú
+    Array.prototype.forEach.call(navLinks.querySelectorAll('a'), function (link) {
+      link.addEventListener('click', function () { toggleMenu(false); });
+    });
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) toggleMenu(false);
+    });
+
+    // Cerrar al tocar fuera (solo móvil)
+    document.addEventListener('click', function (e) {
+      if (!isOpen()) return;
+      if (!mobileMedia || !mobileMedia.matches) return;
+      if (navLinks.contains(e.target) || burger.contains(e.target)) return;
+      toggleMenu(false);
+    });
+
+    // Observador de seguridad: refleja cambios externos de la clase .open
+    if (window.MutationObserver) {
+      new MutationObserver(syncMenu).observe(navLinks, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
     }
-  });
 
-  // Estado inicial por si se recarga con el menú abierto
-  syncMenu();
+    // Re-sincroniza al cruzar el breakpoint móvil/escritorio
+    if (mobileMedia && mobileMedia.addEventListener) {
+      mobileMedia.addEventListener('change', function () {
+        if (!mobileMedia.matches) toggleMenu(false); // llegó a escritorio: cerrar
+        else syncMenu();
+      });
+    }
 
-  // Al pasar de móvil a escritorio (o viceversa), re-sincroniza el estado
-  if (mobileMedia && mobileMedia.addEventListener) {
-    mobileMedia.addEventListener('change', syncMenu);
+    syncMenu(); // estado inicial (por si se recarga con menú abierto)
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();

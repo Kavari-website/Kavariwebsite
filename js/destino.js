@@ -693,7 +693,7 @@ function getCountryVeil() {
     return v;
 }
 
-async function withCountryVeil(codigo, { minMs = 380 } = {}) {
+async function withCountryVeil(codigo, { minMs = 180 } = {}) {
     if (_cambiandoPais) return;
     _cambiandoPais = true;
     const veil = getCountryVeil();
@@ -731,11 +731,17 @@ async function cargarPais(codigoPais) {
         document.title = nombrePais(codigoPais, d.nombre) + ' · KAVARI';
 
         guiasPanama = loadGuidesForCountry(codigoPais, enriched.guias);
-        const supabaseGuides = await loadApprovedGuidesFromSupabase(codigoPais);
-        if (supabaseGuides.length > 0) {
-            guiasPanama = guiasPanama.filter(g => !isDemoGuide(g));
-        }
-        guiasPanama = mergeGuideSources(guiasPanama, supabaseGuides);
+        // Supabase en segundo plano: el render inicial NO espera la red.
+        // Cuando lleguen las guías remotas se fusionan y se refresca la sección.
+        const codSolicitado = codigoPais;
+        loadApprovedGuidesFromSupabase(codSolicitado).then(supabaseGuides => {
+            if (codSolicitado !== currentCountryCode) return; // ya se cambió de país
+            if (supabaseGuides.length > 0) {
+                guiasPanama = guiasPanama.filter(g => !isDemoGuide(g));
+                guiasPanama = mergeGuideSources(guiasPanama, supabaseGuides);
+                renderGuideFilters();
+            }
+        }).catch(() => { /* silencioso */ });
         souvenirsTiendas = enriched.souvenirs || [];
         aerolineasData = enriched.aerolineas || [];
         hospedajesData = enriched.hospedajes || [];

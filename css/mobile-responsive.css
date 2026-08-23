@@ -1286,3 +1286,98 @@ body.menu-open {
   content-visibility: auto;
   contain-intrinsic-size: auto 520px;
 }
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   11 · RED DE SEGURIDAD HAMBURGUESA/MENÚ (v7)
+   Garantiza el comportamiento en TODAS las páginas, con o sin nav-glass:
+   - Hamburguesa siempre visible ≤900px, oculta ≥901px
+   - Menú oculto salvo .open; abierto = panel fijo a pantalla completa
+   - La X (.active) queda por encima del panel para poder cerrar
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .navbar .hamburger {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbar .hamburger.active {
+    position: relative;
+    z-index: 2147483000;
+  }
+  .navbar .kv-menu:not(.open) {
+    display: none !important;
+  }
+  .navbar .kv-menu.open,
+  .nav-glass .nav-links.open {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    z-index: 2147482999 !important;
+    flex-direction: column !important;
+    padding: 96px 24px 40px !important;
+    gap: 6px !important;
+    overflow-y: auto !important;
+    background: linear-gradient(165deg, rgba(9,22,46,.985) 0%, rgba(13,32,62,.975) 55%, rgba(17,46,88,.975) 100%) !important;
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+  .navbar .kv-menu.open::before {
+    content: 'KAVARI' !important;
+    display: block !important;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .5em;
+    text-indent: .5em;
+    color: rgba(255,255,255,.4);
+    margin: 0 0 18px;
+  }
+  .navbar .kv-menu.open li { list-style: none; margin: 0; }
+  .navbar .kv-menu.open a {
+    display: block !important;
+    color: #eaf1fb !important;
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 14px 16px !important;
+    border-radius: 14px;
+    min-height: 48px;
+  }
+  .navbar .kv-menu.open a:hover,
+  .navbar .kv-menu.open a.active {
+    color: #fff !important;
+    background: rgba(255,255,255,.10) !important;
+  }
+}
+@media (min-width: 901px) {
+  .navbar .hamburger { display: none !important; }
+  .navbar .kv-menu.open {
+    position: static !important;
+    display: flex !important;
+    inset: auto !important;
+    width: auto !important;
+    height: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .navbar .kv-menu.open::before { display: none !important; }
+}

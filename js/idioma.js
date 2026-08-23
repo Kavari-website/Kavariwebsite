@@ -15705,6 +15705,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
     // así que el merge se ejecuta también de forma perezosa en t().
     // Se memoiza para no repetir la fusión en cada llamada a t() (rendimiento).
     let extrasFusionados = false;
+    const CACHE_T = new Map(); // idioma -> Map(clave -> traducción) para respuesta instantánea
     function mergeIdiomasExtras() {
         if (extrasFusionados) return;
         if (window.__kavariIdiomasExtras) {
@@ -15712,6 +15713,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
                 if (!diccionario[k]) diccionario[k] = window.__kavariIdiomasExtras[k];
             });
             extrasFusionados = true;
+            CACHE_T.clear();
         }
     }
     mergeIdiomasExtras();
@@ -15725,15 +15727,19 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
 
     window.t = function(clave) {
         mergeIdiomasExtras();
-        const idiomasFallback = idiomasSoportados.indexOf(idiomaActual) === -1 ? ['es', 'en'] : [idiomaActual, 'en', 'es'];
-        for (let i = 0; i < idiomasFallback.length; i++) {
-            const traduccion = diccionario[idiomasFallback[i]]?.[clave];
-            if (traduccion !== undefined) {
-                return traduccion;
-            }
+        let cache = CACHE_T.get(idiomaActual);
+        if (!cache) { cache = new Map(); CACHE_T.set(idiomaActual, cache); }
+        else if (cache.has(clave)) return cache.get(clave);
+        let resultado = clave, encontrado = false;
+        for (let i = 0, orden = [idiomaActual, 'en', 'es']; i < 3; i++) {
+            const d = diccionario[orden[i]];
+            if (d && d[clave] !== undefined) { resultado = d[clave]; encontrado = true; break; }
         }
-        console.warn(`Traducción no encontrada para: "${clave}" en idioma "${idiomaActual}"`);
-        return clave;
+        if (!encontrado) {
+            console.warn(`Traducción no encontrada para: "${clave}" en idioma "${idiomaActual}"`);
+        }
+        cache.set(clave, resultado);
+        return resultado;
     };
 
     window.paisNombre = function(slug, fallback) {
@@ -15759,8 +15765,38 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
         return fallback;
     };
 
+    // ===== ANIMACIÓN DE CAMBIO DE IDIOMA =====
+    // Inyecta el CSS una sola vez para que funcione en todas las páginas.
+    function asegurarAnimacionCSS() {
+        if (document.getElementById('kv-i18n-anim-style')) return;
+        const st = document.createElement('style');
+        st.id = 'kv-i18n-anim-style';
+        st.textContent =
+            '@keyframes kvI18nSwap{0%{opacity:0;transform:translateY(12px) scale(.97);filter:blur(3px)}' +
+            '60%{opacity:1;filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}' +
+            '.kv-i18n-anim{animation:kvI18nSwap .5s cubic-bezier(.22,.61,.36,1) both}' +
+            '@media (prefers-reduced-motion:reduce){.kv-i18n-anim{animation-duration:.01ms}}';
+        document.head.appendChild(st);
+    }
+
+    // Anima un elemento cuyo texto acaba de cambiar, con retardo escalonado
+    // (índice de recorrido del DOM) para crear un efecto ola rápido.
+    function animarCambioTexto(el, indice) {
+        asegurarAnimacionCSS();
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const yaAnimado = el.classList.contains('kv-i18n-anim');
+        if (yaAnimado) { el.classList.remove('kv-i18n-anim'); void el.offsetWidth; }
+        el.style.animationDelay = Math.min((indice || 0) * 12, 350) + 'ms';
+        el.classList.add('kv-i18n-anim');
+        el.addEventListener('animationend', function handler() {
+            el.classList.remove('kv-i18n-anim');
+            el.style.animationDelay = '';
+            el.removeEventListener('animationend', handler);
+        });
+    }
+
     function aplicarTraducciones() {
-        document.querySelectorAll('[data-i18n]').forEach(el => {
+        document.querySelectorAll('[data-i18n]').forEach((el, i) => {
             const clave = el.getAttribute('data-i18n');
             if (el.tagName === 'INPUT' && (el.type === 'text' || el.type === 'email' || el.type === 'password' || el.type === 'search')) {
                 return;
@@ -15768,10 +15804,14 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
                 return;
             } else {
                 const tr = window.t(clave);
+                const esHtml = /<[a-z/]/i.test(tr);
+                const actual = esHtml ? el.innerHTML : el.textContent;
                 // Texto plano: textContent (mucho más rápido que innerHTML,
                 // evita pasar por el parser HTML). Solo si cambió.
-                if (/<[a-z/]/i.test(tr)) { if (el.innerHTML !== tr) el.innerHTML = tr; }
-                else if (el.textContent !== tr) el.textContent = tr;
+                if (actual !== tr) {
+                    if (esHtml) el.innerHTML = tr; else el.textContent = tr;
+                    animarCambioTexto(el, i);
+                }
             }
         });
 

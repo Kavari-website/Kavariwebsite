@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <!-- ==========================================================================
-     KAVARI Â· ÃNDICE DE SECCIONES DE ESTA PÃGINA (index.html)
+     KAVARI · ÍNDICE DE SECCIONES DE ESTA PÁGINA (index.html)
      ==========================================================================
-     Busca rÃ¡pido con Ctrl+F: escribe "SECCIÃ“N:" y salta a cualquier bloque.
+     Busca rápido con Ctrl+F: escribe "SECCIÓN:" y salta a cualquier bloque.
 
-     LÃ­nea  SecciÃ³n
+     Línea  Sección
      -----  ---------------------------------------------------------------
-     79     SECCIÃ“N: HERO / VIDEO DE FONDO (header.hero, video fondo.mp4)
-     86     SECCIÃ“N: NAVBAR (menÃº de navegaciÃ³n)
-     111    SECCIÃ“N: HERO CONTENT (tÃ­tulo y descripciÃ³n)
-     118    SECCIÃ“N: CAJA DE BÃšSQUEDA (search-box)
-     131    SECCIÃ“N: TOP 10 LUGARES (featured-section)
-     239    SECCIÃ“N: PAQUETES DE VIAJE (places-section)
-     426    SECCIÃ“N: PIE DE PÃGINA (footer)
-     488    SECCIÃ“N: MODALES (Top 10 y Paquetes)
-     532    SECCIÃ“N: SCRIPTS DE FIN DE PÃGINA
+     79     SECCIÓN: HERO / VIDEO DE FONDO (header.hero, video fondo.mp4)
+     86     SECCIÓN: NAVBAR (menú de navegación)
+     111    SECCIÓN: HERO CONTENT (título y descripción)
+     118    SECCIÓN: CAJA DE BÚSQUEDA (search-box)
+     131    SECCIÓN: TOP 10 LUGARES (featured-section)
+     239    SECCIÓN: PAQUETES DE VIAJE (places-section)
+     426    SECCIÓN: PIE DE PÁGINA (footer)
+     488    SECCIÓN: MODALES (Top 10 y Paquetes)
+     532    SECCIÓN: SCRIPTS DE FIN DE PÁGINA
      ========================================================================== -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="tituloIndex">KAVARI Travel â€” Descubre el Mundo</title>
-    <meta name="description" content="Descubre los mejores destinos del mundo con KAVARI. GuÃ­as turÃ­sticos certificados, paquetes de viaje, aerolÃ­neas y hospedajes en una sola plataforma.">
-    <meta name="keywords" content="turismo, viajes, guÃ­as turÃ­sticos, destinos, PanamÃ¡, Colombia, AmÃ©rica Latina">
+    <title data-i18n="tituloIndex">KAVARI Travel — Descubre el Mundo</title>
+    <meta name="description" content="Descubre los mejores destinos del mundo con KAVARI. Guías turísticos certificados, paquetes de viaje, aerolíneas y hospedajes en una sola plataforma.">
+    <meta name="keywords" content="turismo, viajes, guías turísticos, destinos, Panamá, Colombia, América Latina">
     <meta property="og:title" content="KAVARI Travel">
-    <meta property="og:description" content="Descubre los mejores destinos del mundo con guÃ­as certificados.">
+    <meta property="og:description" content="Descubre los mejores destinos del mundo con guías certificados.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/tutorial.css">
     <link rel="stylesheet" href="css/chatbot-widget.css">
@@ -32,7 +32,7 @@
  
     <link rel="stylesheet" href="css/site-polish.css">
     <link rel="stylesheet" href="css/traveler-registration.css">
-    <link rel="stylesheet" href="css/mobile-responsive.css?v=6">
+    <link rel="stylesheet" href="css/mobile-responsive.css?v=8">
     <link rel="stylesheet" href="css/nav-polish.css">
     <link rel="stylesheet" href="css/dest-cards.css">
     <link rel="stylesheet" href="css/home-page.css?v=3">
@@ -48,7 +48,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-client.js"></script>
     <script src="js/auth.js"></script>
-    <script defer src="js/idioma.js?v=4"></script>
+    <script defer src="js/idioma.js?v=5"></script>
     <script defer src="js/idioma-pt.js?v=2"></script>
     <script src="js/theme.js?v=3"></script>
     
@@ -58,7 +58,7 @@
 
   <script defer src="js/img-fallback.js"></script>
 
-  <!-- ===== MENÃš DESPLEGABLE DE IDIOMAS ===== -->
+  <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
   <link rel="stylesheet" href="css/lang-dropdown.css">
   <link rel="stylesheet" href="css/universal-shine.css">
   <script defer src="js/lang-dropdown.js"></script>
@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="css/footer.css">
   <script defer src="js/footer.js"></script>
 
-  <!-- ===== OPTIMIZACIÃ“N DE CARGA (performance.js) ===== -->
+  <!-- ===== OPTIMIZACIÓN DE CARGA (performance.js) ===== -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <script src="js/performance.js"></script>
@@ -94,10 +94,10 @@
         <div class="logo">
             <a href="index.html" style="color: inherit; text-decoration: none;">KAVARI</a>
         </div>
-        <ul class="nav-links" id="navLinks">
+        <ul class="nav-links kv-menu" id="navLinks">
             <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
             <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
-            <li><a href="#" id="guiasNavBtn" data-guide-register data-i18n="navRegistrarmeGuia">Ser GuÃ­a</a></li>
+            <li><a href="#" id="guiasNavBtn" data-guide-register data-i18n="navRegistrarmeGuia">Ser Guía</a></li>
             <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
             <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
             <li><a href="contacto.html" data-i18n="contacto">Contacto</a></li>
@@ -109,7 +109,7 @@
             </button>
             <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro">Oscuro</button>
         </div>
-        <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="MenÃº">
+        <button class="hamburger" id="hamburger" aria-label="Menú">
             <span></span><span></span><span></span>
         </button>
     </nav>
@@ -125,7 +125,7 @@
 <section class="search-box" id="main">
     <div class="search-content">
         <div>
-            <h2 data-i18n="searchTitulo">Â¿Listo para tu prÃ³xima aventura?</h2>
+            <h2 data-i18n="searchTitulo">¿Listo para tu próxima aventura?</h2>
             <p data-i18n="searchDescripcion">Encuentra el destino perfecto y comienza a viajar.</p>
         </div>
         <a href="paises.html">
@@ -224,10 +224,10 @@
 <footer class="footer kv-footer">
   <div class="kv-footer-grid">
 
-    <!-- Columna 1 Â· Marca + Redes sociales -->
+    <!-- Columna 1 · Marca + Redes sociales -->
     <div class="kv-footer-col">
       <p class="kv-footer-brand">KAVARI</p>
-      <p class="kv-footer-sub" data-i18n="footerSub1">Tu prÃ³xima aventura empieza aquÃ­.</p>
+      <p class="kv-footer-sub" data-i18n="footerSub1">Tu próxima aventura empieza aquí.</p>
       <div class="kv-footer-social" aria-label="Redes sociales">
         <a class="kv-social-icon" href="https://www.tiktok.com/@kavari.travel" target="_blank" rel="noopener" aria-label="TikTok de KAVARI"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
         <a class="kv-social-icon" href="https://www.facebook.com/kavari" target="_blank" rel="noopener" aria-label="Facebook de KAVARI"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
@@ -236,26 +236,26 @@
       </div>
     </div>
 
-    <!-- Columna 2 Â· Enlaces rÃ¡pidos -->
-    <nav class="kv-footer-col" aria-label="Enlaces rÃ¡pidos">
-      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces rÃ¡pidos</p>
+    <!-- Columna 2 · Enlaces rápidos -->
+    <nav class="kv-footer-col" aria-label="Enlaces rápidos">
+      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces rápidos</p>
       <ul class="kv-footer-links">
         <li><a class="kv-footer-link" href="index.html" data-i18n="footerLinkInicio">Inicio</a></li>
         <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkDestinos">Destinos</a></li>
         <li><a class="kv-footer-link" href="sobrenosotros.html" data-i18n="footerLinkSobre">Sobre nosotros</a></li>
-        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">GuÃ­as locales</a></li>
+        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">Guías locales</a></li>
         <li><a class="kv-footer-link" href="contacto.html" data-i18n="footerLinkContacto">Contacto</a></li>
       </ul>
     </nav>
 
-    <!-- Columna 3 Â· Newsletter -->
+    <!-- Columna 3 · Newsletter -->
     <div class="kv-footer-col">
       <p class="kv-footer-title" data-i18n="footerNewsTitle">Newsletter</p>
       <p class="kv-footer-sub" data-i18n="footerNewsSub">Recibe ofertas y novedades de viajes.</p>
       <form class="kv-footer-form" id="kvNewsletterForm" novalidate>
-        <label class="kv-sr-only" for="kvNewsletterEmail" data-i18n="footerNewsLabel">Tu correo electrÃ³nico</label>
+        <label class="kv-sr-only" for="kvNewsletterEmail" data-i18n="footerNewsLabel">Tu correo electrónico</label>
         <input class="kv-footer-input" id="kvNewsletterEmail" name="email" type="email"
-               placeholder="Tu correo electrÃ³nico" data-i18n-placeholder="footerNewsPlaceholder"
+               placeholder="Tu correo electrónico" data-i18n-placeholder="footerNewsPlaceholder"
                required autocomplete="email">
         <button class="kv-footer-btn" type="submit" data-i18n="footerNewsBtn">Suscribirse</button>
       </form>
@@ -286,7 +286,7 @@
             <div class="top10-modal-desc" id="top10ModalDesc"></div>
             <div class="top10-modal-facts" id="top10ModalFacts"></div>
             <div class="top10-modal-actions">
-                <button class="btn-modal-info" onclick="cerrarModalTop10()" data-i18n="volverAtras">Volver atrÃ¡s</button>
+                <button class="btn-modal-info" onclick="cerrarModalTop10()" data-i18n="volverAtras">Volver atrás</button>
                 <a class="btn-modal-go" id="top10ModalGoBtn" href="paises.html" data-i18n="quieroIr">Quiero ir</a>
             </div>
         </div>
@@ -304,12 +304,12 @@
                 <div class="paquete-modal-precio" id="paqueteModalPrecio"></div>
             </div>
             <div class="paquete-modal-desc" id="paqueteModalDesc"></div>
-            <div class="paquete-modal-section-title" data-i18n="paqueteModalIncluye">Â¿QuÃ© incluye el paquete?</div>
+            <div class="paquete-modal-section-title" data-i18n="paqueteModalIncluye">¿Qué incluye el paquete?</div>
             <div class="paquete-modal-includes" id="paqueteModalIncludes"></div>
             <div class="paquete-modal-section-title" data-i18n="itinerarioSugerido">Itinerario sugerido</div>
             <div class="paquete-modal-itinerary" id="paqueteModalItinerary"></div>
             <div class="paquete-modal-cta">
-                <button class="btn-modal-cerrar" onclick="cerrarModalPaquete()" data-i18n="volverAtras">Volver atrÃ¡s</button>
+                <button class="btn-modal-cerrar" onclick="cerrarModalPaquete()" data-i18n="volverAtras">Volver atrás</button>
                 <button class="btn-modal-go" onclick="cerrarModalPaquete(); PackageRequest.open(window.currentPaqueteModalId)" data-i18n="reservarAhora">Reservar ahora</button>
                 <a class="btn-modal-destino" id="paqueteModalDestBtn" href="paises.html" data-i18n="verDestinoCompleto">Ver destino completo</a>
             </div>
@@ -326,6 +326,6 @@
 <script src="js/guide-registration.js"></script>
 <script src="js/tutorial.js"></script>
 <script src="js/page-transitions.js"></script>
-<script src="js/mobile-nav.js?v=2"></script>
+<script src="js/mobile-nav.js?v=3"></script>
 </body>
 </html>

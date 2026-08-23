@@ -95,7 +95,7 @@ function resolveData(obj) {
 
 data = resolveData(data);
 
-const COUNTRY_CODES = Object.keys(data).filter(k => data[k] && data[k].nombre && !hasPlaceholder(data[k].nombre));
+let COUNTRY_CODES = Object.keys(data).filter(k => data[k] && data[k].nombre && !hasPlaceholder(data[k].nombre));
 
 /* ───────────── clave y modelo Gemini (solo servidor) ───────────── */
 function loadEnvVar(name) {
@@ -172,6 +172,7 @@ function joinParts(parts) {
 }
 
 function indexData() {
+  KB.length = 0;
   COUNTRY_CODES.forEach(code => {
     const c = data[code];
     const nombre = c.nombre;

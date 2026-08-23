@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="tituloDestino">Destino â€” KAVARI Travel</title>
-  <meta name="description" content="Descubre destinos turÃ­sticos con KAVARI: cultura, gastronomÃ­a, aventura, aerolÃ­neas, hospedajes y guÃ­as certificados para cada paÃ­s.">
+  <title data-i18n="tituloDestino">Destino — KAVARI Travel</title>
+  <meta name="description" content="Descubre destinos turísticos con KAVARI: cultura, gastronomía, aventura, aerolíneas, hospedajes y guías certificados para cada país.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/traveler-registration.css">
   <link rel="stylesheet" href="css/tutorial.css">
   <link rel="stylesheet" href="css/chatbot-widget.css">
-  <link rel="stylesheet" href="css/mobile-responsive.css?v=6">
+  <link rel="stylesheet" href="css/mobile-responsive.css?v=8">
   <link rel="stylesheet" href="css/buttons-system.css">
   <link rel="stylesheet" href="css/typography-system.css">
   <link rel="stylesheet" href="css/spacing-system.css">
@@ -23,14 +23,14 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-client.js"></script>
   <script src="js/auth.js"></script>
-  <script defer src="js/idioma.js?v=4"></script>
+  <script defer src="js/idioma.js?v=5"></script>
   <script defer src="js/idioma-pt.js?v=2"></script>
   <script src="js/theme.js?v=3"></script>
   <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
   <script defer src="js/img-fallback.js"></script>
 
-  <!-- ===== MENÃš DESPLEGABLE DE IDIOMAS ===== -->
+  <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
   <link rel="stylesheet" href="css/lang-dropdown.css">
   <link rel="stylesheet" href="css/universal-shine.css">
   <script defer src="js/lang-dropdown.js"></script>
@@ -40,7 +40,7 @@
   <link rel="stylesheet" href="css/footer.css">
   <script defer src="js/footer.js"></script>
 
-  <!-- ===== OPTIMIZACIÃ“N DE CARGA (performance.js) ===== -->
+  <!-- ===== OPTIMIZACIÓN DE CARGA (performance.js) ===== -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <script src="js/performance.js"></script>
@@ -56,69 +56,69 @@
     </button>
     <nav class="nav-scroll-wrap" id="navScrollWrap">
     <ul class="nav-links" id="navLinks">
-      <li><a href="paises.html" class="nav-ext" data-i18n="navPaises"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>PaÃ­ses</a></li>
+      <li><a href="paises.html" class="nav-ext" data-i18n="navPaises"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Países</a></li>
       <li><a data-sec="inicio" class="active" onclick="showSection('inicio')" data-i18n="navInicio"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Inicio</a></li>
       <li><a data-sec="cultura" onclick="showSection('cultura')" data-i18n="navCultura"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-6 8 6v12M9 21v-6h6v6"/></svg>Cultura</a></li>
       <li><a data-sec="lugares" onclick="showSection('lugares')" data-i18n="navDestinos2"><svg viewBox="0 0 24 24"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Destinos</a></li>
-      <li><a data-sec="gastronomia" onclick="showSection('gastronomia')" data-i18n="navGastronomia"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>GastronomÃ­a</a></li>
+      <li><a data-sec="gastronomia" onclick="showSection('gastronomia')" data-i18n="navGastronomia"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Gastronomía</a></li>
       <li><a data-sec="aventura" onclick="showSection('aventura')" data-i18n="navAventura"><svg viewBox="0 0 24 24"><path d="M12 2l9 18H3L12 2z"/></svg>Aventura</a></li>
-      <li><a data-sec="practica" onclick="showSection('practica')" data-i18n="navPractica"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Info prÃ¡ctica</a></li>
-      <li><a data-sec="aerolineas" onclick="showSection('aerolineas')" data-i18n="navAerolineas"><svg viewBox="0 0 24 24"><path d="M2.5 19l19-7-19-7 4 7-4 7z"/></svg>AerolÃ­neas</a></li>
+      <li><a data-sec="practica" onclick="showSection('practica')" data-i18n="navPractica"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Info práctica</a></li>
+      <li><a data-sec="aerolineas" onclick="showSection('aerolineas')" data-i18n="navAerolineas"><svg viewBox="0 0 24 24"><path d="M2.5 19l19-7-19-7 4 7-4 7z"/></svg>Aerolíneas</a></li>
       <li><a data-sec="hospedajes" onclick="showSection('hospedajes')" data-i18n="navHospedajes"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/></svg>Hospedajes</a></li>
       <li><a data-sec="souvenires" onclick="showSection('souvenires')" data-i18n="navSouvenirs"><svg viewBox="0 0 24 24"><path d="M20 7h-3.5a3.5 3.5 0 1 0-7 0H6a2 2 0 0 0-2 2v11h16V9a2 2 0 0 0-2-2z"/></svg>Souvenirs</a></li>
-      <li><a data-sec="guias" onclick="showSection('guias')" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>GuÃ­as TurÃ­sticos</a></li>
+      <li><a data-sec="guias" onclick="showSection('guias')" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>Guías Turísticos</a></li>
     </ul>
     </nav>
-    <button type="button" class="nav-arrow nav-arrow-right" id="navArrowRight" aria-label="Ver mÃ¡s opciones">
+    <button type="button" class="nav-arrow nav-arrow-right" id="navArrowRight" aria-label="Ver más opciones">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
     </button>
   </div>
 
-  <!-- Selector de paÃ­s: glass + panel animado -->
+  <!-- Selector de país: glass + panel animado -->
   <div class="country-switcher" id="countrySwitcher">
     <button type="button" class="country-trigger" id="countryTrigger" aria-haspopup="listbox" aria-expanded="false">
-      <span class="country-flag" id="countryTriggerFlag">ðŸŒŽ</span>
-      <span class="country-trigger-name" id="countryTriggerName" data-i18n="seleccionarPais">PaÃ­s</span>
+      <span class="country-flag" id="countryTriggerFlag">🌎</span>
+      <span class="country-trigger-name" id="countryTriggerName" data-i18n="seleccionarPais">País</span>
       <span class="country-trigger-caret"></span>
     </button>
     <div class="country-panel" id="countryPanel" role="listbox">
       <div class="country-search-wrap">
-        <input type="text" class="country-search" id="countrySearch" placeholder="Buscar paÃ­sâ€¦" data-i18n-placeholder="buscarPais" autocomplete="off">
+        <input type="text" class="country-search" id="countrySearch" placeholder="Buscar país…" data-i18n-placeholder="buscarPais" autocomplete="off">
       </div>
       <div id="countryOptionsList"></div>
     </div>
     <!-- Select nativo oculto -->
     <select id="paisSelector" onchange="cambiarPais(this.value)" style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;">
-      <!-- Se llena dinÃ¡micamente -->
+      <!-- Se llena dinámicamente -->
     </select>
   </div>
 
-  <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileDrawer()" aria-label="MenÃº">
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileDrawer()" aria-label="Menú">
     <span></span><span></span><span></span>
   </button>
 </header>
 
-<!-- Drawer mÃ³vil -->
+<!-- Drawer móvil -->
 <div class="mobile-drawer-overlay" id="mobileDrawerOverlay" onclick="if(event.target===this) toggleMobileDrawer(false)">
   <aside class="mobile-drawer" id="mobileDrawer">
     <div class="mobile-drawer-header">
       <span class="mobile-drawer-title">KAVARI</span>
-      <button class="mobile-drawer-close" onclick="toggleMobileDrawer(false)" aria-label="Cerrar menÃº">
+      <button class="mobile-drawer-close" onclick="toggleMobileDrawer(false)" aria-label="Cerrar menú">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <ul class="mobile-drawer-links" id="mobileDrawerLinks">
-      <li style="animation-delay:.02s"><a href="paises.html" data-i18n="navPaises"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>PaÃ­ses</a></li>
+      <li style="animation-delay:.02s"><a href="paises.html" data-i18n="navPaises"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Países</a></li>
       <li style="animation-delay:.05s"><a data-sec="inicio" class="active" onclick="showSection('inicio');toggleMobileDrawer(false)" data-i18n="navInicio"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Inicio</a></li>
       <li style="animation-delay:.08s"><a data-sec="cultura" onclick="showSection('cultura');toggleMobileDrawer(false)" data-i18n="navCultura"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-6 8 6v12M9 21v-6h6v6"/></svg>Cultura</a></li>
       <li style="animation-delay:.11s"><a data-sec="lugares" onclick="showSection('lugares');toggleMobileDrawer(false)" data-i18n="navDestinos2"><svg viewBox="0 0 24 24"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Destinos</a></li>
-      <li style="animation-delay:.14s"><a data-sec="gastronomia" onclick="showSection('gastronomia');toggleMobileDrawer(false)" data-i18n="navGastronomia"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>GastronomÃ­a</a></li>
+      <li style="animation-delay:.14s"><a data-sec="gastronomia" onclick="showSection('gastronomia');toggleMobileDrawer(false)" data-i18n="navGastronomia"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Gastronomía</a></li>
       <li style="animation-delay:.17s"><a data-sec="aventura" onclick="showSection('aventura');toggleMobileDrawer(false)" data-i18n="navAventura"><svg viewBox="0 0 24 24"><path d="M12 2l9 18H3L12 2z"/></svg>Aventura</a></li>
-      <li style="animation-delay:.20s"><a data-sec="practica" onclick="showSection('practica');toggleMobileDrawer(false)" data-i18n="navPractica"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Info prÃ¡ctica</a></li>
-      <li style="animation-delay:.23s"><a data-sec="aerolineas" onclick="showSection('aerolineas');toggleMobileDrawer(false)" data-i18n="navAerolineas"><svg viewBox="0 0 24 24"><path d="M2.5 19l19-7-19-7 4 7-4 7z"/></svg>AerolÃ­neas</a></li>
+      <li style="animation-delay:.20s"><a data-sec="practica" onclick="showSection('practica');toggleMobileDrawer(false)" data-i18n="navPractica"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Info práctica</a></li>
+      <li style="animation-delay:.23s"><a data-sec="aerolineas" onclick="showSection('aerolineas');toggleMobileDrawer(false)" data-i18n="navAerolineas"><svg viewBox="0 0 24 24"><path d="M2.5 19l19-7-19-7 4 7-4 7z"/></svg>Aerolíneas</a></li>
       <li style="animation-delay:.26s"><a data-sec="hospedajes" onclick="showSection('hospedajes');toggleMobileDrawer(false)" data-i18n="navHospedajes"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/></svg>Hospedajes</a></li>
       <li style="animation-delay:.29s"><a data-sec="souvenires" onclick="showSection('souvenires');toggleMobileDrawer(false)" data-i18n="navSouvenirs"><svg viewBox="0 0 24 24"><path d="M20 7h-3.5a3.5 3.5 0 1 0-7 0H6a2 2 0 0 0-2 2v11h16V9a2 2 0 0 0-2-2z"/></svg>Souvenirs</a></li>
-      <li style="animation-delay:.32s"><a data-sec="guias" onclick="showSection('guias');toggleMobileDrawer(false)" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>GuÃ­as TurÃ­sticos</a></li>
+      <li style="animation-delay:.32s"><a data-sec="guias" onclick="showSection('guias');toggleMobileDrawer(false)" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>Guías Turísticos</a></li>
     </ul>
     <div class="mobile-drawer-divider"></div>
     <div class="mobile-drawer-foot">
@@ -137,7 +137,7 @@
 <!-- BANNER SLOT -->
 <div class="banner-slot" id="bannerSlot"></div>
 
-<!-- SECCIÃ“N INICIO -->
+<!-- SECCIÓN INICIO -->
 <div class="section active fly-in" id="section-inicio">
 <section class="hero" id="main">
 <div class="hero-bg" id="heroBg"></div>
@@ -147,7 +147,7 @@
       <div class="hero-left">
         <div class="hero-eyebrow">
           <span class="hero-eyebrow-dot"></span>
-          <span id="heroContinente" data-i18n="heroContinente">Tu prÃ³ximo destino</span>
+          <span id="heroContinente" data-i18n="heroContinente">Tu próximo destino</span>
         </div>
         <h1 id="heroTitulo"><span data-i18n="heroTitulo">Descubre el Mundo</span><span id="heroSubtitulo" data-i18n="heroSubtitulo">con KAVARI</span></h1>
       </div>
@@ -177,8 +177,8 @@
   <div class="quick-facts reveal" id="quickFacts"></div>
 
   <div class="quote-bar reveal">
-    <blockquote id="quoteInicio" data-i18n="quoteInicio">Viajar es la Ãºnica inversiÃ³n que te hace mÃ¡s rico.</blockquote>
-    <cite id="citeInicio" data-i18n="citeInicio">KAVARI Â· GuÃ­a 2025</cite>
+    <blockquote id="quoteInicio" data-i18n="quoteInicio">Viajar es la única inversión que te hace más rico.</blockquote>
+    <cite id="citeInicio" data-i18n="citeInicio">KAVARI · Guía 2025</cite>
   </div>
 </div>
 
@@ -188,14 +188,14 @@
     <div class="page-header-bg" id="culturaHeaderBg"></div>
     <div class="page-header-ov"></div>
     <div class="page-header-content">
-      <div class="ph-tag" data-i18n="culturaTag">Identidad Â· TradiciÃ³n Â· Historia</div>
+      <div class="ph-tag" data-i18n="culturaTag">Identidad · Tradición · Historia</div>
       <h2 id="culturaTitulo" data-i18n="culturaTitulo">Cultura</h2>
       <p id="culturaDesc" data-i18n="culturaDesc">La riqueza cultural que define a cada destino.</p>
     </div>
   </div>
   <div class="stats-bar reveal" id="culturaStats"></div>
   <div class="cards-section reveal">
-    <h4 data-i18n="iconosCultura">Ãconos de la cultura</h4>
+    <h4 data-i18n="iconosCultura">Íconos de la cultura</h4>
     <div class="cards-grid" id="culturaItems"></div>
   </div>
   <div class="dark-band reveal" id="culturaDarkBand"></div>
@@ -207,9 +207,9 @@
     <div class="page-header-bg" id="lugaresHeaderBg"></div>
     <div class="page-header-ov"></div>
     <div class="page-header-content">
-      <div class="ph-tag" data-i18n="lugaresTag">Destinos Â· Maravillas</div>
+      <div class="ph-tag" data-i18n="lugaresTag">Destinos · Maravillas</div>
       <h2 id="lugaresTitulo" data-i18n="lugaresTitulo">Destinos Imprescindibles</h2>
-      <p id="lugaresDesc" data-i18n="lugaresDesc">Descubre los lugares que definen cada rincÃ³n del mundo.</p>
+      <p id="lugaresDesc" data-i18n="lugaresDesc">Descubre los lugares que definen cada rincón del mundo.</p>
     </div>
   </div>
   <div class="cards-section reveal">
@@ -219,15 +219,15 @@
   <div class="two-col-itin reveal" id="twoColItin"></div>
 </div>
 
-<!-- GASTRONOMÃA -->
+<!-- GASTRONOMÍA -->
 <div class="section" id="section-gastronomia">
   <div class="page-header">
     <div class="page-header-bg" id="gastronomiaHeaderBg"></div>
     <div class="page-header-ov"></div>
     <div class="page-header-content">
-      <div class="ph-tag" data-i18n="gastronomiaTag">Sabores Â· TradiciÃ³n</div>
-      <h2 id="gastronomiaTitulo" data-i18n="gastronomiaTitulo">GastronomÃ­a</h2>
-      <p id="gastronomiaDesc" data-i18n="gastronomiaDesc">La cocina como expresiÃ³n de la identidad cultural.</p>
+      <div class="ph-tag" data-i18n="gastronomiaTag">Sabores · Tradición</div>
+      <h2 id="gastronomiaTitulo" data-i18n="gastronomiaTitulo">Gastronomía</h2>
+      <p id="gastronomiaDesc" data-i18n="gastronomiaDesc">La cocina como expresión de la identidad cultural.</p>
     </div>
   </div>
   <div class="food-grid reveal" id="foodGrid"></div>
@@ -240,14 +240,14 @@
     <div class="page-header-bg" id="aventuraHeaderBg"></div>
     <div class="page-header-ov"></div>
     <div class="page-header-content">
-      <div class="ph-tag" data-i18n="aventuraTag">Naturaleza Â· Adrenalina</div>
+      <div class="ph-tag" data-i18n="aventuraTag">Naturaleza · Adrenalina</div>
       <h2 id="aventuraTitulo" data-i18n="aventuraTitulo">Aventura &amp; Naturaleza</h2>
-      <p id="aventuraDesc" data-i18n="aventuraDesc">Experiencias Ãºnicas en entornos privilegiados.</p>
+      <p id="aventuraDesc" data-i18n="aventuraDesc">Experiencias únicas en entornos privilegiados.</p>
     </div>
   </div>
   <div class="stats-bar reveal" id="aventuraStats"></div>
   <div class="sec-title reveal">
-    <div class="sec-tag-line" data-i18n="seleccionEditorial">SelecciÃ³n editorial</div>
+    <div class="sec-tag-line" data-i18n="seleccionEditorial">Selección editorial</div>
     <h3 data-i18n="experienciasAventura">Experiencias que definen la aventura</h3>
     <p data-i18n="descAventura">Actividades para todos los niveles de adrenalina.</p>
   </div>
@@ -255,39 +255,39 @@
   <div class="dark-band reveal" id="aventuraDarkBand"></div>
 </div>
 
-<!-- INFO PRÃCTICA -->
+<!-- INFO PRÁCTICA -->
 <div class="section" id="section-practica">
   <div class="page-header">
     <div class="page-header-bg" id="practicaHeaderBg"></div>
     <div class="page-header-ov"></div>
     <div class="page-header-content">
       <div class="ph-tag" data-i18n="practicaTag">Viaje inteligente</div>
-      <h2 id="practicaTitulo" data-i18n="practicaTitulo">InformaciÃ³n PrÃ¡ctica</h2>
+      <h2 id="practicaTitulo" data-i18n="practicaTitulo">Información Práctica</h2>
       <p id="practicaDesc" data-i18n="practicaDesc">Todo lo que necesitas saber antes de viajar.</p>
     </div>
   </div>
   <div class="info-grid reveal" id="infoGrid"></div>
   <div class="two-col reveal" id="practicaTwoCol"></div>
   <div class="quote-bar reveal">
-    <blockquote id="quotePractica" data-i18n="quotePractica">Los mejores destinos no siempre son los mÃ¡s conocidos.</blockquote>
-    <cite id="citePractica" data-i18n="citePractica">KAVARI Â· GuÃ­a 2025</cite>
+    <blockquote id="quotePractica" data-i18n="quotePractica">Los mejores destinos no siempre son los más conocidos.</blockquote>
+    <cite id="citePractica" data-i18n="citePractica">KAVARI · Guía 2025</cite>
   </div>
 </div>
 
-<!-- AEROLÃNEAS -->
+<!-- AEROLÍNEAS -->
 <div class="section" id="section-aerolineas">
   <div class="page-header">
     <div class="page-header-bg" id="aerolineasHeaderBg"></div>
     <div class="page-header-ov"></div>
     <div class="page-header-content">
-      <div class="ph-tag" data-i18n="aerolineasTag">Vuelos Â· Conexiones internacionales</div>
-      <h2 id="aerolineasTitulo" data-i18n="aerolineasTitulo">AerolÃ­neas disponibles</h2>
+      <div class="ph-tag" data-i18n="aerolineasTag">Vuelos · Conexiones internacionales</div>
+      <h2 id="aerolineasTitulo" data-i18n="aerolineasTitulo">Aerolíneas disponibles</h2>
       <p id="aerolineasDesc" data-i18n="aerolineasDesc">Las mejores opciones de vuelo hacia tu destino.</p>
     </div>
   </div>
   <div class="airline-section reveal">
     <div class="sec-intro">
-      <p id="aerolineasIntro" data-i18n="aerolineasIntro">Precios de referencia en clase econÃ³mica. Los precios finales varÃ­an segÃºn fecha, disponibilidad y origen. Haz clic en "Reservar vuelo" para ir directamente a la aerolÃ­nea.</p>
+      <p id="aerolineasIntro" data-i18n="aerolineasIntro">Precios de referencia en clase económica. Los precios finales varían según fecha, disponibilidad y origen. Haz clic en "Reservar vuelo" para ir directamente a la aerolínea.</p>
     </div>
     <div class="airline-grid" id="airlineGrid"></div>
   </div>
@@ -299,14 +299,14 @@
     <div class="page-header-bg" id="hospedajesHeaderBg"></div>
     <div class="page-header-ov"></div>
     <div class="page-header-content">
-      <div class="ph-tag" data-i18n="hospedajesTag">Alojamiento Â· Airbnb</div>
+      <div class="ph-tag" data-i18n="hospedajesTag">Alojamiento · Airbnb</div>
       <h2 id="hospedajesTitulo" data-i18n="hospedajesTitulo">Hospedajes recomendados</h2>
       <p id="hospedajesDesc" data-i18n="hospedajesDesc">Opciones seleccionadas en los mejores barrios del destino.</p>
     </div>
   </div>
   <div class="hospedajes-section reveal">
     <div class="sec-intro">
-      <p id="hospedajesIntro" data-i18n="hospedajesIntro">SelecciÃ³n de hospedajes en Airbnb. Precios por noche en temporada media. Haz clic en "Reservar estadÃ­a" para ir directamente a la oferta en Airbnb.</p>
+      <p id="hospedajesIntro" data-i18n="hospedajesIntro">Selección de hospedajes en Airbnb. Precios por noche en temporada media. Haz clic en "Reservar estadía" para ir directamente a la oferta en Airbnb.</p>
     </div>
     <div class="hospedajes-grid" id="hospedajesGrid"></div>
   </div>
@@ -318,9 +318,9 @@
     <div class="page-header-bg" id="souvenirsHeaderBg"></div>
     <div class="page-header-ov"></div>
     <div class="page-header-content">
-      <div class="ph-tag" data-i18n="souvenirsTag">ArtesanÃ­as Â· Cultura local</div>
-      <h2 id="souvenirsTitulo" data-i18n="souvenirsTitulo">Tiendas de artesanÃ­as</h2>
-      <p id="souvenirsDesc" data-i18n="souvenirsDesc">Souvenirs autÃ©nticos elaborados por artesanos locales.</p>
+      <div class="ph-tag" data-i18n="souvenirsTag">Artesanías · Cultura local</div>
+      <h2 id="souvenirsTitulo" data-i18n="souvenirsTitulo">Tiendas de artesanías</h2>
+      <p id="souvenirsDesc" data-i18n="souvenirsDesc">Souvenirs auténticos elaborados por artesanos locales.</p>
     </div>
   </div>
   <div class="souvenirs-section reveal">
@@ -329,19 +329,19 @@
   </div>
 </div>
 
-<!-- GUÃAS TURÃSTICOS -->
+<!-- GUÍAS TURÍSTICOS -->
 <div class="section" id="section-guias">
   <div class="page-header">
     <div class="page-header-bg" id="guiasHeaderBg"></div>
     <div class="page-header-ov"></div>
     <div class="page-header-content">
-      <div class="ph-tag" data-i18n="guiasTag">Expertos locales Â· Certificados</div>
-      <h2 id="guiasTituloHeader" data-i18n="guiasTituloHeader">GuÃ­as TurÃ­sticos</h2>
-      <p id="guiasDescHeader" data-i18n="guiasDescHeader">Conecta con expertos locales certificados que conocen cada rincÃ³n del destino.</p>
+      <div class="ph-tag" data-i18n="guiasTag">Expertos locales · Certificados</div>
+      <h2 id="guiasTituloHeader" data-i18n="guiasTituloHeader">Guías Turísticos</h2>
+      <p id="guiasDescHeader" data-i18n="guiasDescHeader">Conecta con expertos locales certificados que conocen cada rincón del destino.</p>
     </div>
   </div>
   <div class="guides-section" id="guias">
-    <h2 class="section-title" id="guiasSectionTitle" data-i18n="guiasSectionTitle">GuÃ­as turÃ­sticos</h2>
+    <h2 class="section-title" id="guiasSectionTitle" data-i18n="guiasSectionTitle">Guías turísticos</h2>
     <div id="guidesListContainer"></div>
   </div>
 </div>
@@ -386,10 +386,10 @@
 <footer class="footer kv-footer">
   <div class="kv-footer-grid">
 
-    <!-- Columna 1 Â· Marca + Redes sociales -->
+    <!-- Columna 1 · Marca + Redes sociales -->
     <div class="kv-footer-col">
       <p class="kv-footer-brand">KAVARI</p>
-      <p class="kv-footer-sub" data-i18n="footerSub1">Tu prÃ³xima aventura empieza aquÃ­.</p>
+      <p class="kv-footer-sub" data-i18n="footerSub1">Tu próxima aventura empieza aquí.</p>
       <div class="kv-footer-social" aria-label="Redes sociales">
         <a class="kv-social-icon" href="https://www.tiktok.com/@kavari.travel" target="_blank" rel="noopener" aria-label="TikTok de KAVARI"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
         <a class="kv-social-icon" href="https://www.facebook.com/kavari" target="_blank" rel="noopener" aria-label="Facebook de KAVARI"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
@@ -398,26 +398,26 @@
       </div>
     </div>
 
-    <!-- Columna 2 Â· Enlaces rÃ¡pidos -->
-    <nav class="kv-footer-col" aria-label="Enlaces rÃ¡pidos">
-      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces rÃ¡pidos</p>
+    <!-- Columna 2 · Enlaces rápidos -->
+    <nav class="kv-footer-col" aria-label="Enlaces rápidos">
+      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces rápidos</p>
       <ul class="kv-footer-links">
         <li><a class="kv-footer-link" href="index.html" data-i18n="footerLinkInicio">Inicio</a></li>
         <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkDestinos">Destinos</a></li>
         <li><a class="kv-footer-link" href="sobrenosotros.html" data-i18n="footerLinkSobre">Sobre nosotros</a></li>
-        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">GuÃ­as locales</a></li>
+        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">Guías locales</a></li>
         <li><a class="kv-footer-link" href="contacto.html" data-i18n="footerLinkContacto">Contacto</a></li>
       </ul>
     </nav>
 
-    <!-- Columna 3 Â· Newsletter -->
+    <!-- Columna 3 · Newsletter -->
     <div class="kv-footer-col">
       <p class="kv-footer-title" data-i18n="footerNewsTitle">Newsletter</p>
       <p class="kv-footer-sub" data-i18n="footerNewsSub">Recibe ofertas y novedades de viajes.</p>
       <form class="kv-footer-form" id="kvNewsletterForm" novalidate>
-        <label class="kv-sr-only" for="kvNewsletterEmail" data-i18n="footerNewsLabel">Tu correo electrÃ³nico</label>
+        <label class="kv-sr-only" for="kvNewsletterEmail" data-i18n="footerNewsLabel">Tu correo electrónico</label>
         <input class="kv-footer-input" id="kvNewsletterEmail" name="email" type="email"
-               placeholder="Tu correo electrÃ³nico" data-i18n-placeholder="footerNewsPlaceholder"
+               placeholder="Tu correo electrónico" data-i18n-placeholder="footerNewsPlaceholder"
                required autocomplete="email">
         <button class="kv-footer-btn" type="submit" data-i18n="footerNewsBtn">Suscribirse</button>
       </form>
@@ -426,7 +426,7 @@
   </div>
 
   <div class="kv-footer-bottom">
-    <p class="kv-footer-copy" data-i18n="footerTexto">Â© 2025 Kavari â€” Todos los derechos reservados.</p>
+    <p class="kv-footer-copy" data-i18n="footerTexto">© 2025 Kavari — Todos los derechos reservados.</p>
   </div>
 </footer>
 
@@ -435,10 +435,10 @@
 <script src="js/chatbot-widget.js"></script>
 <script src="js/account.js"></script>
 <script src="js/traveler-registration.js"></script>
-<script src="js/destino.js?v=2"></script>
+<script src="js/destino.js?v=3"></script>
 <script src="js/tutorial.js"></script>
 <script src="js/page-transitions.js"></script>
-<script src="js/mobile-nav.js?v=2"></script>
+<script src="js/mobile-nav.js?v=3"></script>
 <script>
   (function () {
     var wrap = document.getElementById('navScrollWrap');

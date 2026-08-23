@@ -3,33 +3,33 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title data-i18n="tituloPaises">KAVARI â€“ Explora 21 Destinos de LatinoamÃ©rica y el Caribe</title>
-  <meta name="description" content="Explora 21 destinos turÃ­sticos de LatinoamÃ©rica y el Caribe con KAVARI. InformaciÃ³n completa de cultura, gastronomÃ­a, hospedajes y guÃ­as certificados."/>
+  <title data-i18n="tituloPaises">KAVARI – Explora 21 Destinos de Latinoamérica y el Caribe</title>
+  <meta name="description" content="Explora 21 destinos turísticos de Latinoamérica y el Caribe con KAVARI. Información completa de cultura, gastronomía, hospedajes y guías certificados."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="css/style.css"/>
-  <link rel="stylesheet" href="css/paises.css?v=2"/>
+  <link rel="stylesheet" href="css/paises.css?v=3"/>
   <link rel="stylesheet" href="css/chatbot-widget.css"/>
   <link rel="stylesheet" href="css/ui-system.css"/>
   <link rel="stylesheet" href="css/site-polish.css"/>
   <link rel="stylesheet" href="css/traveler-registration.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/tutorial.css"/>
-  <link rel="stylesheet" href="css/mobile-responsive.css?v=6"/>
+  <link rel="stylesheet" href="css/mobile-responsive.css?v=8"/>
   <link rel="stylesheet" href="css/nav-polish.css"/>
   <link rel="stylesheet" href="css/dest-cards.css"/>
   <link rel="stylesheet" href="css/buttons-system.css"/>
   <link rel="stylesheet" href="css/typography-system.css"/>
   <link rel="stylesheet" href="css/spacing-system.css">
   <link rel="stylesheet" href="css/audit-consistency.css">
-  <script defer src="js/idioma.js?v=4"></script>
+  <script defer src="js/idioma.js?v=5"></script>
   <script defer src="js/idioma-pt.js?v=2"></script>
   <script src="js/theme.js?v=3"></script>
   <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
   <script defer src="js/img-fallback.js"></script>
 
-  <!-- ===== MENÃš DESPLEGABLE DE IDIOMAS ===== -->
+  <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
   <link rel="stylesheet" href="css/lang-dropdown.css">
   <link rel="stylesheet" href="css/universal-shine.css">
   <script defer src="js/lang-dropdown.js"></script>
@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="css/footer.css">
   <script defer src="js/footer.js"></script>
 
-  <!-- ===== OPTIMIZACIÃ“N DE CARGA (performance.js) ===== -->
+  <!-- ===== OPTIMIZACIÓN DE CARGA (performance.js) ===== -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <script src="js/performance.js"></script>
@@ -50,10 +50,10 @@
     <div class="logo">
         <a href="index.html" style="color: inherit; text-decoration: none;">KAVARI</a>
     </div>
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links kv-menu" id="navLinks">
         <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
         <li><a href="paises.html" class="active" data-i18n="navDestinos">Destinos</a></li>
-        <li><a href="#" id="guiasNavBtn" data-guide-register data-i18n="navRegistrarmeGuia">Ser GuÃ­a</a></li>
+        <li><a href="#" id="guiasNavBtn" data-guide-register data-i18n="navRegistrarmeGuia">Ser Guía</a></li>
         <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
         <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
         <li><a href="contacto.html" data-i18n="contacto">Contacto</a></li>
@@ -65,7 +65,7 @@
         </button>
         <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro">Oscuro</button>
     </div>
-    <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="MenÃº">
+    <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
     </button>
 </nav>
@@ -74,39 +74,47 @@
 <header class="page-hero">
   <div class="page-hero-bg"> <img src="img/Bannnerpaises.jpeg" alt="" fetchpriority="high" loading="eager" decoding="async"></div>
   <div class="page-hero-content">
-    <p class="hero-eyebrow" data-i18n="paisesEyebrow">Tu PrÃ³xima Aventura Te Espera</p>
+    <p class="hero-eyebrow" data-i18n="paisesEyebrow">Tu Próxima Aventura Te Espera</p>
     <h1 data-i18n="paisesTitulo">Explora Nuestros Destinos</h1>
-    <p class="hero-sub" data-i18n="paisesSub">21 paÃ­ses a tu disposiciÃ³n</p>
+    <p class="hero-sub" data-i18n="paisesSub">21 países a tu disposición</p>
   </div>
 </header>
 
 <!-- Buscador, filtro por continente y contador de destinos -->
 <div class="controls-wrap">
   <div class="controls-inner">
-    <!-- Cuadro de bÃºsqueda por nombre o continente -->
+    <!-- Cuadro de búsqueda por nombre o continente -->
     <div class="search-wrap">
       <svg class="search-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" id="searchInput" placeholder="Busca tu destino con Kavariâ€¦" data-i18n-placeholder="paisesBuscar" oninput="buscar()"/>
+      <input type="text" id="searchInput" placeholder="Busca tu destino con Kavari…" data-i18n-placeholder="paisesBuscar" oninput="buscar()"/>
     </div>
-    <!-- Filtro por continente -->
-    <div class="continent-wrap">
-      <select id="continentFilter" class="continent-select" data-i18n-options="paisesContinente" onchange="buscar()" aria-label="Filtrar por continente">
+    <!-- Filtro por continente (chips) -->
+    <div class="continent-wrap" role="group" aria-label="Filtrar por continente">
+      <select id="continentFilter" class="continent-select" data-i18n-options="paisesContinente" onchange="buscar()" aria-label="Filtrar por continente" hidden>
         <option value="todos" data-i18n="paisesContinenteTodos">Todos</option>
-        <option value="america" data-i18n="paisesContinenteAmerica">AmÃ©rica</option>
+        <option value="america" data-i18n="paisesContinenteAmerica">América</option>
         <option value="caribe" data-i18n="paisesContinenteCaribe">Caribe</option>
         <option value="europa" data-i18n="paisesContinenteEuropa">Europa</option>
         <option value="asia" data-i18n="paisesContinenteAsia">Asia</option>
-        <option value="africa" data-i18n="paisesContinenteAfrica">Ãfrica</option>
+        <option value="africa" data-i18n="paisesContinenteAfrica">África</option>
       </select>
+      <div class="continent-chips">
+        <button type="button" class="continent-chip active"  data-continent="todos"   onclick="setContinent('todos')"   data-i18n="paisesContinenteTodos">Todos</button>
+        <button type="button" class="continent-chip"         data-continent="america" onclick="setContinent('america')" data-i18n="paisesContinenteAmerica">América</button>
+        <button type="button" class="continent-chip"         data-continent="caribe"  onclick="setContinent('caribe')"  data-i18n="paisesContinenteCaribe">Caribe</button>
+        <button type="button" class="continent-chip"         data-continent="europa"  onclick="setContinent('europa')"  data-i18n="paisesContinenteEuropa">Europa</button>
+        <button type="button" class="continent-chip"         data-continent="asia"    onclick="setContinent('asia')"    data-i18n="paisesContinenteAsia">Asia</button>
+        <button type="button" class="continent-chip"         data-continent="africa"  onclick="setContinent('africa')"  data-i18n="paisesContinenteAfrica">África</button>
+      </div>
     </div>
-    <!-- Muestra cuÃ¡ntos destinos se ven despuÃ©s de buscar -->
+    <!-- Muestra cuántos destinos se ven después de buscar -->
     <div class="stats-row">
       <div class="stat-pill"> <span id="countVisible">21</span> <span data-i18n="paisesDestinos">destinos</span></div>
     </div>
   </div>
 </div>
 
-<!-- Todos los paÃ­ses -->
+<!-- Todos los países -->
 <main class="page-body" id="main">
   <!-- Mensaje mientras se renderizan las tarjetas -->
   <div class="destinos-loading" id="destinosLoading" data-i18n="paisesCargando">Cargando destinos...</div>
@@ -116,15 +124,15 @@
 
 </main>
 
-<!-- Pie de pÃ¡gina -->
+<!-- Pie de página -->
 <!-- ===== FOOTER ===== -->
 <footer class="footer kv-footer">
   <div class="kv-footer-grid">
 
-    <!-- Columna 1 Â· Marca + Redes sociales -->
+    <!-- Columna 1 · Marca + Redes sociales -->
     <div class="kv-footer-col">
       <p class="kv-footer-brand">KAVARI</p>
-      <p class="kv-footer-sub" data-i18n="footerSub1">Tu prÃ³xima aventura empieza aquÃ­.</p>
+      <p class="kv-footer-sub" data-i18n="footerSub1">Tu próxima aventura empieza aquí.</p>
       <div class="kv-footer-social" aria-label="Redes sociales">
         <a class="kv-social-icon" href="https://www.tiktok.com/@kavari.travel" target="_blank" rel="noopener" aria-label="TikTok de KAVARI"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
         <a class="kv-social-icon" href="https://www.facebook.com/kavari" target="_blank" rel="noopener" aria-label="Facebook de KAVARI"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
@@ -133,26 +141,26 @@
       </div>
     </div>
 
-    <!-- Columna 2 Â· Enlaces rÃ¡pidos -->
-    <nav class="kv-footer-col" aria-label="Enlaces rÃ¡pidos">
-      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces rÃ¡pidos</p>
+    <!-- Columna 2 · Enlaces rápidos -->
+    <nav class="kv-footer-col" aria-label="Enlaces rápidos">
+      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces rápidos</p>
       <ul class="kv-footer-links">
         <li><a class="kv-footer-link" href="index.html" data-i18n="footerLinkInicio">Inicio</a></li>
         <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkDestinos">Destinos</a></li>
         <li><a class="kv-footer-link" href="sobrenosotros.html" data-i18n="footerLinkSobre">Sobre nosotros</a></li>
-        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">GuÃ­as locales</a></li>
+        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">Guías locales</a></li>
         <li><a class="kv-footer-link" href="contacto.html" data-i18n="footerLinkContacto">Contacto</a></li>
       </ul>
     </nav>
 
-    <!-- Columna 3 Â· Newsletter -->
+    <!-- Columna 3 · Newsletter -->
     <div class="kv-footer-col">
       <p class="kv-footer-title" data-i18n="footerNewsTitle">Newsletter</p>
       <p class="kv-footer-sub" data-i18n="footerNewsSub">Recibe ofertas y novedades de viajes.</p>
       <form class="kv-footer-form" id="kvNewsletterForm" novalidate>
-        <label class="kv-sr-only" for="kvNewsletterEmail" data-i18n="footerNewsLabel">Tu correo electrÃ³nico</label>
+        <label class="kv-sr-only" for="kvNewsletterEmail" data-i18n="footerNewsLabel">Tu correo electrónico</label>
         <input class="kv-footer-input" id="kvNewsletterEmail" name="email" type="email"
-               placeholder="Tu correo electrÃ³nico" data-i18n-placeholder="footerNewsPlaceholder"
+               placeholder="Tu correo electrónico" data-i18n-placeholder="footerNewsPlaceholder"
                required autocomplete="email">
         <button class="kv-footer-btn" type="submit" data-i18n="footerNewsBtn">Suscribirse</button>
       </form>
@@ -161,7 +169,7 @@
   </div>
 
   <div class="kv-footer-bottom">
-    <p class="kv-footer-copy" data-i18n="footerTexto">Â© 2025 Kavari â€” Todos los derechos reservados.</p>
+    <p class="kv-footer-copy" data-i18n="footerTexto">© 2025 Kavari — Todos los derechos reservados.</p>
   </div>
 </footer>
 
@@ -173,9 +181,9 @@
 <script defer src="js/chatbot-widget.js"></script>
 <script defer src="js/account.js"></script>
 <script defer src="js/paises-data.js"></script>
-<script defer src="js/paises.js?v=4"></script>
+<script defer src="js/paises.js?v=5"></script>
 <script defer src="js/guide-registration.js"></script>
 <script defer src="js/page-transitions.js"></script>
-<script defer src="js/mobile-nav.js?v=2"></script>
+<script defer src="js/mobile-nav.js?v=3"></script>
 </body>
 </html>
