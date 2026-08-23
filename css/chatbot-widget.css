@@ -275,36 +275,6 @@
 #kavari-chat-clear:hover {
   background:rgba(255,255,255,.28);
 }
-#kavari-acciones {
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  padding:0 14px 10px;
-}
-.kb-accion-btn {
-  background:color-mix(in srgb,var(--kb-blue) 12%,transparent);
-  color:var(--kb-blue);
-  border:1px solid color-mix(in srgb,var(--kb-blue) 40%,transparent);
-  padding:6px 12px;
-  border-radius:50px;
-  font-size:.74rem;
-  font-weight:700;
-  cursor:pointer;
-  font-family:inherit;
-  transition:all .2s;
-}
-.kb-accion-btn:hover {
-  background:var(--kb-blue);
-  color:white;
-  transform:translateY(-1px);
-}
-[data-theme="dark"] .kb-accion-btn {
-  color:#58a6ff;
-  border-color:#58a6ff;
-}
-[data-theme="dark"] .kb-accion-btn:hover {
-  background:#1d2d50;
-}
 #kavari-chat-input-row {
   display:flex;
   gap:8px;

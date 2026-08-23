@@ -38,17 +38,16 @@
 
   // Preguntas principales (siempre visibles)
   const generalQuestionsMain = [
-    { qKey: 'chatQDestino', key: 'destino' },
-    { qKey: 'chatQGuias', key: 'guía' },
-    { qKey: 'chatQPaquetes', key: 'paquete' }
+    { qKey: 'chatQKavari' },
+    { qKey: 'chatQPaises' },
+    { qKey: 'chatQPlanes' }
   ];
   // Preguntas secundarias (colapsadas)
   const generalQuestionsExtra = [
-    { qKey: 'chatQPlanes', key: 'planes' },
-    { qKey: 'chatQCuenta', key: 'cuenta' },
-    { qKey: 'chatQIdioma', key: 'idioma' },
-    { qKey: 'chatQAyuda', key: 'ayuda' },
-    { qKey: 'chatQContacto', key: 'contacto' }
+    { qKey: 'chatQGuias' },
+    { qKey: 'chatQPaquetes' },
+    { qKey: 'chatQCuenta' },
+    { qKey: 'chatQContacto' }
   ];
 
   function cname(d) {
@@ -199,7 +198,6 @@
           </div>
           <div id="kavari-mensajes" role="log" aria-live="polite" aria-relevant="additions"></div>
           <div id="kavari-preguntas"></div>
-          <div id="kavari-acciones"></div>
           <div id="kavari-chat-input-row">
             <input type="text" id="kavari-chat-input" placeholder="Escribe tu pregunta..." autocomplete="off" maxlength="300">
             <button id="kavari-chat-send" type="button" aria-label="Enviar">
@@ -276,7 +274,6 @@
     document.getElementById('kavari-asistente').classList.add('activo');
     restoreMemory();
     renderQuestions();
-    renderAcciones();
     setTimeout(() => {
       const input = document.getElementById('kavari-chat-input');
       if (input) input.focus({ preventScroll: true });
@@ -362,8 +359,8 @@
       if (extra.length) renderToggleButton(box, extra, t);
     } else {
       // Preguntas generales
-      renderQuestionButtons(box, generalQuestionsMain.map(i => ({ q: t(i.qKey), text: t(i.qKey), key: i.key })));
-      renderToggleButton(box, generalQuestionsExtra.map(i => ({ q: t(i.qKey), text: t(i.qKey), key: i.key })), t);
+      renderQuestionButtons(box, generalQuestionsMain.map(i => ({ q: t(i.qKey), text: t(i.qKey) })));
+      renderToggleButton(box, generalQuestionsExtra.map(i => ({ q: t(i.qKey), text: t(i.qKey) })), t);
     }
   }
 
@@ -428,87 +425,7 @@
     }
     if (input) input.placeholder = t('chatInputPlaceholder');
     if (clearBtn) clearBtn.title = msg('Limpiar conversación', 'Clear conversation', 'Limpar conversa');
-    if (opened) { renderQuestions(); renderAcciones(); }
-  }
-
-  /* ═══════════════════ acciones rápidas ═══════════════════ */
-  function actionItems() {
-    return [
-      { key: 'destinos', label: msg('Destinos', 'Destinations', 'Destinos') },
-      { key: 'guias', label: msg('Guías', 'Guides', 'Guias') },
-      { key: 'paquetes', label: msg('Paquetes', 'Packages', 'Pacotes') },
-      { key: 'contacto', label: msg('Contacto', 'Contact', 'Contato') }
-    ];
-  }
-
-  function renderAcciones() {
-    const box = document.getElementById('kavari-acciones');
-    if (!box) return;
-    box.innerHTML = '';
-    actionItems().forEach(item => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'kb-accion-btn';
-      btn.textContent = item.label;
-      btn.dataset.action = item.key;
-      btn.addEventListener('click', () => doAction(item.key));
-      box.appendChild(btn);
-    });
-  }
-
-  function navigate(href) {
-    if (window.kavariNavigate) {
-      try { window.kavariNavigate(href); return; } catch (_) { /* noop */ }
-    }
-    window.location.href = href;
-  }
-
-  function scrollToSection(id) {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function doAction(action) {
-    let reply;
-    switch (action) {
-      case 'destinos':
-        reply = msg('Abriendo destinos…', 'Opening destinations…', 'Abrindo destinos…');
-        addBotMessage(renderBotText(reply));
-        pushTurn('model', reply);
-        navigate('paises.html');
-        break;
-      case 'guias':
-        reply = msg('Abriendo guías certificados…', 'Opening certified guides…', 'Abrindo guias certificados…');
-        addBotMessage(renderBotText(reply));
-        pushTurn('model', reply);
-        if (/destino\.html/i.test(location.pathname)) {
-          scrollToSection('guias');
-        } else {
-          navigate('paises.html');
-        }
-        break;
-      case 'paquetes':
-        if (/index\.html$/i.test(location.pathname) || location.pathname === '/' || /\/index$/i.test(location.pathname)) {
-          reply = msg('Aquí tienes nuestros paquetes de viaje — elige el que te guste.', 'Here are our travel packages — pick the one you like.', 'Aqui estão nossos pacotes de viagem — escolha o que você gosta.');
-          addBotMessage(renderBotText(reply));
-          pushTurn('model', reply);
-          scrollToSection('paquetes');
-        } else {
-          reply = msg('Abriendo paquetes de viaje…', 'Opening travel packages…', 'Abrindo pacotes de viagem…');
-          addBotMessage(renderBotText(reply));
-          pushTurn('model', reply);
-          navigate('index.html#paquetes');
-        }
-        break;
-      case 'contacto':
-        reply = msg('Abriendo la página de contacto…', 'Opening the contact page…', 'Abrindo a página de contato…');
-        addBotMessage(renderBotText(reply));
-        pushTurn('model', reply);
-        navigate('contacto.html');
-        break;
-      default:
-        return;
-    }
+    if (opened) renderQuestions();
   }
 
   function clearConversation() {
