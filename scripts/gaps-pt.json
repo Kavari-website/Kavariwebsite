@@ -1,0 +1,290 @@
+[
+ {
+  "key": "footerLinkDestinos",
+  "es": "Destinos",
+  "en": "Destinations",
+  "actual": "Destinos"
+ },
+ {
+  "key": "footerNewsTitle",
+  "es": "Newsletter",
+  "en": "Newsletter",
+  "actual": "Newsletter"
+ },
+ {
+  "key": "navDestinos",
+  "es": "Destinos",
+  "en": "Destinations",
+  "actual": "Destinos"
+ },
+ {
+  "key": "tutorial",
+  "es": "Tutorial",
+  "en": "Tutorial",
+  "actual": "Tutorial"
+ },
+ {
+  "key": "contactoSuperate",
+  "es": "Centro Supérate David",
+  "en": "Centro Supérate David",
+  "actual": "Centro Supérate David"
+ },
+ {
+  "key": "navPaises",
+  "es": "Países",
+  "en": "Countries",
+  "actual": "Países"
+ },
+ {
+  "key": "navCultura",
+  "es": "Cultura",
+  "en": "Culture",
+  "actual": "Cultura"
+ },
+ {
+  "key": "navDestinos2",
+  "es": "Destinos",
+  "en": "Destinations",
+  "actual": "Destinos"
+ },
+ {
+  "key": "navAventura",
+  "es": "Aventura",
+  "en": "Adventure",
+  "actual": "Aventura"
+ },
+ {
+  "key": "heroExplorarDestinos",
+  "es": "Explorar destinos",
+  "en": "Explore destinations",
+  "actual": "Explorar destinos"
+ },
+ {
+  "key": "culturaTitulo",
+  "es": "Cultura",
+  "en": "Culture",
+  "actual": "Cultura"
+ },
+ {
+  "key": "paisesContinenteTodos",
+  "es": "Todos",
+  "en": "All",
+  "actual": "Todos"
+ },
+ {
+  "key": "paisesContinenteAmerica",
+  "es": "América",
+  "en": "America",
+  "actual": "América"
+ },
+ {
+  "key": "paisesContinenteCaribe",
+  "es": "Caribe",
+  "en": "Caribbean",
+  "actual": "Caribe"
+ },
+ {
+  "key": "paisesContinenteEuropa",
+  "es": "Europa",
+  "en": "Europe",
+  "actual": "Europa"
+ },
+ {
+  "key": "paisesContinenteAfrica",
+  "es": "África",
+  "en": "Africa",
+  "actual": "África"
+ },
+ {
+  "key": "perfilOtpEnviar",
+  "es": "Enviar código",
+  "en": "Send code",
+  "actual": "Enviar código"
+ },
+ {
+  "key": "perfilOtpVerificar",
+  "es": "Verificar código",
+  "en": "Verify code",
+  "actual": "Verificar código"
+ },
+ {
+  "key": "rankDiamante",
+  "es": "Diamante",
+  "en": "Diamond",
+  "actual": "Diamante"
+ },
+ {
+  "key": "ayudaAtajoDestinos",
+  "es": "Explorar destinos",
+  "en": "Explore destinations",
+  "actual": "Explorar destinos"
+ },
+ {
+  "key": "ayudaAtajoTutorial",
+  "es": "Iniciar tutorial",
+  "en": "Start tutorial",
+  "actual": "Iniciar tutorial"
+ },
+ {
+  "key": "contactoInstagram",
+  "es": "Instagram",
+  "en": "Instagram",
+  "actual": "Instagram"
+ },
+ {
+  "key": "contactoUbicacionVal",
+  "es": "Centro Supérate David, Chiriquí, Panamá",
+  "en": "Centro Supérate David, Chiriquí, Panama",
+  "actual": "Centro Supérate David, Chiriquí, Panamá"
+ },
+ {
+  "key": "tituloDestino",
+  "es": "Destino — KAVARI Travel",
+  "en": "Destination — KAVARI Travel",
+  "actual": "Destino — KAVARI Travel"
+ },
+ {
+  "key": "seleccionarPais",
+  "es": "País",
+  "en": "Country",
+  "actual": "País"
+ },
+ {
+  "key": "buscarPais",
+  "es": "Buscar país…",
+  "en": "Search country…",
+  "actual": "Buscar país…"
+ },
+ {
+  "key": "planCtaTelefonoPH",
+  "es": "+507 6000-0000",
+  "en": "+507 6000-0000",
+  "actual": "+507 6000-0000"
+ },
+ {
+  "key": "planCtaViajerosPH",
+  "es": "2",
+  "en": "2",
+  "actual": "2"
+ },
+ {
+  "key": "verDestinoCompleto",
+  "es": "Ver destino completo",
+  "en": "See full destination",
+  "actual": "Ver destino completo"
+ },
+ {
+  "key": "paisesDestinos",
+  "es": "destinos",
+  "en": "destinations",
+  "actual": "destinos"
+ },
+ {
+  "key": "perfilTabFavoritos",
+  "es": "Favoritos",
+  "en": "Favorites",
+  "actual": "Favoritos"
+ },
+ {
+  "key": "perfilFavoritosSortLabel",
+  "es": "Ordenar por",
+  "en": "Sort by",
+  "actual": "Ordenar por"
+ },
+ {
+  "key": "perfilFavoritosSortManual",
+  "es": "Manual",
+  "en": "Manual",
+  "actual": "Manual"
+ },
+ {
+  "key": "perfilFavoritosExplorar",
+  "es": "Explorar destinos",
+  "en": "Explore destinations",
+  "actual": "Explorar destinos"
+ },
+ {
+  "key": "perfilConfigIdioma",
+  "es": "Idioma",
+  "en": "Language",
+  "actual": "Idioma"
+ },
+ {
+  "key": "planViajeroF1",
+  "es": "21 destinos",
+  "en": "21 destinations",
+  "actual": "21 destinos"
+ },
+ {
+  "key": "planPremiumNombre",
+  "es": "Premium",
+  "en": "Premium",
+  "actual": "Premium"
+ },
+ {
+  "key": "planPremiumPrecio",
+  "es": "US$9.99",
+  "en": "US$9.99",
+  "actual": "US$9.99"
+ },
+ {
+  "key": "planOpNombre",
+  "es": "OP",
+  "en": "OP",
+  "actual": "OP"
+ },
+ {
+  "key": "planOpPrecio",
+  "es": "US$19.99",
+  "en": "US$19.99",
+  "actual": "US$19.99"
+ },
+ {
+  "key": "aboutStatDestinos",
+  "es": "Destinos",
+  "en": "Destinations",
+  "actual": "Destinos"
+ },
+ {
+  "key": "aboutStatEquipo",
+  "es": "Integrantes",
+  "en": "Members",
+  "actual": "Integrantes"
+ },
+ {
+  "key": "aboutProgramador",
+  "es": "Programador",
+  "en": "Programmer",
+  "actual": "Programador"
+ },
+ {
+  "key": "filtroTodos",
+  "es": "Todos",
+  "en": "All",
+  "actual": "Todos"
+ },
+ {
+  "key": "contratar",
+  "es": "Contratar",
+  "en": "Hire",
+  "actual": "Contratar"
+ },
+ {
+  "key": "precioHora",
+  "es": "por hora",
+  "en": "per hour",
+  "actual": "por hora"
+ },
+ {
+  "key": "zonaLabel",
+  "es": "Zona",
+  "en": "Zone",
+  "actual": "Zona"
+ },
+ {
+  "key": "entradaLabel",
+  "es": "Entrada",
+  "en": "Entry",
+  "actual": "Entrada"
+ }
+]

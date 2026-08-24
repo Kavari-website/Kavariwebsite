@@ -2,8 +2,12 @@
   position:fixed;
   inset:0;
   z-index:12000;
-  display:grid;
-  place-items:center;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
   padding:20px;
   background:rgba(4,13,29,.5);
   backdrop-filter:blur(8px);
@@ -17,6 +21,7 @@
 }
 .traveler-card {
   width:min(520px,100%);
+  margin:auto;
   padding:28px;
   border:1px solid rgba(255,255,255,.58);
   border-radius:28px;

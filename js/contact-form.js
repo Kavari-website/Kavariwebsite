@@ -3,6 +3,7 @@
  *
  * Guarda cada mensaje en la tabla `contact_messages` de Supabase.
  * user_id es opcional: se rellena si el visitante tiene sesión iniciada.
+ * Además envía una notificación por correo con EmailJS (Gmail).
  */
 (function () {
   var TABLE = 'contact_messages';
@@ -82,6 +83,27 @@
       });
     }).then(function (res) {
       if (res && res.error) throw res.error;
+
+      // Notificación por correo con EmailJS. Es "fire-and-forget":
+      // el mensaje ya quedó guardado en Supabase, así que si el email
+      // falla solo lo registramos en consola sin bloquear al usuario.
+      if (window.emailjs && typeof window.emailjs.send === 'function') {
+        window.emailjs.send(
+          'service_qvmfjk6',      // Gmail service
+          'template_8txcmq8',     // plantilla de notificación
+          {
+            from_name: fullName,
+            reply_to: email,
+            from_email: email,
+            subject: subject,
+            message: message
+          },
+          { publicKey: '2zIIrkekPIphTzjNk' }
+        ).catch(function (err) {
+          console.warn('[KAVARI] No se pudo enviar la notificación por correo:', err);
+        });
+      }
+
       form.reset();
       if (statusEl) {
         statusEl.textContent = tt('contactoEnviado', '¡Mensaje enviado! Te responderemos pronto.');

@@ -1,4 +1,4 @@
-# KAVARI - Guía de Configuración de Supabase
+﻿# KAVARI - Guía de Configuración de Supabase
 
 ## Pasos para configurar Supabase
 
@@ -101,7 +101,7 @@ El asistente de chat (botón flotante) ahora:
   inicias sesión, también en la tabla `chat_messages` de Supabase (se recuerda en
   cualquier dispositivo).
 - **Responde con la información real del sitio**: el servidor indexa `data/data.json`
-  (37 países) y le pasa al modelo los fragmentos relevantes de tu pregunta (RAG).
+  (21 países) y le pasa al modelo los fragmentos relevantes de tu pregunta (RAG).
 
 #### Para activarlo
 

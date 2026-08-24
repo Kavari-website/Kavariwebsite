@@ -33,7 +33,7 @@
       statusEl.textContent = '';
       statusEl.classList.remove('is-error');
       modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      if (window.KavariScrollLock) window.KavariScrollLock.lock();
       setTimeout(function () {
         var n = form.querySelector('[name=full_name]');
         if (n) n.focus();
@@ -52,7 +52,7 @@
   function close() {
     if (!modal) return;
     modal.classList.remove('open');
-    document.body.style.overflow = '';
+    if (window.KavariScrollLock) window.KavariScrollLock.unlock();
   }
 
   function esc(s) {

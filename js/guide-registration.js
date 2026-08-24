@@ -164,14 +164,14 @@
     modalOverlay.style.display = 'flex';
     setTimeout(() => modalOverlay.classList.add('active'), 10);
     loadTouristCountries();
-    document.body.style.overflow = 'hidden';
+    if (window.KavariScrollLock) window.KavariScrollLock.lock();
   }
 
   function closeModal() {
     if (!modalOverlay) return;
     modalOverlay.classList.remove('active');
     setTimeout(() => { modalOverlay.style.display = 'none'; }, 300);
-    document.body.style.overflow = '';
+    if (window.KavariScrollLock) window.KavariScrollLock.unlock();
   }
 
   async function uploadFile(userId, file, bucket, folder, isPrivate) {

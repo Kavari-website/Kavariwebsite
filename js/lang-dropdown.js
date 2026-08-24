@@ -10,7 +10,8 @@
   var IDIOMAS = [
     { codigo: 'es', nombre: 'Español' },
     { codigo: 'en', nombre: 'English' },
-    { codigo: 'pt', nombre: 'Português' }
+    { codigo: 'pt', nombre: 'Português' },
+    { codigo: 'fr', nombre: 'Français' }
   ];
 
   var menuEl = null;

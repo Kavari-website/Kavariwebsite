@@ -1,12 +1,21 @@
 /* ══════════════════════════════════════════════════════════════════
-   KAVARI Chat API · v3 — Asistente con IA + memoria + RAG
+   KAVARI Chat API · v4 — Asistente universal con búsqueda web
    ----------------------------------------------------------------
    - Base de conocimiento: indexa todo data/data.json (37 países +
      top 10 + paquetes) en fragmentos ("chunks") con palabras clave.
    - Recuperación (RAG): por cada pregunta puntúa los fragmentos por
      coincidencia de términos y frases; usa el país activo como refuerzo.
-   - Respuesta: Gemini (gemini-2.5-flash) con instrucciones de sistema,
-     historial de conversación (memoria) y el contexto recuperado.
+   - ROUTER INTELIGENTE: decide por cada mensaje si basta el contexto
+     local o conviene BUSCAR EN LA WEB (Google Search Grounding nativo
+     de Gemini, sin dependencias extra):
+       · Preguntas sobre la plataforma KAVARI → conocimiento oficial.
+       · Preguntas de destino con cobertura local → contexto RAG.
+       · Datos frescos/externos (visas, eventos, clima, precios
+         actuales, noticias...) → Gemini con herramienta google_search.
+       · Cualquier otra pregunta → se responde con lógica y se conecta
+         de vuelta al turismo y a KAVARI.
+   - Respuesta: Gemini con instrucciones de sistema, historial de
+     conversación (memoria), contexto recuperado y fuentes web citadas.
    - Fallback: si no hay clave Gemini o la API falla, responde con un
      motor local que sintetiza la respuesta desde los fragmentos.
    - La clave NUNCA vive en la carpeta pública: se lee de
@@ -308,7 +317,8 @@ function findCountryCodeByName(name) {
   return null;
 }
 
-function retrieve(query, activeCode, topK = 6) {
+// Devuelve pares {ch, score} para que el router pueda medir la cobertura.
+function retrieveScored(query, activeCode, topK = 6) {
   const qTokens = tokens(query);
   if (!qTokens.size) return [];
   const qArr = [...qTokens];
@@ -327,7 +337,11 @@ function retrieve(query, activeCode, topK = 6) {
     return { ch, score };
   }).filter(x => x.score > 0).sort((a, b) => b.score - a.score);
 
-  return scored.slice(0, topK).map(x => x.ch);
+  return scored.slice(0, topK);
+}
+
+function retrieve(query, activeCode, topK = 6) {
+  return retrieveScored(query, activeCode, topK).map(x => x.ch);
 }
 
 function buildContextText(results) {
@@ -362,13 +376,13 @@ function geminiRequest(body) {
       });
     });
     req.on('error', reject);
-    req.setTimeout(25000, () => { req.destroy(new Error('Gemini timeout')); });
+    req.setTimeout(32000, () => { req.destroy(new Error('Gemini timeout')); });
     req.write(payload);
     req.end();
   });
 }
 
-async function askGemini({ system, history, userMessage, contextText }) {
+async function askGemini({ system, history, userMessage, contextText, useSearch }) {
   const contents = [];
   for (const turn of history) {
     contents.push({ role: turn.role === 'model' ? 'model' : 'user', parts: [{ text: turn.text }] });
@@ -378,41 +392,110 @@ async function askGemini({ system, history, userMessage, contextText }) {
     parts: [{ text: contextText ? `${contextText}\n\nPregunta del usuario: ${userMessage}` : userMessage }]
   });
 
-  const resp = await geminiRequest({
+  const body = {
     system_instruction: { parts: [{ text: system }] },
     contents,
-    generationConfig: { temperature: 0.6, maxOutputTokens: 900, topP: 0.95 }
-  });
+    generationConfig: { temperature: 0.6, maxOutputTokens: 1000, topP: 0.95 }
+  };
+  // Búsqueda web nativa (Google Search Grounding): el modelo puede
+  // consultar sitios externos en plena generación, sin API extra.
+  if (useSearch) body.tools = [{ google_search: {} }];
+
+  const resp = await geminiRequest(body);
 
   const text = (resp?.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('').trim();
   if (!text) throw new Error('Gemini devolvió una respuesta vacía');
-  return text;
+
+  // Fuentes web que usó la búsqueda (para mostrarlas en el chat).
+  const meta = resp?.candidates?.[0]?.groundingMetadata;
+  const seen = new Set();
+  const sources = [];
+  for (const c of (meta?.groundingChunks || [])) {
+    const w = c?.web;
+    if (!w?.uri || seen.has(w.uri)) continue;
+    seen.add(w.uri);
+    let host = '';
+    try { host = new URL(w.uri).hostname.replace(/^www\./, ''); } catch (_) { /* uri rara */ }
+    sources.push({
+      uri: w.uri,
+      host,
+      title: clean(w.title || host || w.uri).slice(0, 90)
+    });
+    if (sources.length >= 4) break;
+  }
+
+  return { text, sources };
 }
 
 /* ───────────── prompt de sistema ───────────── */
-function buildSystemPrompt(ctx, userInfo, hasContext) {
-  const lang = ctx.lang === 'en' ? 'English' : 'Spanish';
+function buildSystemPrompt(ctx, userInfo, hasContext, webSearchOn) {
+  const langName = { es: 'Spanish', en: 'English', pt: 'Portuguese' }[ctx.lang] || 'Spanish';
   const name = userInfo?.name ? `The user's name is ${userInfo.name}. Address them by name naturally.` : '';
   const plan = userInfo?.plan ? `Their KAVARI plan is "${userInfo.plan}".` : '';
   const favs = userInfo?.favorites?.length ? `Their favorite countries in KAVARI are: ${userInfo.favorites.join(', ')}.` : '';
   const rules = [
-    'For ANY question about KAVARI itself (what it is, how it works, pages of the site, features, membership plans, prices, account, contact, social media), answer using the "CONOCIMIENTO OFICIAL DE LA PLATAFORMA KAVARI" section. That info is official and complete.',
+    // 1) Plataforma: conocimiento oficial, cerrado.
+    'PRIORITY 1 — Questions about the KAVARI platform (what it is, how it works, site pages, features, membership plans, prices, account, contact, social media): answer ONLY with the "CONOCIMIENTO OFICIAL DE LA PLATAFORMA KAVARI" section below. That info is official and complete; never invent features, prices or contacts beyond it.',
+    // 2) Destinos: contexto RAG primero.
     hasContext
-      ? 'For questions about a destination or country, use the "CONTEXTO KAVARI" included in the last user message. Never invent prices, places, dates or data that are not in that context.'
-      : 'If a destination question has no country context, you may use general well-known tourism knowledge, but NEVER invent specific prices, exact dates or contact details.',
-    'If something is neither in the platform knowledge nor in the context, say honestly what you do not have and offer 2 related topics you CAN help with.'
-  ];
+      ? 'PRIORITY 2 — Destination/country questions: base your answer on the "CONTEXTO KAVARI" attached to the message. You MAY enrich it with your general knowledge (or with what you find via web search), but never contradict or replace the context data.'
+      : 'PRIORITY 2 — Destination questions with no attached context: use reliable general tourism knowledge.',
+    // 3) Búsqueda web disponible.
+    webSearchOn
+      ? 'PRIORITY 3 — You HAVE the Google Search tool enabled for this turn. Use it whenever the answer benefits from fresh, specific or verifiable info: events, news, weather, entry requirements/visas, current prices, schedules, safety notices, things to do right now. Synthesize what you find in your own words and naturally mention the main source (e.g. "según el sitio oficial de...").'
+      : '',
+    // 4) Cualquier otra pregunta: lógica + conexión con turismo/KAVARI.
+    'PRIORITY 4 — Any other question at all (general culture, history, geography, math, recommendations, comparisons, whatever): never refuse it as "out of domain". Answer briefly, accurately and logically, then CONNECT it back to travel/tourism when it fits naturally and suggest how KAVARI can help (a destination page, local guides, packages, membership plans). Example: if asked about a painter, mention the museum city where their works can be visited.',
+    // Honestidad.
+    'HONESTY: never invent specific prices, exact dates, availability, phone numbers or addresses. If you are not sure about something, say so briefly and offer alternatives you CAN help with.'
+  ].filter(Boolean);
   return [
-    'You are Kari, the friendly travel assistant of KAVARI, a platform with detailed tourism information (culture, food, places, adventure, practical info, guides, flights, stays, history, souvenirs).',
-    `Always respond in ${lang} (match the language the website is showing).`,
+    'You are Kari, the friendly travel assistant of KAVARI, a platform with detailed tourism guides (culture, food, places, adventure, practical info, certified local guides, flights, stays, packages).',
+    'Your mission: answer ANY question users ask — using logic and, when useful, information searched on external websites — but ALWAYS keeping the focus on tourism, travel planning and KAVARI.',
+    `Always respond in ${langName} (match the language the website is showing).`,
     ...rules,
-    'Be concise: 3-6 short lines, warm and professional. Use simple formatting: **bold** for names/places and "-" for lists. No markdown headers.',
+    'Style: concise 3-6 short lines, warm and professional. Simple formatting: **bold** for names/places and "-" lists. No markdown headers.',
     '',
     getPlatformKnowledge(),
     '',
     name, plan, favs,
     'End with one short follow-up question or suggestion related to their trip.'
   ].filter(Boolean).join('\n');
+}
+
+/* ───────────── router inteligente ───────────── */
+// ¿La pregunta es sobre la plataforma KAVARI? → conocimiento oficial,
+// no hace falta buscar en la web.
+function isKavariPlatformQuestion(q) {
+  const n = normalize(q);
+  if (/\b(kavari|kavi)\b/.test(n)) return true;
+  return /(membresia|suscripcion|plan viajero|plan premium|plan op|que planes tiene|cuales planes|cuanto cuesta el (premium|op)|como funciona (el sitio|la pagina|kavari)|paginas? del sitio|secciones del sitio|crear cuenta|iniciar sesion|borrar cuenta|cerrar sesion|favoritos|modo oscuro|cambiar idioma|newsletter|tutorial interactivo)/.test(n);
+}
+
+// Saludos y cortesías cortas: nunca disparan búsqueda web.
+function isSmallTalk(q) {
+  const n = normalize(q);
+  return n.split(' ').length <= 3 &&
+    /^(hola|buenas|hey|hi|hello|gracias|ok|okey|vale|adios|chao|saludos|que tal|como estas|todo bien|buenos dias|buenas tardes|buenas noches|jaja|ja)\b/.test(n);
+}
+
+// Señales de que conviene información fresca o externa a la ficha.
+const WEB_HINTS_RE = new RegExp([
+  'hoy', 'esta semana', 'este fin de semana', 'este mes', 'ahora', 'actualmente', '\\bactual\\b',
+  'ultima[s]? hora', 'ultim[oa]s? ', 'reciente[s]?', 'noticia[s]?', 'evento[s]?', 'festival(es)?',
+  'concierto[s]?', 'agenda', 'calendario', 'pronostic', 'temperatura hoy', 'clima hoy',
+  'dolar', 'tipo de cambio', 'requisito[s]?', 'visa', 'visado', 'pasaporte', 'embajada',
+  'frontera', 'abierto', 'cerrado', 'horario', 'seguridad', 'peligroso?', 'prohibido',
+  'alerta', 'recomendad[oa]s? ahora', '20(2[5-9]|3[0-9])'
+].join('|'));
+
+function needsWebSearch(message, bestScore) {
+  const q = String(message || '');
+  if (isSmallTalk(q)) return false;
+  if (isKavariPlatformQuestion(q)) return false;
+  if (WEB_HINTS_RE.test(normalize(q))) return true;
+  // Poca cobertura en la base local → deja que la IA busque en la web.
+  return bestScore < 2 && normalize(q).split(' ').length >= 4;
 }
 
 /* ---------- funciones de ayuda para detección de intenciones ---------- */
@@ -481,11 +564,17 @@ app.post('/api/chat', async (req, res) => {
       guias: context?.guias || [],
       aerolineas: context?.aerolineas || [],
       hospedajes: context?.hospedajes || [],
-      lang: context?.lang === 'en' ? 'en' : 'es'
+      lang: ['es', 'en', 'pt'].includes(context?.lang) ? context.lang : 'es'
     };
 
-    const activeCode = ctx.country?.code || findCountryCodeByName(ctx.country?.nombre);
-    const results = retrieve(String(message), activeCode, 6);
+    // País activo: el de la ficha abierta o el que se mencione en la pregunta.
+    const activeCode = ctx.country?.code
+      || findCountryCodeByName(ctx.country?.nombre)
+      || findCountryCodeByName(String(message));
+
+    const scored = retrieveScored(String(message), activeCode, 6);
+    const results = scored.map(x => x.ch);
+    const bestScore = scored.length ? scored[0].score : 0;
 
     const userInfo = {
       name: user?.name ? String(user.name).slice(0, 60) : null,
@@ -501,19 +590,40 @@ app.post('/api/chat', async (req, res) => {
       }))
       .filter(h => h.text.trim());
 
+    // ROUTER: ¿basta el conocimiento local o conviene buscar en la web?
+    const wantsSearch = needsWebSearch(String(message), bestScore);
+
     let reply = null;
-    // Flujo normal: Gemini primero (con conocimiento oficial de KAVARI en el
-    // prompt de sistema), luego fallback a base de conocimientos local.
+    let sources = [];
     if (GEMINI_API_KEY) {
       try {
-        reply = await askGemini({
-          system: buildSystemPrompt(ctx, userInfo, results.length > 0),
+        const out = await askGemini({
+          system: buildSystemPrompt(ctx, userInfo, results.length > 0, wantsSearch),
           history: historyArr,
           userMessage: String(message).slice(0, 2000),
-          contextText: buildContextText(results)
+          contextText: buildContextText(results),
+          useSearch: wantsSearch
         });
+        reply = out.text;
+        sources = out.sources || [];
       } catch (err) {
-        console.error('⚠️ Gemini error, usando fallback local:', err.message);
+        console.error(`⚠️ Gemini error${wantsSearch ? ' (con búsqueda web)' : ''}:`, err.message);
+        if (wantsSearch) {
+          // Reintento sin herramienta: algunos modelos pueden rechazarla.
+          try {
+            const out2 = await askGemini({
+              system: buildSystemPrompt(ctx, userInfo, results.length > 0, false),
+              history: historyArr,
+              userMessage: String(message).slice(0, 2000),
+              contextText: buildContextText(results),
+              useSearch: false
+            });
+            reply = out2.text;
+            sources = out2.sources || [];
+          } catch (err2) {
+            console.error('⚠️ Gemini reintento sin búsqueda falló:', err2.message);
+          }
+        }
       }
     }
     if (!reply) {
@@ -522,7 +632,7 @@ app.post('/api/chat', async (req, res) => {
         : fallbackAnswer(String(message), ctx, results);
     }
 
-    res.json({ reply, intent: 'ai' });
+    res.json({ reply, intent: 'ai', searched: wantsSearch, sources });
   } catch (err) {
     console.error('Chat error:', err);
     res.status(500).json({ reply: 'Lo siento, ocurrió un error al procesar tu mensaje.' });

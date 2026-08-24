@@ -2045,3 +2045,22 @@ a,button,.card,.place-card,.paquete-card {
 .page-index .btn-sabemas::after,.page-index .btn-paquete-reservar::after,.page-index .btn-modal-go::after,.page-index .btn-modal-destino::after,.page-index .search-content button::after,.page-index .modal-content .btn-submit::after {
   display:none!important;
 }
+
+/* ===== Scroll interno seguro para modales altos (KAVARI) =====
+   Permite hacer scroll dentro de cualquier ventana aunque su contenido
+   sea más alto que la pantalla; cuando es más baja sigue centrada. */
+.modal-overlay,
+.modal-overlay-souvenirs,
+.top10-modal-overlay,
+.paquete-modal-overlay {
+  align-items:flex-start;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
+.modal-overlay > .modal-content,
+.modal-overlay-souvenirs > .modal-content-souvenirs,
+.top10-modal-overlay > .top10-modal,
+.paquete-modal-overlay > .paquete-modal {
+  margin:auto;
+}

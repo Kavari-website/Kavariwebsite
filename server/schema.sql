@@ -227,5 +227,33 @@ CREATE POLICY "Users can delete own chat messages" ON chat_messages
   FOR DELETE USING (auth.uid() = user_id);
 
 -- ============================================
+-- REGISTROS DE VIAJEROS (destino.html → modal "viaja con un guía")
+-- Guarda cada registro de viajero interesado en un destino.
+-- user_id es opcional: se rellena si el visitante tiene sesión iniciada.
+-- ============================================
+CREATE TABLE IF NOT EXISTS traveler_registrations (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+  full_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  country_code TEXT NOT NULL,
+  plan TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_traveler_registrations_country ON traveler_registrations(country_code);
+CREATE INDEX IF NOT EXISTS idx_traveler_registrations_user ON traveler_registrations(user_id);
+
+ALTER TABLE traveler_registrations ENABLE ROW LEVEL SECURITY;
+
+-- Cualquiera puede registrarse como viajero (público)
+CREATE POLICY "Anyone can insert traveler registrations" ON traveler_registrations
+  FOR INSERT WITH CHECK (true);
+
+-- Los usuarios pueden ver sus propios registros (si están logueados)
+CREATE POLICY "Users can view own traveler registrations" ON traveler_registrations
+  FOR SELECT USING (auth.uid() = user_id);
+
+-- ============================================
 -- FIN DEL SCHEMA
 -- ============================================

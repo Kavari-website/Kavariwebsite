@@ -17,14 +17,6 @@ const top10ModalKeyMap = {
     'galapagos': 'Galapagos'
 };
 
-const paqueteModalKeyMap = {
-    'francia': 'Francia',
-    'china': 'China',
-    'india': 'India',
-    'italia': 'Italia',
-    'panama': 'Panama',
-    'el-salvador': 'ElSalvador'
-};
  // Navbar scroll effect
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
@@ -36,7 +28,7 @@ function getTop10TranslationKey(id) {
 }
 
 function getPaqueteTranslationKey(id) {
-    return paqueteModalKeyMap[id] || id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+    return id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('');
 }
 
 function getById(id) {
@@ -73,38 +65,88 @@ const top10CardKeys = [
     'cartagena', 'iguazu', 'machu-picchu', 'tikal', 'chichen-itza', 'galapagos'
 ];
 
+// Paquetes: uno por cada país disponible en KAVARI (21 países)
 const paqueteCardKeys = [
-    'francia', 'china', 'india', 'italia', 'panama', 'el-salvador'
+    'mexico', 'peru', 'panama', 'republica-dominicana', 'brasil',
+    'argentina', 'chile', 'costa-rica', 'colombia', 'ecuador',
+    'cuba', 'guatemala', 'bolivia', 'venezuela', 'uruguay',
+    'paraguay', 'honduras', 'nicaragua', 'el-salvador', 'belice',
+    'guyana'
 ];
 
 // Badge de cada paquete (se traduce con data-i18n)
 const paqueteBadgeKeys = {
-    'francia': 'tagPopular',
-    'china': 'tagAventura',
-    'india': 'tagCultural',
-    'italia': 'tagClasico',
+    'mexico': 'tagPopular',
+    'peru': 'tagCultural',
     'panama': 'tagLocal',
-    'el-salvador': 'tagOferta'
+    'republica-dominicana': 'tagOferta',
+    'brasil': 'tagPopular',
+    'argentina': 'tagClasico',
+    'chile': 'tagAventura',
+    'costa-rica': 'tagAventura',
+    'colombia': 'tagCultural',
+    'ecuador': 'tagAventura',
+    'cuba': 'tagLocal',
+    'guatemala': 'tagCultural',
+    'bolivia': 'tagAventura',
+    'venezuela': 'tagAventura',
+    'uruguay': 'tagClasico',
+    'paraguay': 'tagCultural',
+    'honduras': 'tagOferta',
+    'nicaragua': 'tagAventura',
+    'el-salvador': 'tagLocal',
+    'belice': 'tagOferta',
+    'guyana': 'tagAventura'
 };
 
 // Región de cada paquete (se traduce con data-i18n)
 const paqueteRegionKeys = {
-    'francia': 'regionEuropa',
-    'china': 'regionAsia',
-    'india': 'regionAsia',
-    'italia': 'regionEuropa',
+    'mexico': 'regionNorteamerica',
+    'peru': 'regionSudamerica',
     'panama': 'regionCentroamerica',
-    'el-salvador': 'regionCentroamerica'
+    'republica-dominicana': 'regionCaribe',
+    'brasil': 'regionSudamerica',
+    'argentina': 'regionSudamerica',
+    'chile': 'regionSudamerica',
+    'costa-rica': 'regionCentroamerica',
+    'colombia': 'regionSudamerica',
+    'ecuador': 'regionSudamerica',
+    'cuba': 'regionCaribe',
+    'guatemala': 'regionCentroamerica',
+    'bolivia': 'regionSudamerica',
+    'venezuela': 'regionSudamerica',
+    'uruguay': 'regionSudamerica',
+    'paraguay': 'regionSudamerica',
+    'honduras': 'regionCentroamerica',
+    'nicaragua': 'regionCentroamerica',
+    'el-salvador': 'regionCentroamerica',
+    'belice': 'regionCentroamerica',
+    'guyana': 'regionSudamerica'
 };
 
 // Features de cada paquete (se traducen con data-i18n)
 const paqueteFeaturesKeys = {
-    'francia': ['featureVuelo', 'featureHotel4', 'featureDias8', 'featureGuia'],
-    'china': ['featureVuelo', 'featureHotel4', 'featureDias10', 'featureTransporte'],
-    'india': ['featureVuelo', 'featureHotel3', 'featureDias9', 'featureGuia'],
-    'italia': ['featureVuelo', 'featureHotel4', 'featureDias9', 'featureTours'],
+    'mexico': ['featureVuelo', 'featureHotel4', 'featureDias5', 'featureTours'],
+    'peru': ['featureVuelo', 'featureHotel3', 'featureDias4', 'featureGuia'],
     'panama': ['featureTransporte', 'featureHotel4', 'featureDias5', 'featureGuia'],
-    'el-salvador': ['featureTraslados', 'featureHotel3', 'featureDias4', 'featureActividades']
+    'republica-dominicana': ['featureVuelo', 'featureHotel4', 'featureDias5', 'featureActividades'],
+    'brasil': ['featureVuelo', 'featureHotel3', 'featureDias6', 'featureTours'],
+    'argentina': ['featureVuelo', 'featureHotel4', 'featureDias6', 'featureTours'],
+    'chile': ['featureVuelo', 'featureHotel3', 'featureDias6', 'featureGuia'],
+    'costa-rica': ['featureTransporte', 'featureHotel3', 'featureDias6', 'featureActividades'],
+    'colombia': ['featureVuelo', 'featureHotel3', 'featureDias6', 'featureTours'],
+    'ecuador': ['featureTransporte', 'featureHotel4', 'featureDias5', 'featureGuia'],
+    'cuba': ['featureHotel4', 'featureDias6', 'featureTraslados', 'featureTours'],
+    'guatemala': ['featureTransporte', 'featureHotel3', 'featureDias6', 'featureGuia'],
+    'bolivia': ['featureHotel3', 'featureDias5', 'featureTransporte', 'featureGuia'],
+    'venezuela': ['featureVuelo', 'featureHotel3', 'featureDias6', 'featureGuia'],
+    'uruguay': ['featureHotel3', 'featureDias6', 'featureTraslados', 'featureTours'],
+    'paraguay': ['featureHotel3', 'featureDias5', 'featureTransporte', 'featureTours'],
+    'honduras': ['featureVuelo', 'featureHotel3', 'featureDias6', 'featureGuia'],
+    'nicaragua': ['featureHotel3', 'featureDias6', 'featureTransporte', 'featureActividades'],
+    'el-salvador': ['featureHotel3', 'featureDias5', 'featureTraslados', 'featureActividades'],
+    'belice': ['featureTransporte', 'featureHotel3', 'featureDias5', 'featureGuia'],
+    'guyana': ['featureVuelo', 'featureHotel3', 'featureDias5', 'featureGuia']
 };
 
 function renderHomeCards() {
@@ -228,6 +270,7 @@ async function abrirModalTop10(id) {
         goBtn.onclick = function(e) {
             if (e && e.preventDefault) e.preventDefault();
             localStorage.setItem('paisSeleccionado', data.pais);
+            sessionStorage.setItem('kavari-from-index', '1');
             if (window.kavariNavigate) {
                 window.kavariNavigate('destino.html');
             } else {
@@ -237,12 +280,12 @@ async function abrirModalTop10(id) {
     }
 
     overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    if (window.KavariScrollLock) window.KavariScrollLock.lock();
 }
 
 function cerrarModalTop10() {
     document.getElementById('top10ModalOverlay').classList.remove('active');
-    document.body.style.overflow = '';
+    if (window.KavariScrollLock) window.KavariScrollLock.unlock();
 }
 
 // Cerrar el modal al hacer clic fuera
@@ -303,6 +346,7 @@ async function abrirModalPaquete(id) {
         destBtn.onclick = function(e) {
             e.preventDefault();
             localStorage.setItem('paisSeleccionado', data.pais);
+            sessionStorage.setItem('kavari-from-index', '1');
             if (window.kavariNavigate) {
                 window.kavariNavigate('destino.html');
             } else {
@@ -312,12 +356,12 @@ async function abrirModalPaquete(id) {
     }
 
     overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    if (window.KavariScrollLock) window.KavariScrollLock.lock();
 }
 
 function cerrarModalPaquete() {
     document.getElementById('paqueteModalOverlay').classList.remove('active');
-    document.body.style.overflow = '';
+    if (window.KavariScrollLock) window.KavariScrollLock.unlock();
 }
 
 document.getElementById('paqueteModalOverlay').addEventListener('click', function(e) {

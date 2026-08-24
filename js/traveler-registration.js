@@ -4,8 +4,8 @@
   const esc=s=>String(s||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   const initials=name=>String(name||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]?.toUpperCase()||'').join('')||'?';
 
-  function open(){document.getElementById('travelerModal')?.classList.add('open');document.body.style.overflow='hidden'}
-  function close(){document.getElementById('travelerModal')?.classList.remove('open');document.body.style.overflow=''}
+  function open(){document.getElementById('travelerModal')?.classList.add('open');if(window.KavariScrollLock)KavariScrollLock.lock()}
+  function close(){document.getElementById('travelerModal')?.classList.remove('open');if(window.KavariScrollLock)KavariScrollLock.unlock()}
 
   function render(){
     const root=document.getElementById('travelersByCountry');
@@ -150,6 +150,24 @@
 
         list.push({name,email,country:country_,plan});
         localStorage.setItem(key,JSON.stringify(list));
+
+        // Guardar también en Supabase (persistente, no depende del navegador).
+        // localStorage se mantiene como respaldo para mostrar el registro al instante.
+        try{
+          const client=window.KavariDB&&window.KavariDB.getSupabaseClient?window.KavariDB.getSupabaseClient():null;
+          if(client){
+            Promise.resolve(window.KavariDB.getCurrentUser?window.KavariDB.getCurrentUser():null)
+              .then(u=>client.from('traveler_registrations').insert({
+                user_id:u?u.id:null,
+                full_name:name,
+                email:email,
+                country_code:country_,
+                plan:plan||null
+              }))
+              .then(res=>{if(res&&res.error)console.warn('[KAVARI] No se pudo guardar el registro del viajero en la nube:',res.error.message)})
+              .catch(err=>console.warn('[KAVARI] Error guardando registro del viajero:',err));
+          }
+        }catch(err){console.warn('[KAVARI] Error guardando registro del viajero:',err)}
 
         setTimeout(()=>{
           status.textContent='Registro guardado. Ya apareces en el destino elegido.';

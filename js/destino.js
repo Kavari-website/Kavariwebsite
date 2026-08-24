@@ -314,7 +314,13 @@ function renderHospedajes(d) {
         grid.innerHTML = `<p style="padding:40px;text-align:center;opacity:.6">${_t('hospedajesNoDisponible')}</p>`;
         return;
     }
-    grid.innerHTML = hospedajesData.map(h => {
+    // Nota aclaratoria: mostramos zonas/áreas amplias, no propiedades exactas.
+    const zonaNota = `
+        <div class="kv-zona-nota" style="grid-column:1/-1;width:100%;margin:2px 0 10px;padding:12px 16px;border-radius:14px;background:rgba(46,110,220,.09);border:1px solid rgba(46,110,220,.28);font-size:.84rem;line-height:1.55;display:flex;gap:10px;align-items:flex-start;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>${_t('hospedajesZonaNota')}</span>
+        </div>`;
+    grid.innerHTML = zonaNota + hospedajesData.map(h => {
         const stars = Math.round(h.rating);
         const starsHtml = Array.from({length: 5}, (_, i) => `<svg width="12" height="12" viewBox="0 0 24 24" fill="${i < stars ? '#f59e0b' : 'none'}" stroke="#f59e0b" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`).join('');
         return `
@@ -326,7 +332,7 @@ function renderHospedajes(d) {
                 <div class="hospedaje-body">
                     <div class="hospedaje-location">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        ${_t(h.ubicacion) || h.ubicacion}
+                        ${_t('zonaLabel')}: ${_t(h.ubicacion) || h.ubicacion}
                     </div>
                     <h4 class="hospedaje-nombre">${_t(h.nombre)}</h4>
                     <p class="hospedaje-desc">${_t(h.descripcion) || h.descripcion}</p>
@@ -459,13 +465,13 @@ function openSouvenirModal(shopId) {
     document.getElementById('modalProducts').innerHTML = productsHtml;
     document.getElementById('modalMapLink').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(tienda.coords)}`;
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    if (window.KavariScrollLock) window.KavariScrollLock.lock();
     const closeBtn = document.getElementById('souvenirModalClose');
     if (closeBtn) closeBtn.focus();
 }
 function closeSouvenirModal() {
     document.getElementById('souvenirModal').classList.remove('active');
-    document.body.style.overflow = '';
+    if (window.KavariScrollLock) window.KavariScrollLock.unlock();
 }
 (function initSouvenirModal() {
     const modal = document.getElementById('souvenirModal');
@@ -1059,8 +1065,12 @@ function openModal(id) {
         ${item.consejo ? `<p style="margin-top:16px;font-style:italic;color:var(--text-secondary);border-left:3px solid var(--primary);padding-left:12px">${_t('consejoLabel')} ${_t(item.consejo) || item.consejo}</p>` : ''}
     `;
     document.getElementById('modalOverlay').classList.add('active');
+    if (window.KavariScrollLock) window.KavariScrollLock.lock();
 }
-function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); }
+function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    if (window.KavariScrollLock) window.KavariScrollLock.unlock();
+}
 document.getElementById('modalOverlay')?.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
 // ============================================================
@@ -1109,7 +1119,12 @@ function toggleMobileDrawer(forceClose) {
             hamburger.classList.toggle('active', abrir);
             hamburger.setAttribute('aria-expanded', abrir ? 'true' : 'false');
         }
-        document.body.style.overflow = abrir ? 'hidden' : '';
+        if (window.KavariScrollLock) {
+            if (abrir) window.KavariScrollLock.lock();
+            else window.KavariScrollLock.unlock();
+        } else {
+            document.body.style.overflow = abrir ? 'hidden' : '';
+        }
     }
 
     if (forceClose === true) {
@@ -1149,5 +1164,72 @@ window.addEventListener('kavari:langchange', () => {
         cargarPais(currentCountryCode);
     }
 });
+
+// ============================================================
+// 13. BOTÓN FLOTANTE "VOLVER AL INICIO"
+// Aparece solo si el usuario llegó a este país desde el index
+// (paquete o Top 10). Lo devuelve al inicio con una sola pulsación.
+// ============================================================
+(function initBackToHome() {
+    const FLAG = 'kavari-from-index';
+
+    function lang() { return localStorage.getItem('kavari-idioma') || 'es'; }
+    function label() {
+        return lang() === 'en' ? 'Back to home'
+            : lang() === 'pt' ? 'Voltar ao início'
+            : 'Volver al inicio';
+    }
+
+    const css = ''
+        + '#kvBackToHome{position:fixed;left:24px;bottom:160px;z-index:9500;'
+        + 'display:inline-flex;align-items:center;gap:10px;border:none;cursor:pointer;'
+        + 'padding:13px 22px;border-radius:999px;font-family:Poppins,system-ui,sans-serif;'
+        + 'font-size:.9rem;font-weight:600;color:#fff;'
+        + 'background:linear-gradient(135deg,#0d1f3c 0%,#2e6edc 100%);'
+        + 'box-shadow:0 10px 28px rgba(13,31,60,.35);'
+        + 'opacity:0;transform:translateY(16px);pointer-events:none;'
+        + 'transition:opacity .35s ease,transform .35s ease,box-shadow .25s ease;}'
+        + '#kvBackToHome.show{opacity:1;transform:none;pointer-events:auto;}'
+        + '#kvBackToHome:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(46,110,220,.45);}'
+        + '#kvBackToHome svg{flex-shrink:0;}'
+        + '@media (max-width:519px){#kvBackToHome{left:12px;bottom:102px;padding:11px 18px;font-size:.82rem;}}';
+
+    document.addEventListener('DOMContentLoaded', function () {
+        try {
+            if (sessionStorage.getItem(FLAG) !== '1') return;
+            sessionStorage.removeItem(FLAG);
+
+            const style = document.createElement('style');
+            style.textContent = css;
+            document.head.appendChild(style);
+
+            const btn = document.createElement('button');
+            btn.id = 'kvBackToHome';
+            btn.type = 'button';
+            btn.setAttribute('aria-label', label());
+            btn.innerHTML =
+                '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'
+                + '<path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>'
+                + '<span>' + label() + '</span>';
+
+            btn.addEventListener('click', function () {
+                if (window.kavariNavigate) window.kavariNavigate('index.html');
+                else window.location.href = 'index.html';
+            });
+
+            // Si cambia el idioma, actualiza el texto del botón
+            window.addEventListener('kavari:langchange', function () {
+                const span = btn.querySelector('span');
+                if (span) span.textContent = label();
+                btn.setAttribute('aria-label', label());
+            });
+
+            document.body.appendChild(btn);
+            requestAnimationFrame(function () {
+                setTimeout(function () { btn.classList.add('show'); }, 350);
+            });
+        } catch (e) { /* sessionStorage no disponible: no mostramos el botón */ }
+    });
+})();
 
 console.log('✅ destino.js cargado correctamente (con soporte para selector custom y drawer móvil)');

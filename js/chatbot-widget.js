@@ -14,7 +14,9 @@
  *  - El endpoint del servidor se puede cambiar con localStorage
  *    'kavari-chat-api' (por defecto localhost:3007 en desarrollo, o la
  *    misma URL del sitio en producción).
- *  - Timeout ampliado a 35s (Gemini tarda más que el motor local).
+ *  - Timeout ampliado a 50s (con búsqueda web la IA tarda más).
+ *  - Si el servidor devuelve fuentes web (Google Search Grounding),
+ *    se muestran como enlaces bajo la respuesta.
  */
 (function () {
   let ctx = { country: null, guias: [], aerolineas: [], hospedajes: [] };
@@ -36,41 +38,8 @@
     return l === 'en' ? en : l === 'pt' ? pt : es;
   }
 
-  // Preguntas principales (siempre visibles)
-  const generalQuestionsMain = [
-    { qKey: 'chatQKavari' },
-    { qKey: 'chatQPaises' },
-    { qKey: 'chatQPlanes' }
-  ];
-  // Preguntas secundarias (colapsadas)
-  const generalQuestionsExtra = [
-    { qKey: 'chatQGuias' },
-    { qKey: 'chatQPaquetes' },
-    { qKey: 'chatQCuenta' },
-    { qKey: 'chatQContacto' }
-  ];
-
   function cname(d) {
     return (window.paisNombre && d?.code) ? (window.paisNombre(d.code, d.nombre) || d.nombre) : (d?.nombre || '');
-  }
-
-  function getDestinationQuestions(d) {
-    const n = cname(d);
-    const t = window.t || (k => k);
-    return [
-      { q: t('chatBtnDestinoEpoca').replace('{nombre}', n), text: t('chatQDestinoEpoca').replace('{nombre}', n) },
-      { q: t('chatBtnDestinoCosto'), text: t('chatQDestinoCosto').replace('{nombre}', n) },
-      { q: t('chatBtnDestinoPlatos'), text: t('chatQDestinoPlatos').replace('{nombre}', n) }
-    ];
-  }
-
-  function getDestinationQuestionsExtra(d) {
-    const n = cname(d);
-    const t = window.t || (k => k);
-    return [
-      { q: t('chatBtnDestinoDoc'), text: t('chatQDestinoDoc') },
-      { q: t('chatBtnDestinoImp'), text: t('chatQDestinoImp').replace('{nombre}', n) }
-    ];
   }
 
   /* ═══════════════════ memoria de conversación ═══════════════════ */
@@ -197,7 +166,6 @@
             </div>
           </div>
           <div id="kavari-mensajes" role="log" aria-live="polite" aria-relevant="additions"></div>
-          <div id="kavari-preguntas"></div>
           <div id="kavari-chat-input-row">
             <input type="text" id="kavari-chat-input" placeholder="Escribe tu pregunta..." autocomplete="off" maxlength="300">
             <button id="kavari-chat-send" type="button" aria-label="Enviar">
@@ -210,6 +178,14 @@
       </div>
     `;
     document.body.appendChild(root);
+    if (!document.getElementById('kavari-chat-extra-style')) {
+      const st = document.createElement('style');
+      st.id = 'kavari-chat-extra-style';
+      st.textContent =
+        '.kb-msg-sources{margin-top:8px;font-size:11px;line-height:1.5;opacity:.75;word-break:break-word}' +
+        '.kb-msg-sources a{color:inherit;text-decoration:underline}';
+      document.head.appendChild(st);
+    }
     bindEvents();
     refreshUI();
     showBadgeIfNeeded();
@@ -273,7 +249,6 @@
     hideBadge();
     document.getElementById('kavari-asistente').classList.add('activo');
     restoreMemory();
-    renderQuestions();
     setTimeout(() => {
       const input = document.getElementById('kavari-chat-input');
       if (input) input.focus({ preventScroll: true });
@@ -341,76 +316,6 @@
     addBotMessage(html, true);
   }
 
-  let preguntasExpandidas = false;
-
-  function renderQuestions() {
-    const box = document.getElementById('kavari-preguntas');
-    if (!box) return;
-    box.innerHTML = '';
-    preguntasExpandidas = false;
-
-    const t = window.t || (k => k);
-
-    if (ctx.country?.nombre) {
-      // Preguntas de destino
-      const main = getDestinationQuestions(ctx.country);
-      const extra = getDestinationQuestionsExtra(ctx.country);
-      renderQuestionButtons(box, main);
-      if (extra.length) renderToggleButton(box, extra, t);
-    } else {
-      // Preguntas generales
-      renderQuestionButtons(box, generalQuestionsMain.map(i => ({ q: t(i.qKey), text: t(i.qKey) })));
-      renderToggleButton(box, generalQuestionsExtra.map(i => ({ q: t(i.qKey), text: t(i.qKey) })), t);
-    }
-  }
-
-  function renderQuestionButtons(box, items) {
-    items.forEach(item => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'kb-pregunta-btn';
-      btn.textContent = item.q;
-      btn.disabled = thinking;
-      btn.addEventListener('click', () => handleQuestion(item.text || item.q));
-      box.appendChild(btn);
-    });
-  }
-
-  function renderToggleButton(box, extraItems, t) {
-    const toggleBtn = document.createElement('button');
-    toggleBtn.type = 'button';
-    toggleBtn.className = 'kb-pregunta-toggle';
-    toggleBtn.innerHTML = '<span class="kb-toggle-text">' + msg('Más preguntas', 'More questions', 'Mais perguntas') + '</span> <span class="kb-toggle-icon">›</span>';
-
-    const extraContainer = document.createElement('div');
-    extraContainer.className = 'kb-pregunta-extra hidden';
-
-    extraItems.forEach(item => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'kb-pregunta-btn';
-      btn.textContent = item.q;
-      btn.disabled = thinking;
-      btn.addEventListener('click', () => handleQuestion(item.text || item.q));
-      extraContainer.appendChild(btn);
-    });
-
-    toggleBtn.addEventListener('click', () => {
-      preguntasExpandidas = !preguntasExpandidas;
-      extraContainer.classList.toggle('hidden', !preguntasExpandidas);
-      toggleBtn.classList.toggle('active', preguntasExpandidas);
-      const icon = toggleBtn.querySelector('.kb-toggle-icon');
-      if (icon) icon.textContent = preguntasExpandidas ? '‹' : '›';
-      const text = toggleBtn.querySelector('.kb-toggle-text');
-      if (text) text.textContent = preguntasExpandidas
-        ? msg('Menos preguntas', 'Less questions', 'Menos perguntas')
-        : msg('Más preguntas', 'More questions', 'Mais perguntas');
-    });
-
-    box.appendChild(toggleBtn);
-    box.appendChild(extraContainer);
-  }
-
   function refreshUI() {
     const t = window.t || (k => k);
     const title = document.getElementById('kavari-chat-title');
@@ -425,7 +330,6 @@
     }
     if (input) input.placeholder = t('chatInputPlaceholder');
     if (clearBtn) clearBtn.title = msg('Limpiar conversación', 'Clear conversation', 'Limpar conversa');
-    if (opened) renderQuestions();
   }
 
   function clearConversation() {
@@ -523,7 +427,6 @@
     const sendBtn = document.getElementById('kavari-chat-send');
     if (input) input.disabled = state;
     if (sendBtn) sendBtn.disabled = state;
-    document.querySelectorAll('.kb-pregunta-btn').forEach(b => { b.disabled = state; });
   }
 
   /* ═══════════════════ envío y respuesta ═══════════════════ */
@@ -535,8 +438,10 @@
     showTyping();
 
     let aiReply = null;
+    let aiSources = [];
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 35000);
+    // 50s: con búsqueda web (Google Search Grounding) la IA puede tardar más.
+    const timeoutId = setTimeout(() => controller.abort(), 50000);
     try {
       const res = await fetch(CHAT_URL, {
         method: 'POST',
@@ -551,7 +456,10 @@
       });
       if (res.ok) {
         const data = await res.json();
-        if (data && data.reply) aiReply = data.reply;
+        if (data && data.reply) {
+          aiReply = data.reply;
+          aiSources = Array.isArray(data.sources) ? data.sources : [];
+        }
       }
     } catch (_) {
       // Servidor no disponible → motor local
@@ -583,6 +491,22 @@
     }
 
     addBotMessage(html);
+
+    // Fuentes web citadas por la búsqueda (si las hubo).
+    if (aiReply && aiSources.length) {
+      const bubbles = document.querySelectorAll('#kavari-mensajes .kb-msg-bot');
+      const lastMsg = bubbles[bubbles.length - 1];
+      if (lastMsg) {
+        const label = msg('Fuentes', 'Sources', 'Fontes');
+        const links = aiSources.map(s => {
+          const uri = escapeHtml(String(s.uri || ''));
+          const txt = escapeHtml(String(s.title || s.host || s.uri || '').slice(0, 70));
+          return `<a href="${uri}" target="_blank" rel="noopener noreferrer">${txt}</a>`;
+        }).join('');
+        lastMsg.insertAdjacentHTML('beforeend',
+          `<div class="kb-msg-sources">${label}: ${links}</div>`);
+      }
+    }
     // Guardar en memoria el texto plano (sin HTML) para el historial.
     const plainForMemory = aiReply ? aiReply : html.replace(/<[^>]+>/g, ' ');
     pushTurn('model', plainForMemory);
