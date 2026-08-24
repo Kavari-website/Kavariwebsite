@@ -147,7 +147,6 @@
             guias: 'Guías turísticos',
             tutorial: 'Tutorial',
             modoOscuro: 'Oscuro',
-            navInicio: 'Inicio',
             navDestinos: 'Destinos',
             tituloSobrenosotros: 'Sobre Nosotros — KAVARI',
             tituloIndex: 'KAVARI Travel — Descubre el Mundo',
@@ -210,7 +209,6 @@
             paisSudafrica_nombre: 'Sudáfrica',
 
             // ===== HERO (index) =====
-            heroTitulo: 'Descubre <br> el mundo con KAVARI',
             heroDescripcion: 'Vive experiencias inolvidables alrededor del mundo.',
             heroStatViajeros: 'Viajeros felices',
             heroStatDestinos: 'Destinos disponibles',
@@ -639,7 +637,7 @@
             tutorialIndexDesc_12: 'Ya conoces KAVARI: destinos, guías, paquetes, idioma, modo oscuro y asistente IA. Explora países, registra tu perfil de guía y planifica el viaje de tus sueños.',
 
             // ===== TUTORIAL PAÍSES (12 pasos) =====
-            tutorialPaisesTitulo_0: 'Explora 36 Destinos',
+            tutorialPaisesTitulo_0: 'Explora 21 Destinos',
             tutorialPaisesDesc_0: 'En KAVARI encontrarás 21 países del mundo con información completa sobre atracciones turísticas, cultura local, gastronomía, hospedajes y guías certificados. Conoce cada rincón del planeta.',
             tutorialPaisesTitulo_1: 'Tutorial disponible',
             tutorialPaisesDesc_1: 'Puedes relanzar este recorrido en cualquier momento haciendo clic aquí para recordar cómo usar todas las funciones de exploración de destinos.',
@@ -1048,7 +1046,6 @@
             // ===== CLAVES NUEVAS (REGISTRO DE GUÍA) =====
             navRegistrarmeGuia: 'Ser Guía',
             guiaRegistrateCTA: 'Regístrate como guía',
-            seleccionaPais: 'Selecciona un país',
             modalGuiasTerminos: 'Acepto los Términos y Condiciones',
             modalGuiasTerminosTexto: 'Al registrarte aceptas los términos del programa de guías certificados de KAVARI y la política de privacidad.',
             guideRequeridos: 'Todos los campos son obligatorios',
@@ -8010,7 +8007,6 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             guias: 'Tour Guides',
             tutorial: 'Tutorial',
             modoOscuro: 'Dark',
-            navInicio: 'Home',
             navDestinos: 'Destinations',
             tituloSobrenosotros: 'About Us — KAVARI',
             tituloIndex: 'KAVARI Travel — Discover the World',
@@ -8073,7 +8069,6 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             paisSudafrica_nombre: 'South Africa',
 
             // ===== HERO =====
-            heroTitulo: 'Discover <br> the world with KAVARI',
             heroDescripcion: 'Live unforgettable experiences around the world.',
             heroStatViajeros: 'Happy travelers',
             heroStatDestinos: 'Available destinations',
@@ -8415,7 +8410,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             faq9q: 'What payment methods does KAVARI accept?',
             faq9a: 'For guide membership payments we accept: Yappy (Panama mobile banking), Bank transfer (Banco General, BAC, Banistmo), and Credit/Debit card (Visa, Mastercard, American Express). All payments are protected with SSL encryption.',
             faq10q: 'What languages is KAVARI available in?',
-            faq10a: 'KAVARI is available in Spanish, English, and Portuguese. You can change the language at any time using the language selector (🌐 icon) available in the navigation bar of all pages. Your preference is automatically saved for your next visit.',
+            faq10a: 'KAVARI is available in Spanish, English, Portuguese, and French. You can change the language at any time using the language selector (🌐 icon) available in the navigation bar of all pages. Your preference is automatically saved for your next visit.',
             faq11q: 'How do I activate dark mode?',
             faq11a: 'Click the 🌙 icon on any KAVARI navigation bar to activate dark mode. You can also click the ☀️ icon to return to light mode. Your preference is automatically saved and applied across all pages of the platform.',
             faq12q: 'How does the platform tutorial work?',
@@ -8498,7 +8493,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             tutorialIndexDesc_12: 'You now know KAVARI: destinations, guides, packages, language, dark mode, and AI assistant. Explore countries, register your guide profile, and plan your dream trip.',
 
             // ===== TUTORIAL PAÍSES =====
-            tutorialPaisesTitulo_0: 'Explore 36 Destinations',
+            tutorialPaisesTitulo_0: 'Explore 21 Destinations',
             tutorialPaisesDesc_0: 'On KAVARI you will find 21 countries around the world with complete information about tourist attractions, local culture, gastronomy, accommodations, and certified guides. Discover every corner of the planet.',
             tutorialPaisesTitulo_1: 'Tutorial available',
             tutorialPaisesDesc_1: 'You can restart this tour at any time by clicking here to remember how to use all the destination exploration features.',
@@ -8907,7 +8902,6 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             // ===== NEW KEYS (GUIDE REGISTRATION) =====
             navRegistrarmeGuia: 'Become a Guide',
             guiaRegistrateCTA: 'Register as a guide',
-            seleccionaPais: 'Select a country',
             modalGuiasTerminos: 'I accept the Terms and Conditions',
             modalGuiasTerminosTexto: 'By registering you accept the terms of the KAVARI certified guide program and the privacy policy.',
             guideRequeridos: 'All fields are required',
