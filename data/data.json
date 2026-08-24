@@ -1,4 +1,4 @@
-{
+﻿{
   "top10": {
     "obelisco": {
       "img": "img/Obelisco.jpg",
@@ -14695,7 +14695,7 @@
         "nombre": "Asunción",
         "tag": "Urbano · Historia · Capital",
         "descripcion": "Capital con historia y vida cultural. Centro político y principal ciudad del país. Fundada en 1537, una de las capitales más antiguas de Sudamérica.",
-        "imagen": "img/paraguay/asuncion.jpg",
+        "imagen": "img/paraguay/Asunción.jpeg",
         "detalle": "Casco Histórico (Manzana de la Rivera, Panteón de los Héroes, Cabildo). Palacio de los López. Costanera (vistas al río Paraguay). Centro Cultural del Lago. Ña Eustaquia.",
         "precio_entrada": "Museos: 10,000-25,000 PYG",
         "horario": "8:00 AM - 6:00 PM",
@@ -14706,7 +14706,7 @@
         "nombre": "Encarnación",
         "tag": "Playa · Río · Turismo",
         "descripcion": "Ciudad ribereña muy visitada en verano. Famosa por su costanera y ambiente de playa artificial. Puerta a las Misiones Jesuíticas.",
-        "imagen": "img/paraguay/encarnacion.jpg",
+        "imagen": "img/paraguay/Encarnación.webp",
         "detalle": "Playa San José (playa artificial sobre el río Paraná). Costanera de 12 km. Carnaval Encarnaceno (febrero). Santuario de la Virgen de Itacuá. Ruinas jesuíticas cercanas.",
         "precio_entrada": "Playa: acceso libre",
         "horario": "Costanera: 24 horas",
@@ -14728,7 +14728,7 @@
         "nombre": "Parque Nacional Ybycuí",
         "tag": "Naturaleza · Cascadas",
         "descripcion": "Parque con vegetación exuberante y cascadas. Muy bueno para caminatas, baños en pozos naturales y aire libre.",
-        "imagen": "img/paraguay/ybycui.jpg",
+        "imagen": "img/paraguay/Parque Nacional Ybycuí.webp",
         "detalle": "Saltos: Salto Mina, Salto Cristal, Salto Guarani (tres cascadas). Pozos naturales para baños. Sendero interpretativo de selva. Fábrica La Rosada (histórica).",
         "precio_entrada": "20,000 PYG",
         "horario": "8:00 AM - 5:00 PM",
@@ -14739,7 +14739,7 @@
         "nombre": "Ciudad del Este",
         "tag": "Comercio · Compras",
         "descripcion": "Centro fronterizo y comercial, en la Triple Frontera (Paraguay, Brasil, Argentina). Muy conocido por compras y acceso a las Cataratas del Iguazú.",
-        "imagen": "img/paraguay/ciudaddeleste.jpg",
+        "imagen": "img/paraguay/Ciudad del Este.jpg",
         "detalle": "Zona de free shops (shopping China, Shopping del Este). Puente de la Amistad (conexión con Brasil). Represa de Itaipú (una de las mayores hidroeléctricas del mundo).",
         "precio_entrada": "Itaipú: 25,000 PYG",
         "horario": "9:00 AM - 6:00 PM",
@@ -14815,7 +14815,7 @@
           "nombre": "Arpa Paraguaya",
           "tag": "Instrumento · Música",
           "descripcion": "Instrumento emblemático de Paraguay. La polca paraguaya y la guarania (creada por José Asunción Flores) se tocan con arpa.",
-          "imagen": "img/paraguay/arpa.jpg",
+          "imagen": "img/paraguay/Arpa Paraguaya.jpg",
           "detalle": "El arpa paraguaya tiene 36 a 38 cuerdas. La guarania es el género musical más representativo. Arpistas famosos: Emiliano Cardozo."
         },
         {
@@ -14823,7 +14823,7 @@
           "nombre": "Tereré",
           "tag": "Bebida · Costumbre diaria",
           "descripcion": "Bebida social y costumbre diaria en Paraguay. Es mate frío (yerba mate con agua fría o helada, y yuyos), compartido en ronda.",
-          "imagen": "img/paraguay/terere.jpg",
+          "imagen": "img/paraguay/Tereré.jpg",
           "detalle": "El tereré es Patrimonio Cultural del Paraguay. Se bebe con guampa (vaso) y bombilla. Yuyos (hierbas medicinales) comunes: menta, burrito, cocú."
         },
         {
@@ -15640,7 +15640,7 @@
         "nombre": "Roatán",
         "tag": "Playa · Buceo · Arrecife",
         "descripcion": "Isla famosa por buceo y arrecifes. Muy visitada por turismo internacional. Parte del Arrecife Mesoamericano, segundo más grande del mundo.",
-        "imagen": "img/honduras/roatan.jpg",
+        "imagen": "img/honduras/Roatán.jpg",
         "detalle": "West Bay (playa más famosa). West End (vida nocturna). Punta Gorda (comunidad garífuna). Arrecifes de coral para buceo. Snorkel con tortugas, rayas y tiburones ballena.",
         "precio_entrada": "Playas: accesibles",
         "horario": "24 horas",
@@ -15673,7 +15673,7 @@
         "nombre": "La Ceiba",
         "tag": "Naturaleza · Puerta a la selva",
         "descripcion": "Ciudad costera y puerta a la selva. Puerta al Parque Nacional Pico Bonito y al ecoturismo. Celebraciones del carnaval.",
-        "imagen": "img/honduras/laceiba.jpg",
+        "imagen": "img/honduras/La Ceiba.webp",
         "detalle": "Parque Nacional Pico Bonito (selva tropical, senderos, cascadas, jaguares). Río Cangrejal (rafting clase III-IV). Carnaval de La Ceiba (mayo).",
         "precio_entrada": "Pico Bonito: 10 USD",
         "horario": "6:00 AM - 4:00 PM",
@@ -15706,7 +15706,7 @@
         "nombre": "Cayos Cochinos",
         "tag": "Islas vírgenes · Snorkel",
         "descripcion": "Reserva marina virgen entre Roatán y La Ceiba. Arrecifes prístinos, aguas cristalinas y comunidad garífuna.",
-        "imagen": "img/honduras/cayoscochinos.jpg",
+        "imagen": "img/honduras/Cayos Cochinos.jpg",
         "detalle": "Cayos Cochinos, reserva marina protegida. Snorkel en arrecifes de coral. Comunidad garífuna de Chachahuate. Acceso limitado para conservación.",
         "precio_entrada": "20 USD + tour",
         "horario": "8:00 AM - 4:00 PM",
@@ -15741,7 +15741,7 @@
           "nombre": "Marimba Hondureña",
           "tag": "Música · Instrumento",
           "descripcion": "Instrumento muy tradicional en Honduras. Versión hondureña más grande que la guatemalteca. Sonido grave.",
-          "imagen": "img/honduras/marimba.jpg",
+          "imagen": "img/honduras/Marimba Hondureña.jpg",
           "detalle": "Usada en fiestas patronales y eventos cívicos. El himno nacional se interpreta con marimba."
         },
         {
@@ -15765,7 +15765,7 @@
           "nombre": "Cultura Garífuna",
           "tag": "Etnia · UNESCO",
           "descripcion": "Descendientes de africanos y caribes. La lengua garífuna fue declarada Obra Maestra del Patrimonio Oral e Inmaterial de la Humanidad (UNESCO).",
-          "imagen": "img/honduras/garifunas.jpg",
+          "imagen": "img/honduras/Cultura Garífuna.webp",
           "detalle": "Comunidades principales en la costa norte: Punta Gorda (Roatán), Triunfo de la Cruz, Bajamar. Danza, música, y medicina tradicional."
         }
       ],
