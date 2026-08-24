@@ -67,7 +67,7 @@
   
   // HERO - SECCIÓN PRINCIPAL
   heroContinente: "Tu próximo destino",
-  heroTitulo: "Descubre el Mundo",
+  heroTitulo: "Descubre <br> el mundo con KAVARI",
   heroSubtitulo: "con KAVARI",
   heroDesc: "Viajes que transforman, experiencias que perduran.",
   heroExplorarDestinos: "Explorar destinos",
@@ -7927,7 +7927,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
   
   // HERO - MAIN SECTION
   heroContinente: "Your Next Destination",
-  heroTitulo: "Discover the World",
+  heroTitulo: "Discover <br> the world with KAVARI",
   heroSubtitulo: "with KAVARI",
   heroDesc: "Trips that transform, experiences that last.",
   heroExplorarDestinos: "Explore destinations",

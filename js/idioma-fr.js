@@ -93,7 +93,7 @@ window.__kavariIdiomasExtras.fr = {
   paisesContinenteAfrica: 'Afrique',
 
   /* ─── Index / héros ─── */
-  heroTitulo: 'Explore le monde avec KAVARI',
+  heroTitulo: 'Découvre <br> le monde avec KAVARI',
   heroExplorarDestinos: 'Explorer les destinations',
   losDestinosQueDefinen: 'Les destinations qui définissent',
 
