@@ -164,7 +164,8 @@ function renderTop10Cards() {
         const translationKey = getTop10TranslationKey(id);
         const title = translateOrDefault('topTitulo' + translationKey, d.title);
         const desc = translateOrDefault('top' + translationKey, d.desc);
-        const tagHtml = d.tag ? `<span class="card-tag-pill">${d.tag}</span>` : '';
+        const precioHtml = String(d.precio).replace(/por persona/gi, function() { return window.t ? window.t('porPersona') : 'por persona'; });
+        const tagHtml = d.tag ? `<span class="card-tag-pill">${window.t ? window.t(d.tag) : d.tag}</span>` : '';
         html += `
             <div class="card reveal">
                 <img src="${d.img}" alt="${title}" loading="lazy" decoding="async">
@@ -211,7 +212,7 @@ function renderPaquetesCards() {
                     <div class="paquete-bottom">
                         <div class="paquete-precio-wrap">
                             <div class="paquete-desde" data-i18n="desde">Desde</div>
-                            <div class="paquete-precio">${d.precio}</div>
+                            <div class="paquete-precio">${precioHtml}</div>
                             <div class="paquete-pp" data-i18n="porPersona">por persona</div>
                         </div>
                         <div class="paquete-btns">
@@ -250,7 +251,7 @@ async function abrirModalTop10(id) {
         imgEl.src = data.img;
         imgEl.alt = data.title;
     }
-    if (tagEl) tagEl.textContent = data.tag;
+    if (tagEl) tagEl.textContent = window.t ? window.t(data.tag) : data.tag;
 
     const translationKey = getTop10TranslationKey(id);
     if (titleEl) titleEl.textContent = translateOrDefault('topTitulo' + translationKey, data.title);
@@ -318,10 +319,10 @@ async function abrirModalPaquete(id) {
         imgEl.src = data.img;
         imgEl.alt = data.title;
     }
-    if (titleEl) titleEl.textContent = data.title;
-    if (precioEl) precioEl.innerHTML = data.precio;
-
     const paqueteKey = getPaqueteTranslationKey(id);
+    if (titleEl) titleEl.textContent = translateOrDefault('paquete' + paqueteKey + 'Titulo', data.title);
+    if (precioEl) precioEl.innerHTML = String(data.precio).replace(/por persona/gi, function() { return window.t ? window.t('porPersona') : 'por persona'; });
+
     if (descEl) descEl.textContent = translateOrDefault('paquete' + paqueteKey + 'Desc', data.desc);
 
     if (includesEl) {
