@@ -16569,7 +16569,7 @@
         "nombre": "San Juan del Sur",
         "tag": "Playa · Surf · Pacífico",
         "descripcion": "Pueblo costero de playa en el Pacífico nicaragüense. Muy visitado por turismo de sol, mar y surf. Atardeceres espectaculares.",
-        "imagen": "img/nicaragua/sanjuan.jpg",
+        "imagen": "img/nicaragua/SanJuan.webp",
         "detalle": "Playa San Juan del Sur (principal). Cristo de la Misericordia (vistas panorámicas). Surf en Maderas, Hermosa, Majagual. Paseo en barco. Pesca deportiva.",
         "precio_entrada": "Playas: acceso libre",
         "horario": "24 horas",
@@ -16580,7 +16580,7 @@
         "nombre": "Isla de Ometepe",
         "tag": "Volcán · Lago · Aventura",
         "descripcion": "Isla volcánica en el Lago de Nicaragua, formada por dos volcanes: Concepción (activo) y Maderas. Paraíso natural único.",
-        "imagen": "img/nicaragua/ometepe.jpg",
+        "imagen": "img/nicaragua/IslaDeOmetepe.jpg",
         "detalle": "Volcán Concepción (1,610 m, activo, trekking desafiante). Volcán Maderas (1,394 m, inactivo, laguna en el cráter). Ojo de Agua (piscinas naturales). Petrograbados. Playa Santo Domingo.",
         "precio_entrada": "Parques: 5 USD",
         "horario": "7:00 AM - 5:00 PM",
@@ -16602,7 +16602,7 @@
         "nombre": "Volcán Masaya",
         "tag": "Volcán · Parques nacionales",
         "descripcion": "Parque Nacional Volcán Masaya. Cráter accesible en automóvil hasta el borde. Se puede ver lava y azufre.",
-        "imagen": "img/nicaragua/masaya.jpg",
+        "imagen": "img/nicaragua/VolcanMasaya.jpg",
         "detalle": "Santiago (cráter principal, emite gas y lava). Mirador. Centro de interpretación. Túnel de lava (cuevas volcánicas). Tour nocturno (aves nocturnas).",
         "precio_entrada": "Parque: 5 USD",
         "horario": "9:00 AM - 4:30 PM",
@@ -16613,7 +16613,7 @@
         "nombre": "León",
         "tag": "Historia · Colonial · Universidad",
         "descripcion": "Segunda ciudad más importante de Nicaragua. Centro histórico colonial. Universidad más antigua de Centroamérica (1813).",
-        "imagen": "img/nicaragua/leon.jpg",
+        "imagen": "img/nicaragua/Leoon.jpg",
         "detalle": "Catedral de León (Patrimonio UNESCO, más grande de Centroamérica, tumbas de poetas). Museo de Arte Fundación Ortiz Gurdián. Ruinas de León Viejo (Patrimonio UNESCO).",
         "precio_entrada": "Catedral: 2 USD",
         "horario": "9:00 AM - 5:00 PM",
@@ -16624,7 +16624,7 @@
         "nombre": "Islas del Maíz",
         "tag": "Caribe · Snorkel · Playa",
         "descripcion": "Archipiélago caribeño en el mar Caribe. Aguas turquesa, arena blanca y arrecifes de coral.",
-        "imagen": "img/nicaragua/islasmaiz.jpg",
+        "imagen": "img/nicaragua/IslasDelMaiz.jpeg",
         "detalle": "Isla Grande del Maíz (desarrollo turístico). Isla Pequeña del Maíz (virgen, comunidad indígena). Buceo y snorkel. Tortugas marinas. Pescado frito y langosta.",
         "precio_entrada": "Acceso: 10 USD",
         "horario": "24 horas",
@@ -16670,7 +16670,7 @@
           "nombre": "Marimba Nicaragüense",
           "tag": "Música · Instrumento",
           "descripcion": "Instrumento tradicional muy importante en Nicaragua. Similar a la marimba guatemalteca pero con su propio estilo.",
-          "imagen": "img/nicaragua/marimba.jpg",
+          "imagen": "img/nicaragua/Marimbaa.jpg",
           "detalle": "Usada en fiestas patronales. El son nica es un género tradicional. La marimba es el instrumento nacional de Nicaragua."
         },
         {
@@ -16678,7 +16678,7 @@
           "nombre": "Gallo pinto",
           "tag": "Gastronomía",
           "descripcion": "Plato típico muy popular: arroz y frijoles rojos o negros revueltos. Se come en desayuno, almuerzo o cena.",
-          "imagen": "img/nicaragua/gallopinto.jpg",
+          "imagen": "img/nicaragua/Gallo.Pinto.jpg",
           "detalle": "Acompañado de huevo, queso, tortilla o plátano."
         },
         {
@@ -16686,7 +16686,7 @@
           "nombre": "Fiesta de Nuestra Señora de la Asunción",
           "tag": "Festividad · León",
           "descripcion": "Celebración muy popular en León en diciembre. Fiesta de la Virgen María con procesiones, música, danza y fuegos artificiales.",
-          "imagen": "img/nicaragua/fiestapatronales.jpg",
+          "imagen": "img/nicaragua/NuestraSeñoraDeAsuncion.jpg",
           "detalle": "La Gritería es una tradición donde la gente grita '¿Quién causa tanta alegría?' y reparten regalos."
         },
         {
@@ -16694,7 +16694,7 @@
           "nombre": "Rubén Darío",
           "tag": "Literatura · Poesía",
           "descripcion": "Máximo poeta nicaragüense. Padre del modernismo literario en español.",
-          "imagen": "img/nicaragua/rubendario.jpg",
+          "imagen": "img/nicaragua/RubenDario.png",
           "detalle": "Nacido en Metapa en 1867. Autor de 'Azul' y 'Cantos de vida y esperanza'. Su tumba está en la Catedral de León."
         }
       ],
