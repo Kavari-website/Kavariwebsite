@@ -292,6 +292,26 @@
   background:var(--kb-navy);
   transform:scale(1.05);
 }
+/* Tablet: el mascota a 120px tapaba el botón "Suscribirse" y los
+   enlaces legales del footer al llegar al final de la página. Se
+   reduce y se pasa a la derecha en todo el rango móvil/tablet. */
+@media (max-width:900px) {
+  .kavari-mascot-inner {
+    width:76px;
+    height:76px;
+  }
+  #kavari-mascot {
+    bottom:20px;
+    left:auto;
+    right:14px;
+  }
+  #kavari-asistente {
+    left:auto;
+    right:14px;
+    bottom:108px;
+    transform-origin:bottom right;
+  }
+}
 @media (max-width:519px) {
   .kavari-mascot-inner {
     width:70px;
@@ -301,10 +321,11 @@
   }
   #kavari-mascot {
     bottom:22px;
-    left:4px;
+    left:auto;
+    right:10px;
   }
   #kavari-asistente {
-    left:4px;
+    left:auto;
     right:8px;
     bottom:98px;
     flex-direction:column-reverse;
@@ -338,10 +359,12 @@
   }
   #kavari-mascot {
     bottom:18px;
-    left:2px;
+    left:auto;
+    right:8px;
   }
   #kavari-asistente {
-    left:2px;
+    left:auto;
+    right:6px;
     bottom:84px;
   }
   @keyframes kavariFloatMascot {

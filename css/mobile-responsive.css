@@ -37,6 +37,18 @@ svg,
 iframe {
   max-width: 100%;
 }
+/* Evita que palabras largas (nombres de países/ciudades, precios) revienten
+   su contenedor en pantallas angostas */
+h1, h2, h3, h4, p,
+.card-content p,
+.card-content h3,
+.paquete-info h3,
+.paquete-info > p,
+.paquete-region,
+.plan-cta-head p {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
 /* Fondo sólido del menú móvil bloquea el scroll del body */
 body.menu-open {
   overflow: hidden;
@@ -339,6 +351,18 @@ body.menu-open {
 @media (max-width: 900px) {
   .hero-content {
     margin-top: 88px;
+  }
+}
+@media (max-width: 900px) {
+  /* Insignia ("Popular", "Oferta"...) sobre la imagen del paquete: sin
+     límite de ancho podía salirse del borde de la tarjeta en pantallas
+     angostas con traducciones más largas. */
+  .paquete-badge {
+    max-width: calc(100% - 28px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
   }
 }
 @media (max-width: 600px) {

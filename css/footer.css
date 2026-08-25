@@ -250,8 +250,12 @@
     gap: 32px;
   }
 
+  /* Margen extra abajo para que el asistente flotante (chatbot) nunca
+     tape el botón de newsletter ni los enlaces legales al llegar al
+     final de la página. */
   .footer.kv-footer {
-    padding: 40px 20px 20px;
+    padding: 40px 20px calc(20px + 76px);
+    padding-bottom: calc(20px + 76px + env(safe-area-inset-bottom));
   }
 
   .footer .kv-footer-col {

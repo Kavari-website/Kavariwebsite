@@ -2,11 +2,8 @@
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
 
-// Botón de hamburguesa para abrir/cerrar el menú en celulares
-document.getElementById('hamburger').addEventListener('click', function(){
-  this.classList.toggle('open');
-  document.getElementById('navLinks').classList.toggle('open');
-});
+// El botón de hamburguesa lo controla mobile-nav.js (evita doble toggle
+// que hacía que el menú se abriera y cerrara en el mismo clic).
 
 // ============================================
 // RENDER DE LOS 21 DESTINOS (desde KAVARI_PAISES)
