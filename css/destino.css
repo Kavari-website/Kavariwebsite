@@ -3751,7 +3751,7 @@ a:focus-visible,button:focus-visible,.filter-chip:focus-visible,.btn-hero:focus-
 }
 .country-panel {
   position:absolute;
-  top:calc(100%+12px);
+  top:calc(100% + 12px);
   right:0;
   width:min(300px,82vw);
   max-height:420px;

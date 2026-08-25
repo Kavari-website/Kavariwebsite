@@ -14862,14 +14862,14 @@
           "nombre": "Sopa paraguaya",
           "categoria": "Plato nacional",
           "descripcion": "Pastel de maíz y queso, similar a un bizcocho salado. Uno de los platos más famosos. No es sopa, es sólida.",
-          "imagen": "img/paraguay/Sopa paraguaya.jpg",
+          "imagen": "img/paraguay/sopaparaguaya.jpg",
           "nota": "Sopa paraguaya, única en el mundo"
         },
         {
           "nombre": "Chipa",
           "categoria": "Pan tradicional",
           "descripcion": "Pan de almidón de mandioca, queso panela, huevo y leche. Formas: chipa caburé (clásica), chipa so'o (rellena).",
-          "imagen": "img/paraguay/chipaguazu.jpg",
+          "imagen": "img/paraguay/chipa.jpg",
           "nota": "Patrimonio Cultural"
         },
         {
@@ -14890,7 +14890,7 @@
           "nombre": "Pastel mandi'o",
           "categoria": "Empanada",
           "descripcion": "Empanada de masa de mandioca, rellena de carne picada, huevo duro, cebolla y especias. Frita.",
-          "imagen": "img/paraguay/Pastel mandi'o.webp",
+          "imagen": "img/paraguay/pastelmandi.jpg",
           "nota": "Variante local de la empanada"
         },
         {

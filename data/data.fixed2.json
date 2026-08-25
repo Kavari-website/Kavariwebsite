@@ -14739,7 +14739,8 @@
         "nombre": "Ciudad del Este",
         "tag": "Comercio · Compras",
         "descripcion": "Centro fronterizo y comercial, en la Triple Frontera (Paraguay, Brasil, Argentina). Muy conocido por compras y acceso a las Cataratas del Iguazú.",
-         "detalle": "Zona de free shops (shopping China, Shopping del Este). Puente de la Amistad (conexión con Brasil). Represa de Itaipú (una de las mayores hidroeléctricas del mundo).",
+ 4f136056c6427421812d45f90d06b96979072cf5
+        "detalle": "Zona de free shops (shopping China, Shopping del Este). Puente de la Amistad (conexión con Brasil). Represa de Itaipú (una de las mayores hidroeléctricas del mundo).",
         "precio_entrada": "Itaipú: 25,000 PYG",
         "horario": "9:00 AM - 6:00 PM",
         "consejo": "Planear bien el transporte y la aduana"
@@ -14862,14 +14863,14 @@
           "nombre": "Sopa paraguaya",
           "categoria": "Plato nacional",
           "descripcion": "Pastel de maíz y queso, similar a un bizcocho salado. Uno de los platos más famosos. No es sopa, es sólida.",
-          "imagen": "img/paraguay/Sopa paraguaya.jpg",
+          "imagen": "img/paraguay/sopaparaguaya.jpg",
           "nota": "Sopa paraguaya, única en el mundo"
         },
         {
           "nombre": "Chipa",
           "categoria": "Pan tradicional",
           "descripcion": "Pan de almidón de mandioca, queso panela, huevo y leche. Formas: chipa caburé (clásica), chipa so'o (rellena).",
-          "imagen": "img/paraguay/chipaguazu.jpg",
+          "imagen": "img/paraguay/chipa.jpg",
           "nota": "Patrimonio Cultural"
         },
         {
@@ -14890,7 +14891,7 @@
           "nombre": "Pastel mandi'o",
           "categoria": "Empanada",
           "descripcion": "Empanada de masa de mandioca, rellena de carne picada, huevo duro, cebolla y especias. Frita.",
-          "imagen": "img/paraguay/Pastel mandi'o.webp",
+          "imagen": "img/paraguay/pastelmandi.jpg",
           "nota": "Variante local de la empanada"
         },
         {

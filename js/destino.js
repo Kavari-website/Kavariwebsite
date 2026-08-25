@@ -1084,6 +1084,9 @@ function showSection(id) {
         requestAnimationFrame(() => requestAnimationFrame(() => target.classList.add('fly-in')));
     }
     document.querySelectorAll('.nav-links a[data-sec]').forEach(a => a.classList.toggle('active', a.dataset.sec === id));
+    // Sincroniza también el resaltado activo del drawer móvil (antes se
+    // quedaba fijo en "Inicio" sin importar la sección visitada).
+    document.querySelectorAll('#mobileDrawerLinks a[data-sec]').forEach(a => a.classList.toggle('active', a.dataset.sec === id));
     if (id === 'guias') renderGuideFilters();
     if (id === 'souvenires') renderSouvenirs(countryData);
     if (id === 'aerolineas') renderAerolineas(countryData);
