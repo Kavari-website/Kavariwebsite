@@ -15639,7 +15639,7 @@
         "nombre": "Roatán",
         "tag": "Playa · Buceo · Arrecife",
         "descripcion": "Isla famosa por buceo y arrecifes. Muy visitada por turismo internacional. Parte del Arrecife Mesoamericano, segundo más grande del mundo.",
-        "imagen": "img/honduras/roatan.jpg",
+        "imagen": "img/honduras/roatán.jpg",
         "detalle": "West Bay (playa más famosa). West End (vida nocturna). Punta Gorda (comunidad garífuna). Arrecifes de coral para buceo. Snorkel con tortugas, rayas y tiburones ballena.",
         "precio_entrada": "Playas: accesibles",
         "horario": "24 horas",
@@ -16182,7 +16182,7 @@
         "productos": [
           {
             "nombre": "Réplica de Estela Maya",
-            "descripcion": "Réplica en miniatura de una estela de Copán, con glifos y figuras talladas. Hecha de piedra o resina.",
+           "descripcion": "Réplica en miniatura de una estela de Copán, con glifos y figuras talladas. Hecha de piedra o resina.",
             "precio": "15-40 USD",
             "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400"
           },
