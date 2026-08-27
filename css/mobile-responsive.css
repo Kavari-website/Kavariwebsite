@@ -539,7 +539,11 @@ body.menu-open {
 }
 @media (max-width: 600px) {
   .page-destino .navbar {
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    /* 4 columnas: logo | espacio flexible | selector de país | hamburguesa.
+       Antes solo había 3 columnas definidas mientras el navbar tiene 4
+       elementos reales, así que la hamburguesa se caía a una fila nueva
+       fuera de la barra visible en la mayoría de teléfonos (≤600px). */
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
     padding: 0 10px;
   }
   .page-destino .country-trigger-name {

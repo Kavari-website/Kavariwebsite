@@ -414,7 +414,7 @@ function updateLangButton(idioma) {
         if (langLabel) {
             langLabel.textContent = (idioma || 'es').toUpperCase();
         }
-        const orden = ['es', 'en', 'pt'];
+        const orden = ['es', 'en', 'pt', 'fr'];
         const idx = orden.indexOf(idioma);
         const nextIdioma = orden[(idx + 1) % orden.length];
         btnLang.setAttribute('aria-label', 'Cambiar a ' + nextIdioma.toUpperCase());

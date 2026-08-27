@@ -27,8 +27,8 @@ const PAIS_BADGES = {
 };
 
 function getLang() {
-  const l = localStorage.getItem('kavari-idioma') || 'es';
-  return ['es', 'en', 'pt'].includes(l) ? l : 'es';
+  const l = localStorage.getItem('kavari-idioma') || localStorage.getItem('kavariIdioma') || 'es';
+  return ['es', 'en', 'pt', 'fr'].includes(l) ? l : 'es';
 }
 
 // Busca el texto traducido de una clave (con respaldo seguro)

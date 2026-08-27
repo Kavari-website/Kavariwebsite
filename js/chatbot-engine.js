@@ -5,7 +5,7 @@
      - normaliza texto (tildes, mayúsculas, signos)
      - puntúa TODAS las intenciones y elige la de mayor coincidencia
        (en vez de "la primera que matchea gana")
-     - agrega sinónimos, plurales y mezcla ES/EN/PT
+     - agrega sinónimos, plurales y mezcla ES/EN/PT/FR
      - suma intenciones nuevas: saludo, gracias, ayuda, presupuesto,
        transporte, seguridad, conectividad, propinas
      - el fallback ahora sugiere temas disponibles en vez de un
@@ -15,8 +15,14 @@
 
   /* ---------- utilidades ---------- */
   const clean = value => String(value || '').replace(/[<>]/g, '');
-  const lang = () => (localStorage.getItem('kavari-idioma') || 'es');
-  const tr = (es, en, pt) => lang() === 'en' ? en : lang() === 'pt' ? pt : es;
+  const lang = () => (localStorage.getItem('kavari-idioma') || localStorage.getItem('kavariIdioma') || 'es');
+  const tr = (es, en, pt, fr) => {
+    const l = lang();
+    if (l === 'en') return en;
+    if (l === 'pt') return pt;
+    if (l === 'fr') return fr !== undefined ? fr : en;
+    return es;
+  };
 
   // quita tildes, pasa a minúsculas y colapsa espacios
   const normalize = str => String(str || '')
@@ -27,7 +33,13 @@
     .trim();
 
   const items = (list, mapper) => list.slice(0, 3).map(mapper).join('<br>');
-  const noche = () => lang() === 'pt' ? '/noite' : lang() === 'en' ? '/night' : '/noche';
+  const noche = () => {
+    const l = lang();
+    if (l === 'pt') return '/noite';
+    if (l === 'en') return '/night';
+    if (l === 'fr') return '/nuit';
+    return '/noche';
+  };
 
   /* ---------- diccionario de intenciones ---------- */
   // cada intención tiene una lista de palabras clave (ya normalizadas)
@@ -39,7 +51,8 @@
       handler: (d, ctx, en, name) => tr(
         `¡Hola! Soy el asistente de KAVARI${name ? ` para ${name}` : ''}. Pregúntame por lugares, gastronomía, cultura, actividades, guías, vuelos, hospedajes o info práctica.`,
         `Hi! I'm the KAVARI assistant${name ? ` for ${name}` : ''}. Ask me about places, food, culture, activities, guides, flights, stays or practical info.`,
-        `Olá! Sou o assistente da KAVARI${name ? ` para ${name}` : ''}. Pergunte-me sobre lugares, gastronomia, cultura, atividades, guias, voos, hospedagens ou informações práticas.`
+        `Olá! Sou o assistente da KAVARI${name ? ` para ${name}` : ''}. Pergunte-me sobre lugares, gastronomia, cultura, atividades, guias, voos, hospedagens ou informações práticas.`,
+        `Bonjour ! Je suis l'assistant KAVARI${name ? ` pour ${name}` : ''}. Demandez-moi des lieux, la gastronomie, la culture, les activités, les guides, les vols, les hébergements ou les infos pratiques.`
       )
     },
     {
@@ -347,9 +360,10 @@
       name: 'idioma_tema',
       keywords: ['idioma', 'language', 'ingles', 'english', 'espanol', 'spanish', 'oscuro', 'tema', 'dark mode', 'modo oscuro', 'modo claro', 'portugues', 'modo escuro'],
       handler: en => tr(
-        'Usa el interruptor ES/EN/PT y el botón de tema en la navegación para cambiar el idioma o activar el modo oscuro. Tu elección se guarda en este dispositivo.',
-        'Use the ES/EN/PT switch and the theme button in the navigation to change language or turn on dark mode. Your choice is saved on this device.',
-        'Use o botão ES/EN/PT e o botão de tema na navegação para mudar o idioma ou ativar o modo escuro. Sua escolha fica salva neste dispositivo.'
+        'Usa el menú de idiomas (ES/EN/PT/FR) y el botón de tema en la navegación para cambiar el idioma o activar el modo oscuro. Tu elección se guarda en este dispositivo.',
+        'Use the language menu (ES/EN/PT/FR) and the theme button in the navigation to change language or turn on dark mode. Your choice is saved on this device.',
+        'Use o menu de idiomas (ES/EN/PT/FR) e o botão de tema na navegação para mudar o idioma ou ativar o modo escuro. Sua escolha fica salva neste dispositivo.',
+        'Utilisez le menu des langues (ES/EN/PT/FR) et le bouton de thème dans la navigation pour changer de langue ou activer le mode sombre. Votre choix est enregistré sur cet appareil.'
       )
     },
     {

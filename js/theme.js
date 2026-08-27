@@ -48,13 +48,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let savedLang = 'es';
   try {
-    savedLang = localStorage.getItem('kavariIdioma') || localStorage.getItem('idioma') || 'es';
+    savedLang = localStorage.getItem('kavari-idioma') || localStorage.getItem('kavariIdioma') || localStorage.getItem('idioma') || 'es';
   } catch (e) {
     if (window.sessionStorage) savedLang = sessionStorage.getItem('kavariIdioma') || 'es';
   }
 
-  if (typeof cambiarIdioma === 'function') {
-    cambiarIdioma(savedLang);
+  if (typeof window.setIdioma === 'function') {
+    window.setIdioma(savedLang);
   }
 
   if (window.matchMedia) {

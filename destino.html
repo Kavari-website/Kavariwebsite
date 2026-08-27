@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=2">
-  <link rel="stylesheet" href="css/destino.css?v=2">
+  <link rel="stylesheet" href="css/destino.css?v=4">
   <link rel="stylesheet" href="css/ui-system.css">
   <link rel="stylesheet" href="css/site-polish.css">
   <link rel="stylesheet" href="css/traveler-registration.css?v=2">
@@ -57,6 +57,7 @@
     </button>
     <nav class="nav-scroll-wrap" id="navScrollWrap">
     <ul class="nav-links" id="navLinks">
+      <span class="nav-pill" id="navPillIndicator" aria-hidden="true"></span>
       <li><a href="paises.html" class="nav-ext" data-i18n="navPaises"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Países</a></li>
       <li><a data-sec="inicio" class="active" onclick="showSection('inicio')" data-i18n="navInicio"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Inicio</a></li>
       <li><a data-sec="cultura" onclick="showSection('cultura')" data-i18n="navCultura"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-6 8 6v12M9 21v-6h6v6"/></svg>Cultura</a></li>
@@ -138,31 +139,39 @@
 
 <!-- SECCIÓN INICIO -->
 <div class="section active fly-in" id="section-inicio">
-<section class="hero" id="main">
+<section class="hero hero-banner" id="main">
 <div class="hero-bg" id="heroBg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-deco"><span></span><span></span><span></span><span></span></div>
     <div class="hero-content">
-      <div class="hero-left">
-        <div class="hero-eyebrow">
-          <span class="hero-eyebrow-dot"></span>
-          <span id="heroContinente" data-i18n="heroContinente">Tu próximo destino</span>
-        </div>
-        <h1 id="heroTitulo"><span data-i18n="heroTitulo">Descubre el Mundo</span><span id="heroSubtitulo" data-i18n="heroSubtitulo">con KAVARI</span></h1>
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        <span id="heroContinente" data-i18n="heroContinente">Tu próximo destino</span>
       </div>
-      <div class="hero-right">
-        <p class="hero-desc" id="heroDesc" data-i18n="heroDesc">Viajes que transforman, experiencias que perduran.</p>
-        <div class="hero-actions">
-          <button class="btn-hero" onclick="showSection('lugares')"><span data-i18n="heroExplorarDestinos">Explorar destinos</span></button>
-          <button class="btn-hero-outline" onclick="showSection('aerolineas')" data-i18n="heroVerVuelosDisponibles">Ver vuelos disponibles</button>
-        </div>
-      </div>
+      <h1 id="heroTitulo"><span data-i18n="heroTitulo">Descubre el Mundo</span><span id="heroSubtitulo" data-i18n="heroSubtitulo">con KAVARI</span></h1>
     </div>
     <div class="hero-scroll">
       <div class="scroll-track"><div class="scroll-dot"></div></div>
       <span data-i18n="scrollDesplazar">Desplazar</span>
     </div>
   </section>
+
+  <div class="hero-intro reveal">
+    <div class="hero-intro-inner">
+      <p class="hero-desc" id="heroDesc" data-i18n="heroDesc">Viajes que transforman, experiencias que perduran.</p>
+      <div class="hero-actions">
+        <button class="btn-hero" onclick="showSection('lugares')"><span data-i18n="heroExplorarDestinos">Explorar destinos</span></button>
+        <button class="btn-hero-outline" onclick="showSection('aerolineas')" data-i18n="heroVerVuelosDisponibles">Ver vuelos disponibles</button>
+      </div>
+      <div class="hero-mini-stats">
+        <div class="hero-mini-stat"><b id="heroMiniDestinos">40+</b><span data-i18n="heroMiniDestinos">Destinos</span></div>
+        <div class="hero-mini-divider"></div>
+        <div class="hero-mini-stat"><b id="heroMiniGuias">120+</b><span data-i18n="heroMiniGuias">Guías locales</span></div>
+        <div class="hero-mini-divider"></div>
+        <div class="hero-mini-stat"><b>4.8★</b><span data-i18n="heroMiniValoracion">Valoración</span></div>
+      </div>
+    </div>
+  </div>
 
   <div class="ticker"><div class="ticker-inner" id="tickerInner"></div></div>
   <div class="stats-bar reveal" id="statsBar"></div>

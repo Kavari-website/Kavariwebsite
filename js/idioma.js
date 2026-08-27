@@ -15757,8 +15757,8 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
    };
 
     // ===== LÓGICA DE IDIOMA =====
-    // Idiomas soportados: es, en, pt (portugués). El diccionario de pt se
-    // carga desde js/idioma-pt.js a través de window.__kavariIdiomasExtras.
+    // Idiomas soportados: es, en, pt, fr. Los diccionarios pt/fr se cargan
+    // desde js/idioma-pt.js y js/idioma-fr.js vía window.__kavariIdiomasExtras.
     const idiomasSoportados = ['es', 'en', 'pt', 'fr'];
     // El diccionario extra (idioma-pt.js) puede cargarse después de este archivo,
     // así que el merge se ejecuta también de forma perezosa en t().
@@ -15919,6 +15919,8 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
             }
         }
 
+        document.documentElement.lang = idiomaActual;
+
         if (typeof updateLangButton === 'function') {
             updateLangButton(idiomaActual);
         } else {
@@ -15948,6 +15950,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
         if (idiomasSoportados.indexOf(idioma) === -1) return;
         if (idioma === idiomaActual) return;
         idiomaActual = idioma;
+        CACHE_T.clear();
         localStorage.setItem('kavari-idioma', idioma);
         localStorage.setItem('kavariIdioma', idioma);
         localStorage.setItem('idioma', idioma);
@@ -15961,6 +15964,8 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
     };
 
     window.setIdioma = setIdioma;
+    window.cambiarIdioma = setIdioma;
+    window.getIdioma = function() { return idiomaActual; };
 
     document.addEventListener('DOMContentLoaded', function() {
         aplicarTraducciones();

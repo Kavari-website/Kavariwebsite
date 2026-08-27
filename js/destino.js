@@ -1050,9 +1050,11 @@ window.addEventListener('kavari:langchange', () => {
 
     function lang() { return localStorage.getItem('kavari-idioma') || 'es'; }
     function label() {
-        return lang() === 'en' ? 'Back to home'
-            : lang() === 'pt' ? 'Voltar ao início'
-            : 'Volver al inicio';
+        const l = lang();
+        if (l === 'en') return 'Back to home';
+        if (l === 'pt') return 'Voltar ao início';
+        if (l === 'fr') return 'Retour à l\'accueil';
+        return 'Volver al inicio';
     }
 
     const css = ''

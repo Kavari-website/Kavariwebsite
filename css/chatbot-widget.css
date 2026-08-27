@@ -22,8 +22,8 @@
 #kavari-mascot {
   position:fixed;
   bottom:24px;
-  left:8px;
-  z-index:9998;
+  right:24px;
+  z-index:9990;
   cursor:pointer;
   border-radius:50%;
 }
@@ -32,8 +32,8 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  width:120px;
-  height:120px;
+  width:72px;
+  height:72px;
   cursor:pointer;
   animation:kavariFloatMascot 6s ease-in-out infinite;
   transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease;
@@ -50,7 +50,7 @@
 }
 .kavari-mascot-inner:hover,
 #kavari-mascot:hover .kavari-mascot-inner {
-  transform:scale(1.08);
+  transform:scale(1.1);
   animation-play-state:paused;
 }
 .kavari-mascot-inner:hover img,
@@ -62,7 +62,7 @@
     transform:translateY(0);
   }
   50% {
-    transform:translateY(-12px);
+    transform:translateY(-8px);
   }
   100% {
     transform:translateY(0);
@@ -76,36 +76,36 @@
 }
 #kavari-asistente {
   position:fixed;
-  bottom:152px;
-  left:8px;
-  right:auto;
+  bottom:110px;
+  right:24px;
+  left:auto;
   display:none;
   align-items:flex-end;
   flex-direction:row;
   gap:10px;
-  z-index:9998;
-  max-width:calc(100vw - 20px);
+  z-index:9990;
+  max-width:calc(100vw - 48px);
   opacity:0;
   transform:translateY(20px) scale(.92);
-  transform-origin:bottom left;
+  transform-origin:bottom right;
   pointer-events:none;
 }
 #kavari-asistente.activo {
   display:flex;
   pointer-events:auto;
-  animation:kavariSlideUp .55s cubic-bezier(.22,1,.36,1) forwards;
+  animation:kavariSlideUp .4s cubic-bezier(.22,1,.36,1) forwards;
 }
 #kavari-asistente.cerrando {
-  animation:kavariSlideDown .3s cubic-bezier(.4,0,.2,1) forwards;
+  animation:kavariSlideDown .25s cubic-bezier(.4,0,.2,1) forwards;
 }
 @keyframes kavariSlideUp {
   0% {
     opacity:0;
-    transform:translateY(28px) scale(.88);
+    transform:translateY(20px) scale(.9);
   }
   60% {
     opacity:1;
-    transform:translateY(-4px) scale(1.02);
+    transform:translateY(-3px) scale(1.01);
   }
   100% {
     opacity:1;
@@ -119,7 +119,7 @@
   }
   to {
     opacity:0;
-    transform:translateY(16px) scale(.92);
+    transform:translateY(12px) scale(.92);
   }
 }
 #kavari-chat-panel {
@@ -292,90 +292,68 @@
   background:var(--kb-navy);
   transform:scale(1.05);
 }
-/* Tablet: el mascota a 120px tapaba el botón "Suscribirse" y los
-   enlaces legales del footer al llegar al final de la página. Se
-   reduce y se pasa a la derecha en todo el rango móvil/tablet. */
+/* Tablet y móvil: el mascota en la esquina inferior derecha,
+   lejos de menús laterales y del footer. */
 @media (max-width:900px) {
   .kavari-mascot-inner {
-    width:76px;
-    height:76px;
+    width:64px;
+    height:64px;
   }
   #kavari-mascot {
-    bottom:20px;
-    left:auto;
-    right:14px;
+    bottom:100px;
+    right:16px;
   }
   #kavari-asistente {
-    left:auto;
-    right:14px;
-    bottom:108px;
-    transform-origin:bottom right;
+    right:16px;
+    bottom:170px;
   }
 }
 @media (max-width:519px) {
-  .kavari-mascot-inner {
-    width:70px;
-    height:70px;
-    bottom:auto;
-    left:auto;
-  }
-  #kavari-mascot {
-    bottom:22px;
-    left:auto;
-    right:10px;
-  }
-  #kavari-asistente {
-    left:auto;
-    right:8px;
-    bottom:98px;
-    flex-direction:column-reverse;
-    align-items:stretch;
-  }
-  #kavari-chat-panel {
-    width:100%;
-    height:min(560px,calc(100vh - 130px));
-    max-height:calc(100vh - 120px);
-  }
-  #kavari-mensajes {
-    min-height:180px;
-  }
-  @keyframes kavariFloatMascot {
-    0% {
-      transform:translateY(0);
-    }
-    50% {
-      transform:translateY(-8px);
-    }
-    100% {
-      transform:translateY(0);
-    }
-  }
-}
-
-@media (max-width:400px) {
   .kavari-mascot-inner {
     width:60px;
     height:60px;
   }
   #kavari-mascot {
-    bottom:18px;
-    left:auto;
+    bottom:100px;
+    right:12px;
+  }
+  #kavari-asistente {
+    right:12px;
+    bottom:165px;
+    flex-direction:column-reverse;
+    align-items:stretch;
+  }
+  #kavari-chat-panel {
+    width:100%;
+    height:min(560px,calc(100vh - 180px));
+    max-height:calc(100vh - 170px);
+  }
+  #kavari-mensajes {
+    min-height:180px;
+  }
+  @keyframes kavariFloatMascot {
+    0% { transform:translateY(0); }
+    50% { transform:translateY(-6px); }
+    100% { transform:translateY(0); }
+  }
+}
+
+@media (max-width:400px) {
+  .kavari-mascot-inner {
+    width:56px;
+    height:56px;
+  }
+  #kavari-mascot {
+    bottom:90px;
     right:8px;
   }
   #kavari-asistente {
-    left:auto;
-    right:6px;
-    bottom:84px;
+    right:8px;
+    bottom:155px;
   }
   @keyframes kavariFloatMascot {
-    0% {
-      transform:translateY(0);
-    }
-    50% {
-      transform:translateY(-6px);
-    }
-    100% {
-      transform:translateY(0);
-    }
+    0% { transform:translateY(0); }
+    50% { transform:translateY(-5px); }
+    100% { transform:translateY(0); }
   }
 }

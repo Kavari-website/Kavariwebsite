@@ -94,7 +94,7 @@
   const GOOGLE_CLIENT_ID = '103720820760-fi091rq34tik6dgbevv8j37v8mtt86q1.apps.googleusercontent.com';
 
   /* ─── Helpers ─── */
-  const lang = () => localStorage.getItem('kavariIdioma') || localStorage.getItem('idioma') || 'es';
+  const lang = () => localStorage.getItem('kavari-idioma') || localStorage.getItem('kavariIdioma') || localStorage.getItem('idioma') || 'es';
   const t = (key) => window.t ? window.t(key) : key;
 
   function getInitials(name) {
@@ -984,13 +984,12 @@
   function initSettingsToggles() {
     if (els.settingsLangToggle) {
       els.settingsLangToggle.addEventListener('click', () => {
-        const orden = ['es', 'en', 'pt'];
+        const orden = ['es', 'en', 'pt', 'fr'];
         const actual = orden.indexOf(lang());
         const newLang = orden[(actual + 1) % orden.length];
-        if (typeof cambiarIdioma === 'function') {
-          cambiarIdioma(newLang);
+        if (typeof window.setIdioma === 'function') {
+          window.setIdioma(newLang);
         }
-        els.settingsLangToggle.textContent = newLang.toUpperCase();
       });
     }
 
@@ -1071,6 +1070,9 @@
 
     // Re-traducir los nombres de los favoritos al cambiar de idioma
     window.addEventListener('kavari:langchange', () => {
+      if (els.settingsLangToggle) {
+        els.settingsLangToggle.textContent = lang().toUpperCase();
+      }
       if (views.perfilView.style.display !== 'none') renderFavorites();
     });
 
