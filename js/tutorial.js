@@ -108,8 +108,7 @@ const tutorialStepsDestino = [
   { navigateTo: 'practica', targetSelector: '#infoGrid', titleKey: 'tutorialDestinoTitulo_13', descKey: 'tutorialDestinoDesc_13', position: 'top', arrow: true },
   { navigateTo: 'aerolineas', targetSelector: '#airlineGrid', titleKey: 'tutorialDestinoTitulo_14', descKey: 'tutorialDestinoDesc_14', position: 'top', arrow: true },
   { navigateTo: 'hospedajes', targetSelector: '#hospedajesGrid', titleKey: 'tutorialDestinoTitulo_15', descKey: 'tutorialDestinoDesc_15', position: 'top', arrow: true },
-  { navigateTo: 'souvenires', targetSelector: '#souvenirsGrid', titleKey: 'tutorialDestinoTitulo_16', descKey: 'tutorialDestinoDesc_16', position: 'top', arrow: true },
-  { navigateTo: 'guias', targetSelector: '#guidesListContainer', titleKey: 'tutorialDestinoTitulo_17', descKey: 'tutorialDestinoDesc_17', position: 'top', arrow: true },
+  { navigateTo: 'guias', targetSelector: '#guidesListContainer', titleKey: 'tutorialDestinoTitulo_16', descKey: 'tutorialDestinoDesc_17', position: 'top', arrow: true },
   { targetId: 'kavari-mascot', titleKey: 'tutorialDestinoTitulo_18', descKey: 'tutorialDestinoDesc_18', position: 'center', arrow: true },
   { targetId: null, titleKey: 'tutorialDestinoTitulo_19', descKey: 'tutorialDestinoDesc_19', position: 'center', arrow: false, isLast: true }
 ];

@@ -125,11 +125,6 @@
             zonaLabel: "Zona",
   hospedajesIntro: "Selección de hospedajes en Airbnb. Precios por noche en temporada media. Haz clic en 'Reservar estadía' para ir directamente a la oferta en Airbnb.",
   
-  // SOUVENIRS
-  souvenirsTag: "Artesanías · Cultura local",
-  souvenirsTitulo: "Tiendas de artesanías",
-  souvenirsDesc: "Souvenirs auténticos elaborados por artesanos locales.",
-  
   // GUÍAS TURÍSTICOS
   guiasTag: "Expertos locales · Certificados",
   guiasTituloHeader: "Guías Turísticos",

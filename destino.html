@@ -65,10 +65,9 @@
       <li><a data-sec="aventura" onclick="showSection('aventura')" data-i18n="navAventura"><svg viewBox="0 0 24 24"><path d="M12 2l9 18H3L12 2z"/></svg>Aventura</a></li>
       <li><a data-sec="practica" onclick="showSection('practica')" data-i18n="navPractica"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Info práctica</a></li>
       <li><a data-sec="aerolineas" onclick="showSection('aerolineas')" data-i18n="navAerolineas"><svg viewBox="0 0 24 24"><path d="M2.5 19l19-7-19-7 4 7-4 7z"/></svg>Aerolíneas</a></li>
-      <li><a data-sec="hospedajes" onclick="showSection('hospedajes')" data-i18n="navHospedajes"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/></svg>Hospedajes</a></li>
-      <li><a data-sec="souvenires" onclick="showSection('souvenires')" data-i18n="navSouvenirs"><svg viewBox="0 0 24 24"><path d="M20 7h-3.5a3.5 3.5 0 1 0-7 0H6a2 2 0 0 0-2 2v11h16V9a2 2 0 0 0-2-2z"/></svg>Souvenirs</a></li>
+<li><a data-sec="hospedajes" onclick="showSection('hospedajes')" data-i18n="navHospedajes"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/></svg>Hospedajes</a></li>
       <li><a data-sec="guias" onclick="showSection('guias')" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>Guías Turísticos</a></li>
-    </ul>
+</ul>
     </nav>
     <button type="button" class="nav-arrow nav-arrow-right" id="navArrowRight" aria-label="Ver más opciones">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
@@ -118,8 +117,7 @@
       <li style="animation-delay:.20s"><a data-sec="practica" onclick="showSection('practica');toggleMobileDrawer(false)" data-i18n="navPractica"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Info práctica</a></li>
       <li style="animation-delay:.23s"><a data-sec="aerolineas" onclick="showSection('aerolineas');toggleMobileDrawer(false)" data-i18n="navAerolineas"><svg viewBox="0 0 24 24"><path d="M2.5 19l19-7-19-7 4 7-4 7z"/></svg>Aerolíneas</a></li>
       <li style="animation-delay:.26s"><a data-sec="hospedajes" onclick="showSection('hospedajes');toggleMobileDrawer(false)" data-i18n="navHospedajes"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/></svg>Hospedajes</a></li>
-      <li style="animation-delay:.29s"><a data-sec="souvenires" onclick="showSection('souvenires');toggleMobileDrawer(false)" data-i18n="navSouvenirs"><svg viewBox="0 0 24 24"><path d="M20 7h-3.5a3.5 3.5 0 1 0-7 0H6a2 2 0 0 0-2 2v11h16V9a2 2 0 0 0-2-2z"/></svg>Souvenirs</a></li>
-      <li style="animation-delay:.32s"><a data-sec="guias" onclick="showSection('guias');toggleMobileDrawer(false)" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>Guías Turísticos</a></li>
+      <li style="animation-delay:.29s"><a data-sec="guias" onclick="showSection('guias');toggleMobileDrawer(false)" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>Guías Turísticos</a></li>
     </ul>
     <div class="mobile-drawer-divider"></div>
     <div class="mobile-drawer-foot">
@@ -313,23 +311,6 @@
   </div>
 </div>
 
-<!-- SOUVENIRS -->
-<div class="section" id="section-souvenires">
-  <div class="page-header">
-    <div class="page-header-bg" id="souvenirsHeaderBg"></div>
-    <div class="page-header-ov"></div>
-    <div class="page-header-content">
-      <div class="ph-tag" data-i18n="souvenirsTag">Artesanías · Cultura local</div>
-      <h2 id="souvenirsTitulo" data-i18n="souvenirsTitulo">Tiendas de artesanías</h2>
-      <p id="souvenirsDesc" data-i18n="souvenirsDesc">Souvenirs auténticos elaborados por artesanos locales.</p>
-    </div>
-  </div>
-  <div class="souvenirs-section reveal">
-    <div class="souvenirs-meta" id="souvenirsMeta"></div>
-    <div class="souvenirs-grid-3" id="souvenirsGrid"></div>
-  </div>
-</div>
-
 <!-- GUÍAS TURÍSTICOS -->
 <div class="section" id="section-guias">
   <div class="page-header">
@@ -355,30 +336,6 @@
       <span data-i18n="modalCerrar">Cerrar</span>
     </button>
     <div id="modalBody"></div>
-  </div>
-</div>
-
-<!-- MODAL SOUVENIRS -->
-<div id="souvenirModal" class="modal-overlay-souvenirs" role="dialog" aria-modal="true" aria-labelledby="modalShopName">
-  <div class="modal-content-souvenirs">
-    <button class="modal-close-sm" id="souvenirModalClose" onclick="closeSouvenirModal()" aria-label="Cerrar">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-    <div class="souvenir-modal-head">
-      <div>
-        <h3 id="modalShopName"></h3>
-        <div class="souv-shop-loc">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span id="modalShopLocation"></span>
-        </div>
-      </div>
-      <div class="souv-shop-count" id="modalShopCount"></div>
-    </div>
-    <div id="modalProducts"></div>
-    <a id="modalMapLink" href="#" target="_blank" rel="noopener" class="map-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span data-i18n="verEnGoogleMaps">Ver en Google Maps</span>
-    </a>
   </div>
 </div>
 

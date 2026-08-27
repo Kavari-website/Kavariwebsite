@@ -6,7 +6,6 @@
 // ============================================================
 let countryData = {};
 let guiasPanama = [];
-let souvenirsTiendas = [];
 let aerolineasData = [];
 let hospedajesData = [];
 let currentCountryCode = 'panama';
@@ -149,17 +148,7 @@ function enrichCountryData(codigo, d) {
             { id: 3, nombre: `Loft urbano - ${capital}`, tipo: 'Loft entero', descripcion: `Espacio amplio en ${capital}.`, imagen: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600', precio_noche: 65, moneda: 'USD', rating: 4.6, reviews: 52, capacidad: '1-3 personas', ubicacion: capital, url: 'https://www.airbnb.com', amenidades: ['WiFi', 'Netflix', 'Cocina'] }
         ];
     }
-    if (!d.souvenirs || d.souvenirs.length === 0) {
-        d.souvenirs = [
-            { id: 1, nombre: `Artesanías de ${destino}`, ubicacion: capital, descripcion: `Souvenirs auténticos de ${destino}.`, horario: 'Lun-Sáb 9:00-18:00', coords: encodeURIComponent(`${capital}, ${destino}`), productos: [
-                { nombre: `Recuerdo de ${destino}`, descripcion: 'Artesanía local.', precio: '$15-40 USD', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400' },
-                { nombre: 'Textil artesanal', descripcion: 'Tejidos regionales.', precio: '$25-60 USD', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400' }
-            ]},
-            { id: 2, nombre: `Mercado local - ${capital}`, ubicacion: capital, descripcion: `Productos típicos de ${destino}.`, horario: 'Mar-Dom 10:00-17:00', coords: encodeURIComponent(`Mercado ${capital}`), productos: [
-                { nombre: 'Especias locales', descripcion: 'Sabores de la región.', precio: '$8-20 USD', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400' }
-            ]}
-        ];
-    }
+    
     if (!d.guias || d.guias.length === 0) {
         let g = loadGuidesForCountry(codigo, []);
         if (g.length === 0) {
@@ -369,120 +358,6 @@ function renderHospedajes(d) {
         desc.textContent = `${_t('hospedajesDesc')} ${nombrePais(currentCountryCode, d.nombre)}.`;
     }
 }
-
-function renderSouvenirs(d) {
-    const grid = document.getElementById('souvenirsGrid');
-    if (!grid) return;
-    if (souvenirsTiendas.length === 0) {
-        grid.innerHTML = `<p style="padding:40px;text-align:center;opacity:.6">${_t('cargandoTiendas')}</p>`;
-        return;
-    }
-
-    const totalProductos = souvenirsTiendas.reduce((n, t) => n + (t.productos ? t.productos.length : 0), 0);
-    const meta = document.getElementById('souvenirsMeta');
-    if (meta) meta.innerHTML = `<strong>${souvenirsTiendas.length}</strong> ${_t('souvenirsTiendasLabel')} · <strong>${totalProductos}</strong> ${_t('souvenirsProductosLabel')}`;
-
-    grid.innerHTML = souvenirsTiendas.map(tienda => {
-        const prod = tienda.productos || [];
-        const portada = (prod[0] && prod[0].img) || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400';
-        let precioDesde = Infinity;
-        prod.forEach(p => { const n = parseInt(p.precio); if (!isNaN(n) && n < precioDesde) precioDesde = n; });
-        const precioHtml = isFinite(precioDesde)
-            ? `<div class="souv-price-tag">${_t('desde')} $${precioDesde}</div>`
-            : '';
-        const mini = prod.slice(0, 3).map(p => `
-            <div class="souv-mini-item" onclick="openSouvenirModal(${tienda.id})" title="${_t('verTodosLosProductos')}">
-                <img src="${p.img}" alt="${_t(p.nombre)}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100'">
-                <span>${_t(p.nombre)}</span>
-                ${p.precio ? `<span class="souv-mini-price">${_t(p.precio) || p.precio}</span>` : ''}
-            </div>`).join('');
-
-        return `
-        <article class="souvenir-card-v2" onclick="openSouvenirModal(${tienda.id})" role="button" tabindex="0" aria-label="${_t(tienda.nombre)}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openSouvenirModal(${tienda.id})}">
-            <div class="souv-img-wrap">
-                <img class="souv-main-img" src="${portada}" alt="${_t(tienda.nombre)}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400'">
-                <div class="souv-overlay"></div>
-                ${precioHtml}
-                <div class="souv-product-count">${prod.length} ${_t('articulos')}</div>
-                <div class="souv-location-badge">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    ${_t(tienda.ubicacion) || tienda.ubicacion}
-                </div>
-            </div>
-            <div class="souv-body">
-                <h4 class="souv-nombre">${_t(tienda.nombre)}</h4>
-                <p class="souv-desc">${_t(tienda.descripcion) || tienda.descripcion}</p>
-                ${tienda.horario ? `<div class="souv-horario"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ${_t(tienda.horario) || tienda.horario}</div>` : ''}
-                <div class="souv-products-preview">${mini}</div>
-            </div>
-            <div class="souv-footer">
-                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(tienda.coords)}" target="_blank" rel="noopener" class="souv-map-btn" onclick="event.stopPropagation()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    ${_t('verEnMapa')}
-                </a>
-                <button class="btn-sm" onclick="event.stopPropagation();openSouvenirModal(${tienda.id})">${_t('verTodosLosProductos')}</button>
-            </div>
-        </article>`;
-    }).join('');
-    const headerBg = document.getElementById('souvenirsHeaderBg');
-    if (headerBg && d) headerBg.style.backgroundImage = `url('${d.page_header_img}')`;
-    
-    // ✅ CORRECCIÓN: Usar claves existentes del diccionario
-    const titulo = document.getElementById('souvenirsTitulo');
-    if (titulo && d) {
-        titulo.textContent = `${_t('souvenirsTitulo')} — ${nombrePais(currentCountryCode, d.nombre)}`;
-    }
-    const desc = document.getElementById('souvenirsDesc');
-    if (desc && d) {
-        desc.textContent = `${_t('souvenirsDesc')} ${nombrePais(currentCountryCode, d.nombre)}.`;
-    }
-}
-
-function openSouvenirModal(shopId) {
-    const tienda = souvenirsTiendas.find(t => t.id === shopId);
-    if (!tienda) return;
-    const modal = document.getElementById('souvenirModal');
-    document.getElementById('modalShopName').innerText = _t(tienda.nombre);
-    const loc = document.getElementById('modalShopLocation');
-    if (loc) loc.textContent = _t(tienda.ubicacion) || tienda.ubicacion;
-    const count = document.getElementById('modalShopCount');
-    if (count) count.textContent = `${tienda.productos.length} ${_t('articulos')}`;
-    let productsHtml = '<div class="product-grid">';
-    tienda.productos.forEach(p => {
-        productsHtml += `
-            <div class="product-card">
-                <div class="product-card-img-wrap">
-                    <img class="product-card-img" src="${p.img}" alt="${_t(p.nombre)}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300'">
-                </div>
-                <div class="product-card-body">
-                    <strong class="product-card-name">${_t(p.nombre)}</strong>
-                    <span class="product-card-desc">${_t(p.descripcion) || p.descripcion}</span>
-                    ${p.precio ? `<span class="product-price-chip">${_t(p.precio) || p.precio}</span>` : ''}
-                </div>
-            </div>`;
-    });
-    productsHtml += '</div>';
-    document.getElementById('modalProducts').innerHTML = productsHtml;
-    document.getElementById('modalMapLink').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(tienda.coords)}`;
-    modal.classList.add('active');
-    if (window.KavariScrollLock) window.KavariScrollLock.lock();
-    const closeBtn = document.getElementById('souvenirModalClose');
-    if (closeBtn) closeBtn.focus();
-}
-function closeSouvenirModal() {
-    document.getElementById('souvenirModal').classList.remove('active');
-    if (window.KavariScrollLock) window.KavariScrollLock.unlock();
-}
-(function initSouvenirModal() {
-    const modal = document.getElementById('souvenirModal');
-    if (!modal) return;
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeSouvenirModal();
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) closeSouvenirModal();
-    });
-})();
 
 // ============================================================
 // 6. COUNTRY SELECTOR CUSTOM (sin cambios)
@@ -748,13 +623,11 @@ async function cargarPais(codigoPais) {
                 renderGuideFilters();
             }
         }).catch(() => { /* silencioso */ });
-        souvenirsTiendas = enriched.souvenirs || [];
         aerolineasData = enriched.aerolineas || [];
         hospedajesData = enriched.hospedajes || [];
 
         renderAllSections(enriched);
         renderGuideFilters();
-        renderSouvenirs(enriched);
         renderAerolineas(enriched);
         renderHospedajes(enriched);
 
@@ -1088,7 +961,6 @@ function showSection(id) {
     // quedaba fijo en "Inicio" sin importar la sección visitada).
     document.querySelectorAll('#mobileDrawerLinks a[data-sec]').forEach(a => a.classList.toggle('active', a.dataset.sec === id));
     if (id === 'guias') renderGuideFilters();
-    if (id === 'souvenires') renderSouvenirs(countryData);
     if (id === 'aerolineas') renderAerolineas(countryData);
     if (id === 'hospedajes') renderHospedajes(countryData);
     setTimeout(() => observeReveals(), 100);
