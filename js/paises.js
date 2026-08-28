@@ -343,7 +343,7 @@ async function persistLikeToServer(code, liked) {
       }
     }
   } catch (e) {
-    console.warn('[KAVARI] No se pudo sincronizar el like con la cuenta:', e);
+    // console.warn('[KAVARI] No se pudo sincronizar el like con la cuenta:', e);
   }
 }
 

@@ -129,22 +129,65 @@
     });
   }
 
+  function getLang() {
+    return (typeof window.getIdioma === 'function' ? window.getIdioma() : null) || localStorage.getItem('kavari-idioma') || 'es';
+  }
+
+  function applyI18n(data, i18n) {
+    if (!data || !i18n) return data;
+    const clone = JSON.parse(JSON.stringify(data));
+    function replaceInString(str) {
+      if (typeof str !== 'string') return str;
+      let result = str;
+      for (const [key, val] of Object.entries(i18n)) {
+        if (typeof val === 'string') result = result.split(key).join(val);
+      }
+      return result;
+    }
+    function walk(obj) {
+      if (Array.isArray(obj)) {
+        obj.forEach(walk);
+      } else if (obj && typeof obj === 'object') {
+        for (const [key, val] of Object.entries(obj)) {
+          if (Array.isArray(val) && typeof val[0] === 'string') {
+            obj[key] = val.map(replaceInString);
+          } else if (val && typeof val === 'object') {
+            walk(val);
+          } else if (typeof val === 'string') {
+            obj[key] = replaceInString(val);
+          }
+        }
+      }
+    }
+    walk(clone);
+    return clone;
+  }
+
   async function loadTouristCountries() {
     if (!selectCountry || selectCountry.dataset.loaded === '1') return;
     try {
       const res = await fetch('data/data.json', { cache: 'no-cache' });
       if (!res.ok) throw new Error('data.json ' + res.status);
       const data = await res.json();
+      const lang = getLang();
+      let countries = data;
+      try {
+        const i18nRes = await fetch('data/i18n/' + lang + '.json', { cache: 'no-cache' });
+        if (i18nRes.ok) {
+          const i18n = await i18nRes.json();
+          countries = applyI18n(data, i18n);
+        }
+      } catch (_) { /* noop */ }
       selectCountry.innerHTML = `<option value="" disabled selected>${t('seleccionaPais')}</option>`;
-      Object.keys(data)
-        .filter(key => data[key] && typeof data[key].nombre === 'string')
+      Object.keys(countries)
+        .filter(key => countries[key] && typeof countries[key].nombre === 'string')
         .sort((a, b) => {
-          const na = (window.paisNombre ? window.paisNombre(a, data[a].nombre) : data[a].nombre) || data[a].nombre || a;
-          const nb = (window.paisNombre ? window.paisNombre(b, data[b].nombre) : data[b].nombre) || data[b].nombre || b;
+          const na = (window.paisNombre ? window.paisNombre(a, countries[a].nombre) : countries[a].nombre) || countries[a].nombre || a;
+          const nb = (window.paisNombre ? window.paisNombre(b, countries[b].nombre) : countries[b].nombre) || countries[b].nombre || b;
           return na.localeCompare(nb, getLangBucket());
         })
         .forEach(key => {
-          const country = data[key];
+          const country = countries[key];
           const opt = document.createElement('option');
           opt.value = key;
           opt.textContent = (window.paisNombre ? window.paisNombre(key, country.nombre) : country.nombre) || country.nombre || key;

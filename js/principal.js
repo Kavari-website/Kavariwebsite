@@ -26,24 +26,58 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadTouristCountries() {
     if (!selectCountry || selectCountry.dataset.loaded === '1') return;
     const lang = getLang();
-    const placeholder = lang === 'en' ? 'Select a country' : 'Selecciona un país';
+    const placeholder = lang === 'en' ? 'Select a country' : t('seleccionaPais');
     fetch('data/data.json', { cache: 'no-cache' })
       .then(res => res.json())
       .then(data => {
-        selectCountry.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
-        Object.keys(data)
-          .sort((a, b) => (data[a].nombre || a).localeCompare(data[b].nombre || a, lang))
-          .forEach(key => {
-            const country = data[key];
-            const opt = document.createElement('option');
-            opt.value = key;
-            opt.textContent = country.nombre || key;
-            selectCountry.appendChild(opt);
+        let countries = data;
+        return fetch('data/i18n/' + lang + '.json', { cache: 'no-cache' })
+          .then(r => r.ok ? r.json() : null)
+          .then(i18n => {
+            if (i18n) {
+              const clone = JSON.parse(JSON.stringify(countries));
+              function replaceInString(str) {
+                if (typeof str !== 'string') return str;
+                let result = str;
+                for (const [key, val] of Object.entries(i18n)) {
+                  if (typeof val === 'string') result = result.split(key).join(val);
+                }
+                return result;
+              }
+              function walk(obj) {
+                if (Array.isArray(obj)) {
+                  obj.forEach(walk);
+                } else if (obj && typeof obj === 'object') {
+                  for (const [key, val] of Object.entries(obj)) {
+                    if (Array.isArray(val) && typeof val[0] === 'string') {
+                      obj[key] = val.map(replaceInString);
+                    } else if (val && typeof val === 'object') {
+                      walk(val);
+                    } else if (typeof val === 'string') {
+                      obj[key] = replaceInString(val);
+                    }
+                  }
+                }
+              }
+              walk(clone);
+              countries = clone;
+            }
+            selectCountry.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
+            Object.keys(countries)
+              .sort((a, b) => (countries[a].nombre || a).localeCompare(countries[b].nombre || b, lang))
+              .forEach(key => {
+                const country = countries[key];
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = country.nombre || key;
+                selectCountry.appendChild(opt);
+              });
+            selectCountry.dataset.loaded = '1';
           });
-        selectCountry.dataset.loaded = '1';
       })
       .catch(() => {
-        selectCountry.innerHTML = `<option value="" disabled selected>${lang === 'en' ? 'Error loading countries' : 'Error al cargar países'}</option>`;
+        selectCountry.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
+        selectCountry.dataset.loaded = '1';
       });
   }
 
@@ -225,9 +259,8 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (_) {}
 
       // Éxito
-      const successMsg = lang === 'en'
-        ? 'Registration successful! Your guide profile has been submitted for review. We will contact you soon.'
-        : '¡Registro exitoso! Tu perfil de guía ha sido enviado para revisión. Nos pondremos en contacto contigo pronto.';
+      const t = window.t || function(k){return k;};
+      const successMsg = t('guideExito');
 
       if (formStatus) {
         formStatus.textContent = successMsg;

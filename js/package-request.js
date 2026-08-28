@@ -78,20 +78,21 @@
     modal = document.createElement('div');
     modal.id = 'packageRequestModal';
     modal.className = 'traveler-modal';
+    const t = window.t || function(k){return k;};
     modal.innerHTML =
       '<section class="traveler-card" role="dialog" aria-modal="true" aria-labelledby="pkgTitle">' +
-        '<button class="traveler-close" type="button" aria-label="Cerrar">×</button>' +
-        '<h2 id="pkgTitle">Solicita tu plan de viaje</h2>' +
-        '<p>Cuéntanos tu plan y te armamos el paquete a tu medida.</p>' +
+        '<button class="traveler-close" type="button" aria-label="' + t('volverAtras') + '">×</button>' +
+        '<h2 id="pkgTitle">' + t('planCtaTitulo') + '</h2>' +
+        '<p>' + t('planCtaDesc') + '</p>' +
         '<div class="paq-banner" id="paqBanner"></div>' +
         '<form class="traveler-form" novalidate>' +
-          '<label>Nombre completo<input name="full_name" required minlength="2" autocomplete="name"></label>' +
-          '<label>Correo electrónico<input name="email" type="email" required autocomplete="email"></label>' +
-          '<label>Teléfono (opcional)<input name="phone" type="tel" autocomplete="tel"></label>' +
-          '<label>Fecha estimada de viaje<input name="travel_date" type="date"></label>' +
-          '<label>Número de viajeros<input name="travelers" type="number" min="1" max="30" value="2"></label>' +
-          '<label>Comentarios / ideas para tu plan<textarea name="notes" rows="3" placeholder="Ej: vuelos, hotel, guías, presupuesto…"></textarea></label>' +
-          '<button class="traveler-submit" type="submit">Solicitar mi plan</button>' +
+          '<label>' + t('planCtaNombreLabel') + '<input name="full_name" required minlength="2" autocomplete="name"></label>' +
+          '<label>' + t('planCtaEmailLabel') + '<input name="email" type="email" required autocomplete="email"></label>' +
+          '<label>' + t('planCtaTelefonoLabel') + ' (opcional)<input name="phone" type="tel" autocomplete="tel"></label>' +
+          '<label>' + t('planCtaFechaLabel') + '<input name="travel_date" type="date"></label>' +
+          '<label>' + t('planCtaViajerosLabel') + '<input name="travelers" type="number" min="1" max="30" value="2"></label>' +
+          '<label>' + t('planCtaMensajeLabel') + '<textarea name="notes" rows="3" placeholder="Ej: vuelos, hotel, guías, presupuesto…"></textarea></label>' +
+          '<button class="traveler-submit" type="submit">' + t('planCtaBoton') + '</button>' +
           '<p class="traveler-status" role="status" aria-live="polite"></p>' +
         '</form>' +
       '</section>';
@@ -109,6 +110,12 @@
     });
 
     form.addEventListener('submit', onSubmit);
+  }
+
+  function setStatus(text, isError) {
+    if (!statusEl) return;
+    statusEl.textContent = text;
+    statusEl.className = 'traveler-status' + (isError ? ' is-error' : '');
   }
 
   function onSubmit(e) {
@@ -138,20 +145,20 @@
         var el = form.querySelector('[name=' + n + ']');
         if (el) el.classList.add('field-error');
       });
-      setStatus('Revisa los campos marcados.', true);
+      setStatus(window.t('planCtaError'), true);
       return;
     }
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando…';
+    submitBtn.textContent = window.t('planCtaEnviando');
     setStatus('');
 
     var client = window.KavariDB && window.KavariDB.getSupabaseClient ?
       window.KavariDB.getSupabaseClient() : null;
     if (!client) {
-      setStatus('Supabase no está disponible. Intenta de nuevo.', true);
+      setStatus(window.t('planCtaFallo'), true);
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Solicitar mi plan';
+      submitBtn.textContent = window.t('planCtaBoton');
       return;
     }
 
@@ -176,19 +183,19 @@
       });
     }).then(function (res) {
       if (res && res.error) throw res.error;
-      setStatus('¡Solicitud enviada! Te contactaremos para armar tu plan.');
+      setStatus(window.t('planCtaExito'));
       form.reset();
       setTimeout(function () {
         close();
         setStatus('');
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Solicitar mi plan';
+        submitBtn.textContent = window.t('planCtaBoton');
       }, 1400);
     }).catch(function (err) {
       console.error('[KAVARI] Error guardando solicitud de paquete:', err);
-      setStatus('No se pudo enviar la solicitud. Intenta de nuevo.', true);
+      setStatus(window.t('planCtaFallo'), true);
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Solicitar mi plan';
+      submitBtn.textContent = window.t('planCtaBoton');
     });
   }
 

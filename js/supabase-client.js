@@ -31,7 +31,7 @@ function getSupabaseClient() {
     }
     return window._kavariSupabase;
   }
-  console.warn('[KAVARI] Supabase SDK no cargado. Incluye el CDN antes de supabase-client.js');
+  // console.warn('[KAVARI] Supabase SDK no cargado. Incluye el CDN antes de supabase-client.js');
   return null;
 }
 

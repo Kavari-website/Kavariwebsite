@@ -352,7 +352,7 @@
     welcomeShown = false;
     showWelcome();
     setThinking(false);
-    const rep = msg('Conversación limpia. ¿En qué te ayudo?', 'Conversation cleared. How can I help you?', 'Conversa limpa. Como posso ajudá-lo?');
+    const rep = msg('Conversación limpia. ¿En qué te ayudo?', 'Conversation cleared. How can I help you?', 'Conversa limpa. Como posso ajudá-lo?', 'Conversation effacée. Comment puis-je vous aider ?');
     addBotMessage(renderBotText(rep));
   }
 
@@ -479,13 +479,14 @@
         } else if (typeof generateGeneralResponse === 'function') {
           html = generateGeneralResponse(q);
         } else {
-          html = msg('¿En qué puedo ayudarte?', 'How can I help you?', 'Como posso ajudá-lo?');
+          html = msg('¿En qué puedo ayudarte?', 'How can I help you?', 'Como posso ajudá-lo?', 'Comment puis-je vous aider ?');
         }
       } catch (err) {
         html = msg(
           'Lo siento, algo falló al responder eso. Intenta reformular tu pregunta.',
           'Sorry, something went wrong answering that. Try rephrasing your question.',
-          'Desculpe, algo deu errado ao responder isso. Tente reformular a sua pergunta.'
+          'Desculpe, algo deu errado ao responder isso. Tente reformular a sua pergunta.',
+          'Désolé, une erreur est survenue. Essayez de reformuler votre question.'
         );
       }
     }
@@ -558,15 +559,23 @@
     if (!code) return;
     try {
       let all = null;
+      const lang = (localStorage.getItem('kavari-idioma') || localStorage.getItem('idioma') || 'es');
       try {
-        const cached = sessionStorage.getItem('kavari-data-cache-v1');
+        const cached = sessionStorage.getItem('kavari-data-cache-v1-' + lang);
         if (cached) all = JSON.parse(cached);
       } catch (_) { /* noop */ }
       if (!all) {
         const res = await fetch('data/data.json', { cache: 'no-cache' });
         if (!res.ok) throw new Error('data.json ' + res.status);
         all = await res.json();
-        try { sessionStorage.setItem('kavari-data-cache-v1', JSON.stringify(all)); } catch (_) { /* noop */ }
+        try {
+          const i18nRes = await fetch('data/i18n/' + lang + '.json', { cache: 'no-cache' });
+          if (i18nRes.ok) {
+            const i18n = await i18nRes.json();
+            all = applyI18n(all, i18n);
+          }
+        } catch (_) { /* noop */ }
+        try { sessionStorage.setItem('kavari-data-cache-v1-' + lang, JSON.stringify(all)); } catch (_) { /* noop */ }
       }
       if (!all[code]) return;
       const d = all[code];
@@ -577,7 +586,37 @@
         hospedajes: d.hospedajes || []
       });
     } catch (e) {
-      console.warn('KAVARI chatbot: no se pudo cargar data.json', e);
+      // console.warn('KAVARI chatbot: no se pudo cargar data.json', e);
     }
+  }
+
+  function applyI18n(data, i18n) {
+    if (!data || !i18n) return data;
+    const clone = JSON.parse(JSON.stringify(data));
+    function replaceInString(str) {
+      if (typeof str !== 'string') return str;
+      let result = str;
+      for (const [key, val] of Object.entries(i18n)) {
+        if (typeof val === 'string') result = result.split(key).join(val);
+      }
+      return result;
+    }
+    function walk(obj) {
+      if (Array.isArray(obj)) {
+        obj.forEach(walk);
+      } else if (obj && typeof obj === 'object') {
+        for (const [key, val] of Object.entries(obj)) {
+          if (Array.isArray(val) && typeof val[0] === 'string') {
+            obj[key] = val.map(replaceInString);
+          } else if (val && typeof val === 'object') {
+            walk(val);
+          } else if (typeof val === 'string') {
+            obj[key] = replaceInString(val);
+          }
+        }
+      }
+    }
+    walk(clone);
+    return clone;
   }
 })();

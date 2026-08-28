@@ -15750,21 +15750,32 @@ paisGuyana_hospedajes_4_tipo: 'Rural cabin',
 paisGuyana_hospedajes_4_descripcion: 'Ranch in the Rupununi savannas. Rustic cabins, wildlife watching, and open landscapes.',
 paisGuyana_hospedajes_5_nombre: 'Cabin in Shell Beach',
 paisGuyana_hospedajes_5_tipo: 'Coastal cabin',
-paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views, beach access, and turtle season.',
+  paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views, beach access, and turtle season.',
+
+  metaDescAyuda: 'KAVARI Help Center: frequently asked questions, usage guides, support for travelers and tourist guides.',
+  metaDescCookies: 'KAVARI Travel cookie policy: what cookies and storage we use, how and why.',
+  metaDescCuenta: 'Manage your KAVARI profile, travel preferences and account settings.',
+  metaDescDestino: 'Discover tourist destinations with KAVARI: culture, gastronomy, adventure, airlines, accommodations and certified guides for each country.',
+  metaDescIndex: 'Discover the best destinations in the world with KAVARI. Certified tourist guides, travel packages, airlines and accommodations all in one platform.',
+  metaDescPaises: 'Explore 21 tourist destinations in Latin America and the Caribbean with KAVARI. Complete information on culture, gastronomy, accommodations and certified guides.',
+  metaDescPerfil: 'Manage your KAVARI profile, travel preferences and account settings.',
+  metaDescPlanes: 'KAVARI travel plans: discover destinations, packages, tourist guides and more.',
+  metaDescPrivacidad: 'KAVARI Travel privacy policy: what data we collect, how we use it and what are your rights.',
+  metaDescSobrenosotros: 'Meet the team behind KAVARI: mission, vision and the members who make this smart tourism platform possible.',
+  metaDescTerminos: 'Terms and conditions of use of KAVARI Travel.',
+  titleCookies: 'Cookie Policy · KAVARI',
+  titlePrivacidad: 'Privacy Policy · KAVARI',
+  titleTerminos: 'Terms and Conditions · KAVARI'
 }
     
       
    };
 
     // ===== LÓGICA DE IDIOMA =====
-    // Idiomas soportados: es, en, pt, fr. Los diccionarios pt/fr se cargan
-    // desde js/idioma-pt.js y js/idioma-fr.js vía window.__kavariIdiomasExtras.
     const idiomasSoportados = ['es', 'en', 'pt', 'fr'];
-    // El diccionario extra (idioma-pt.js) puede cargarse después de este archivo,
-    // así que el merge se ejecuta también de forma perezosa en t().
-    // Se memoiza para no repetir la fusión en cada llamada a t() (rendimiento).
     let extrasFusionados = false;
-    const CACHE_T = new Map(); // idioma -> Map(clave -> traducción) para respuesta instantánea
+    const CACHE_T = new Map();
+
     function mergeIdiomasExtras() {
         if (extrasFusionados) return;
         if (window.__kavariIdiomasExtras) {
@@ -15775,9 +15786,19 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
             CACHE_T.clear();
         }
     }
+
+    // Reintentar fusión de extras cuando lleguen (por si se cargan con defer)
+    function tryMergeExtras() {
+        if (!extrasFusionados && window.__kavariIdiomasExtras) {
+            mergeIdiomasExtras();
+        }
+    }
+
     mergeIdiomasExtras();
+    setInterval(tryMergeExtras, 100);
+
     let idiomaActual = 'es';
-    const idiomaGuardado = localStorage.getItem('kavari-idioma') || navigator.language.slice(0, 2) || 'es';
+    const idiomaGuardado = localStorage.getItem('kavari-idioma') || (navigator.language && navigator.language.slice(0, 2)) || 'es';
     if (idiomasSoportados.indexOf(idiomaGuardado) === -1) {
         idiomaActual = 'es';
     } else {
@@ -15785,7 +15806,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
     }
 
     window.t = function(clave) {
-        mergeIdiomasExtras();
+        tryMergeExtras();
         let cache = CACHE_T.get(idiomaActual);
         if (!cache) { cache = new Map(); CACHE_T.set(idiomaActual, cache); }
         else if (cache.has(clave)) return cache.get(clave);
@@ -15795,7 +15816,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabin on the remote Shell Beach. Sea views
             if (d && d[clave] !== undefined) { resultado = d[clave]; encontrado = true; break; }
         }
         if (!encontrado) {
-            console.warn(`Traducción no encontrada para: "${clave}" en idioma "${idiomaActual}"`);
+            // console.warn('Traducción no encontrada para: "' + clave + '" en idioma "' + idiomaActual + '"');
         }
         cache.set(clave, resultado);
         return resultado;

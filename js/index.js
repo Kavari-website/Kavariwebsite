@@ -41,18 +41,67 @@ function translateOrDefault(key, fallback) {
     return value === key ? fallback : value;
 }
 
+function getLang() {
+    return (typeof window.getIdioma === 'function' ? window.getIdioma() : null) || localStorage.getItem('kavari-idioma') || 'es';
+}
+
+function applyI18n(data, i18n) {
+    if (!data || !i18n) return data;
+    const clone = JSON.parse(JSON.stringify(data));
+
+    function replaceInString(str) {
+        if (typeof str !== 'string') return str;
+        let result = str;
+        for (const [key, val] of Object.entries(i18n)) {
+            if (typeof val === 'string') {
+                result = result.split(key).join(val);
+            }
+        }
+        return result;
+    }
+
+    function walk(obj) {
+        if (Array.isArray(obj)) {
+            obj.forEach(walk);
+        } else if (obj && typeof obj === 'object') {
+            for (const [key, val] of Object.entries(obj)) {
+                if (Array.isArray(val) && typeof val[0] === 'string') {
+                    obj[key] = val.map(replaceInString);
+                } else if (val && typeof val === 'object') {
+                    walk(val);
+                } else if (typeof val === 'string') {
+                    obj[key] = replaceInString(val);
+                }
+            }
+        }
+    }
+
+    walk(clone);
+    return clone;
+}
+
 function loadHomeData() {
     if (window.homeDataPromise) return window.homeDataPromise;
+    const lang = getLang();
     window.homeDataPromise = fetch('data/data.json', { cache: 'no-cache' })
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) throw new Error('HTTP error! status: ' + res.status);
+            return res.json();
+        })
         .then(data => {
-            top10Data = data.top10 || {};
-            paquetesData = data.paquetes || {};
-            window.homeDataLoaded = true;
-            renderHomeCards();
+            return fetch(`data/i18n/${lang}.json`, { cache: 'no-cache' })
+                .then(r => r.ok ? r.json() : null)
+                .then(i18n => {
+                    const translated = applyI18n(data, i18n);
+                    top10Data = translated.top10 || {};
+                    paquetesData = translated.paquetes || {};
+                    window.homeDataLoaded = true;
+                    renderHomeCards();
+                });
         })
         .catch(error => {
             console.error('Error cargando data de inicio:', error);
+            window.homeDataPromise = null;
         });
     return window.homeDataPromise;
 }
@@ -391,18 +440,25 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 // Listener para actualizar modales y tarjetas cuando cambia el idioma
 window.addEventListener('kavari:langchange', function(e) {
     const idioma = e.detail.idioma;
-    
-    // Re-renderizar tarjetas del home con el nuevo idioma
-    if (window.homeDataLoaded) renderHomeCards();
-    
-    // Si hay un modal de Top 10 abierto, actualizarlo
-    if (window.currentTop10ModalId && document.getElementById('top10ModalOverlay').classList.contains('active')) {
-        abrirModalTop10(window.currentTop10ModalId);
-    }
-    
-    // Si hay un modal de paquete abierto, actualizarlo
-    if (window.currentPaqueteModalId && document.getElementById('paqueteModalOverlay').classList.contains('active')) {
-        abrirModalPaquete(window.currentPaqueteModalId);
+
+    if (window.homeDataLoaded) {
+        window.homeDataPromise = null;
+        window.homeDataLoaded = false;
+        loadHomeData().then(() => {
+            if (window.currentTop10ModalId && document.getElementById('top10ModalOverlay').classList.contains('active')) {
+                abrirModalTop10(window.currentTop10ModalId);
+            }
+            if (window.currentPaqueteModalId && document.getElementById('paqueteModalOverlay').classList.contains('active')) {
+                abrirModalPaquete(window.currentPaqueteModalId);
+            }
+        });
+    } else {
+        if (window.currentTop10ModalId && document.getElementById('top10ModalOverlay').classList.contains('active')) {
+            abrirModalTop10(window.currentTop10ModalId);
+        }
+        if (window.currentPaqueteModalId && document.getElementById('paqueteModalOverlay').classList.contains('active')) {
+            abrirModalPaquete(window.currentPaqueteModalId);
+        }
     }
 });
 

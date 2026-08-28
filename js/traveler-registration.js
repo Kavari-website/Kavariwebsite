@@ -97,13 +97,45 @@
       }
 
       fetch('data/data.json', { cache: 'no-cache' }).then(r=>r.json()).then(data=>{
-        const s=m.querySelector('[name=country]');
-        s.innerHTML='<option value="">'+(window.t?window.t('seleccionaPais'):'Selecciona un país')+'</option>'+Object.entries(data)
-          .filter(([,v])=>v&&v.nombre)
-          .map(([k,v])=>{const n=(window.paisNombre?window.paisNombre(k,v.nombre):v.nombre)||v.nombre;return '<option value="'+esc(k)+'">'+esc(n)+'</option>';}).join('');
-        s.value=localStorage.getItem('paisSeleccionado')||'';
-        s.addEventListener('change',function(){showGuidesForCountry(this.value)});
-        showGuidesForCountry(s.value);
+        const lang = (localStorage.getItem('kavari-idioma') || localStorage.getItem('idioma') || 'es');
+        let countries = data;
+        return fetch('data/i18n/' + lang + '.json', { cache: 'no-cache' }).then(r2 => r2.ok ? r2.json() : null).then(i18n => {
+          if (i18n) {
+            const clone = JSON.parse(JSON.stringify(countries));
+            function replaceInString(str) {
+              if (typeof str !== 'string') return str;
+              let result = str;
+              for (const [key, val] of Object.entries(i18n)) {
+                if (typeof val === 'string') result = result.split(key).join(val);
+              }
+              return result;
+            }
+            function walk(obj) {
+              if (Array.isArray(obj)) {
+                obj.forEach(walk);
+              } else if (obj && typeof obj === 'object') {
+                for (const [key, val] of Object.entries(obj)) {
+                  if (Array.isArray(val) && typeof val[0] === 'string') {
+                    obj[key] = val.map(replaceInString);
+                  } else if (val && typeof val === 'object') {
+                    walk(val);
+                  } else if (typeof val === 'string') {
+                    obj[key] = replaceInString(val);
+                  }
+                }
+              }
+            }
+            walk(clone);
+            countries = clone;
+          }
+          const s=m.querySelector('[name=country]');
+          s.innerHTML='<option value="">'+(window.t?window.t('seleccionaPais'):'Selecciona un país')+'</option>'+Object.entries(countries)
+            .filter(([,v])=>v&&v.nombre)
+            .map(([k,v])=>{const n=(window.paisNombre?window.paisNombre(k,v.nombre):v.nombre)||v.nombre;return '<option value="'+esc(k)+'">'+esc(n)+'</option>';}).join('');
+          s.value=localStorage.getItem('paisSeleccionado')||'';
+          s.addEventListener('change',function(){showGuidesForCountry(this.value)});
+          showGuidesForCountry(s.value);
+        });
       }).catch(()=>{
         m.querySelector('.traveler-status').textContent='No se pudo cargar la lista de países.';
         m.querySelector('.traveler-status').classList.add('is-error');
@@ -164,10 +196,10 @@
                 country_code:country_,
                 plan:plan||null
               }))
-              .then(res=>{if(res&&res.error)console.warn('[KAVARI] No se pudo guardar el registro del viajero en la nube:',res.error.message)})
-              .catch(err=>console.warn('[KAVARI] Error guardando registro del viajero:',err));
+              .then(function(res){})
+              .catch(function(err){})
           }
-        }catch(err){console.warn('[KAVARI] Error guardando registro del viajero:',err)}
+        }catch(err){}
 
         setTimeout(()=>{
           status.textContent='Registro guardado. Ya apareces en el destino elegido.';

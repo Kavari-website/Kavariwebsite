@@ -109,7 +109,7 @@ async function loadApprovedGuidesFromSupabase(countryCode) {
             especialidades: String(row.specialties || '').split(',').map(s => s.trim()).filter(Boolean)
         }));
     } catch (e) {
-        console.warn('[KAVARI] No se pudieron cargar guías de Supabase:', e);
+        // console.warn('[KAVARI] No se pudieron cargar guías de Supabase:', e);
         return [];
     }
 }
@@ -506,36 +506,86 @@ function initCountrySelector() {
 // ============================================================
 // 7. CARGA Y RENDERIZADO PRINCIPAL
 // ============================================================
-const DATA_CACHE_KEY = 'kavari-data-cache-v1';
+const DATA_CACHE_KEY_BASE = 'kavari-data-cache-v1';
 
 function getDataCache() {
+    const lang = (typeof window.getIdioma === 'function' ? window.getIdioma() : null) || localStorage.getItem('kavari-idioma') || 'es';
+    const key = DATA_CACHE_KEY_BASE + '-' + lang;
     try {
-        const raw = sessionStorage.getItem(DATA_CACHE_KEY);
+        const raw = sessionStorage.getItem(key);
         return raw ? JSON.parse(raw) : null;
     } catch (e) { return null; }
 }
 
 function setDataCache(data) {
-    try { sessionStorage.setItem(DATA_CACHE_KEY, JSON.stringify(data)); } catch (e) { /* almacenamiento lleno */ }
+    const lang = (typeof window.getIdioma === 'function' ? window.getIdioma() : null) || localStorage.getItem('kavari-idioma') || 'es';
+    const key = DATA_CACHE_KEY_BASE + '-' + lang;
+    try { sessionStorage.setItem(key, JSON.stringify(data)); } catch (e) { /* almacenamiento lleno */ }
+}
+
+function getLang() {
+    return (typeof window.getIdioma === 'function' ? window.getIdioma() : null) || localStorage.getItem('kavari-idioma') || 'es';
+}
+
+function applyI18n(data, i18n) {
+    if (!data || !i18n) return data;
+    const clone = JSON.parse(JSON.stringify(data));
+
+    function replaceInString(str) {
+        if (typeof str !== 'string') return str;
+        let result = str;
+        for (const [key, val] of Object.entries(i18n)) {
+            if (typeof val === 'string') {
+                result = result.split(key).join(val);
+            }
+        }
+        return result;
+    }
+
+    function walk(obj) {
+        if (Array.isArray(obj)) {
+            obj.forEach(walk);
+        } else if (obj && typeof obj === 'object') {
+            for (const [key, val] of Object.entries(obj)) {
+                if (Array.isArray(val) && typeof val[0] === 'string') {
+                    obj[key] = val.map(replaceInString);
+                } else if (val && typeof val === 'object') {
+                    walk(val);
+                } else if (typeof val === 'string') {
+                    obj[key] = replaceInString(val);
+                }
+            }
+        }
+    }
+
+    walk(clone);
+    return clone;
 }
 
 async function loadDataJson() {
     if (datosGlobales) return datosGlobales;
     const cache = getDataCache();
     try {
-        // Siempre pide la copia fresca ('no-cache' evita que el navegador
-        // devuelva una versión vieja): los cambios en data.json se reflejan
-        // al recargar sin tener que cerrar la pestaña.
         const respuesta = await fetch('data/data.json', { cache: 'no-cache' });
         if (!respuesta.ok) throw new Error(`HTTP error! status: ${respuesta.status}`);
         const data = await respuesta.json();
-        datosGlobales = data;
-        setDataCache(data);
-        return data;
+        const lang = getLang();
+        try {
+            const i18nRes = await fetch(`data/i18n/${lang}.json`, { cache: 'no-cache' });
+            if (i18nRes.ok) {
+                const i18n = await i18nRes.json();
+                datosGlobales = applyI18n(data, i18n);
+            } else {
+                datosGlobales = data;
+            }
+        } catch (e) {
+            datosGlobales = data;
+        }
+        setDataCache(datosGlobales);
+        return datosGlobales;
     } catch (e) {
-        // Sin servidor/red: usa la copia guardada de esta sesión si existe
         if (cache) {
-            console.warn('[KAVARI] Usando data.json en caché (no se pudo recargar):', e);
+            // console.warn('[KAVARI] Usando data.json en caché (no se pudo recargar):', e);
             datosGlobales = cache;
             return cache;
         }
@@ -594,7 +644,7 @@ async function withCountryVeil(codigo, { minMs = 180 } = {}) {
 
 async function cargarPais(codigoPais) {
     try {
-        console.log('🔄 Cargando país:', codigoPais);
+        // console.log('🔄 Cargando país:', codigoPais);
         const data = await loadDataJson();
         if (!window.__countrySelectorReady) {
             initCountrySelector();
@@ -605,7 +655,7 @@ async function cargarPais(codigoPais) {
             console.error('❌ País no encontrado:', codigoPais);
             return;
         }
-        console.log('✅ País encontrado:', d.nombre);
+        // console.log('✅ País encontrado:', d.nombre);
         const enriched = enrichCountryData(codigoPais, JSON.parse(JSON.stringify(d)));
         countryData = enriched;
         currentCountryCode = codigoPais;
@@ -1035,6 +1085,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 window.addEventListener('kavari:langchange', () => {
+    datosGlobales = null;
     if (currentCountryCode && window.__kavariDestinoInit) {
         cargarPais(currentCountryCode);
     }
@@ -1109,4 +1160,4 @@ window.addEventListener('kavari:langchange', () => {
     });
 })();
 
-console.log('✅ destino.js cargado correctamente (con soporte para selector custom y drawer móvil)');
+// console.log('✅ destino.js cargado correctamente (con soporte para selector custom y drawer móvil)');

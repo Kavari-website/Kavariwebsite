@@ -269,7 +269,8 @@
     return tr(
       `Solo puedo responder con esta ficha de <strong>${name}</strong>. Prueba preguntando por: ${topics.join(', ')}.`,
       `I can only answer from the KAVARI page for <strong>${name}</strong>. Try asking about: ${topics.join(', ')}.`,
-      `Só posso responder com esta página de <strong>${name}</strong>. Tente perguntar sobre: ${topics.join(', ')}.`
+      `Só posso responder com esta página de <strong>${name}</strong>. Tente perguntar sobre: ${topics.join(', ')}.`,
+      `Je ne peux répondre qu'avec la fiche de <strong>${name}</strong>. Essayez de demander : ${topics.join(', ')}.`
     );
   };
 
@@ -433,7 +434,8 @@
     return tr(
       `Respondo solo sobre KAVARI. Prueba preguntando por: ${topics.join(', ')}.`,
       `I answer only about KAVARI. Try asking about: ${topics.join(', ')}.`,
-      `Respondo apenas sobre a KAVARI. Tente perguntar sobre: ${topics.join(', ')}.`
+      `Respondo apenas sobre a KAVARI. Tente perguntar sobre: ${topics.join(', ')}.`,
+      `Je ne réponds qu'à propos de KAVARI. Essayez de demander : ${topics.join(', ')}.`
     );
   };
 })();

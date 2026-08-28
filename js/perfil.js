@@ -11,6 +11,40 @@
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => document.querySelectorAll(sel);
 
+  function getLang() {
+    return (typeof window.getIdioma === 'function' ? window.getIdioma() : null) || localStorage.getItem('kavari-idioma') || 'es';
+  }
+
+  function applyI18n(data, i18n) {
+    if (!data || !i18n) return data;
+    const clone = JSON.parse(JSON.stringify(data));
+    function replaceInString(str) {
+      if (typeof str !== 'string') return str;
+      let result = str;
+      for (const [key, val] of Object.entries(i18n)) {
+        if (typeof val === 'string') result = result.split(key).join(val);
+      }
+      return result;
+    }
+    function walk(obj) {
+      if (Array.isArray(obj)) {
+        obj.forEach(walk);
+      } else if (obj && typeof obj === 'object') {
+        for (const [key, val] of Object.entries(obj)) {
+          if (Array.isArray(val) && typeof val[0] === 'string') {
+            obj[key] = val.map(replaceInString);
+          } else if (val && typeof val === 'object') {
+            walk(val);
+          } else if (typeof val === 'string') {
+            obj[key] = replaceInString(val);
+          }
+        }
+      }
+    }
+    walk(clone);
+    return clone;
+  }
+
   const views = {
     authRequired: $('#perfilAuthRequired'),
     registerForm: $('#perfilRegisterForm'),
@@ -127,13 +161,22 @@
       const res = await fetch('data/data.json', { cache: 'no-cache' });
       const data = await res.json();
       const currentVal = selectEl.value;
+      const lang = getLang ? getLang() : (localStorage.getItem('kavari-idioma') || 'es');
+      let countries = data;
+      try {
+        const i18nRes = await fetch('data/i18n/' + lang + '.json', { cache: 'no-cache' });
+        if (i18nRes.ok) {
+          const i18n = await i18nRes.json();
+          countries = applyI18n ? applyI18n(data, i18n) : data;
+        }
+      } catch (_) { /* noop */ }
       selectEl.innerHTML = '<option value="">' + (window.t ? window.t('seleccionaPais') : 'Selecciona un país') + '</option>';
-      Object.keys(data)
-        .sort((a, b) => (data[a].nombre || a).localeCompare(data[b].nombre || b))
+      Object.keys(countries)
+        .sort((a, b) => (countries[a].nombre || a).localeCompare(countries[b].nombre || b))
         .forEach(key => {
           const opt = document.createElement('option');
           opt.value = key;
-          opt.textContent = (window.paisNombre ? window.paisNombre(key, data[key].nombre) : data[key].nombre) || key;
+          opt.textContent = (window.paisNombre ? window.paisNombre(key, countries[key].nombre) : countries[key].nombre) || key;
           selectEl.appendChild(opt);
         });
       if (currentVal) selectEl.value = currentVal;
@@ -203,7 +246,19 @@
     if (_dataJsonCache) return _dataJsonCache;
     try {
       const res = await fetch('data/data.json', { cache: 'no-cache' });
-      _dataJsonCache = await res.json();
+      const data = await res.json();
+      const lang = getLang ? getLang() : (localStorage.getItem('kavari-idioma') || 'es');
+      try {
+        const i18nRes = await fetch('data/i18n/' + lang + '.json', { cache: 'no-cache' });
+        if (i18nRes.ok) {
+          const i18n = await i18nRes.json();
+          _dataJsonCache = applyI18n ? applyI18n(data, i18n) : data;
+        } else {
+          _dataJsonCache = data;
+        }
+      } catch (_) {
+        _dataJsonCache = data;
+      }
     } catch (e) {
       console.error('[KAVARI Perfil] Error cargando data.json:', e);
       _dataJsonCache = {};
@@ -461,7 +516,7 @@
           await window.KavariAuth.setLikeOrder(session.user.id, codes);
         }
       } catch (e) {
-        console.warn('[KAVARI Perfil] No se pudo guardar el orden en la cuenta:', e);
+        // console.warn('[KAVARI Perfil] No se pudo guardar el orden en la cuenta:', e);
       }
     })();
   }
@@ -482,7 +537,7 @@
         await window.KavariAuth.setUserLike(session.user.id, code, false);
       }
     } catch (e) {
-      console.warn('[KAVARI Perfil] No se pudo quitar el favorito de la cuenta:', e);
+      // console.warn('[KAVARI Perfil] No se pudo quitar el favorito de la cuenta:', e);
     }
     if (cardEl) {
       cardEl.style.transition = 'opacity .25s ease, transform .25s ease';
@@ -678,7 +733,7 @@
         }
       }, 600);
     } catch (e) {
-      console.warn('[KAVARI Perfil] No se pudo renderizar el botón de Google, se usará redirección:', e);
+      // console.warn('[KAVARI Perfil] No se pudo renderizar el botón de Google, se usará redirección:', e);
       overlay.remove();
       btn.dataset.gisRendered = 'false';
     }
@@ -686,7 +741,7 @@
 
   function initGoogleIdentity() {
     if (!window.google?.accounts?.id) {
-      console.warn('[KAVARI Perfil] Google Identity Services no cargado. Se usará OAuth redirect (como GitHub).');
+      // console.warn('[KAVARI Perfil] Google Identity Services no cargado. Se usará OAuth redirect (como GitHub).');
       return;
     }
 
@@ -698,7 +753,7 @@
         auto_select: false
       });
     } catch (e) {
-      console.warn('[KAVARI Perfil] No se pudo inicializar Google Identity Services:', e);
+      // console.warn('[KAVARI Perfil] No se pudo inicializar Google Identity Services:', e);
     }
 
     // El botón de GIS se renderiza en el overlay cuando la vista es visible (ver showView)
@@ -757,7 +812,7 @@
       // (correo ya registrado), mostramos el mensaje y no abrimos otro flujo.
       const raw = String(result.error);
       if (/jwt|invalid_client|audience|id_token|provider.*not.*enabled|disabled/i.test(raw)) {
-        console.warn('[KAVARI Perfil] Reintentando con OAuth redirect…');
+        // console.warn('[KAVARI Perfil] Reintentando con OAuth redirect…');
         await startGoogleRedirect();
       } else {
         showAuthError(result.error);
@@ -907,24 +962,26 @@
 
   /* ─── Delete Account Handler ─── */
   async function handleDeleteAccount() {
+    const t = window.t || function(k){return k;};
     const confirmed = window.confirm(
-      '¿Seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer.'
+      t('perfilEliminarCuentaConfirm')
     );
     if (!confirmed) return;
 
     els.perfilDeleteAccountBtn.disabled = true;
-    els.perfilDeleteAccountBtn.textContent = 'Eliminando…';
+    els.perfilDeleteAccountBtn.textContent = t('perfilEliminando');
 
     const result = await window.KavariAuth.deleteAccount();
 
     if (result.error) {
-      window.alert('No se pudo eliminar la cuenta: ' + result.error);
+      window.alert(t('perfilEliminarCuentaError') + result.error);
       els.perfilDeleteAccountBtn.disabled = false;
       els.perfilDeleteAccountBtn.textContent = t('perfilEliminarCuenta');
       return;
     }
 
-    showView('authRequired');
+    window.alert(t('perfilEliminarCuentaExito'));
+    window.location.reload();
   }
 
   /* ─── Tab Switching ─── */

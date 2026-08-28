@@ -191,7 +191,7 @@
               avatar_url: info.picture || null
             });
           } catch (_) {
-            console.warn('[KAVARI Auth] No se pudo crear el perfil (¿tabla profiles ausente?).');
+            // console.warn('[KAVARI Auth] No se pudo crear el perfil (¿tabla profiles ausente?).');
           }
         }
         profile = await getProfileWithRetry(data.user.id);
@@ -615,7 +615,7 @@
     if (!client) return;
 
     client.auth.onAuthStateChange(async (event, session) => {
-      console.log('[KAVARI Auth] Evento:', event);
+      // console.log('[KAVARI Auth] Evento:', event);
 
       if (session?.user) {
         let profile = await getProfile(session.user.id);
@@ -632,7 +632,7 @@
             });
             profile = await getProfile(session.user.id);
           } catch (err) {
-            console.warn('[KAVARI Auth] No se pudo crear el perfil:', err);
+            // console.warn('[KAVARI Auth] No se pudo crear el perfil:', err);
           }
         }
         if (profile) {

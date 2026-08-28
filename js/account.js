@@ -340,7 +340,7 @@
         </div>
 
         <div class="auth-field">
-          <label for="f-email">${t('cuentaCorreoPlaceholder').split('@')[0] === 'tu' ? 'Correo electrónico' : 'Email'}</label>
+          <label for="f-email">${t('cuentaCorreo')}</label>
           <div class="auth-input-wrap">
             <input id="f-email" name="email" type="email" required autocomplete="email" placeholder="${t('cuentaCorreoPlaceholder')}">
           </div>

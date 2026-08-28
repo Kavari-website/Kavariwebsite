@@ -6619,7 +6619,40 @@ paisGuyana_hospedajes_4_tipo: 'Cabana rural',
 paisGuyana_hospedajes_4_descripcion: 'Fazenda nas savanas de Rupununi. Cabanas rústicas, avistamento de fauna e paisagens abertas.',
 paisGuyana_hospedajes_5_nombre: 'Cabana em Shell Beach',
 paisGuyana_hospedajes_5_tipo: 'Cabana costeira',
-paisGuyana_hospedajes_5_descripcion: 'Cabana na praia remota de Shell Beach. Vista para o mar, acesso à praia e temporada de tartarugas.',
+  paisGuyana_hospedajes_5_descripcion: 'Cabana na praia remota de Shell Beach. Vista para o mar, acesso à praia e temporada de tartarugas.',
 
-    };
+  perfilEliminarCuentaConfirm: 'Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.',
+  perfilEliminando: 'Excluindo…',
+  perfilEliminarCuentaError: 'Não foi possível excluir a conta: ',
+  perfilEliminarCuentaExito: 'Conta excluída com sucesso.',
+
+  contactoAsuntoOpc: 'Assunto',
+  heroMiniDestinos: 'Destinos',
+  heroMiniGuias: 'Guias locais',
+  heroMiniValoracion: 'Avaliação',
+  perfilDestinoOpc: 'Destinos de interesse',
+  perfilBudgetOpc: 'Orçamento',
+  perfilEstiloOpc: 'Estilo de viagem',
+
+  metaDescAyuda: 'Central de ajuda KAVARI: perguntas frequentes, guias de uso, suporte para viajantes e guias turísticos.',
+  metaDescCookies: 'Política de cookies do KAVARI Travel: quais cookies e armazenamento usamos, como e por quê.',
+  metaDescCuenta: 'Gerencie seu perfil KAVARI, preferências de viagem e configurações da conta.',
+  metaDescDestino: 'Descubra destinos turísticos com KAVARI: cultura, gastronomia, aventura, companhias aéreas, hospedagens e guias certificados para cada país.',
+  metaDescIndex: 'Descubra os melhores destinos do mundo com KAVARI. Guias turísticos certificados, pacotes de viagem, companhias aéreas e hospedagens tudo em uma plataforma.',
+  metaDescPaises: 'Explore 21 destinos turísticos da América Latina e do Caribe com KAVARI. Informação completa de cultura, gastronomia, hospedagens e guias certificados.',
+  metaDescPerfil: 'Gerencie seu perfil KAVARI, preferências de viagem e configurações da conta.',
+  metaDescPlanes: 'Planos de viagem KAVARI: descubra destinos, pacotes, guias turísticos e mais.',
+  metaDescPrivacidade: 'Política de privacidade do KAVARI Travel: quais dados coletamos, como usamos e quais são seus direitos.',
+  metaDescSobrenosotros: 'Conheça a equipe por trás da KAVARI: missão, visão e os membros que tornam esta plataforma de turismo inteligente possível.',
+  metaDescTerminos: 'Termos e condições de uso do KAVARI Travel.',
+  titleCookies: 'Política de Cookies · KAVARI',
+  titlePrivacidade: 'Política de Privacidade · KAVARI',
+  titleTerminos: 'Termos e Condições · KAVARI',
+
+  metaDescPrivacidad: 'Política de privacidade do KAVARI Travel: quais dados coletamos, como usamos e quais são seus direitos.',
+  titlePrivacidad: 'Política de Privacidade · KAVARI',
+  metaDescPrivacidade: 'Política de privacidade do KAVARI Travel: quais dados coletamos, como usamos e quais são seus direitos.',
+  titlePrivacidade: 'Política de Privacidade · KAVARI'
+
+};
 })();

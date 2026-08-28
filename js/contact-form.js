@@ -100,7 +100,7 @@
           },
           { publicKey: '2zIIrkekPIphTzjNk' }
         ).catch(function (err) {
-          console.warn('[KAVARI] No se pudo enviar la notificación por correo:', err);
+          // console.warn('[KAVARI] No se pudo enviar la notificación por correo:', err);
         });
       }
 
