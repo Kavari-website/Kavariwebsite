@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https: wss:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-src 'self' https: https://cdn.botpress.cloud https://messaging.botpress.cloud; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.botpress.cloud https://messaging.botpress.cloud; style-src 'self' 'unsafe-inline' https://cdn.botpress.cloud; img-src 'self' data: https:; connect-src 'self' https: wss:;">
   <title data-i18n="tituloDestino">Destino — KAVARI Travel</title>
   <meta name="description" data-i18n="metaDescDestino" content="Descubre destinos turísticos con KAVARI: cultura, gastronomía, aventura, aerolíneas, hospedajes y guías certificados para cada país.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,16 +59,16 @@
     <nav class="nav-scroll-wrap" id="navScrollWrap">
     <ul class="nav-links" id="navLinks">
       <span class="nav-pill" id="navPillIndicator" aria-hidden="true"></span>
-      <li><a href="paises.html" class="nav-ext" data-i18n="navPaises"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Países</a></li>
-      <li><a data-sec="inicio" class="active" onclick="showSection('inicio')" data-i18n="navInicio"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Inicio</a></li>
-      <li><a data-sec="cultura" onclick="showSection('cultura')" data-i18n="navCultura"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-6 8 6v12M9 21v-6h6v6"/></svg>Cultura</a></li>
-      <li><a data-sec="lugares" onclick="showSection('lugares')" data-i18n="navDestinos2"><svg viewBox="0 0 24 24"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Destinos</a></li>
-      <li><a data-sec="gastronomia" onclick="showSection('gastronomia')" data-i18n="navGastronomia"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Gastronomía</a></li>
-      <li><a data-sec="aventura" onclick="showSection('aventura')" data-i18n="navAventura"><svg viewBox="0 0 24 24"><path d="M12 2l9 18H3L12 2z"/></svg>Aventura</a></li>
-      <li><a data-sec="practica" onclick="showSection('practica')" data-i18n="navPractica"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Info práctica</a></li>
-      <li><a data-sec="aerolineas" onclick="showSection('aerolineas')" data-i18n="navAerolineas"><svg viewBox="0 0 24 24"><path d="M2.5 19l19-7-19-7 4 7-4 7z"/></svg>Aerolíneas</a></li>
-<li><a data-sec="hospedajes" onclick="showSection('hospedajes')" data-i18n="navHospedajes"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/></svg>Hospedajes</a></li>
-      <li><a data-sec="guias" onclick="showSection('guias')" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>Guías Turísticos</a></li>
+      <li><a href="paises.html" class="nav-ext" data-i18n="navPaises"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>Países</a></li>
+      <li><a data-sec="inicio" class="active" onclick="showSection('inicio')" data-i18n="navInicio"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9.5h4.5V15h3v4.5H18V10"/></svg>Inicio</a></li>
+      <li><a data-sec="cultura" onclick="showSection('cultura')" data-i18n="navCultura"><svg viewBox="0 0 24 24"><path d="M3 10 12 4l9 6"/><path d="M4.5 10v9.5M8 10v9.5M12 10v9.5M16 10v9.5M19.5 10v9.5"/><path d="M3 19.5h18"/></svg>Cultura</a></li>
+      <li><a data-sec="lugares" onclick="showSection('lugares')" data-i18n="navDestinos2"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.2 8.8 13 13l-4.2 2.2L11 11l4.2-2.2z"/></svg>Destinos</a></li>
+      <li><a data-sec="gastronomia" onclick="showSection('gastronomia')" data-i18n="navGastronomia"><svg viewBox="0 0 24 24"><path d="M7 2.5v7.5a2 2 0 1 0 4 0V2.5"/><path d="M9 12v9.5"/><path d="M17 2.5c-1.7 0-3 2-3 4.5S15.3 11.5 17 11.5"/><path d="M17 2.5v19"/></svg>Gastronomía</a></li>
+      <li><a data-sec="aventura" onclick="showSection('aventura')" data-i18n="navAventura"><svg viewBox="0 0 24 24"><circle cx="18" cy="6" r="2"/><path d="M2.5 20 9 8.5l3 5 2-3 7.5 9.5z"/></svg>Aventura</a></li>
+      <li><a data-sec="practica" onclick="showSection('practica')" data-i18n="navPractica"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.3"/><path d="M12 3v5.3M12 15.7V21M3 12h5.3M15.7 12H21"/></svg>Info práctica</a></li>
+      <li><a data-sec="aerolineas" onclick="showSection('aerolineas')" data-i18n="navAerolineas"><svg viewBox="0 0 24 24"><path d="M21 3 3 10.3l6.8 2.4 2 7L21 3Z"/><path d="M12.3 14.2 21 3"/></svg>Aerolíneas</a></li>
+<li><a data-sec="hospedajes" onclick="showSection('hospedajes')" data-i18n="navHospedajes"><svg viewBox="0 0 24 24"><path d="M3 19.5v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7"/><path d="M3 19.5h18"/><path d="M7 10.5V7.5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/></svg>Hospedajes</a></li>
+      <li><a data-sec="guias" onclick="showSection('guias')" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3"/><path d="M12 10.5v3"/><rect x="7.5" y="14" width="9" height="7.5" rx="1.6"/><circle cx="12" cy="17.7" r=".5" fill="currentColor" stroke="none"/></svg>Guías Turísticos</a></li>
 </ul>
     </nav>
     <button type="button" class="nav-arrow nav-arrow-right" id="navArrowRight" aria-label="Ver más opciones">
@@ -110,16 +110,16 @@
       </button>
     </div>
     <ul class="mobile-drawer-links" id="mobileDrawerLinks">
-      <li style="animation-delay:.02s"><a href="paises.html" data-i18n="navPaises"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Países</a></li>
-      <li style="animation-delay:.05s"><a data-sec="inicio" class="active" onclick="showSection('inicio');toggleMobileDrawer(false)" data-i18n="navInicio"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Inicio</a></li>
-      <li style="animation-delay:.08s"><a data-sec="cultura" onclick="showSection('cultura');toggleMobileDrawer(false)" data-i18n="navCultura"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-6 8 6v12M9 21v-6h6v6"/></svg>Cultura</a></li>
-      <li style="animation-delay:.11s"><a data-sec="lugares" onclick="showSection('lugares');toggleMobileDrawer(false)" data-i18n="navDestinos2"><svg viewBox="0 0 24 24"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Destinos</a></li>
-      <li style="animation-delay:.14s"><a data-sec="gastronomia" onclick="showSection('gastronomia');toggleMobileDrawer(false)" data-i18n="navGastronomia"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Gastronomía</a></li>
-      <li style="animation-delay:.17s"><a data-sec="aventura" onclick="showSection('aventura');toggleMobileDrawer(false)" data-i18n="navAventura"><svg viewBox="0 0 24 24"><path d="M12 2l9 18H3L12 2z"/></svg>Aventura</a></li>
-      <li style="animation-delay:.20s"><a data-sec="practica" onclick="showSection('practica');toggleMobileDrawer(false)" data-i18n="navPractica"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Info práctica</a></li>
-      <li style="animation-delay:.23s"><a data-sec="aerolineas" onclick="showSection('aerolineas');toggleMobileDrawer(false)" data-i18n="navAerolineas"><svg viewBox="0 0 24 24"><path d="M2.5 19l19-7-19-7 4 7-4 7z"/></svg>Aerolíneas</a></li>
-      <li style="animation-delay:.26s"><a data-sec="hospedajes" onclick="showSection('hospedajes');toggleMobileDrawer(false)" data-i18n="navHospedajes"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/></svg>Hospedajes</a></li>
-      <li style="animation-delay:.29s"><a data-sec="guias" onclick="showSection('guias');toggleMobileDrawer(false)" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>Guías Turísticos</a></li>
+      <li style="animation-delay:.02s"><a href="paises.html" data-i18n="navPaises"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>Países</a></li>
+      <li style="animation-delay:.05s"><a data-sec="inicio" class="active" onclick="showSection('inicio');toggleMobileDrawer(false)" data-i18n="navInicio"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9.5h4.5V15h3v4.5H18V10"/></svg>Inicio</a></li>
+      <li style="animation-delay:.08s"><a data-sec="cultura" onclick="showSection('cultura');toggleMobileDrawer(false)" data-i18n="navCultura"><svg viewBox="0 0 24 24"><path d="M3 10 12 4l9 6"/><path d="M4.5 10v9.5M8 10v9.5M12 10v9.5M16 10v9.5M19.5 10v9.5"/><path d="M3 19.5h18"/></svg>Cultura</a></li>
+      <li style="animation-delay:.11s"><a data-sec="lugares" onclick="showSection('lugares');toggleMobileDrawer(false)" data-i18n="navDestinos2"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.2 8.8 13 13l-4.2 2.2L11 11l4.2-2.2z"/></svg>Destinos</a></li>
+      <li style="animation-delay:.14s"><a data-sec="gastronomia" onclick="showSection('gastronomia');toggleMobileDrawer(false)" data-i18n="navGastronomia"><svg viewBox="0 0 24 24"><path d="M7 2.5v7.5a2 2 0 1 0 4 0V2.5"/><path d="M9 12v9.5"/><path d="M17 2.5c-1.7 0-3 2-3 4.5S15.3 11.5 17 11.5"/><path d="M17 2.5v19"/></svg>Gastronomía</a></li>
+      <li style="animation-delay:.17s"><a data-sec="aventura" onclick="showSection('aventura');toggleMobileDrawer(false)" data-i18n="navAventura"><svg viewBox="0 0 24 24"><circle cx="18" cy="6" r="2"/><path d="M2.5 20 9 8.5l3 5 2-3 7.5 9.5z"/></svg>Aventura</a></li>
+      <li style="animation-delay:.20s"><a data-sec="practica" onclick="showSection('practica');toggleMobileDrawer(false)" data-i18n="navPractica"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.3"/><path d="M12 3v5.3M12 15.7V21M3 12h5.3M15.7 12H21"/></svg>Info práctica</a></li>
+      <li style="animation-delay:.23s"><a data-sec="aerolineas" onclick="showSection('aerolineas');toggleMobileDrawer(false)" data-i18n="navAerolineas"><svg viewBox="0 0 24 24"><path d="M21 3 3 10.3l6.8 2.4 2 7L21 3Z"/><path d="M12.3 14.2 21 3"/></svg>Aerolíneas</a></li>
+      <li style="animation-delay:.26s"><a data-sec="hospedajes" onclick="showSection('hospedajes');toggleMobileDrawer(false)" data-i18n="navHospedajes"><svg viewBox="0 0 24 24"><path d="M3 19.5v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7"/><path d="M3 19.5h18"/><path d="M7 10.5V7.5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/></svg>Hospedajes</a></li>
+      <li style="animation-delay:.29s"><a data-sec="guias" onclick="showSection('guias');toggleMobileDrawer(false)" data-i18n="navGuias"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3"/><path d="M12 10.5v3"/><rect x="7.5" y="14" width="9" height="7.5" rx="1.6"/><circle cx="12" cy="17.7" r=".5" fill="currentColor" stroke="none"/></svg>Guías Turísticos</a></li>
     </ul>
     <div class="mobile-drawer-divider"></div>
     <div class="mobile-drawer-foot">
@@ -404,8 +404,8 @@
 </footer>
 
 <!-- Scripts -->
-<script src="js/chatbot-engine.js"></script>
-<script src="js/chatbot-widget.js"></script>
+<!-- <script src="js/chatbot-engine.js"></script> -->
+<!-- <script src="js/chatbot-widget.js"></script> -->
 <script src="js/account.js"></script>
 <script src="js/scroll-lock.js?v=2"></script>
 <script src="js/cookie-consent.js?v=1"></script>
@@ -437,6 +437,22 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateArrows);
     updateArrows();
   })();
+</script>
+
+<script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
+<script>
+  window.botpressWebChat.init({
+    "botId": "R3AVOYXO",
+    "hostUrl": "https://cdn.botpress.cloud/webchat/v3.7",
+    "messagingUrl": "https://messaging.botpress.cloud",
+    "clientId": "R3AVOYXO",
+    "conversationId": "kavari-webchat",
+    "useSessionStorage": true,
+    "enableConversationDeletion": true,
+    "themeName": "prism",
+    "stylesheetUrl": "https://cdn.botpress.cloud/webchat/v3.7/themes/prism/style.css",
+    "configUrl": "https://files.bpcontent.cloud/2026/08/28/15/20260828152119-R3AVOYXO.json"
+  });
 </script>
 </body>
 </html>

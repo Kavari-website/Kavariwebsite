@@ -157,13 +157,20 @@ body {
   gap:6px;
 }
 .nav-links a svg {
-  width:14px;
-  height:14px;
+  width:15px;
+  height:15px;
   stroke:currentColor;
   fill:none;
-  stroke-width:2;
+  stroke-width:1.9;
+  stroke-linecap:round;
+  stroke-linejoin:round;
   flex-shrink:0;
-  opacity:.8;
+  opacity:.82;
+  transition:opacity .25s,transform .35s var(--ease-spring);
+}
+.nav-links a:hover svg,.nav-links a.active svg {
+  opacity:1;
+  transform:scale(1.08);
 }
 .nav-links a:hover {
   background:rgba(46,110,220,.08);
@@ -4020,8 +4027,16 @@ a:focus-visible,button:focus-visible,.filter-chip:focus-visible,.btn-hero:focus-
   height:18px;
   stroke:currentColor;
   fill:none;
-  stroke-width:1.8;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
   flex-shrink:0;
+  opacity:.85;
+  transition:opacity .25s,transform .3s var(--ease-spring);
+}
+.mobile-drawer-links a:hover svg,.mobile-drawer-links a.active svg {
+  opacity:1;
+  transform:scale(1.08);
 }
 .mobile-drawer-links a:hover,.mobile-drawer-links a.active {
   background:rgba(88,166,255,.14);

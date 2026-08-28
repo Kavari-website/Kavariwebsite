@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https: wss:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-src 'self' https: https://cdn.botpress.cloud https://messaging.botpress.cloud; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.botpress.cloud https://messaging.botpress.cloud; style-src 'self' 'unsafe-inline' https://cdn.botpress.cloud; img-src 'self' data: https:; connect-src 'self' https: wss:;">
     <title data-i18n="tituloSobrenosotros">Sobre Nosotros — KAVARI</title>
     <meta name="description" data-i18n="metaDescSobrenosotros" content="Conoce al equipo detrás de KAVARI: misión, visión y los integrantes que hacen posible esta plataforma de turismo inteligente.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,7 @@
 <body>
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <!-- Hero / banner con video de fondo + mapa de rutas animado -->
-<header class="hero about-hero" id="aboutHero" style="height: 86vh; min-height: 620px;">
+<header class="hero about-hero" id="aboutHero">
     <video autoplay muted loop playsinline class="background-video">
         <source src="fondo.mp4" type="video/mp4">
     </video>
@@ -381,8 +381,8 @@
 </footer>
 
 <!-- Scripts -->
-<script src="js/chatbot-engine.js"></script>
-<script src="js/chatbot-widget.js"></script>
+<!-- <script src="js/chatbot-engine.js"></script> -->
+<!-- <script src="js/chatbot-widget.js"></script> -->
 <script src="js/account.js"></script>
 <script src="js/tutorial.js"></script>
 <script src="js/sobrenosotros.js"></script>
@@ -391,5 +391,21 @@
 <script src="js/guide-registration.js"></script>
 <script src="js/page-transitions.js"></script>
 <script src="js/mobile-nav.js?v=3"></script>
+
+<script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
+<script>
+  window.botpressWebChat.init({
+    "botId": "R3AVOYXO",
+    "hostUrl": "https://cdn.botpress.cloud/webchat/v3.7",
+    "messagingUrl": "https://messaging.botpress.cloud",
+    "clientId": "R3AVOYXO",
+    "conversationId": "kavari-webchat",
+    "useSessionStorage": true,
+    "enableConversationDeletion": true,
+    "themeName": "prism",
+    "stylesheetUrl": "https://cdn.botpress.cloud/webchat/v3.7/themes/prism/style.css",
+    "configUrl": "https://files.bpcontent.cloud/2026/08/28/15/20260828152119-R3AVOYXO.json"
+  });
+</script>
 </body>
 </html>

@@ -20,7 +20,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https: wss:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-src 'self' https: https://cdn.botpress.cloud https://messaging.botpress.cloud; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.botpress.cloud https://messaging.botpress.cloud; style-src 'self' 'unsafe-inline' https://cdn.botpress.cloud; img-src 'self' data: https:; connect-src 'self' https: wss:;">
     <title data-i18n="tituloIndex">KAVARI Travel — Descubre el Mundo</title>
     <meta name="description" data-i18n="metaDescIndex" content="Descubre los mejores destinos del mundo con KAVARI. Guías turísticos certificados, paquetes de viaje, aerolíneas y hospedajes en una sola plataforma.">
     <meta name="keywords" content="turismo, viajes, guías turísticos, destinos, Panamá, Colombia, América Latina">
@@ -320,8 +320,8 @@
 </div>
 
 <!-- ===== SCRIPTS ===== -->
-<script src="js/chatbot-engine.js"></script>
-<script src="js/chatbot-widget.js"></script>
+<!-- <script src="js/chatbot-engine.js"></script> -->
+<!-- <script src="js/chatbot-widget.js"></script> -->
 <script src="js/account.js"></script>
 <script src="js/scroll-lock.js?v=2"></script>
 <script src="js/cookie-consent.js?v=1"></script>
@@ -331,5 +331,22 @@
 <script src="js/tutorial.js"></script>
 <script src="js/page-transitions.js"></script>
 <script src="js/mobile-nav.js?v=3"></script>
+
+<script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
+<script>
+  window.botpressWebChat.init({
+    "botId": "R3AVOYXO",
+    "hostUrl": "https://cdn.botpress.cloud/webchat/v3.7",
+    "messagingUrl": "https://messaging.botpress.cloud",
+    "clientId": "R3AVOYXO",
+    "conversationId": "kavari-webchat",
+    "useSessionStorage": true,
+    "enableConversationDeletion": true,
+    "themeName": "prism",
+    "stylesheetUrl": "https://cdn.botpress.cloud/webchat/v3.7/themes/prism/style.css",
+    "configUrl": "https://files.bpcontent.cloud/2026/08/28/15/20260828152119-R3AVOYXO.json"
+  });
+</script>
 </body>
 </html>
+

@@ -19,31 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* ---------- Menú hamburguesa (móvil) ---------- */
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-
-    navLinks.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        navLinks.classList.remove('open');
-      });
-    });
-
-    document.addEventListener('click', (e) => {
-      const clickedInsideNav = navbar.contains(e.target);
-      if (!clickedInsideNav && navLinks.classList.contains('open')) {
-        hamburger.classList.remove('open');
-        navLinks.classList.remove('open');
-      }
-    });
-  }
+  /* ---------- Menú hamburguesa (móvil) ----------
+     Gestionado de forma única por js/mobile-nav.js (compartido por
+     todas las páginas). Aquí ya no se duplica esa lógica: hacerlo
+     causaba que ambos scripts alternaran la misma clase 'open' en
+     el mismo clic y se cancelaran entre sí, dejando el menú sin
+     abrir y la animación de la hamburguesa a X sin activarse. */
 
   /* ---------- Animación de entrada (.reveal) con efecto escalonado ---------- */
   const revealEls = Array.from(document.querySelectorAll('.reveal'));
