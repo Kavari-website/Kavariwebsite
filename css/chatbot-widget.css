@@ -358,17 +358,7 @@
   }
 }
 
-/* ===== BOTPRESS INTEGRADO: ocultar chatbot legacy de KAVARI ===== */
-#kavari-chat-root,
-#kavari-chat-root * {
-  display: none !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  visibility: hidden !important;
-}
-
-
-/* ===== BOTPRESS: asegurar visibilidad del botón flotante ===== */
+/* ===== Botpress Webchat - Visible en todas las pÃ¡ginas ===== */
 #bp-web-widget,
 .bp-web-widget,
 .bp-launcher,
@@ -380,7 +370,11 @@ iframe[src*="bp-embed"] {
   pointer-events: auto !important;
   visibility: visible !important;
   z-index: 99999 !important;
-  position: fixed !important;
-  bottom: 24px !important;
-  right: 24px !important;
+}
+
+/* Ocultar chatbot legacy KAVARI personalizado */
+#kavari-chat-root,
+#kavari-mascot,
+#kavari-asistente {
+  display: none !important;
 }
