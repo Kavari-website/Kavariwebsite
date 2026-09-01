@@ -133,7 +133,7 @@
   },
   "paquetes": {
     "mexico": {
-      "img": "img/mexico/mexico.jpeg",
+      "img": "img/paquetes_viaje/PQT_MX.jpeg",
       "title": "México",
       "precio": "$790 <span>por persona</span>",
       "desc": "Cancún y la Riviera Maya en 5 días: hotel todo incluido en la Zona Hotelera, visita a Chichén Itzá, cenotes sagrados y Isla Mujeres. Precio referenciado en ofertas reales de vuelo+hotel (Expedia/deturista, desde $450–$900 según temporada).",
@@ -176,7 +176,7 @@
       "pais": "mexico"
     },
     "peru": {
-      "img": "img/banners/bannerdeperu.jpeg",
+      "img": "img/paquetes_viaje/PQT_PERU.jpeg",
       "title": "Perú",
       "precio": "$520 <span>por persona</span>",
       "desc": "Cusco y Machu Picchu en 4 días: ciudad imperial, Valle Sagrado y la maravilla inca en tren panorámico. Basado en tarifas vigentes de operadores locales ($430–$950 por persona según hotel).",
@@ -213,7 +213,7 @@
       "pais": "peru"
     },
     "panama": {
-      "img": "img/banners/bannerdepanama.jpeg",
+      "img": "img/paquetes_viaje/PQT_PN.jpeg",
       "title": "Panamá",
       "precio": "$690 <span>por persona</span>",
       "desc": "Lo mejor de Panamá en 5 días: Canal de Panamá, Casco Viejo colonial y las playas paradisíacas de Guna Yala en San Blas.",
@@ -256,7 +256,7 @@
       "pais": "panama"
     },
     "republica-dominicana": {
-      "img": "img/republica-dominicana/republica dominicana.jpeg",
+      "img": "img/paquetes_viaje/PQT_RD.jpeg",
       "title": "República Dominicana",
       "precio": "$1,150 <span>por persona</span>",
       "desc": "Punta Cana todo incluido en 5 días: playas de Bávaro, catamarán y vida caribeña. Precio referenciado en paquetes reales vuelo+resort ($1,190–$1,600 según temporada).",
@@ -298,7 +298,7 @@
       "pais": "republica-dominicana"
     },
     "brasil": {
-      "img": "img/brasil/brasil.jpg",
+      "img": "img/paquetes_viaje/PQT_BR.jpeg",
       "title": "Brasil",
       "precio": "$980 <span>por persona</span>",
       "desc": "Río de Janeiro en 6 días: Copacabana, Cristo Redentor, Pan de Azúcar y samba. Precios reales de mercado: $970–$1,200 con vuelo y hotel desde Buenos Aires (deturista/Ikatu).",
@@ -346,7 +346,7 @@
       "pais": "brasil"
     },
     "argentina": {
-      "img": "img/argentina/argentina.jpeg",
+      "img": "img/paquetes_viaje/PQT_ARG.jpeg",
       "title": "Argentina",
       "precio": "$890 <span>por persona</span>",
       "desc": "Buenos Aires e Iguazú en 6 días: tango, Recoleta y las cataratas más impresionantes de Sudamérica por lado argentino.",
@@ -441,7 +441,7 @@
       "pais": "chile"
     },
     "costa-rica": {
-      "img": "img/banners/bannerdecostarica.jpeg",
+      "img": "img/paquetes_viaje/PQ_CSTRC.jpeg",
       "title": "Costa Rica",
       "precio": "$760 <span>por persona</span>",
       "desc": "Ecoturismo puro en 6 días: volcán Arenal, aguas termales, bosque nuboso de Monteverde y playas del Pacífico central.",
@@ -537,7 +537,7 @@
       "pais": "colombia"
     },
     "ecuador": {
-      "img": "img/banners/bannerdeecuador.jpeg",
+      "img": "img/paquetes_viaje/PQT_EC.jpeg",
       "title": "Ecuador",
       "precio": "$750 <span>por persona</span>",
       "desc": "Quito y Otavalo en 5 días: el centro histórico mejor preservado de América, la mitad del mundo y el mercado indígena más famoso.",
