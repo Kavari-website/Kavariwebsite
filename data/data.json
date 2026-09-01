@@ -393,7 +393,7 @@
       "pais": "argentina"
     },
     "chile": {
-      "img": "img/banners/bannerdechile.jpeg",
+      "img": "img/paquetes_viaje/PAQUETECHILE.png",
       "title": "Chile",
       "precio": "$950 <span>por persona</span>",
       "desc": "Santiago y Valle de Atacama en 6 días: la capital andina, géiseres del Tatio, lagunas altiplánicas y valles de sal a más de 2,400 m.",
@@ -489,7 +489,7 @@
       "pais": "costa-rica"
     },
     "colombia": {
-      "img": "img/banners/bannerdecolombia.jpeg",
+      "img": "img/paquetes_viaje/PAQUETECOLOMBIA.jpg",
       "title": "Colombia",
       "precio": "$720 <span>por persona</span>",
       "desc": "Cartagena y Medellín en 6 días: la ciudad amurallada, las islas del Rosario y la comuna 13 con su arte urbano.",
@@ -580,7 +580,7 @@
       "pais": "ecuador"
     },
     "cuba": {
-      "img": "img/banners/bannerdecuba.jpeg",
+      "img": "img/paquetes_viaje/PAQUETECUBA.jpg",
       "title": "Cuba",
       "precio": "$780 <span>por persona</span>",
       "desc": "La Habana y Varadero en 6 días: clásicos americanos, son cubano, mojitos en La Bodeguita y arena blanca en Varadero.",
@@ -627,7 +627,7 @@
       "pais": "cuba"
     },
     "guatemala": {
-      "img": "img/banners/bannerdeguatemala.jpeg",
+      "img": "img/paquetes_viaje/PAQUETEGUATEMALA.jpg",
       "title": "Guatemala",
       "precio": "$590 <span>por persona</span>",
       "desc": "Antigua, Lago Atitlán y Tikal en 6 días: ciudades coloniales, volcanes activos y templos mayas entre la selva.",
@@ -675,7 +675,7 @@
       "pais": "guatemala"
     },
     "bolivia": {
-      "img": "img/banners/bannerdebolivia.jpeg",
+      "img": "img/paquetes_viaje/PAQUETEBOLIVIA.jpg",
       "title": "Bolivia",
       "precio": "$560 <span>por persona</span>",
       "desc": "La Paz y Salar de Uyuni en 5 días: teleferico urbano, isla del Sol en Titicaca y el espejo de sal más grande del mundo.",
@@ -717,7 +717,7 @@
       "pais": "bolivia"
     },
     "venezuela": {
-      "img": "img/venezuela/bannervenezuela2.jpg",
+      "img": "img/paquetes_viaje/PAQUETEVENEZUELA.jpg",
       "title": "Venezuela",
       "precio": "$650 <span>por persona</span>",
       "desc": "Margarita y Canaima en 6 días: playas caribeñas, fortaleza colonial y sobrevuelo al Salto Ángel, la caída de agua más alta del planeta.",
@@ -764,7 +764,7 @@
       "pais": "venezuela"
     },
     "uruguay": {
-      "img": "img/banners/bannerdeuruguay.jpeg",
+      "img": "img/paquetes_viaje/PAQUETEURUGUAY.jpg",
       "title": "Uruguay",
       "precio": "$820 <span>por persona</span>",
       "desc": "Montevideo, Colonia y Punta del Este en 6 días: ramblas, ciudad histórica UNESCO y la playa más glamorosa del Río de la Plata.",
@@ -812,7 +812,7 @@
       "pais": "uruguay"
     },
     "paraguay": {
-      "img": "img/banners/bannerdeparaguay.jpeg",
+      "img": "img/paquetes_viaje/PAQUETEPARAGUAY.png",
       "title": "Paraguay",
       "precio": "$590 <span>por persona</span>",
       "desc": "Asunción y las Misiones jesuíticas en 5 días: capital ribereña, ruinas guaraníes UNESCO y la represa de Itaipú.",
@@ -854,7 +854,7 @@
       "pais": "paraguay"
     },
     "honduras": {
-      "img": "img/banners/bannerdehonduras.jpeg",
+      "img": "img/paquetes_viaje/PAQUETEHONDURAS.jpg",
       "title": "Honduras",
       "precio": "$640 <span>por persona</span>",
       "desc": "Roatán y Copán en 6 días: el arrecife de coral más grande del hemisferio norte y la Atenas maya declarada Patrimonio de la Humanidad.",
@@ -901,7 +901,7 @@
       "pais": "honduras"
     },
     "nicaragua": {
-      "img": "img/banners/bannerdenicaragua.jpeg",
+      "img": "img/paquetes_viaje/PAQUETENICARAGUA.jpg",
       "title": "Nicaragua",
       "precio": "$540 <span>por persona</span>",
       "desc": "Granada, Masaya y Ometepe en 6 días: colonialismo colorido, volcanes activos y una isla gemela en el lago Cocibolca.",
@@ -948,7 +948,7 @@
       "pais": "nicaragua"
     },
     "el-salvador": {
-      "img": "img/banners/bannerdelsalvador.jpeg",
+      "img": "img/paquetes_viaje/PAQUETEELSALVADOR.png",
       "title": "El Salvador",
       "precio": "$490 <span>por persona</span>",
       "desc": "Ruta de las Flores y playas de surf en 5 días: pueblos pintorescos, lagos volcánicos, Joya de Cerén (UNESCO) y la ola del Sunzal.",
@@ -991,7 +991,7 @@
       "pais": "el-salvador"
     },
     "belice": {
-      "img": "img/banners/bannerdebelice.jpeg",
+      "img": "img/paquetes_viaje/PAQUETEBELICE.png",
       "title": "Belice",
       "precio": "$850 <span>por persona</span>",
       "desc": "Cayo Ambergris y las cuevas mayas en 5 días: la segunda barrera de coral más grande del mundo, tiburones nodriza y ruinas Xunantunich.",
@@ -1033,7 +1033,7 @@
       "pais": "belice"
     },
     "guyana": {
-      "img": "img/banners/bannerdeguyana.jpeg",
+      "img": "img/paquetes_viaje/PAQUETEGUYANA.jpg",
       "title": "Guyana",
       "precio": "$980 <span>por persona</span>",
       "desc": "Georgetown y Kaieteur en 5 días: naturaleza virgen amazónica, las cataratas de una sola caída más potentes del mundo y lodges de selva.",
