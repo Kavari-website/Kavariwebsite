@@ -78,7 +78,9 @@ try {
     else if (ch === '}') { depth--; if (!depth) { end = i; break; } }
   }
   if (end > open) {
-    const dict = eval('(function(){ ' + src.slice(start, end + 1) + '; return diccionario; })()');
+    const objText = src.slice(start, end + 1);
+    const fn = new Function('return ' + objText.replace(/^const\s+diccionario\s*=\s*/, ''));
+    const dict = fn();
     TRAD = (dict && dict.es) || {};
   }
 } catch (e) {
@@ -660,7 +662,7 @@ app.get('/api/country/:code', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🤖 KAVARI Chat API v3 en http://localhost:${PORT}`);
+  console.log(`🤖 KAVARI Chat API v4 en http://localhost:${PORT}`);
   console.log(`   Gemini: ${GEMINI_API_KEY ? '✅ configurada (' + GEMINI_MODEL + ')' : '❌ sin clave — modo fallback local'}`);
   console.log(`   POST /api/chat · GET /api/health · GET /api/countries · GET /api/country/:code`);
 });

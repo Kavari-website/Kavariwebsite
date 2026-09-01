@@ -1,6 +1,8 @@
 // Cambia el color de la barra de navegación cuando haces scroll
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+if (navbar) {
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+}
 
 // El botón de hamburguesa lo controla mobile-nav.js (evita doble toggle
 // que hacía que el menú se abriera y cerrara en el mismo clic).
@@ -170,7 +172,8 @@ function aplicarBadgesGuias() {
 // ============================================
 function updateCount() {
   const visibles = document.querySelectorAll('.dest-card:not([style*="display: none"])').length;
-  document.getElementById('countVisible').textContent = visibles;
+  const el = document.getElementById('countVisible');
+  if (el) el.textContent = visibles;
 }
 
 // Oculta las etiquetas de región cuyas tarjetas estén todas filtradas
@@ -210,8 +213,8 @@ function setContinent(valor) {
 }
 
 function buscar() {
-  const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
-  const cont = (document.getElementById('continentFilter').value || 'todos');
+  const q = ((document.getElementById('searchInput') || {}).value || '').toLowerCase().trim();
+  const cont = ((document.getElementById('continentFilter') || {}).value || 'todos');
   const cards = document.querySelectorAll('.dest-card');
   let visibles = 0;
 
@@ -245,7 +248,8 @@ function buscar() {
     }
   });
 
-  document.getElementById('countVisible').textContent = visibles;
+  const countEl = document.getElementById('countVisible');
+  if (countEl) countEl.textContent = visibles;
   updateRegionLabels();
 }
 
@@ -320,7 +324,7 @@ async function syncLikesFromServer() {
     } else if (window.KavariAuth && typeof window.KavariAuth.getUserLikes === 'function') {
       const codes = await window.KavariAuth.getUserLikes(userId);
       const likes = {};
-      codes.forEach(code => { likes[code] = 1; });
+      (codes || []).forEach(code => { likes[code] = 1; });
       saveLikes(likes);
     }
   } catch (_) { /* noop */ }

@@ -28,15 +28,14 @@
 <IfModule mod_expires.c>
     ExpiresActive On
 
-    # Imágenes: el navegador pregunta al servidor en cada visita
-    # (si cambió la descarga, si no, reutiliza la guardada).
-    ExpiresByType image/gif   "access plus 0 seconds"
-    ExpiresByType image/jpeg  "access plus 0 seconds"
-    ExpiresByType image/png   "access plus 0 seconds"
-    ExpiresByType image/webp  "access plus 0 seconds"
-    ExpiresByType image/avif  "access plus 0 seconds"
-    ExpiresByType image/svg+xml "access plus 0 seconds"
-    ExpiresByType image/x-icon  "access plus 0 seconds"
+    # Imágenes: caché de 1 mes (se versionan por URL si cambian).
+    ExpiresByType image/gif   "access plus 1 month"
+    ExpiresByType image/jpeg  "access plus 1 month"
+    ExpiresByType image/png   "access plus 1 month"
+    ExpiresByType image/webp  "access plus 1 month"
+    ExpiresByType image/avif  "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/x-icon  "access plus 1 month"
     ExpiresByType font/woff2  "access plus 1 month"
     ExpiresByType font/woff   "access plus 1 month"
 
@@ -55,11 +54,9 @@
 
 # --- Encabezados de control de caché (mod_headers) ---
 <IfModule mod_headers.c>
-    # Imágenes: el navegador pregunta al servidor en cada visita
-    # (no-cache = siempre revalidar; si cambió, descarga la nueva).
-    # Fuentes y video: 1 año (no cambian).
+    # Imágenes: caché de 1 mes.
     <FilesMatch "\.(gif|jpe?g|png|webp|avif|svg|ico)$">
-        Header set Cache-Control "public, no-cache"
+        Header set Cache-Control "public, max-age=2592000"
     </FilesMatch>
     <FilesMatch "\.(woff2?|mp4|webm)$">
         Header set Cache-Control "public, max-age=31536000, immutable"

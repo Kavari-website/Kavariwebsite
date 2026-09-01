@@ -187,7 +187,7 @@
   if (trigger) {
     trigger.addEventListener("click", function (e) {
       e.stopPropagation();
-      if (switcher.classList.contains("open")) closePanel();
+      if (switcher && switcher.classList.contains("open")) closePanel();
       else openPanel();
     });
   }

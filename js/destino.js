@@ -1,6 +1,16 @@
 // destino.js — Lógica de renderizado y carga de datos
 // Depende de idioma.js (window.t, window.toggleLang) y theme.js
 
+function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 // ============================================================
 // 1. VARIABLES GLOBALES
 // ============================================================
@@ -19,6 +29,7 @@ let countryOptionsInitialized = false;
 // ============================================================
 function _t(valor) {
     if (typeof valor === 'string') {
+        if (typeof window.t !== 'function') return valor;
         const traducido = window.t(valor);
         return traducido !== valor ? traducido : valor;
     }
@@ -223,20 +234,20 @@ function renderGuidesList() {
         const gl = g.languages ? _t(g.languages) : '';
         const goc = g.location ? _t(g.location) : '';
         return `
-        <div class="guide-card rank-${g.rank}">
-            <img class="guide-avatar" src="${g.photo}" alt="${gn}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(gn)}&background=0050a0&color=fff'">
+        <div class="guide-card rank-${escapeHtml(g.rank)}">
+            <img class="guide-avatar" src="${escapeHtml(g.photo)}" alt="${escapeHtml(gn)}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(gn)}&background=0050a0&color=fff'">
             <div class="guide-info">
                 <div class="guide-name-row">
-                    <span class="guide-name">${gn}</span>
-                    <span class="rank-badge badge-${g.rank}">${rankLabels[g.rank] || g.rank}</span>
+                    <span class="guide-name">${escapeHtml(gn)}</span>
+                    <span class="rank-badge badge-${escapeHtml(g.rank)}">${escapeHtml(rankLabels[g.rank] || g.rank)}</span>
                     ${g.disponible !== undefined ? `<span class="guide-avail ${g.disponible ? 'avail-yes' : 'avail-no'}">${g.disponible ? availYes : availNo}</span>` : ''}
                 </div>
-                <p class="guide-desc">${gd}</p>
+                <p class="guide-desc">${escapeHtml(gd)}</p>
                 <div class="guide-meta">
-                    ${g.languages ? `<span>${gl}</span>` : ''}
-                    ${g.location ? `<span>${goc}</span>` : ''}
+                    ${g.languages ? `<span>${escapeHtml(gl)}</span>` : ''}
+                    ${g.location ? `<span>${escapeHtml(goc)}</span>` : ''}
                 </div>
-                ${g.especialidades ? `<div class="guide-tags">${g.especialidades.map(e => `<span class="guide-tag">${_t(e)}</span>`).join('')}</div>` : ''}
+                ${g.especialidades ? `<div class="guide-tags">${g.especialidades.map(e => `<span class="guide-tag">${escapeHtml(_t(e))}</span>`).join('')}</div>` : ''}
             </div>
             <div class="guide-price-col">
                 <div class="price-num">$${g.price}</div>
@@ -260,22 +271,22 @@ function renderAerolineas(d) {
     grid.innerHTML = aerolineasData.map(a => `
         <div class="airline-card">
             <div class="airline-logo-wrap">
-                <img class="airline-logo" src="${a.logo}" alt="${a.nombre}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                <div class="airline-logo-fallback" style="display:none">${a.iata}</div>
+                <img class="airline-logo" src="${escapeHtml(a.logo)}" alt="${escapeHtml(a.nombre)}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="airline-logo-fallback" style="display:none">${escapeHtml(a.iata)}</div>
             </div>
             <div class="airline-info">
-                <div class="airline-name">${a.nombre} <span class="airline-iata">${a.iata}</span></div>
-                <p class="airline-desc">${_t(a.descripcion) || a.descripcion}</p>
+                <div class="airline-name">${escapeHtml(a.nombre)} <span class="airline-iata">${escapeHtml(a.iata)}</span></div>
+                <p class="airline-desc">${escapeHtml(_t(a.descripcion) || a.descripcion)}</p>
                 <div class="airline-meta">
-                    <span class="airline-origin">${_t(a.origen_referencia) || a.origen_referencia}</span>
-                    <span class="airline-freq">${_t(a.frecuencia) || a.frecuencia}</span>
+                    <span class="airline-origin">${escapeHtml(_t(a.origen_referencia) || a.origen_referencia)}</span>
+                    <span class="airline-freq">${escapeHtml(_t(a.frecuencia) || a.frecuencia)}</span>
                 </div>
             </div>
             <div class="airline-price-col">
                 <div class="airline-price-label">${_t('desde')}</div>
-                <div class="airline-price">$${a.precio_desde}</div>
-                <div class="airline-class">${a.clase}</div>
-                <a href="${a.url_reserva}" target="_blank" rel="noopener noreferrer" class="btn-airline">${_t('reservarVuelo')}</a>
+                <div class="airline-price">$${escapeHtml(a.precio_desde)}</div>
+                <div class="airline-class">${escapeHtml(a.clase)}</div>
+                <a href="${escapeHtml(a.url_reserva)}" target="_blank" rel="noopener noreferrer" class="btn-airline">${_t('reservarVuelo')}</a>
             </div>
         </div>
     `).join('');
@@ -315,23 +326,23 @@ function renderHospedajes(d) {
         return `
             <div class="hospedaje-card">
                 <div class="hospedaje-img-wrap">
-                    <img class="hospedaje-img" src="${h.imagen}" alt="${_t(h.nombre)}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400'">
-                    <div class="hospedaje-tipo">${_t(h.tipo) || h.tipo}</div>
+                    <img class="hospedaje-img" src="${escapeHtml(h.imagen)}" alt="${escapeHtml(_t(h.nombre))}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400'">
+                    <div class="hospedaje-tipo">${escapeHtml(_t(h.tipo) || h.tipo)}</div>
                 </div>
                 <div class="hospedaje-body">
                     <div class="hospedaje-location">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        ${_t('zonaLabel')}: ${_t(h.ubicacion) || h.ubicacion}
+                        ${_t('zonaLabel')}: ${escapeHtml(_t(h.ubicacion) || h.ubicacion)}
                     </div>
-                    <h4 class="hospedaje-nombre">${_t(h.nombre)}</h4>
-                    <p class="hospedaje-desc">${_t(h.descripcion) || h.descripcion}</p>
+                    <h4 class="hospedaje-nombre">${escapeHtml(_t(h.nombre))}</h4>
+                    <p class="hospedaje-desc">${escapeHtml(_t(h.descripcion) || h.descripcion)}</p>
                     <div class="hospedaje-rating">
                         <div class="stars-row">${starsHtml}</div>
-                        <span class="rating-num">${h.rating}</span>
-                        <span class="rating-reviews">(${h.reviews} ${_t('reviewsLabel')})</span>
+                        <span class="rating-num">${escapeHtml(h.rating)}</span>
+                        <span class="rating-reviews">(${escapeHtml(h.reviews)} ${_t('reviewsLabel')})</span>
                     </div>
                     <div class="hospedaje-amenidades">
-                        ${h.amenidades ? h.amenidades.slice(0, 3).map(am => `<span class="amenidad-tag">${_t(am) || am}</span>`).join('') : ''}
+                        ${h.amenidades ? h.amenidades.slice(0, 3).map(am => `<span class="amenidad-tag">${escapeHtml(_t(am) || am)}</span>`).join('') : ''}
                     </div>
                 </div>
                 <div class="hospedaje-footer">
@@ -749,12 +760,12 @@ function renderAllSections(d) {
     if (destinosInicio && d.destinos) {
         destinosInicio.innerHTML = d.destinos.slice(0, 4).map((dest, i) => `
             <div class="card reveal d${(i % 4) + 1}">
-                <div class="card-img-wrap"><img class="card-img" src="${dest.imagen}" alt="${_t(dest.nombre)}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1578922746465-3a80a228f223?q=80&w=800'"></div>
+                <div class="card-img-wrap"><img class="card-img" src="${escapeHtml(dest.imagen)}" alt="${escapeHtml(_t(dest.nombre))}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1578922746465-3a80a228f223?q=80&w=800'"></div>
                 <div class="card-body">
-                    <div class="card-tag">${_t(dest.tag) || dest.tag}</div>
-                    <h4>${_t(dest.nombre)}</h4>
-                    <p>${_t(dest.descripcion).substring(0, 120)}...</p>
-                    <button class="btn-card" onclick="openModal('${dest.id}')"><span>${_t('verMas')}</span></button>
+                    <div class="card-tag">${escapeHtml(_t(dest.tag) || dest.tag)}</div>
+                    <h4>${escapeHtml(_t(dest.nombre))}</h4>
+                    <p>${escapeHtml(_t(dest.descripcion).substring(0, 120))}...</p>
+                    <button class="btn-card" onclick="openModal('${escapeHtml(dest.id)}')"><span>${_t('verMas')}</span></button>
                 </div>
             </div>
         `).join('');
@@ -765,12 +776,12 @@ function renderAllSections(d) {
     if (featureBand && d.destinos && d.destinos.length > 0) {
         const featDest = d.destinos[3] || d.destinos[0];
         featureBand.innerHTML = `
-            <div class="feature-img"><img src="${featDest.imagen}" alt="${_t(featDest.nombre)}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200'"></div>
+            <div class="feature-img"><img src="${escapeHtml(featDest.imagen)}" alt="${escapeHtml(_t(featDest.nombre))}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200'"></div>
             <div class="feature-text">
-                <div class="sec-tag-line">${_t(d.continente) || ''} · ${_t(featDest.tag) || featDest.tag}</div>
-                <h3>${_t(featDest.nombre)}</h3>
-                <p>${_t(featDest.descripcion)}</p>
-                <div class="data-chip">${_t(featDest.tag) || featDest.tag}</div>
+                <div class="sec-tag-line">${escapeHtml(_t(d.continente) || '')} · ${escapeHtml(_t(featDest.tag) || featDest.tag)}</div>
+                <h3>${escapeHtml(_t(featDest.nombre))}</h3>
+                <p>${escapeHtml(_t(featDest.descripcion))}</p>
+                <div class="data-chip">${escapeHtml(_t(featDest.tag) || featDest.tag)}</div>
                 <button class="btn-card" style="margin-top:22px" onclick="openModal('${featDest.id}')"><span>${_t('explorarMas')}</span></button>
             </div>`;
     }
@@ -876,12 +887,12 @@ function renderAllSections(d) {
         if (foodGrid && g.platos) {
             foodGrid.innerHTML = g.platos.map(plato => `
                 <div class="food-item">
-                    <div class="food-thumb"><img src="${plato.imagen}" alt="${_t(plato.nombre)}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400'"></div>
+                    <div class="food-thumb"><img src="${escapeHtml(plato.imagen)}" alt="${escapeHtml(_t(plato.nombre))}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400'"></div>
                     <div class="food-body">
-                        <div class="food-cat">${_t(plato.categoria) || plato.categoria}</div>
-                        <h4>${_t(plato.nombre)}</h4>
-                        <p>${_t(plato.descripcion) || plato.descripcion}</p>
-                        ${plato.nota ? `<div class="food-note">${_t(plato.nota) || plato.nota}</div>` : ''}
+                        <div class="food-cat">${escapeHtml(_t(plato.categoria) || plato.categoria)}</div>
+                        <h4>${escapeHtml(_t(plato.nombre))}</h4>
+                        <p>${escapeHtml(_t(plato.descripcion) || plato.descripcion)}</p>
+                        ${plato.nota ? `<div class="food-note">${escapeHtml(_t(plato.nota) || plato.nota)}</div>` : ''}
                     </div>
                 </div>
             `).join('');
@@ -979,13 +990,13 @@ function openModal(id) {
     let item = countryData.destinos?.find(d => d.id === id) || countryData.cultura?.items?.find(i => i.id === id);
     if (!item) return;
     document.getElementById('modalBody').innerHTML = `
-        <img src="${item.imagen}" alt="${_t(item.nombre)}" decoding="async" style="width:100%;border-radius:12px;margin-bottom:20px;max-height:400px;object-fit:cover" onerror="this.style.display='none'">
-        <div class="card-tag">${_t(item.tag) || item.tag}</div>
-        <h3 style="font-family:'Nunito',sans-serif;font-size:24px;color:var(--text-primary);margin:12px 0">${_t(item.nombre)}</h3>
-        <p style="line-height:1.8;color:var(--text-secondary)">${_t(item.detalle) || _t(item.descripcion) || item.descripcion}</p>
-        ${item.precio_entrada ? `<div class="info-badge" style="margin-top:12px">${_t('entradaLabel')} ${_t(item.precio_entrada) || item.precio_entrada}</div>` : ''}
-        ${item.horario ? `<div class="info-badge" style="margin-top:8px">${_t('horarioLabel')} ${_t(item.horario) || item.horario}</div>` : ''}
-        ${item.consejo ? `<p style="margin-top:16px;font-style:italic;color:var(--text-secondary);border-left:3px solid var(--primary);padding-left:12px">${_t('consejoLabel')} ${_t(item.consejo) || item.consejo}</p>` : ''}
+        <img src="${escapeHtml(item.imagen)}" alt="${escapeHtml(_t(item.nombre))}" decoding="async" style="width:100%;border-radius:12px;margin-bottom:20px;max-height:400px;object-fit:cover" onerror="this.style.display='none'">
+        <div class="card-tag">${escapeHtml(_t(item.tag) || item.tag)}</div>
+        <h3 style="font-family:'Nunito',sans-serif;font-size:24px;color:var(--text-primary);margin:12px 0">${escapeHtml(_t(item.nombre))}</h3>
+        <p style="line-height:1.8;color:var(--text-secondary)">${escapeHtml(_t(item.detalle) || _t(item.descripcion) || item.descripcion)}</p>
+        ${item.precio_entrada ? `<div class="info-badge" style="margin-top:12px">${_t('entradaLabel')} ${escapeHtml(_t(item.precio_entrada) || item.precio_entrada)}</div>` : ''}
+        ${item.horario ? `<div class="info-badge" style="margin-top:8px">${_t('horarioLabel')} ${escapeHtml(_t(item.horario) || item.horario)}</div>` : ''}
+        ${item.consejo ? `<p style="margin-top:16px;font-style:italic;color:var(--text-secondary);border-left:3px solid var(--primary);padding-left:12px">${_t('consejoLabel')} ${escapeHtml(_t(item.consejo) || item.consejo)}</p>` : ''}
     `;
     document.getElementById('modalOverlay').classList.add('active');
     if (window.KavariScrollLock) window.KavariScrollLock.lock();

@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ─── Helpers ─── */
   function getLang() {
-    return localStorage.getItem('kavariIdioma') || localStorage.getItem('idioma') || 'es';
+    return localStorage.getItem('kavari-idioma') || 'es';
   }
 
   function t(key) {
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const lang = getLang();
       const submitBtn = registerForm.querySelector('.btn-submit');
-      const originalText = submitBtn.textContent;
+      const originalText = submitBtn ? submitBtn.textContent : '';
 
       // Datos del formulario
       const formData = new FormData(registerForm);

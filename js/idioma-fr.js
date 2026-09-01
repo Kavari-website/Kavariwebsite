@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    KAVARI — Diccionario FRANCÉS (fr)
    Se carga DESPUÉS de js/idioma.js y se integra mediante
    window.__kavariIdiomasExtras (ver lógica en js/idioma.js).
@@ -30,7 +30,7 @@ window.__kavariIdiomasExtras.fr = {
   footerNewsPlaceholder: 'tu@exemple.com',
   footerNewsBtn: "S'abonner",
   footerNewsOk: 'Merci !',
-  footerTexto: '© 2025 Kavari — Tous droits réservés.',
+  footerTexto: '© 2026 Kavari — Tous droits réservés.',
   footerPrivacidad: 'Politique de confidentialité',
   footerTerminos: 'Conditions générales',
   footerCookies: 'Politique de cookies',

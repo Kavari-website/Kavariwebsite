@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
     var btn = form.querySelector('.kv-footer-btn');
     var okText = window.t ? window.t('footerNewsOk') : '¡Gracias!';
-    btn.textContent = okText;
+    if (btn) btn.textContent = okText;
     setTimeout(function () {
       form.reset();
-      btn.textContent = window.t ? window.t('footerNewsBtn') : 'Suscribirse';
+      if (btn) btn.textContent = window.t ? window.t('footerNewsBtn') : 'Suscribirse';
     }, 2500);
   });
 });

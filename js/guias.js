@@ -12,7 +12,7 @@ const rankHourlyRates = { silver: 20, gold: 35, diamond: 50 };
 function init() {
   const stored = localStorage.getItem('kavariGuides');
   if (stored) {
-    guides = JSON.parse(stored);
+    guides = stored ? JSON.parse(stored) : [];
   } else {
     guides = [
       { id: 1, name: "Mariana Estévez", description: "Especialista en turismo sostenible y avistamiento de aves. Certificada por la IATA. 10 años guiando expediciones únicas.", languages: "Español, Inglés, Francés", location: "Bocas del Toro", country: "panama", rank: "diamond", price: 50, photo: "https://randomuser.me/api/portraits/women/68.jpg", especialidades: ["Ecoturismo", "Aves", "Naturaleza"], disponible: true },
@@ -35,7 +35,8 @@ function saveGuides() {
 // ========== NAVIGATION ==========
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
+  const page = document.getElementById('page-' + name);
+  if (page) page.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
   if (name === 'tourist') {
@@ -239,9 +240,9 @@ function submitGuideRegistration() {
   const firstName = (document.getElementById('firstName') || {}).value?.trim() || '';
   const lastName = (document.getElementById('lastName') || {}).value?.trim() || '';
   const name = firstName && lastName ? firstName + ' ' + lastName : (document.getElementById('fullName') || {}).value?.trim() || '';
-  const bio = document.getElementById('bio').value.trim();
-  const languages = document.getElementById('languages').value.trim();
-  const location = document.getElementById('location').value.trim();
+  const bio = (document.getElementById('bio') || {}).value?.trim() || '';
+  const languages = (document.getElementById('languages') || {}).value?.trim() || '';
+  const location = (document.getElementById('location') || {}).value?.trim() || '';
   const email = (document.getElementById('email') || {}).value?.trim() || '';
   const password = (document.getElementById('password') || {}).value?.trim() || '';
   const phone = (document.getElementById('phone') || {}).value?.trim() || '';
@@ -401,7 +402,8 @@ function dismissNotif(id) {
 }
 
 // ========== CLOSE MODAL ON BACKDROP ==========
-document.getElementById('contactModal').addEventListener('click', function(e) {
+const contactModalEl = document.getElementById('contactModal');
+if (contactModalEl) contactModalEl.addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
 

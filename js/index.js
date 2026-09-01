@@ -1,4 +1,14 @@
 
+function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 let top10Data = {};
 let paquetesData = {};
 window.homeDataLoaded = false;
@@ -213,14 +223,14 @@ function renderTop10Cards() {
         const translationKey = getTop10TranslationKey(id);
         const title = translateOrDefault('topTitulo' + translationKey, d.title);
         const desc = translateOrDefault('top' + translationKey, d.desc);
-        const tagHtml = d.tag ? `<span class="card-tag-pill">${d.tag}</span>` : '';
+        const tagHtml = d.tag ? `<span class="card-tag-pill">${escapeHtml(d.tag)}</span>` : '';
         html += `
             <div class="card reveal">
-                <img src="${d.img}" alt="${title}" loading="lazy" decoding="async">
+                <img src="${escapeHtml(d.img)}" alt="${escapeHtml(title)}" loading="lazy" decoding="async">
                 ${tagHtml}
                 <div class="card-content">
-                    <h3>${title}</h3>
-                    <p>${desc}</p>
+                    <h3>${escapeHtml(title)}</h3>
+                    <p>${escapeHtml(desc)}</p>
                     <button class="btn-sabemas" onclick="abrirModalTop10('${id}')" data-i18n="saberMas">Saber más</button>
                 </div>
             </div>`;
@@ -247,20 +257,20 @@ function renderPaquetesCards() {
         html += `
             <div class="paquete-card reveal">
                 <div class="paquete-img-wrap">
-                    <img src="${d.img}" alt="${title}" loading="lazy" decoding="async">
+                    <img src="${escapeHtml(d.img)}" alt="${escapeHtml(title)}" loading="lazy" decoding="async">
                     <span class="paquete-badge" data-i18n="${badgeKey}">${translateOrDefault(badgeKey, '')}</span>
                 </div>
                 <div class="paquete-info">
                     <div class="paquete-region" data-i18n="${regionKey}">${translateOrDefault(regionKey, '')}</div>
-                    <h3>${title}</h3>
-                    <p>${desc}</p>
+                    <h3>${escapeHtml(title)}</h3>
+                    <p>${escapeHtml(desc)}</p>
                     <div class="paquete-features">
                         ${featuresHtml}
                     </div>
                     <div class="paquete-bottom">
                         <div class="paquete-precio-wrap">
                             <div class="paquete-desde" data-i18n="desde">Desde</div>
-                            <div class="paquete-precio">${d.precio}</div>
+                            <div class="paquete-precio">${escapeHtml(d.precio)}</div>
                             <div class="paquete-pp" data-i18n="porPersona">por persona</div>
                         </div>
                         <div class="paquete-btns">
@@ -311,7 +321,7 @@ async function abrirModalTop10(id) {
     const facts = factString === factsKey ? data.facts : factString.split('|');
     if (factsEl) {
         factsEl.innerHTML = facts
-            .map(f => `<span class="top10-modal-fact">${f}</span>`).join('');
+            .map(f => `<span class="top10-modal-fact">${escapeHtml(f)}</span>`).join('');
     }
 
     // Botón "Quiero ir" guarda el país y redirige
@@ -333,15 +343,18 @@ async function abrirModalTop10(id) {
 }
 
 function cerrarModalTop10() {
-    document.getElementById('top10ModalOverlay').classList.remove('active');
+    const el = document.getElementById('top10ModalOverlay');
+    if (el) el.classList.remove('active');
     if (window.KavariScrollLock) window.KavariScrollLock.unlock();
 }
 
 // Cerrar el modal al hacer clic fuera
-document.getElementById('top10ModalOverlay').addEventListener('click', function(e) {
+const top10Overlay = document.getElementById('top10ModalOverlay');
+if (top10Overlay) top10Overlay.addEventListener('click', function(e) {
     if (e.target === this) cerrarModalTop10();
 });
-document.getElementById('top10ModalClose').addEventListener('click', cerrarModalTop10);
+const top10Close = document.getElementById('top10ModalClose');
+if (top10Close) top10Close.addEventListener('click', cerrarModalTop10);
 
 // Función para abrir el modal de detalle del paquete
 async function abrirModalPaquete(id) {
@@ -368,24 +381,24 @@ async function abrirModalPaquete(id) {
         imgEl.alt = data.title;
     }
     if (titleEl) titleEl.textContent = data.title;
-    if (precioEl) precioEl.innerHTML = data.precio;
+    if (precioEl) precioEl.textContent = data.precio;
 
     const paqueteKey = getPaqueteTranslationKey(id);
     if (descEl) descEl.textContent = translateOrDefault('paquete' + paqueteKey + 'Desc', data.desc);
 
     if (includesEl) {
         includesEl.innerHTML = data.includes
-            .map(item => `<div class="paquete-include-item">${item}</div>`).join('');
+            .map(item => `<div class="paquete-include-item">${escapeHtml(item)}</div>`).join('');
     }
 
     if (itineraryEl) {
         itineraryEl.innerHTML = data.itinerary
             .map(d => `
                 <div class="itinerary-day">
-                    <div class="itin-day-num">${d.dia.split(' ')[1]}</div>
+                    <div class="itin-day-num">${escapeHtml(d.dia.split(' ')[1])}</div>
                     <div class="itin-day-text">
-                        <h5>${d.titulo}</h5>
-                        <p>${d.texto}</p>
+                        <h5>${escapeHtml(d.titulo)}</h5>
+                        <p>${escapeHtml(d.texto)}</p>
                     </div>
                 </div>
             `).join('');
@@ -409,14 +422,17 @@ async function abrirModalPaquete(id) {
 }
 
 function cerrarModalPaquete() {
-    document.getElementById('paqueteModalOverlay').classList.remove('active');
+    const el = document.getElementById('paqueteModalOverlay');
+    if (el) el.classList.remove('active');
     if (window.KavariScrollLock) window.KavariScrollLock.unlock();
 }
 
-document.getElementById('paqueteModalOverlay').addEventListener('click', function(e) {
+const paqOverlay = document.getElementById('paqueteModalOverlay');
+if (paqOverlay) paqOverlay.addEventListener('click', function(e) {
     if (e.target === this) cerrarModalPaquete();
 });
-document.getElementById('paqueteModalClose').addEventListener('click', cerrarModalPaquete);
+const paqClose = document.getElementById('paqueteModalClose');
+if (paqClose) paqClose.addEventListener('click', cerrarModalPaquete);
 
 // Función auxiliar para preseleccionar el país al ir al listado de paquetes
 function seleccionarPais(pais) {

@@ -11,7 +11,7 @@
 })();
 
 function getThemeLabel(theme) {
-  const lang = localStorage.getItem('kavariIdioma') || localStorage.getItem('idioma') || 'es';
+  const lang = localStorage.getItem('kavari-idioma') || 'es';
   if (typeof textos !== 'undefined' && textos[lang]) {
     return theme === 'dark' ? textos[lang].modoClaro : textos[lang].modoOscuro;
   }
@@ -24,7 +24,7 @@ function updateThemeButton(theme) {
   if (!btn) return;
   const label = getThemeLabel(current);
   btn.textContent = label;
-  const lang = localStorage.getItem('kavariIdioma') || 'es';
+  const lang = localStorage.getItem('kavari-idioma') || 'es';
   btn.setAttribute('aria-label', current === 'dark'
     ? (lang === 'en' ? 'Switch to light mode' : lang === 'pt' ? 'Mudar para o modo claro' : 'Activar modo claro')
     : (lang === 'en' ? 'Switch to dark mode' : lang === 'pt' ? 'Mudar para o modo escuro' : 'Activar modo oscuro'));
@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let savedLang = 'es';
   try {
-    savedLang = localStorage.getItem('kavari-idioma') || localStorage.getItem('kavariIdioma') || localStorage.getItem('idioma') || 'es';
+    savedLang = localStorage.getItem('kavari-idioma') || 'es';
   } catch (e) {
-    if (window.sessionStorage) savedLang = sessionStorage.getItem('kavariIdioma') || 'es';
+    if (window.sessionStorage) savedLang = sessionStorage.getItem('kavari-idioma') || 'es';
   }
 
   if (typeof window.setIdioma === 'function') {

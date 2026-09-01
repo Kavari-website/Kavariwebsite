@@ -459,7 +459,6 @@
             destJapon: 'Tokio, Kioto, Monte Fuji, templos de Nara y la cultura samurái e ikebana.',
             destTailandia: 'Bangkok, Chiang Mai, Phuket, templos budistas y rituales del Año Nuevo Songkran.',
             destMarruecos: 'Marrakech, Fez, desierto del Sahara, medinas históricas y la cultura bereber.',
-            destMasiaDios: 'Marrakech, Fez, desierto del Sahara, medinas históricas y la cultura bereber.',
             destTurquia: 'Estambul, Capadocia en globo, Pamukkale, Éfeso y el Bósforo entre dos continentes.',
             destGrecia: 'Atenas, Santorini, Mykonos, Creta y las ruinas del mundo antiguo clásico.',
             destSudafrica: 'Ciudad del Cabo, safari en Kruger, Ruta Jardín y la costa de KwaZulu-Natal.',
@@ -896,7 +895,7 @@
             planViajeroF1: '21 destinos',
             planViajeroF2: 'Guías, cultura y gastronomía',
             planViajeroF3: 'Asistente KAVARI',
-            planViajeroF4: 'Favoritos avanzados',
+            planViajeroF4: 'Tutorial interactivo',
             planPremiumBadge: 'Más elegido',
             planPremiumNombre: 'Premium',
             planPremiumPrecio: 'US$9.99',
@@ -1101,7 +1100,7 @@
             consejoLabel: 'Consejo',
             paqueteModalIncluye: '¿Qué incluye el paquete?',
 
-            footerTexto: '© 2025 Kavari — Todos los derechos reservados.',
+            footerTexto: '© 2026 Kavari — Todos los derechos reservados.',
             footerPrivacidad: 'Política de privacidad',
             footerTerminos: 'Términos y condiciones',
             footerCookies: 'Política de cookies',
@@ -8961,7 +8960,7 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
             consejoLabel: 'Tip',
             paqueteModalIncluye: 'What does the package include?',
 
-            footerTexto: '© 2025 Kavari — All rights reserved.',
+            footerTexto: '© 2026 Kavari — All rights reserved.',
             footerPrivacidad: 'Privacy Policy',
             footerTerminos: 'Terms & Conditions',
             footerCookies: 'Cookie Policy',
@@ -15973,8 +15972,6 @@ paisGuyana_hospedajes_5_tipo: 'Coastal cabin',
         idiomaActual = idioma;
         CACHE_T.clear();
         localStorage.setItem('kavari-idioma', idioma);
-        localStorage.setItem('kavariIdioma', idioma);
-        localStorage.setItem('idioma', idioma);
         aplicarTraducciones();
     }
 

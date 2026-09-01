@@ -2,7 +2,7 @@
  * supabase-client.js — Cliente Supabase para KAVARI
  * Inicializa la conexión con Supabase para autenticación, base de datos y storage.
  *
- * IMPORTANTE: Verifica que ANON_KEY corresponda a tu proyecto real.
+ * IMPORTANTE: La clave ANON debe corresponder a tu proyecto real.
  * Panel → Settings → API → Project API keys → "anon public"
  *
  * Este archivo SOLO expone helpers de bajo nivel (cliente y sesión).
@@ -21,17 +21,20 @@ const SUPABASE_ANON_KEY = 'sb_publishable_-TbybQaKJP3496dqAV2qiA_ullV60oW'; // a
 function getSupabaseClient() {
   if (window.supabase && window.supabase.createClient) {
     if (!window._kavariSupabase) {
+      if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+        console.warn('[KAVARI] Supabase URL o ANON_KEY no configurados.');
+        return null;
+      }
       window._kavariSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
         auth: {
           autoRefreshToken: true,
           persistSession: true,
-          detectSessionInUrl: true // necesario para que el redirect de Google OAuth complete el login
+          detectSessionInUrl: true
         }
       });
     }
     return window._kavariSupabase;
   }
-  // console.warn('[KAVARI] Supabase SDK no cargado. Incluye el CDN antes de supabase-client.js');
   return null;
 }
 
@@ -69,12 +72,11 @@ async function isAuthenticated() {
   return !!user;
 }
 
-// Exportar para uso global
+// Exportar para uso global (sin exponer la clave en window)
 window.KavariDB = {
   getSupabaseClient,
   getCurrentSession,
   getCurrentUser,
   isAuthenticated,
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
+  SUPABASE_URL
 };
