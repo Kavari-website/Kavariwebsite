@@ -135,7 +135,7 @@
     "mexico": {
       "img": "img/paquetes_viaje/PQT_MX.jpeg",
       "title": "México",
-      "precio": "$790 <span>por persona</span>",
+      "precio": "$790 por persona",
       "desc": "Cancún y la Riviera Maya en 5 días: hotel todo incluido en la Zona Hotelera, visita a Chichén Itzá, cenotes sagrados y Isla Mujeres. Precio referenciado en ofertas reales de vuelo+hotel (Expedia/deturista, desde $450–$900 según temporada).",
       "includes": [
         "Vuelo redondo",
@@ -178,7 +178,7 @@
     "peru": {
       "img": "img/paquetes_viaje/PQT_PERU.jpeg",
       "title": "Perú",
-      "precio": "$520 <span>por persona</span>",
+      "precio": "$520 por persona",
       "desc": "Cusco y Machu Picchu en 4 días: ciudad imperial, Valle Sagrado y la maravilla inca en tren panorámico. Basado en tarifas vigentes de operadores locales ($430–$950 por persona según hotel).",
       "includes": [
         "Vuelo Lima-Cusco-Lima",
@@ -215,7 +215,7 @@
     "panama": {
       "img": "img/paquetes_viaje/PQT_PN.jpeg",
       "title": "Panamá",
-      "precio": "$690 <span>por persona</span>",
+      "precio": "$690 por persona",
       "desc": "Lo mejor de Panamá en 5 días: Canal de Panamá, Casco Viejo colonial y las playas paradisíacas de Guna Yala en San Blas.",
       "includes": [
         "Traslados aeropuerto-hotel",
@@ -258,7 +258,7 @@
     "republica-dominicana": {
       "img": "img/paquetes_viaje/PQT_RD.jpeg",
       "title": "República Dominicana",
-      "precio": "$1,150 <span>por persona</span>",
+      "precio": "$1,150 por persona",
       "desc": "Punta Cana todo incluido en 5 días: playas de Bávaro, catamarán y vida caribeña. Precio referenciado en paquetes reales vuelo+resort ($1,190–$1,600 según temporada).",
       "includes": [
         "Vuelo redondo",
@@ -300,7 +300,7 @@
     "brasil": {
       "img": "img/paquetes_viaje/PQT_BR.jpeg",
       "title": "Brasil",
-      "precio": "$980 <span>por persona</span>",
+      "precio": "$980 por persona",
       "desc": "Río de Janeiro en 6 días: Copacabana, Cristo Redentor, Pan de Azúcar y samba. Precios reales de mercado: $970–$1,200 con vuelo y hotel desde Buenos Aires (deturista/Ikatu).",
       "includes": [
         "Vuelo redondo",
@@ -348,7 +348,7 @@
     "argentina": {
       "img": "img/paquetes_viaje/PQT_ARG.jpeg",
       "title": "Argentina",
-      "precio": "$890 <span>por persona</span>",
+      "precio": "$890 por persona",
       "desc": "Buenos Aires e Iguazú en 6 días: tango, Recoleta y las cataratas más impresionantes de Sudamérica por lado argentino.",
       "includes": [
         "Vuelos internos BA-Iguazú-BA",
@@ -395,7 +395,7 @@
     "chile": {
       "img": "img/paquetes_viaje/PAQUETECHILE.png",
       "title": "Chile",
-      "precio": "$950 <span>por persona</span>",
+      "precio": "$950 por persona",
       "desc": "Santiago y Valle de Atacama en 6 días: la capital andina, géiseres del Tatio, lagunas altiplánicas y valles de sal a más de 2,400 m.",
       "includes": [
         "Vuelo Santiago-Calama-Santiago",
@@ -443,7 +443,7 @@
     "costa-rica": {
       "img": "img/paquetes_viaje/PQ_CSTRC.jpeg",
       "title": "Costa Rica",
-      "precio": "$760 <span>por persona</span>",
+      "precio": "$760 por persona",
       "desc": "Ecoturismo puro en 6 días: volcán Arenal, aguas termales, bosque nuboso de Monteverde y playas del Pacífico central.",
       "includes": [
         "Traslados privados 4x4",
@@ -491,7 +491,7 @@
     "colombia": {
       "img": "img/paquetes_viaje/PAQUETECOLOMBIA.jpg",
       "title": "Colombia",
-      "precio": "$720 <span>por persona</span>",
+      "precio": "$720 por persona",
       "desc": "Cartagena y Medellín en 6 días: la ciudad amurallada, las islas del Rosario y la comuna 13 con su arte urbano.",
       "includes": [
         "Vuelo interno Cartagena-Medellín",
@@ -539,7 +539,7 @@
     "ecuador": {
       "img": "img/paquetes_viaje/PQT_EC.jpeg",
       "title": "Ecuador",
-      "precio": "$750 <span>por persona</span>",
+      "precio": "$750 por person",
       "desc": "Quito y Otavalo en 5 días: el centro histórico mejor preservado de América, la mitad del mundo y el mercado indígena más famoso.",
       "includes": [
         "Traslados privados",
@@ -582,7 +582,7 @@
     "cuba": {
       "img": "img/paquetes_viaje/PAQUETECUBA.jpg",
       "title": "Cuba",
-      "precio": "$780 <span>por persona</span>",
+      "precio": "$780 por persona",
       "desc": "La Habana y Varadero en 6 días: clásicos americanos, son cubano, mojitos en La Bodeguita y arena blanca en Varadero.",
       "includes": [
         "Hotel en La Habana (2 noches)",
@@ -629,7 +629,7 @@
     "guatemala": {
       "img": "img/paquetes_viaje/PAQUETEGUATEMALA.jpg",
       "title": "Guatemala",
-      "precio": "$590 <span>por persona</span>",
+      "precio": "$590 por persona",
       "desc": "Antigua, Lago Atitlán y Tikal en 6 días: ciudades coloniales, volcanes activos y templos mayas entre la selva.",
       "includes": [
         "Transporte privado",
@@ -677,7 +677,7 @@
     "bolivia": {
       "img": "img/paquetes_viaje/PAQUETEBOLIVIA.jpg",
       "title": "Bolivia",
-      "precio": "$560 <span>por persona</span>",
+      "precio": "$560 por persona",
       "desc": "La Paz y Salar de Uyuni en 5 días: teleferico urbano, isla del Sol en Titicaca y el espejo de sal más grande del mundo.",
       "includes": [
         "Hotel en La Paz (2 noches)",
@@ -719,7 +719,7 @@
     "venezuela": {
       "img": "img/paquetes_viaje/PAQUETEVENEZUELA.jpg",
       "title": "Venezuela",
-      "precio": "$650 <span>por persona</span>",
+      "precio": "$650 por persona",
       "desc": "Margarita y Canaima en 6 días: playas caribeñas, fortaleza colonial y sobrevuelo al Salto Ángel, la caída de agua más alta del planeta.",
       "includes": [
         "Vuelo interno a Canaima",
@@ -766,7 +766,7 @@
     "uruguay": {
       "img": "img/paquetes_viaje/PAQUETEURUGUAY.jpg",
       "title": "Uruguay",
-      "precio": "$820 <span>por persona</span>",
+      "precio": "$820 por persona",
       "desc": "Montevideo, Colonia y Punta del Este en 6 días: ramblas, ciudad histórica UNESCO y la playa más glamorosa del Río de la Plata.",
       "includes": [
         "Hoteles (5 noches)",
@@ -814,7 +814,7 @@
     "paraguay": {
       "img": "img/paquetes_viaje/PAQUETEPARAGUAY.png",
       "title": "Paraguay",
-      "precio": "$590 <span>por persona</span>",
+      "precio": "$590 por persona",
       "desc": "Asunción y las Misiones jesuíticas en 5 días: capital ribereña, ruinas guaraníes UNESCO y la represa de Itaipú.",
       "includes": [
         "Hotel en Asunción (4 noches)",
@@ -856,7 +856,7 @@
     "honduras": {
       "img": "img/paquetes_viaje/PAQUETEHONDURAS.jpg",
       "title": "Honduras",
-      "precio": "$640 <span>por persona</span>",
+      "precio": "$640 por persona",
       "desc": "Roatán y Copán en 6 días: el arrecife de coral más grande del hemisferio norte y la Atenas maya declarada Patrimonio de la Humanidad.",
       "includes": [
         "Vuelo interno a San Pedro Sula",
@@ -903,7 +903,7 @@
     "nicaragua": {
       "img": "img/paquetes_viaje/PAQUETENICARAGUA.jpg",
       "title": "Nicaragua",
-      "precio": "$540 <span>por persona</span>",
+      "precio": "$540 por persona",
       "desc": "Granada, Masaya y Ometepe en 6 días: colonialismo colorido, volcanes activos y una isla gemela en el lago Cocibolca.",
       "includes": [
         "Hotel colonial en Granada (2 noches)",
@@ -950,7 +950,7 @@
     "el-salvador": {
       "img": "img/paquetes_viaje/PAQUETEELSALVADOR.png",
       "title": "El Salvador",
-      "precio": "$490 <span>por persona</span>",
+      "precio": "$490 por persona",
       "desc": "Ruta de las Flores y playas de surf en 5 días: pueblos pintorescos, lagos volcánicos, Joya de Cerén (UNESCO) y la ola del Sunzal.",
       "includes": [
         "Hotel en San Salvador (2 noches)",
@@ -993,7 +993,7 @@
     "belice": {
       "img": "img/paquetes_viaje/PAQUETEBELICE.png",
       "title": "Belice",
-      "precio": "$850 <span>por persona</span>",
+      "precio": "$850 por persona",
       "desc": "Cayo Ambergris y las cuevas mayas en 5 días: la segunda barrera de coral más grande del mundo, tiburones nodriza y ruinas Xunantunich.",
       "includes": [
         "Water taxi o vuelo interno",
@@ -1035,7 +1035,7 @@
     "guyana": {
       "img": "img/paquetes_viaje/PAQUETEGUYANA.jpg",
       "title": "Guyana",
-      "precio": "$980 <span>por persona</span>",
+      "precio": "$980 por persona",
       "desc": "Georgetown y Kaieteur en 5 días: naturaleza virgen amazónica, las cataratas de una sola caída más potentes del mundo y lodges de selva.",
       "includes": [
         "Lodge de selva (2 noches)",

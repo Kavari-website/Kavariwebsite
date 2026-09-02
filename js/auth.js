@@ -12,7 +12,7 @@
   const VERIFICATION_KEY = 'kavari-verification';
 
   /* ─── Helpers ─── */
-  const lang = () => localStorage.getItem('kavariIdioma') || localStorage.getItem('idioma') || 'es';
+  const lang = () => localStorage.getItem('kavari-idioma') || 'es';
 
   const t = (key) => {
     if (window.t) return window.t(key);

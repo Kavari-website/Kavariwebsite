@@ -67,11 +67,6 @@
     }).join(' ');
   }
 
-  function setStatus(msg, isError) {
-    statusEl.textContent = msg;
-    statusEl.classList.toggle('is-error', !!isError);
-  }
-
   function build() {
     if (document.getElementById('packageRequestModal')) return;
 

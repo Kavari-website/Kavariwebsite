@@ -199,13 +199,17 @@
     if (els.perfilPlanBadge) els.perfilPlanBadge.textContent = planNames[plan] || 'Viajero';
 
     if (avatarUrl) {
-      els.perfilAvatarImg.src = avatarUrl;
-      els.perfilAvatarImg.style.display = 'block';
-      els.perfilAvatarInitials.style.display = 'none';
+      if (els.perfilAvatarImg) {
+        els.perfilAvatarImg.src = avatarUrl;
+        els.perfilAvatarImg.style.display = 'block';
+      }
+      if (els.perfilAvatarInitials) els.perfilAvatarInitials.style.display = 'none';
     } else {
-      els.perfilAvatarImg.style.display = 'none';
-      els.perfilAvatarInitials.style.display = 'block';
-      els.perfilAvatarInitials.textContent = getInitials(displayName);
+      if (els.perfilAvatarImg) els.perfilAvatarImg.style.display = 'none';
+      if (els.perfilAvatarInitials) {
+        els.perfilAvatarInitials.style.display = 'block';
+        els.perfilAvatarInitials.textContent = getInitials(displayName);
+      }
     }
 
     if (els.perfilName) els.perfilName.value = profile?.full_name || '';
@@ -559,8 +563,8 @@
   /* ─── Login Handler ─── */
   async function handleLogin(e) {
     e.preventDefault();
-    const email = els.loginEmail.value.trim();
-    const password = els.loginPassword.value;
+    const email = els.loginEmail ? els.loginEmail.value.trim() : '';
+    const password = els.loginPassword ? els.loginPassword.value : '';
 
     let valid = true;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -631,8 +635,10 @@
     }
     if (!valid) return;
 
-    els.registerSubmitBtn.disabled = true;
-    els.registerSubmitBtn.textContent = 'Creando cuenta…';
+    if (els.registerSubmitBtn) {
+      els.registerSubmitBtn.disabled = true;
+      els.registerSubmitBtn.textContent = 'Creando cuenta…';
+    }
 
     const result = await window.KavariAuth.signUpWithEmail(email, password, name);
 

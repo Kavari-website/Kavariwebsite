@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Navbar: fondo sólido al hacer scroll ---------- */
   const navbar = document.getElementById('navbar');
   const onScroll = () => {
+    if (!navbar) return;
     if (window.scrollY > 40) {
       navbar.classList.add('scrolled');
     } else {

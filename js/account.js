@@ -199,7 +199,7 @@
       const firstName = String(name).split(' ')[0];
 
       const avatarHtml = avatar
-        ? `<img class="kavari-nav-avatar" src="${escapeHtml(avatar)}" alt="" loading="lazy" data-kavari-no-fallback="1">`
+        ? `<img class="kavari-nav-avatar" src="${escapeHtml(avatar)}" alt="Avatar de usuario" loading="lazy" data-kavari-no-fallback="1">`
         : `<span class="kavari-nav-avatar kavari-nav-avatar-fallback">${escapeHtml(initials)}</span>`;
 
       wrap.innerHTML =

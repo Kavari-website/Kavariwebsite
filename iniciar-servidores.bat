@@ -12,7 +12,7 @@ echo [1/2] Iniciando sitio web en puerto 5501...
 start "KAVARI Sitio Web (5501)" cmd /k "cd /d "%PROJECT_DIR%" && node scripts/dev-server.js 5501"
 
 echo [2/2] Iniciando API del chatbot en puerto 3007...
-start "KAVARI Chat API (3007)" cmd /k "cd /d "%PROJECT_DIR%server" && node index.js"
+start "KAVARI Chat API (3007)" cmd /k "cd /d "%PROJECT_DIR%server\" && node index.js"
 
 timeout /t 3 /nobreak >nul
 start http://localhost:5501/index.html
