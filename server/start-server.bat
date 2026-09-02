@@ -1,3 +1,3 @@
 @echo off
-cd C:\Users\usuario\Downloads\Kavari1.4\Kavariwebsite\server
+cd /d "%~dp0"
 node index.js

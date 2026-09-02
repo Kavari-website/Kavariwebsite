@@ -626,7 +626,7 @@ function getCountryVeil() {
         v.className = 'kavari-country-veil';
         v.innerHTML = `
             <div class="kcv-inner">
-                <div class="kcv-mascot"><img src="img/mascota.png" alt="" onerror="this.style.display='none'"></div>
+                <div class="kcv-mascot"><img src="img/mascota.png" alt="Mascota de KAVARI" onerror="this.style.display='none'"></div>
                 <div class="kcv-name" id="kcvName"></div>
                 <div class="kcv-bar"><div class="kcv-bar-fill"></div></div>
             </div>`;

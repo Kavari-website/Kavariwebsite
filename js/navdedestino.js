@@ -125,7 +125,7 @@
       row.style.animationDelay = Math.min(idx * 0.02, 0.3) + "s";
 
       var flagHtml = info.img
-        ? '<img src="' + info.img + '" alt="">'
+        ? '<img src="' + info.img + '" alt="Bandera de ' + (info.label || label) + '">'
         : (info.flag || info.initial || "🌎");
       row.innerHTML =
         '<span class="country-flag">' + flagHtml + '</span>' +
@@ -151,7 +151,7 @@
     if (!opt) return;
     var info = flagMarkup(opt.textContent, opt.value);
     if (triggerFlag) {
-      triggerFlag.innerHTML = info.img ? '<img src="' + info.img + '" alt="">' : (info.flag || info.initial || "🌎");
+      triggerFlag.innerHTML = info.img ? '<img src="' + info.img + '" alt="Bandera de ' + (info.label || opt.textContent) + '">' : (info.flag || info.initial || "🌎");
     }
     if (triggerName) triggerName.textContent = info.label || opt.textContent;
   }

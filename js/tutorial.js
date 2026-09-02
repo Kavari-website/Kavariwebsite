@@ -234,7 +234,7 @@ function createTutorialOverlay() {
       <div class="tut-progress-bar"><div class="tut-progress-fill" id="tutProgressFill"></div></div>
       <div class="tut-tooltip-inner">
         <div class="tut-head">
-          <div class="tut-mascot"><img src="img/mascota.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+          <div class="tut-mascot"><img src="img/mascota.png" alt="Mascota de KAVARI" onerror="this.parentElement.style.display='none'"></div>
           <div class="tut-head-text">
             <div class="tut-step-num" id="tutStepNum"></div>
             <h3 class="tut-title" id="tutTitle"></h3>

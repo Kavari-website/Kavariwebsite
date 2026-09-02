@@ -6,6 +6,28 @@ server/.env
 node_modules/
 npm-debug.log*
 
+# Logs y archivos temporales
+server.log
+output.txt
+
+# Scripts de desarrollo / temporales
+scripts/fr-parts/
+scripts/*.json
+scripts/_t.txt
+scripts/_frag*.js
+scripts/_check.js
+scripts/_build.js
+scripts/_freq.js
+scripts/_validate.js
+
+# Backups de datos
+data/data_backup.json
+data/data_clean.json
+data/data.fixed.json
+data/data.fixed2.json
+data/data.fixed3.json
+data/datajson.fixed
+
 # Sistema
 .DS_Store
 Thumbs.db
