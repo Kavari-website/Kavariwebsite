@@ -372,6 +372,56 @@ iframe[src*="bp-embed"] {
   z-index: 99999 !important;
 }
 
+/* Mover Botpress widget a la izquierda y hacerlo más grande */
+.bpFabWrapper {
+  left: 24px !important;
+  right: auto !important;
+  bottom: 24px !important;
+  width: 80px !important;
+  height: 80px !important;
+}
+.bpFab {
+  width: 80px !important;
+  height: 80px !important;
+}
+.bpFab img,
+.bpFab svg {
+  width: 44px !important;
+  height: 44px !important;
+}
+.bpWebchat {
+  left: 24px !important;
+  right: auto !important;
+  bottom: 116px !important;
+  width: min(480px, calc(100vw - 48px)) !important;
+  max-width: 480px !important;
+  height: 680px !important;
+  max-height: calc(100vh - 140px) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 16px 48px rgba(13,31,60,.22) !important;
+}
+
+/* Móvil: widget a la izquierda, tamaño ajustado */
+@media (max-width: 600px) {
+  .bpFabWrapper {
+    left: 16px !important;
+    width: 72px !important;
+    height: 72px !important;
+  }
+  .bpFab {
+    width: 72px !important;
+    height: 72px !important;
+  }
+  .bpWebchat {
+    left: 16px !important;
+    width: calc(100vw - 32px) !important;
+    max-width: none !important;
+    height: 520px !important;
+    max-height: calc(100vh - 120px) !important;
+    bottom: 100px !important;
+  }
+}
+
 /* Ocultar chatbot legacy KAVARI personalizado */
 #kavari-chat-root,
 #kavari-mascot,

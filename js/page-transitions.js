@@ -1,8 +1,7 @@
 /**
- * page-transitions.js — Transiciones entre páginas de KAVARI
- * Desvanece la página actual y muestra un overlay con el logo mientras
- * carga la siguiente. Expone window.kavariNavigate(href) para que las
- * navegaciones programáticas (p.ej. irAPais) usen la misma transición.
+ * page-transitions.js — Transiciones suaves entre páginas de KAVARI
+ * Funde la página actual, muestra overlay con barra de progreso y logo,
+ * luego navega. Al llegar, la nueva página aparece con fade-in + slide-up.
  */
 (function () {
   'use strict';
@@ -32,12 +31,19 @@
   function showOverlay() {
     if (!overlay) buildOverlay();
     requestAnimationFrame(function () {
+      overlay.classList.remove('kpt-leaving');
       overlay.classList.add('kpt-shown');
     });
   }
 
-  function hideOverlay() {
-    if (overlay) overlay.classList.remove('kpt-shown');
+  function hideOverlay(callback) {
+    if (!overlay) { if (callback) callback(); return; }
+    overlay.classList.add('kpt-leaving');
+    overlay.classList.remove('kpt-shown');
+    setTimeout(function () {
+      overlay.classList.remove('kpt-leaving');
+      if (callback) callback();
+    }, 400);
   }
 
   function revealPage() {
@@ -58,11 +64,18 @@
   function navigate(href) {
     if (transitioning) return;
     transitioning = true;
-    document.body.classList.remove('page-loaded');
-    showOverlay();
+
+    // Funde suavemente el contenido actual
+    document.body.style.opacity = '0';
+    document.body.style.transform = 'translateY(-6px)';
+
     setTimeout(function () {
-      window.location.href = href;
-    }, 420);
+      showOverlay();
+      // Navega después de que el overlay sea visible
+      setTimeout(function () {
+        window.location.href = href;
+      }, 500);
+    }, 350);
   }
 
   /* Navegación programática con la misma transición */
@@ -101,12 +114,12 @@
       bindClicks();
     }
 
-    // Al volver atrás/adelante con el botón del navegador, la página se
-    // restaura desde la caché con el velo de transición aún visible.
-    // Lo ocultamos para que no quede negro.
+    // Al volver atrás/adelante con el botón del navegador
     window.addEventListener('pageshow', function (event) {
       if (event.persisted) {
         transitioning = false;
+        document.body.style.opacity = '';
+        document.body.style.transform = '';
         revealPage();
       }
     });
