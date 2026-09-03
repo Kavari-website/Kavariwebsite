@@ -531,7 +531,7 @@ body.menu-open {
     font-size: 12px;
   }
   .page-utilities {
-    right: 12px;
+    left: 12px;
     bottom: 12px;
     padding: 6px 10px;
     gap: 6px;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8"/>
@@ -6,48 +6,55 @@
   
   <title data-i18n="tituloPaises">KAVARI – Explora 21 Destinos de Latinoamérica y el Caribe</title>
   <meta name="description" data-i18n="metaDescPaises" content="Explora 21 destinos turísticos de Latinoamérica y el Caribe con KAVARI. Información completa de cultura, gastronomía, hospedajes y guías certificados."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=2"/>
-  <link rel="stylesheet" href="css/paises.css?v=3"/>
-  <link rel="stylesheet" href="css/chatbot-widget.css?v=4"/>
-  <link rel="stylesheet" href="css/ui-system.css"/>
-  <link rel="stylesheet" href="css/site-polish.css"/>
-  <link rel="stylesheet" href="css/traveler-registration.css?v=2"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/tutorial.css"/>
-  <link rel="stylesheet" href="css/mobile-responsive.css?v=8"/>
-  <link rel="stylesheet" href="css/nav-polish.css"/>
-  <link rel="stylesheet" href="css/dest-cards.css"/>
-  <link rel="stylesheet" href="css/buttons-system.css"/>
-  <link rel="stylesheet" href="css/typography-system.css"/>
+  <!-- CSS CRÍTICO: carga síncrona -->
+  <link rel="stylesheet" href="css/style.css?v=99">
+  <link rel="stylesheet" href="css/paises.css?v=3">
+  <link rel="stylesheet" href="css/ui-system.css?v=100">
+  <link rel="stylesheet" href="css/site-polish.css">
+  <link rel="stylesheet" href="css/mobile-responsive.css?v=99">
+  <link rel="stylesheet" href="css/nav-polish.css">
+  <link rel="stylesheet" href="css/dest-cards.css">
+  <link rel="stylesheet" href="css/buttons-system.css">
+  <link rel="stylesheet" href="css/typography-system.css">
   <link rel="stylesheet" href="css/spacing-system.css">
   <link rel="stylesheet" href="css/audit-consistency.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <!-- CSS NO CRÍTICO: carga asíncrona -->
+  <link rel="stylesheet" href="css/chatbot-widget.css?v=99" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="css/traveler-registration.css?v=2" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="css/tutorial.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="css/lang-dropdown.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="css/universal-shine.css" media="print" onload="this.media='all'">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
   <script defer src="js/idioma.js?v=5"></script>
   <script defer src="js/idioma-pt.js?v=2"></script>
   <script defer src="js/idioma-fr.js?v=1"></script>
-  <script src="js/theme.js?v=3"></script>
+  <script defer src="js/theme.js?v=3"></script>
   <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
   <script defer src="js/img-fallback.js"></script>
 
   <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
-  <link rel="stylesheet" href="css/lang-dropdown.css">
-  <link rel="stylesheet" href="css/universal-shine.css">
   <script defer src="js/lang-dropdown.js"></script>
 
   <!-- ===== FOOTER (estilos, iconos y script) ===== -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" media="print" onload="this.media='all'" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script defer src="js/footer.js"></script>
 
   <!-- ===== OPTIMIZACIÓN DE CARGA (performance.js) ===== -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-client.js"></script>
+  <script defer src="js/auth.js"></script>
   <script src="js/performance.js"></script>
 </head>
 <body>
-<a class="skip-link" href="#main">Saltar al contenido</a>
+<link rel="prefetch" href="index.html" as="document">
+<link rel="prefetch" href="destino.html" as="document">
+<link rel="prefetch" href="sobrenosotros.html" as="document">
 <nav class="navbar nav-glass home-nav" id="navbar">
     <div class="logo">
         <a href="index.html" style="color: inherit; text-decoration: none;">KAVARI</a>
@@ -96,17 +103,13 @@
         <option value="todos" data-i18n="paisesContinenteTodos">Todos</option>
         <option value="america" data-i18n="paisesContinenteAmerica">América</option>
         <option value="caribe" data-i18n="paisesContinenteCaribe">Caribe</option>
-        <option value="europa" data-i18n="paisesContinenteEuropa">Europa</option>
-        <option value="asia" data-i18n="paisesContinenteAsia">Asia</option>
-        <option value="africa" data-i18n="paisesContinenteAfrica">África</option>
+
       </select>
       <div class="continent-chips">
         <button type="button" class="continent-chip active"  data-continent="todos"   onclick="setContinent('todos')"   data-i18n="paisesContinenteTodos">Todos</button>
         <button type="button" class="continent-chip"         data-continent="america" onclick="setContinent('america')" data-i18n="paisesContinenteAmerica">América</button>
         <button type="button" class="continent-chip"         data-continent="caribe"  onclick="setContinent('caribe')"  data-i18n="paisesContinenteCaribe">Caribe</button>
-        <button type="button" class="continent-chip"         data-continent="europa"  onclick="setContinent('europa')"  data-i18n="paisesContinenteEuropa">Europa</button>
-        <button type="button" class="continent-chip"         data-continent="asia"    onclick="setContinent('asia')"    data-i18n="paisesContinenteAsia">Asia</button>
-        <button type="button" class="continent-chip"         data-continent="africa"  onclick="setContinent('africa')"  data-i18n="paisesContinenteAfrica">África</button>
+     
       </div>
     </div>
     <!-- Muestra cuántos destinos se ven después de buscar -->
@@ -180,9 +183,6 @@
   </div>
 </footer>
 
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script defer src="js/supabase-client.js"></script>
-<script defer src="js/auth.js"></script>
 <script defer src="js/tutorial.js"></script>
 <script defer src="js/account.js"></script>
 <script defer src="js/paises-data.js"></script>
@@ -202,7 +202,7 @@
 
 
 <!-- Botpress Webchat -->
-<script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
+<script defer src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
 <script src="https://files.bpcontent.cloud/2026/08/28/15/20260828152119-PPLK2M38.js" defer></script>
 </body>
 </html>

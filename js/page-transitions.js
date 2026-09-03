@@ -1,17 +1,15 @@
 /**
- * page-transitions.js — Transiciones entre páginas de KAVARI
- * Desvanece la página actual y muestra un overlay con el logo mientras
- * carga la siguiente. Expone window.kavariNavigate(href) para que las
- * navegaciones programáticas (p.ej. irAPais) usen la misma transición.
+ * page-transitions.js — Transiciones suaves y rápidas entre páginas de KAVARI
+ * Overlay con barra de progreso + logo, navegación y fade-in al llegar.
  */
 (function () {
   'use strict';
 
-  const prefersReduced =
+  var prefersReduced =
     window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  let overlay = null;
-  let transitioning = false;
+  var overlay = null;
+  var transitioning = false;
 
   function buildOverlay() {
     if (document.getElementById('kavariPageTrans')) {
@@ -32,12 +30,19 @@
   function showOverlay() {
     if (!overlay) buildOverlay();
     requestAnimationFrame(function () {
+      overlay.classList.remove('kpt-leaving');
       overlay.classList.add('kpt-shown');
     });
   }
 
-  function hideOverlay() {
-    if (overlay) overlay.classList.remove('kpt-shown');
+  function hideOverlay(callback) {
+    if (!overlay) { if (callback) callback(); return; }
+    overlay.classList.add('kpt-leaving');
+    overlay.classList.remove('kpt-shown');
+    setTimeout(function () {
+      overlay.classList.remove('kpt-leaving');
+      if (callback) callback();
+    }, 300);
   }
 
   function revealPage() {
@@ -48,7 +53,7 @@
   function isInternalSibling(href) {
     if (/^(#|mailto:|tel:|javascript:|\/\/)/i.test(href)) return false;
     try {
-      const url = new URL(href, window.location.href);
+      var url = new URL(href, window.location.href);
       return url.origin === window.location.origin && /\.html($|\?|$)/.test(url.pathname);
     } catch (_) {
       return false;
@@ -58,14 +63,17 @@
   function navigate(href) {
     if (transitioning) return;
     transitioning = true;
-    document.body.classList.remove('page-loaded');
+
+    document.body.style.opacity = '0';
+    document.body.style.transform = 'translateY(-4px)';
+
     showOverlay();
+
     setTimeout(function () {
       window.location.href = href;
-    }, 420);
+    }, 280);
   }
 
-  /* Navegación programática con la misma transición */
   window.kavariNavigate = function (href) {
     if (!href) return;
     if (prefersReduced) { window.location.href = href; return; }
@@ -75,10 +83,10 @@
   function bindClicks() {
     document.addEventListener('click', function (e) {
       if (prefersReduced || transitioning) return;
-      const anchor = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      var anchor = e.target && e.target.closest ? e.target.closest('a[href]') : null;
       if (!anchor) return;
       if (anchor.target && anchor.target !== '_self') return;
-      const href = anchor.getAttribute('href') || '';
+      var href = anchor.getAttribute('href') || '';
       if (anchor.hasAttribute('download')) return;
       if (anchor.hasAttribute('data-guide-register')) return;
       if (anchor.dataset.navegable === 'false') return;
@@ -101,12 +109,11 @@
       bindClicks();
     }
 
-    // Al volver atrás/adelante con el botón del navegador, la página se
-    // restaura desde la caché con el velo de transición aún visible.
-    // Lo ocultamos para que no quede negro.
     window.addEventListener('pageshow', function (event) {
       if (event.persisted) {
         transitioning = false;
+        document.body.style.opacity = '';
+        document.body.style.transform = '';
         revealPage();
       }
     });

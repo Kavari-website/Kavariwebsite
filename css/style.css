@@ -2064,3 +2064,14 @@ a,button,.card,.place-card,.paquete-card {
 .paquete-modal-overlay > .paquete-modal {
   margin:auto;
 }
+
+/* Performance: content-visibility for heavy off-screen sections */
+.search-box,
+.featured-section,
+.places-section,
+.footer,
+.kv-footer,
+.plan-cta {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}

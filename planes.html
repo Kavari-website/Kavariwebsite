@@ -4,53 +4,54 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-  <title data-i18n="tituloPlanes">Planes ∑ KAVARI</title>
-  <meta name="description" data-i18n="metaDescPlanes" content="Planes de viaje KAVARI: descubre destinos, paquetes, guÌas turÌsticos y m·s.">
+  <title data-i18n="tituloPlanes">Planes ¬∑ KAVARI</title>
+  <meta name="description" data-i18n="metaDescPlanes" content="Planes de viaje KAVARI: descubre destinos, paquetes, GU√çAS TUR√çSTICOS y m√°s.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2">
-  <link rel="stylesheet" href="css/planes.css">
-  <link rel="stylesheet" href="css/ui-system.css">
-  <link rel="stylesheet" href="css/pricing.css">
-  <link rel="stylesheet" href="css/site-polish.css">
-  <link rel="stylesheet" href="css/traveler-registration.css?v=2">
-  <link rel="stylesheet" href="css/tutorial.css">
-  <link rel="stylesheet" href="css/chatbot-widget.css?v=4">
-  <link rel="stylesheet" href="css/mobile-responsive.css?v=8">
-  <link rel="stylesheet" href="css/nav-polish.css">
-  <link rel="stylesheet" href="css/buttons-system.css">
-  <link rel="stylesheet" href="css/typography-system.css">
-  <link rel="stylesheet" href="css/spacing-system.css">
-  <link rel="stylesheet" href="css/audit-consistency.css">
+  <link rel="stylesheet" href="css/style.css?v=99" />
+  <link rel="stylesheet" href="css/planes.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/ui-system.css?v=100" />
+  <link rel="stylesheet" href="css/pricing.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/site-polish.css" />
+  <link rel="stylesheet" href="css/traveler-registration.css?v=2" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/tutorial.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/chatbot-widget.css?v=99" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/mobile-responsive.css?v=99" />
+  <link rel="stylesheet" href="css/nav-polish.css" />
+  <link rel="stylesheet" href="css/buttons-system.css" />
+  <link rel="stylesheet" href="css/typography-system.css" />
+  <link rel="stylesheet" href="css/spacing-system.css" />
+  <link rel="stylesheet" href="css/audit-consistency.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth.js"></script>
   <script defer src="js/idioma.js?v=5"></script>
   <script defer src="js/idioma-pt.js?v=2"></script>
   <script defer src="js/idioma-fr.js?v=1"></script>
-  <script defer src="js/theme.js"></script>
+  <script defer src="js/theme.js?v=3"></script>
   <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
   <script defer src="js/img-fallback.js"></script>
 
-  <!-- ===== MEN⁄ DESPLEGABLE DE IDIOMAS ===== -->
-  <link rel="stylesheet" href="css/lang-dropdown.css">
-  <link rel="stylesheet" href="css/universal-shine.css">
+  <!-- ===== MEN√ö DESPLEGABLE DE IDIOMAS ===== -->
+  <link rel="stylesheet" href="css/lang-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/universal-shine.css" media="print" onload="this.media='all'" />
   <script defer src="js/lang-dropdown.js"></script>
 
   <!-- ===== FOOTER (estilos, iconos y script) ===== -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/footer.css" />
   <script defer src="js/footer.js"></script>
 
-  <!-- ===== OPTIMIZACI”N DE CARGA (performance.js) ===== -->
+  <!-- ===== OPTIMIZACI√ìN DE CARGA (performance.js) ===== -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-  <script src="js/performance.js"></script>
+  <script defer src="js/performance.js"></script>
 </head>
 <body class="pricing-page">
-<a class="skip-link" href="#main">Saltar al contenido</a>
+<link rel="prefetch" href="index.html" as="document">
+<link rel="prefetch" href="paises.html" as="document">
   <nav class="navbar nav-glass home-nav" id="navbar">
     <div class="logo">
       <a href="index.html" style="color: inherit; text-decoration: none;">KAVARI</a>
@@ -68,14 +69,14 @@
       <button class="btn-lang-nav" id="btnLang" onclick="toggleLang()" aria-label="Cambiar idioma"><span id="langLabel">ES</span></button>
       <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Cambiar tema claro u oscuro">Oscuro</button>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Men˙">
+    <button class="hamburger" id="hamburger" aria-label="Men√∫">
       <span></span><span></span><span></span>
     </button>
   </nav>
   <main class="pricing-section" id="main">
     <header class="pricing-header">
-      <div><span class="pricing-kicker"><i></i> <span data-i18n="planesNavPlanes">Planes</span></span><h1 data-i18n="planesTitulo">Elige cÛmo quieres<br>viajar con KAVARI.</h1></div>
-      <p data-i18n="planesDesc">Empieza gratis o desbloquea herramientas de planificaciÛn y experiencias exclusivas.</p>
+      <div><span class="pricing-kicker"><i></i> <span data-i18n="planesNavPlanes">Planes</span></span><h1 data-i18n="planesTitulo">Elige c√ìmo quieres<br>viajar con KAVARI.</h1></div>
+      <p data-i18n="planesDesc">Empieza gratis o desbloquea herramientas de planificaci√ìn y experiencias exclusivas.</p>
     </header>
     <section class="pricing-grid" aria-label="Planes disponibles">
       <div class="pricing-spotlight"><article class="pricing-card">
@@ -83,19 +84,19 @@
         <div class="pricing-price"><strong data-i18n="planViajeroPrecio">Gratis</strong><span data-i18n="planViajeroDuracion">para siempre</span></div>
         <p class="pricing-desc" data-i18n="planViajeroDesc">La forma sencilla de descubrir el mundo con KAVARI.</p>
         <button class="pricing-cta" data-plan="viajero" data-i18n="planViajeroCta">Continuar gratis</button>
-        <ul class="pricing-features"><li><span class="feature-icon">?</span><span data-i18n="planViajeroF1">36 destinos</span></li><li><span class="feature-icon">?</span><span data-i18n="planViajeroF2">GuÌas, cultura y gastronomÌa</span></li><li><span class="feature-icon">?</span><span data-i18n="planViajeroF3">Asistente KAVARI</span></li><li class="excluded"><span class="feature-icon">◊</span><span data-i18n="planViajeroF4">Favoritos avanzados</span></li></ul>
+        <ul class="pricing-features"><li><span class="feature-icon">?</span><span data-i18n="planViajeroF1">36 destinos</span></li><li><span class="feature-icon">?</span><span data-i18n="planViajeroF2">Gu√≠as, cultura y GASTRONOM√çA</span></li><li><span class="feature-icon">?</span><span data-i18n="planViajeroF3">Asistente KAVARI</span></li><li class="excluded"><span class="feature-icon">‚úì</span><span data-i18n="planViajeroF4">Favoritos avanzados</span></li></ul>
       </article></div>
       <div class="pricing-spotlight"><article class="pricing-card featured">
-        <span class="pricing-badge" data-i18n="planPremiumBadge">M·s elegido</span><div class="pricing-name" data-i18n="planPremiumNombre">Premium</div><hr class="pricing-rule">
+        <span class="pricing-badge" data-i18n="planPremiumBadge">M√Ås elegido</span><div class="pricing-name" data-i18n="planPremiumNombre">Premium</div><hr class="pricing-rule">
         <div class="pricing-price"><strong data-i18n="planPremiumPrecio">US$9.99</strong><span data-i18n="planPremiumDuracion">/ mes</span></div>
-        <p class="pricing-desc" data-i18n="planPremiumDesc">Para quienes quieren preparar cada detalle de su prÛximo viaje.</p>
+        <p class="pricing-desc" data-i18n="planPremiumDesc">Para quienes quieren preparar cada detalle de su pr√≥ximo viaje.</p>
         <button class="pricing-cta" data-plan="premium" data-i18n="planPremiumCta">Elegir Premium</button>
         <ul class="pricing-features"><li><span class="feature-icon">?</span><span data-i18n="planPremiumF1">Todo lo de Viajero</span></li><li><span class="feature-icon">?</span><span data-i18n="planPremiumF2">Rutas y favoritos ilimitados</span></li><li><span class="feature-icon">?</span><span data-i18n="planPremiumF3">Preferencias de viaje guardadas</span></li><li><span class="feature-icon">?</span><span data-i18n="planPremiumF4">Recomendaciones personalizadas</span></li></ul>
       </article></div>
       <div class="pricing-spotlight"><article class="pricing-card op-plan">
         <div class="pricing-name" data-i18n="planOpNombre">OP</div><hr class="pricing-rule">
         <div class="pricing-price"><strong data-i18n="planOpPrecio">US$19.99</strong><span data-i18n="planPremiumDuracion">/ mes</span></div>
-        <p class="pricing-desc" data-i18n="planOpDesc">La experiencia completa para viajeros que quieren ir un paso m·s all·.</p>
+        <p class="pricing-desc" data-i18n="planOpDesc">La experiencia completa para viajeros que quieren ir un paso m√°s all√Å.</p>
         <button class="pricing-cta" data-plan="op" data-i18n="planOpCta">Elegir OP</button>
         <ul class="pricing-features"><li><span class="feature-icon">?</span><span data-i18n="planOpF1">Todo lo de Premium</span></li><li><span class="feature-icon">?</span><span data-i18n="planOpF2">Itinerarios prioritarios</span></li><li><span class="feature-icon">?</span><span data-i18n="planOpF3">Acceso anticipado a novedades</span></li><li><span class="feature-icon">?</span><span data-i18n="planOpF4">Soporte prioritario</span></li></ul>
       </article></div>
@@ -109,10 +110,10 @@
 <footer class="footer kv-footer">
   <div class="kv-footer-grid">
 
-    <!-- Columna 1 ∑ Marca + Redes sociales -->
+    <!-- Columna 1 ¬∑ Marca + Redes sociales -->
     <div class="kv-footer-col">
       <p class="kv-footer-brand">KAVARI</p>
-      <p class="kv-footer-sub" data-i18n="footerSub1">Tu prÛxima aventura empieza aquÌ.</p>
+      <p class="kv-footer-sub" data-i18n="footerSub1">Tu pr√ìxima aventura empieza aqu√≠.</p>
       <div class="kv-footer-social" aria-label="Redes sociales">
         <a class="kv-social-icon" href="https://www.tiktok.com/@kavari.travel" target="_blank" rel="noopener" aria-label="TikTok de KAVARI"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
         <a class="kv-social-icon" href="https://www.facebook.com/kavari" target="_blank" rel="noopener" aria-label="Facebook de KAVARI"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
@@ -121,26 +122,26 @@
       </div>
     </div>
 
-    <!-- Columna 2 ∑ Enlaces r·pidos -->
-    <nav class="kv-footer-col" aria-label="Enlaces r·pidos">
-      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces r·pidos</p>
+    <!-- Columna 2 ¬∑ Enlaces r√°pidos -->
+    <nav class="kv-footer-col" aria-label="Enlaces r√°pidos">
+      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces r√°pidos</p>
       <ul class="kv-footer-links">
         <li><a class="kv-footer-link" href="index.html" data-i18n="footerLinkInicio">Inicio</a></li>
         <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkDestinos">Destinos</a></li>
         <li><a class="kv-footer-link" href="sobrenosotros.html" data-i18n="footerLinkSobre">Sobre nosotros</a></li>
-        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">GuÌas locales</a></li>
+        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">Gu√≠as locales</a></li>
         <li><a class="kv-footer-link" href="contacto.html" data-i18n="footerLinkContacto">Contacto</a></li>
       </ul>
     </nav>
 
-    <!-- Columna 3 ∑ Newsletter -->
+    <!-- Columna 3 ¬∑ Newsletter -->
     <div class="kv-footer-col">
       <p class="kv-footer-title" data-i18n="footerNewsTitle">Newsletter</p>
       <p class="kv-footer-sub" data-i18n="footerNewsSub">Recibe ofertas y novedades de viajes.</p>
       <form class="kv-footer-form" id="kvNewsletterForm" novalidate>
-        <label class="kv-sr-only" for="kvNewsletterEmail" data-i18n="footerNewsLabel">Tu correo electrÛnico</label>
+        <label class="kv-sr-only" for="kvNewsletterEmail" data-i18n="footerNewsLabel">Tu correo electr√≥nico</label>
         <input class="kv-footer-input" id="kvNewsletterEmail" name="email" type="email"
-               placeholder="Tu correo electrÛnico" data-i18n-placeholder="footerNewsPlaceholder"
+               placeholder="Tu correo electr√≥nico" data-i18n-placeholder="footerNewsPlaceholder"
                required autocomplete="email">
         <button class="kv-footer-btn" type="submit" data-i18n="footerNewsBtn">Suscribirse</button>
       </form>
@@ -149,17 +150,17 @@
   </div>
 
   <div class="kv-footer-bottom">
-    <p class="kv-footer-copy" data-i18n="footerTexto">© 2026 Kavari ó Todos los derechos reservados.</p>
+    <p class="kv-footer-copy" data-i18n="footerTexto">¬© 2026 Kavari ¬∑ Todos los derechos reservados.</p>
     <ul class="kv-footer-legal">
-      <li><a class="kv-footer-link" href="privacidad.html" data-i18n="footerPrivacidad">PolÌtica de privacidad</a></li>
-      <li><a class="kv-footer-link" href="terminos.html" data-i18n="footerTerminos">TÈrminos y condiciones</a></li>
+      <li><a class="kv-footer-link" href="privacidad.html" data-i18n="footerPrivacidad">Pol√≠tica de privacidad</a></li>
+      <li><a class="kv-footer-link" href="terminos.html" data-i18n="footerTerminos">T√©rminos y condiciones</a></li>
 
     </ul>
   </div>
 </footer>
 
-<script src="js/account.js"></script>
-<script src="js/tutorial.js"></script>
+<script defer src="js/account.js"></script>
+<script defer src="js/tutorial.js"></script>
 <script>
   document.querySelectorAll('.pricing-spotlight').forEach(card => card.addEventListener('pointermove', event => {
     const rect = card.getBoundingClientRect();
@@ -171,11 +172,11 @@
     document.getElementById('planStatus').textContent = `Plan ${button.textContent.replace('Elegir ', '').replace('Continuar ', '')} guardado. Puedes verlo en Mi cuenta.`;
   });
 </script>
-<script src="js/scroll-lock.js?v=2"></script>
+<script defer src="js/scroll-lock.js?v=2"></script>
 
-<script src="js/guide-registration.js"></script>
-<script src="js/page-transitions.js"></script>
-<script src="js/mobile-nav.js?v=3"></script>
+<script defer src="js/guide-registration.js"></script>
+<script defer src="js/page-transitions.js"></script>
+<script defer src="js/mobile-nav.js?v=3"></script>
 
 
 

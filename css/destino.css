@@ -1811,7 +1811,7 @@ footer {
   }
   .page-utilities {
     bottom:16px;
-    right:16px;
+    left:16px;
   }
   .page-utilities .btn-lang-nav,.page-utilities .btn-theme-nav,.page-utilities .nav-btn-tutorial {
     height:30px;
@@ -3051,9 +3051,9 @@ img,video,iframe {
 }
 .page-utilities {
   position:fixed;
-  bottom:24px;
-  right:24px;
-  z-index:300;
+  bottom:60px;
+  left:24px;
+  z-index:9998;
   display:flex;
   flex-direction:column;
   gap:8px;
