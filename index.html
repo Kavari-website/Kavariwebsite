@@ -27,13 +27,19 @@
     <meta name="keywords" content="turismo, viajes, guías turísticos, destinos, Panamá, Colombia, América Latina">
     <meta property="og:title" content="KAVARI Travel">
     <meta property="og:description" content="Descubre los mejores destinos del mundo con guías certificados.">
-            <link rel="stylesheet" href="css/style.css?v=99" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="css/ui-system.css?v=100" media="print" onload="this.media='all'" />
-    <link rel="stylesheet" href="css/mobile-responsive.css?v=99" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="css/home-page.css?v=3" media="print" onload="this.media='all'">
-                                                            <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- CSS CRÍTICO: carga síncrona para que aparezca de inmediato -->
+    <link rel="stylesheet" href="css/style.css?v=99">
+    <link rel="stylesheet" href="css/ui-system.css?v=100">
+    <link rel="stylesheet" href="css/site-polish.css">
+    <link rel="stylesheet" href="css/nav-polish.css">
+    <link rel="stylesheet" href="css/mobile-responsive.css?v=99">
+    <link rel="stylesheet" href="css/home-page.css?v=3">
+    <!-- CSS NO CRÍTICO: carga asíncrona -->
+    <link rel="stylesheet" href="css/chatbot-widget.css?v=99" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/lang-dropdown.css" media="print" onload="this.media='all'">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" onload="this.rel='stylesheet'">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
     
     <!-- CARGAR IDIOMA.JS PRIMERO -->
@@ -64,16 +70,16 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <script defer src="js/performance.js"></script>
-
-
-
-
-
+</head>
 
     <link rel="stylesheet" href="css/chatbot-widget.css?v=99" media="print" onload="this.media='all'" />
 </head>
 <body class="page-index">
-<a class="skip-link" href="#main">Saltar al contenido</a>
+<!-- Prefetch de páginas vecinas para navegación instantánea -->
+<link rel="prefetch" href="paises.html" as="document">
+<link rel="prefetch" href="sobrenosotros.html" as="document">
+<link rel="prefetch" href="contacto.html" as="document">
+<link rel="prefetch" href="ayuda.html" as="document">
 
 <link rel="preload" as="image" href="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=80" fetchpriority="high">
 <link rel="preload" as="image" href="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80">

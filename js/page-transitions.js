@@ -1,16 +1,15 @@
 /**
- * page-transitions.js — Transiciones suaves entre páginas de KAVARI
- * Funde la página actual, muestra overlay con barra de progreso y logo,
- * luego navega. Al llegar, la nueva página aparece con fade-in + slide-up.
+ * page-transitions.js — Transiciones suaves y rápidas entre páginas de KAVARI
+ * Overlay con barra de progreso + logo, navegación y fade-in al llegar.
  */
 (function () {
   'use strict';
 
-  const prefersReduced =
+  var prefersReduced =
     window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  let overlay = null;
-  let transitioning = false;
+  var overlay = null;
+  var transitioning = false;
 
   function buildOverlay() {
     if (document.getElementById('kavariPageTrans')) {
@@ -43,7 +42,7 @@
     setTimeout(function () {
       overlay.classList.remove('kpt-leaving');
       if (callback) callback();
-    }, 400);
+    }, 300);
   }
 
   function revealPage() {
@@ -54,7 +53,7 @@
   function isInternalSibling(href) {
     if (/^(#|mailto:|tel:|javascript:|\/\/)/i.test(href)) return false;
     try {
-      const url = new URL(href, window.location.href);
+      var url = new URL(href, window.location.href);
       return url.origin === window.location.origin && /\.html($|\?|$)/.test(url.pathname);
     } catch (_) {
       return false;
@@ -65,20 +64,16 @@
     if (transitioning) return;
     transitioning = true;
 
-    // Funde suavemente el contenido actual
     document.body.style.opacity = '0';
-    document.body.style.transform = 'translateY(-6px)';
+    document.body.style.transform = 'translateY(-4px)';
+
+    showOverlay();
 
     setTimeout(function () {
-      showOverlay();
-      // Navega después de que el overlay sea visible
-      setTimeout(function () {
-        window.location.href = href;
-      }, 500);
-    }, 350);
+      window.location.href = href;
+    }, 280);
   }
 
-  /* Navegación programática con la misma transición */
   window.kavariNavigate = function (href) {
     if (!href) return;
     if (prefersReduced) { window.location.href = href; return; }
@@ -88,10 +83,10 @@
   function bindClicks() {
     document.addEventListener('click', function (e) {
       if (prefersReduced || transitioning) return;
-      const anchor = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      var anchor = e.target && e.target.closest ? e.target.closest('a[href]') : null;
       if (!anchor) return;
       if (anchor.target && anchor.target !== '_self') return;
-      const href = anchor.getAttribute('href') || '';
+      var href = anchor.getAttribute('href') || '';
       if (anchor.hasAttribute('download')) return;
       if (anchor.hasAttribute('data-guide-register')) return;
       if (anchor.dataset.navegable === 'false') return;
@@ -114,7 +109,6 @@
       bindClicks();
     }
 
-    // Al volver atrás/adelante con el botón del navegador
     window.addEventListener('pageshow', function (event) {
       if (event.persisted) {
         transitioning = false;

@@ -11,12 +11,16 @@
       decoding="async" a las <img> que crea el JavaScript en tiempo real.
    3) PRECONNECT A CDN DE SUPABASE -> el navegador abre conexión antes de
       usar el script de supabase, acortando la descarga.
+   4) FONT LOADING -> optimiza la carga de fuentes Google Fonts.
+   5) RESOURCE HINTS -> agrega prefetch de recursos críticos.
 
    Secciones (búscalas con Ctrl+F):
    // ===== SECCIÓN: CONFIGURACIÓN =====
    // ===== SECCIÓN: DIFERIR VIDEO DE FONDO =====
    // ===== SECCIÓN: LAZY-LOAD DE IMÁGENES =====
    // ===== SECCIÓN: PRECONNECT AL CDN =====
+   // ===== SECCIÓN: FONT LOADING =====
+   // ===== SECCIÓN: RESOURCE HINTS =====
    // ===== SECCIÓN: INICIO =====
    ========================================================================== */
 (function () {
@@ -24,26 +28,19 @@
 
   /* ===== SECCIÓN: CONFIGURACIÓN ===== */
   var CONFIG = {
-    // Tiempo (ms) máximo para empezar a cargar el video aunque no haya
-    // scroll ni interacción (fallback de seguridad).
     videoTimeoutMax: 4000,
-    // Selector del video de fondo usado en index.html, contacto.html y
-    // sobrenosotros.html.
     videoSelector: 'video.background-video, header video, video[autoplay]'
   };
 
-  var videoFuentes = [];   // <source> guardados del video (se restauran luego)
+  var videoFuentes = [];
   var videoIniciado = false;
 
   /* ===== SECCIÓN: DIFERIR VIDEO DE FONDO ===== */
-  // Captura el video apenas aparece en el DOM (antes de que termine de
-  // descargar) y retira sus <source> para frenar la descarga de 10.85 MB.
   function diferirVideo(video) {
     try {
       if (!video || video.__kavariDiferido) return;
       video.__kavariDiferido = true;
 
-      // Guarda y quita los <source> para cortar la descarga inicial.
       var fuentes = video.querySelectorAll('source');
       for (var i = 0; i < fuentes.length; i++) {
         videoFuentes.push(fuentes[i]);
@@ -52,20 +49,15 @@
         video.removeChild(video.firstChild);
       }
 
-      // No precargar nada hasta que lo pidamos nosotros.
       try { video.setAttribute('preload', 'none'); } catch (e) {}
       try { video.pause(); } catch (e) {}
-    } catch (err) {
-      /* no romper el sitio si algo falla */
-    }
+    } catch (err) {}
   }
 
-  // Restaura los <source> guardados y arranca la reproducción.
   function cargarYReproducirVideo(video) {
     try {
       if (!video) return;
 
-      // Limpia posibles <source> duplicados y restaura los originales.
       while (video.firstChild) {
         video.removeChild(video.firstChild);
       }
@@ -77,14 +69,11 @@
       video.load();
       var promesa = video.play();
       if (promesa && typeof promesa.catch === 'function') {
-        promesa.catch(function () { /* autoplay bloqueado: se ignora */ });
+        promesa.catch(function () {});
       }
-    } catch (err) {
-      /* no romper el sitio si algo falla */
-    }
+    } catch (err) {}
   }
 
-  // Cuando toca empezar: carga el video (una sola vez).
   function dispararCargaVideo() {
     if (videoIniciado) return;
     videoIniciado = true;
@@ -98,32 +87,25 @@
     desconectarListeners();
   }
 
-  // Elige el momento ideal para cargar el video: lo antes posible, pero sin
-  // robar ancho de banda mientras se dibuja la página.
   function programarCargaVideo() {
     try {
-      // 1) Cuando el navegador esté inactivo (requestIdleCallback).
       if ('requestIdleCallback' in window) {
         window.requestIdleCallback(function () { dispararCargaVideo(); }, { timeout: CONFIG.videoTimeoutMax });
       } else {
-        // Fallback: un pequeño retardo tras terminar de cargar la página.
-        window.setTimeout(dispararCargaVideo, 800);
+        window.setTimeout(dispararCargaVideo, 600);
       }
     } catch (err) {
       window.setTimeout(dispararCargaVideo, CONFIG.videoTimeoutMax);
     }
 
-    // 2) Si el usuario interactúa antes, carga de inmediato.
     window.addEventListener('pointerdown', dispararCargaVideo, { once: true, passive: true });
     window.addEventListener('touchstart', dispararCargaVideo, { once: true, passive: true });
     window.addEventListener('scroll', dispararCargaVideo, { once: true, passive: true });
     window.addEventListener('keydown', dispararCargaVideo, { once: true, passive: true });
 
-    // 3) Máximo de seguridad.
-    window.setTimeout(dispararCargaVideo, CONFIG.videoTimeoutMax + 1500);
+    window.setTimeout(dispararCargaVideo, CONFIG.videoTimeoutMax + 1000);
   }
 
-  // Vigila el DOM: apenas aparezca el <video>, lo diferimos de inmediato.
   function vigilarVideo() {
     try {
       var raiz = document.documentElement || document;
@@ -143,38 +125,29 @@
         }
       });
       observador.observe(raiz, { childList: true, subtree: true });
-    } catch (err) {
-      /* si MutationObserver no existe, al menos diferimos lo ya presente */
-    }
+    } catch (err) {}
   }
 
   /* ===== SECCIÓN: LAZY-LOAD DE IMÁGENES ===== */
-  // Marca las imágenes creadas por JS como lazy, salvo las del encabezado
-  // (que conviene cargar rápido).
   function optimizarImagen(img) {
     try {
       if (!img || img.__kavariImg) return;
       img.__kavariImg = true;
 
-      // decoding="async" nunca daña y evita bloquear el renderizado.
       if (!img.hasAttribute('decoding')) {
         img.setAttribute('decoding', 'async');
       }
 
-      // Dentro del <header>/<nav> o si ya lleva fetchpriority: se deja tal cual.
       var dentroCabecera = !!img.closest && (img.closest('header') || img.closest('.hero') || img.closest('.navbar'));
       var yaLazy = img.hasAttribute('loading') || img.getAttribute('fetchpriority') === 'high';
       if (!yaLazy && !dentroCabecera) {
         img.setAttribute('loading', 'lazy');
       }
-    } catch (err) {
-      /* no romper el sitio si algo falla */
-    }
+    } catch (err) {}
   }
 
   function vigilarImagenes() {
     try {
-      // Imágenes que ya existen en el DOM (caso de scripts que corrieron antes).
       var yaPresentes = document.querySelectorAll('img');
       for (var i = 0; i < yaPresentes.length; i++) {
         optimizarImagen(yaPresentes[i]);
@@ -196,14 +169,10 @@
         }
       });
       observador.observe(document.documentElement || document, { childList: true, subtree: true });
-    } catch (err) {
-      /* no romper el sitio si algo falla */
-    }
+    } catch (err) {}
   }
 
   /* ===== SECCIÓN: PRECONNECT AL CDN ===== */
-  // El script de Supabase se sirve desde cdn.jsdelivr.net; abrir la
-  // conexión antes reduce el tiempo de espera de la primera petición.
   function preconnectCDN() {
     try {
       var origenes = ['https://cdn.jsdelivr.net'];
@@ -222,9 +191,36 @@
         dns.href = origenes[i];
         cabeza.appendChild(dns);
       }
-    } catch (err) {
-      /* no romper el sitio si algo falla */
-    }
+    } catch (err) {}
+  }
+
+  /* ===== SECCIÓN: FONT LOADING ===== */
+  function optimizarFontLoading() {
+    try {
+      if (!document.fonts) return;
+      // Esperar a que las fentes críticas se carguen antes de pintar
+      document.fonts.ready.then(function() {
+        document.documentElement.classList.add('fonts-loaded');
+      });
+    } catch (err) {}
+  }
+
+  /* ===== SECCIÓN: RESOURCE HINTS ===== */
+  function agregarResourceHints() {
+    try {
+      var cabeza = document.head || document.documentElement;
+      // Prefetch de CSS que se necesitará al navegar
+      var paginas = ['paises.html', 'contacto.html', 'ayuda.html', 'sobrenosotros.html'];
+      for (var i = 0; i < paginas.length; i++) {
+        if (!cabeza.querySelector('link[rel="prefetch"][href="' + paginas[i] + '"]')) {
+          var link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.href = paginas[i];
+          link.as = 'document';
+          cabeza.appendChild(link);
+        }
+      }
+    } catch (err) {}
   }
 
   /* ===== SECCIÓN: INICIO ===== */
@@ -238,12 +234,11 @@
   }
 
   try {
-    // Se ejecuta al cargar (está en <head>, antes del body):
     preconnectCDN();
     vigilarVideo();
     vigilarImagenes();
+    optimizarFontLoading();
 
-    // Cuando el DOM esté listo, re-diferir el video por si ya existía.
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', function () {
         var videos = document.querySelectorAll(CONFIG.videoSelector);
@@ -251,6 +246,7 @@
           diferirVideo(videos[i]);
         }
         programarCargaVideo();
+        agregarResourceHints();
       });
     } else {
       var videosYa = document.querySelectorAll(CONFIG.videoSelector);
@@ -258,12 +254,10 @@
         diferirVideo(videosYa[j]);
       }
       programarCargaVideo();
+      agregarResourceHints();
     }
-  } catch (err) {
-    /* el rendimiento nunca debe romper la página */
-  }
+  } catch (err) {}
 
-  // Utilidad pública (para depurar en consola): window.__kavariPerf
   try {
     window.__kavariPerf = {
       videoDiferido: function () { return videoFuentes.length > 0; },

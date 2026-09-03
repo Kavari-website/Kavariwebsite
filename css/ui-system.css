@@ -613,7 +613,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible {
 body {
   opacity:0;
   transform:translateY(8px);
-  transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1);
+  transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1);
 }
 body.page-loaded {
   opacity:1;
@@ -709,7 +709,7 @@ body.page-loaded {
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  transition:opacity .4s cubic-bezier(.22,1,.36,1),visibility .4s ease;
+  transition:opacity .25s cubic-bezier(.22,1,.36,1),visibility .25s ease;
 }
 .kavari-page-trans.kpt-shown {
   opacity:1;
@@ -727,7 +727,7 @@ body.page-loaded {
   width:0;
   background:linear-gradient(90deg,var(--gold-light,#f0b80e),var(--blue-light,#5b93f5),var(--gold-light,#f0b80e));
   background-size:200% 100%;
-  animation:kptProgress 1.2s cubic-bezier(.4,0,.2,1) forwards,kptShimmer 1.5s ease-in-out infinite;
+  animation:kptProgress .8s cubic-bezier(.4,0,.2,1) forwards,kptShimmer 1s ease-in-out infinite;
   border-radius:0 2px 2px 0;
 }
 @keyframes kptProgress {
@@ -747,7 +747,7 @@ body.page-loaded {
   flex-direction:column;
   align-items:center;
   gap:24px;
-  animation:kptEnter .6s cubic-bezier(.22,1,.36,1) both;
+  animation:kptEnter .3s cubic-bezier(.22,1,.36,1) both;
 }
 @keyframes kptEnter {
   from{opacity:0;transform:translateY(16px) scale(.95)}
@@ -785,7 +785,7 @@ body.page-loaded {
 /* Salida suave del overlay */
 .kavari-page-trans.kpt-leaving {
   opacity:0;
-  transition:opacity .35s cubic-bezier(.4,0,1,1);
+  transition:opacity .2s cubic-bezier(.4,0,1,1);
 }
 .kavari-page-trans.kpt-leaving::before {
   width:100% !important;

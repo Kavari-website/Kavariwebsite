@@ -565,25 +565,7 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 [data-theme="dark"] :focus-visible {
   outline-color:#f2cc60;
 }
-.skip-link {
-  position:absolute;
-  left:-9999px;
-  top:0;
-  z-index:30000;
-  padding:12px 18px;
-  background:#0d1f3c;
-  color:#fff;
-  font-weight:700;
-  font-size:.95rem;
-  border-radius:0 0 14px 0;
-  text-decoration:none;
-}
-.skip-link:focus,
-.skip-link:focus-visible {
-  left:0;
-  outline:3px solid #f0b429;
-  outline-offset:2px;
-}
+
 @media (prefers-reduced-motion:reduce) {
   *,
   *::before,
