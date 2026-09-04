@@ -46,8 +46,8 @@ function getById(id) {
 }
 
 function translateOrDefault(key, fallback) {
-    if (typeof t !== 'function') return fallback;
-    const value = t(key);
+    if (typeof window.t !== 'function') return fallback;
+    const value = window.t(key);
     return value === key ? fallback : value;
 }
 
@@ -238,6 +238,8 @@ function renderTop10Cards() {
     container.innerHTML = html;
     // Re-observe new cards for reveal animation
     container.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    // Re-traducir elementos dinámicos con data-i18n
+    window.aplicarTraducciones?.();
 }
 
 function renderPaquetesCards() {
@@ -284,6 +286,8 @@ function renderPaquetesCards() {
     container.innerHTML = html;
     // Re-observe new cards for reveal animation
     container.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    // Re-traducir elementos dinámicos con data-i18n
+    window.aplicarTraducciones?.();
 }
 
 // Función para abrir el modal del Top 10
@@ -305,19 +309,19 @@ async function abrirModalTop10(id) {
     const factsEl = getById('top10ModalFacts');
     const goBtn = getById('top10ModalGoBtn');
 
+    const translationKey = getTop10TranslationKey(id);
     if (imgEl) {
         imgEl.src = data.img;
-        imgEl.alt = data.title;
+        imgEl.alt = translateOrDefault('topTitulo' + translationKey, data.title);
     }
     if (tagEl) tagEl.textContent = data.tag;
 
-    const translationKey = getTop10TranslationKey(id);
     if (titleEl) titleEl.textContent = translateOrDefault('topTitulo' + translationKey, data.title);
     if (descEl) descEl.textContent = translateOrDefault('topDesc' + translationKey, data.desc);
 
     // Chips de datos - parsear desde traducción
     const factsKey = 'topFacts' + translationKey;
-    const factString = typeof t === 'function' ? t(factsKey) : factsKey;
+    const factString = typeof window.t === 'function' ? window.t(factsKey) : factsKey;
     const facts = factString === factsKey ? data.facts : factString.split('|');
     if (factsEl) {
         factsEl.innerHTML = facts
@@ -376,32 +380,39 @@ async function abrirModalPaquete(id) {
     const itineraryEl = getById('paqueteModalItinerary');
     const destBtn = getById('paqueteModalDestBtn');
 
+    const paqueteKey = getPaqueteTranslationKey(id);
+
     if (imgEl) {
         imgEl.src = data.img;
-        imgEl.alt = data.title;
+        imgEl.alt = translateOrDefault('paquete' + paqueteKey + 'Titulo', data.title);
     }
-    if (titleEl) titleEl.textContent = data.title;
+    if (titleEl) titleEl.textContent = translateOrDefault('paquete' + paqueteKey + 'Titulo', data.title);
     if (precioEl) precioEl.textContent = data.precio;
-
-    const paqueteKey = getPaqueteTranslationKey(id);
     if (descEl) descEl.textContent = translateOrDefault('paquete' + paqueteKey + 'Desc', data.desc);
 
     if (includesEl) {
         includesEl.innerHTML = data.includes
-            .map(item => `<div class="paquete-include-item">${escapeHtml(item)}</div>`).join('');
+            .map((item, i) => {
+                const translated = translateOrDefault('paquete' + paqueteKey + 'Includes' + i, item);
+                return `<div class="paquete-include-item">${escapeHtml(translated)}</div>`;
+            }).join('');
     }
 
     if (itineraryEl) {
         itineraryEl.innerHTML = data.itinerary
-            .map(d => `
+            .map((d, i) => {
+                const dia = translateOrDefault('paquete' + paqueteKey + 'Itinerario' + i + 'Dia', d.dia);
+                const titulo = translateOrDefault('paquete' + paqueteKey + 'Itinerario' + i + 'Titulo', d.titulo);
+                const texto = translateOrDefault('paquete' + paqueteKey + 'Itinerario' + i + 'Texto', d.texto);
+                return `
                 <div class="itinerary-day">
-                    <div class="itin-day-num">${escapeHtml(d.dia.split(' ')[1])}</div>
+                    <div class="itin-day-num">${escapeHtml(dia)}</div>
                     <div class="itin-day-text">
-                        <h5>${escapeHtml(d.titulo)}</h5>
-                        <p>${escapeHtml(d.texto)}</p>
+                        <h5>${escapeHtml(titulo)}</h5>
+                        <p>${escapeHtml(texto)}</p>
                     </div>
-                </div>
-            `).join('');
+                </div>`;
+            }).join('');
     }
 
     if (destBtn) {
@@ -489,7 +500,8 @@ function updateLangButton(idioma) {
         const orden = ['es', 'en', 'pt', 'fr'];
         const idx = orden.indexOf(idioma);
         const nextIdioma = orden[(idx + 1) % orden.length];
-        btnLang.setAttribute('aria-label', 'Cambiar a ' + nextIdioma.toUpperCase());
+        const ariaLabel = typeof window.t === 'function' ? window.t('ariaCambiarIdioma') : 'Cambiar idioma';
+        btnLang.setAttribute('aria-label', ariaLabel + ' (' + nextIdioma.toUpperCase() + ')');
     }
 }
 
@@ -522,7 +534,7 @@ function updateLangButton(idioma) {
     }
 
     function txt(clave, fallback) {
-        return typeof t === 'function' ? t(clave) : fallback;
+        return typeof window.t === 'function' ? window.t(clave) : fallback;
     }
 
     form.addEventListener('submit', function(e) {

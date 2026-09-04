@@ -7,6 +7,11 @@
   function open(){document.getElementById('travelerModal')?.classList.add('open');if(window.KavariScrollLock)KavariScrollLock.lock()}
   function close(){document.getElementById('travelerModal')?.classList.remove('open');if(window.KavariScrollLock)KavariScrollLock.unlock()}
 
+  function t(key) {
+    if (window.t) return window.t(key);
+    return key;
+  }
+
   function render(){
     const root=document.getElementById('travelersByCountry');
     if(!root)return;
@@ -16,25 +21,25 @@
 
     if(!countryKey){
       root.innerHTML=`
-        <div class="tbc-head"><h3>Viajeros registrados</h3></div>
-        <div class="tbc-empty"><strong>Selecciona un país</strong><span>Elige un destino para ver quién más viaja allí.</span></div>`;
+        <div class="tbc-head"><h3>${esc(t('travelerViajerosRegistrados'))}</h3></div>
+        <div class="tbc-empty"><strong>${esc(t('travelerSeleccionaPais'))}</strong><span>${esc(t('travelerEligeDestino'))}</span></div>`;
       return;
     }
 
     if(!items.length){
       root.innerHTML=`
-        <div class="tbc-head"><h3>Viajeros registrados</h3><span class="tbc-count">0</span></div>
-        <p class="tbc-sub">Aún nadie se ha registrado para ${esc(countryName||'este destino')}.</p>
-        <div class="tbc-empty"><strong>Sé el primero</strong><span>Regístrate y aparece aquí para otros viajeros.</span>
-          <button type="button" class="tbc-cta">Registrarme</button>
+        <div class="tbc-head"><h3>${esc(t('travelerViajerosRegistrados'))}</h3><span class="tbc-count">0</span></div>
+        <p class="tbc-sub">${esc(t('travelerNadieRegistrado'))} ${esc(countryName||'este destino')}.</p>
+        <div class="tbc-empty"><strong>${esc(t('travelerSerePrimero'))}</strong><span>${esc(t('travelerRegistrateAqui'))}</span>
+          <button type="button" class="tbc-cta">${esc(t('travelerBtnRegistrarme'))}</button>
         </div>`;
       root.querySelector('.tbc-cta')?.addEventListener('click',open);
       return;
     }
 
     root.innerHTML=`
-      <div class="tbc-head"><h3>Viajeros registrados</h3><span class="tbc-count">${items.length}</span></div>
-      <p class="tbc-sub">Personas registradas para ${esc(countryName||'este destino')}.</p>
+      <div class="tbc-head"><h3>${esc(t('travelerViajerosRegistrados'))}</h3><span class="tbc-count">${items.length}</span></div>
+      <p class="tbc-sub">${esc(t('travelerPersonasRegistradas'))} ${esc(countryName||'este destino')}.</p>
       <div class="traveler-list">
         ${items.map(x=>`
           <div class="traveler-chip">
@@ -50,7 +55,7 @@
   function renderSkeleton(){
     const root=document.getElementById('travelersByCountry');
     if(!root)return;
-    root.innerHTML=`<div class="tbc-head"><h3>Viajeros registrados</h3></div>
+    root.innerHTML=`<div class="tbc-head"><h3>${esc(t('travelerViajerosRegistrados'))}</h3></div>
       <div class="tbc-skeleton">${'<span></span>'.repeat(4)}</div>`;
   }
 
@@ -62,16 +67,16 @@
       m.id='travelerModal';
       m.className='traveler-modal';
       m.innerHTML=`<section class="traveler-card" role="dialog" aria-modal="true">
-        <button class="traveler-close" type="button" aria-label="Cerrar">×</button>
-        <h2>Regístrate como viajero</h2>
-        <p>Guarda tu país y plan para aparecer en la lista del destino elegido.</p>
+        <button class="traveler-close" type="button" aria-label="${esc(t('modalCerrar'))}">×</button>
+        <h2>${esc(t('travelerModalTitulo'))}</h2>
+        <p>${esc(t('travelerModalDesc'))}</p>
         <form class="traveler-form" novalidate>
-          <label>Nombre<input name="name" required minlength="2"></label>
-          <label>Correo<input name="email" type="email" required></label>
-          <label>País<select name="country" required><option value="">Cargando países…</option></select></label>
+          <label>${esc(t('travelerLabelNombre'))}<input name="name" required minlength="2"></label>
+          <label>${esc(t('travelerLabelCorreo'))}<input name="email" type="email" required></label>
+          <label>${esc(t('travelerLabelPais'))}<select name="country" required><option value="">${esc(t('travelerCargandoPaises'))}</option></select></label>
           <div class="traveler-guides" id="travelerGuides" style="display:none;margin-top:-4px;margin-bottom:2px;padding:8px 12px;border-radius:10px;background:rgba(46,110,220,.06);font-size:.8rem;line-height:1.5"></div>
-          <label>Plan<select name="plan"><option>Gratis</option><option>Premium · US$9.99/mes</option><option>OP · US$19.99/mes</option></select></label>
-          <button class="traveler-submit" type="submit">Guardar registro</button>
+          <label>${esc(t('travelerLabelPlan'))}<select name="plan"><option>${esc(t('travelerPlanGratis'))}</option><option>Premium · US$9.99/mes</option><option>OP · US$19.99/mes</option></select></label>
+          <button class="traveler-submit" type="submit">${esc(t('travelerBtnGuardar'))}</button>
           <p class="traveler-status" role="status" aria-live="polite"></p>
         </form>
       </section>`;
@@ -89,7 +94,7 @@
         var filtered=stored.filter(function(g){return g.country===countryCode});
         if(!filtered.length){guidesEl.style.display='none';return}
         guidesEl.style.display='block';
-        guidesEl.innerHTML='<strong style="display:block;margin-bottom:4px">Guías disponibles:</strong>'+
+        guidesEl.innerHTML='<strong style="display:block;margin-bottom:4px">'+esc(t('travelerGuiaDisponible'))+'</strong>'+
           filtered.map(function(g){return '<span style="display:flex;align-items:center;gap:6px;padding:3px 0">'+
             '<span style="width:6px;height:6px;border-radius:50%;background:#2e6edc;flex-shrink:0"></span>'+
             esc(g.name)+' <span style="color:#64748b;font-size:.75rem">· '+esc(g.rank)+'</span></span>'
@@ -137,7 +142,7 @@
           showGuidesForCountry(s.value);
         });
       }).catch(()=>{
-        m.querySelector('.traveler-status').textContent='No se pudo cargar la lista de países.';
+        m.querySelector('.traveler-status').textContent=t('travelerErrorCargarPaises');
         m.querySelector('.traveler-status').classList.add('is-error');
       });
 
@@ -162,21 +167,21 @@
         if(!country){errors.push('country')}
         if(errors.length){
           errors.forEach(n=>form.querySelector(`[name=${n}]`).classList.add('field-error'));
-          status.textContent='Revisa los campos marcados.';
+          status.textContent=t('travelerErrorCampos');
           status.classList.add('is-error');
           return;
         }
 
         submitBtn.disabled=true;
-        submitBtn.textContent='Guardando…';
+        submitBtn.textContent=t('travelerGuardando');
 
         const list=get();
         const country_ = country;
         if(list.some(x=>x.email.toLowerCase()===email.toLowerCase()&&x.country===country_)){
-          status.textContent='Ya estás registrado para este destino.';
+          status.textContent=t('travelerYaRegistrado');
           status.classList.add('is-error');
           submitBtn.disabled=false;
-          submitBtn.textContent='Guardar registro';
+          submitBtn.textContent=t('travelerBtnGuardar');
           return;
         }
 
@@ -202,9 +207,9 @@
         }catch(err){}
 
         setTimeout(()=>{
-          status.textContent='Registro guardado. Ya apareces en el destino elegido.';
+          status.textContent=t('travelerRegistroGuardado');
           submitBtn.disabled=false;
-          submitBtn.textContent='Guardar registro';
+          submitBtn.textContent=t('travelerBtnGuardar');
           render();
           setTimeout(close,900);
           form.reset();
@@ -223,6 +228,7 @@
         if(e?.detail?.nombre)root.dataset.countryName=e.detail.nombre;
         render();
       });
+      window.addEventListener('kavari:langchange',()=>render());
     }
   }
 

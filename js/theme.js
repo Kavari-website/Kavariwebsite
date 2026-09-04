@@ -11,9 +11,8 @@
 })();
 
 function getThemeLabel(theme) {
-  const lang = localStorage.getItem('kavari-idioma') || 'es';
-  if (typeof textos !== 'undefined' && textos[lang]) {
-    return theme === 'dark' ? textos[lang].modoClaro : textos[lang].modoOscuro;
+  if (typeof window.t === 'function') {
+    return theme === 'dark' ? window.t('modoClaro') : window.t('modoOscuro');
   }
   return theme === 'dark' ? 'Claro' : 'Oscuro';
 }
@@ -24,10 +23,9 @@ function updateThemeButton(theme) {
   if (!btn) return;
   const label = getThemeLabel(current);
   btn.textContent = label;
-  const lang = localStorage.getItem('kavari-idioma') || 'es';
-  btn.setAttribute('aria-label', current === 'dark'
-    ? (lang === 'en' ? 'Switch to light mode' : lang === 'pt' ? 'Mudar para o modo claro' : 'Activar modo claro')
-    : (lang === 'en' ? 'Switch to dark mode' : lang === 'pt' ? 'Mudar para o modo escuro' : 'Activar modo oscuro'));
+  if (typeof window.t === 'function') {
+    btn.setAttribute('aria-label', current === 'dark' ? window.t('ariaModoClaro') : window.t('ariaModoOscuro'));
+  }
 }
 
 function applyTheme(theme) {

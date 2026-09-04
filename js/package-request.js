@@ -17,15 +17,15 @@
     function show() {
       var data = (typeof paquetesData !== 'undefined') ? (paquetesData[currentId] || null) : null;
 
-      var title = data ? (data.title || 'Paquete') : 'Paquete';
+      var title = data ? (data.title || t('paqueteSeleccionado')) : t('paqueteSeleccionado');
       var precio = data && data.precio ? data.precio : '';
       var pais = data && data.pais ? data.pais : '';
 
       banner.innerHTML =
         '<div>' +
-          '<span class="paq-banner-label">Paquete seleccionado</span>' +
+          '<span class="paq-banner-label">' + esc(t('paqueteSeleccionado')) + '</span>' +
           '<strong class="paq-banner-title">' + esc(title) + '</strong>' +
-          (pais ? '<small class="paq-banner-country">Destino: ' + esc(friendlyCountry(pais)) + '</small>' : '') +
+          (pais ? '<small class="paq-banner-country">' + esc(t('destinoLabel')) + ' ' + esc(friendlyCountry(pais)) + '</small>' : '') +
         '</div>' +
         (precio ? '<span class="paq-banner-price">' + precio + '</span>' : '');
 

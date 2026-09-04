@@ -2673,7 +2673,7 @@
           "nombre": "Gabriel García Márquez",
           "tag": "Nobel",
           "descripcion": "Autor de 'Cien años de soledad'. Nacido en Aracataca.",
-          "imagen": "img/colombia/gabo.jpg",
+          "imagen": "img/colombia/Gabriel García Márquez.webp",
           "detalle": "Nobel de Literatura 1982. Su casa natal es museo."
         },
         {
@@ -9164,7 +9164,7 @@
         "nombre": "Amazonía Ecuatoriana",
         "tag": "Naturaleza · Selva · Ecoturismo",
         "descripcion": "Selva tropical de enorme riqueza biológica. Perfecta para ecoturismo, exploración y encuentro con culturas indígenas.",
-        "imagen": "img/ecuador/amazonia.jpg",
+        "imagen": "img/ecuador/Ecuadorian Amazon.jpg",
         "detalle": "Puertas: Tena (actividades, rafting), Puyo (cascadas, indichuris), Coca (Puerto Francisco de Orellana), Lago Agrio (Reserva Cuyabeno). Nacionalidades: Kichwa, Shuar, Huaorani, Achuar. Observación de delfines rosados, monos, jaguares.",
         "precio_entrada": "Lodges desde 100 USD/día",
         "horario": "6:00 AM - 6:00 PM",
@@ -9175,7 +9175,7 @@
         "nombre": "Manta y Costa Pacífica",
         "tag": "Playa · Mariscos · Pacífico",
         "descripcion": "Ciudad costera y puerto pesquero. Playas del Pacífico ecuatoriano, mariscos frescos y sol todo el año.",
-        "imagen": "img/ecuador/manta.jpg",
+        "imagen": "img/ecuador/Manta y Costa Pacífica.jpg",
         "detalle": "Playas: Murciélago, Santa Marianita (kitesurf), San Lorenzo. Puerto pesquero (atún). Isla de la Plata ('Galápagos de los pobres', aves marinas, ballenas junio-septiembre). Parque Nacional Machalilla cercano.",
         "precio_entrada": "Playas: gratuitas",
         "horario": "24 horas",
@@ -9229,7 +9229,7 @@
           "nombre": "Artesanía de Otavalo",
           "tag": "Textiles · Mercado",
           "descripcion": "Tejidos, tapices, ponchos, alfombras y joyería de plata. Muy reconocida dentro y fuera del país.",
-          "imagen": "img/ecuador/artesania otavalo.jpg",
+          "imagen": "img/ecuador/Artesanía de Otavalo.webp",
           "detalle": "El mercado de ponchos de Otavalo es uno de los más grandes de Sudamérica. Técnicas de tejido ancestrales de la cultura otavaleña. La comunidad otavaleña es famosa mundialmente."
         },
         {
@@ -9309,14 +9309,14 @@
           "nombre": "Seco de chivo",
           "categoria": "Guiso · Costa",
           "descripcion": "Guiso de chivo (o pollo) con cerveza, cilantro y especias. Servido con arroz, aguacate y patacones. Comida festiva.",
-          "imagen": "img/ecuador/seco chivo.jpg",
+          "imagen": "img/ecuador/Seco de chivo.webp",
           "nota": "Popular en celebraciones"
         },
         {
           "nombre": "Llapingachos",
           "categoria": "Tortillas · Sierra",
           "descripcion": "Tortillas de papa rellenas de queso, fritas hasta dorar. Servidas con chorizo, huevo, aguacate y salsa de maní.",
-          "imagen": "img/ecuador/llapingachos.jpg",
+          "imagen": "img/ecuador/Llapingachos.webp",
           "nota": "Especialidad de la Sierra"
         },
         {
@@ -9344,7 +9344,7 @@
           "nombre": "Chicha y colada",
           "categoria": "Bebidas tradicionales",
           "descripcion": "Chicha de maíz o yuca (bebida fermentada ancestral). Colada de avena, frutas y especias (más común).",
-          "imagen": "img/ecuador/chicha.jpg",
+          "imagen": "img/ecuador/Chicha y colada.webp",
           "nota": "Chicha más común en Amazonía y Sierra"
         }
       ]
@@ -10123,7 +10123,7 @@
         "nombre": "Baracoa",
         "tag": "Naturaleza · Aventura · Primera villa",
         "descripcion": "Primera villa fundada por los españoles en Cuba (1511). Paisaje montañoso y coco, chocolate y playas vírgenes.",
-        "imagen": "img/cuba/baracoa.jpg",
+        "imagen": "img/cuba/Baracoa.webp",
         "detalle": "Primer asentamiento español en Cuba (1511). Parque Nacional Alejandro de Humboldt (Patrimonio UNESCO, biodiversidad). El Yunque (meseta plana emblemática). Playa Maguana. Río Toa (el más caudaloso de Cuba). Cacao y chocolate artesanal.",
         "precio_entrada": "Parque: 250 CUP",
         "horario": "8:00 AM - 5:00 PM",
@@ -11012,7 +11012,7 @@
         "nombre": "Chichicastenango",
         "tag": "Cultura · Mercado indígena",
         "descripcion": "Mercado indígena muy tradicional, uno de los más grandes y famosos de América Latina. Centro ceremonial maya.",
-        "imagen": "img/guatemala/chichicastenango.jpg",
+        "imagen": "img/guatemala/Chichicastenango.webp",
         "detalle": "Mercado jueves y domingo (días principales). Iglesia de Santo Tomás (construida sobre plataforma ceremonial maya, escalones donde se queman velas e incienso). Máscaras de madera, textiles, jade. Coloridas escaleras.",
         "precio_entrada": "Mercado: gratuito",
         "horario": "6:00 AM - 5:00 PM",
