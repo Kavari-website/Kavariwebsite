@@ -7980,6 +7980,43 @@ paisGuyana_hospedajes_4_descripcion: 'Estancia en las sabanas de Rupununi. Caba�
 paisGuyana_hospedajes_5_nombre: 'Cabaña en Shell Beach',
 paisGuyana_hospedajes_5_tipo: 'Cabaña costera',
 paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach. Vista al mar, acceso a la playa y temporada de tortugas.',
+
+// ===== SOUVENIRS =====
+souvenirsTag: 'Artesanías · Cultura Local',
+souvenirsTitulo: 'Tiendas de Artesanías',
+souvenirsDesc: 'Recuerdos auténticos hechos por artesanos locales.',
+
+// ===== DESTINO: DESTACADOS HERO MINI =====
+heroMiniDestinos: 'Destinos',
+heroMiniGuias: 'Guías locales',
+heroMiniValoracion: 'Valoración',
+
+// ===== DESTINO: DESCRIPCIONES =====
+destMasiaDios: 'Marrakech, Fez, Desierto del Sahara, medinas históricas y cultura bereber.',
+
+// ===== PERFIL: ELIMINAR CUENTA =====
+perfilEliminarCuentaConfirm: '¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.',
+perfilEliminando: 'Eliminando…',
+perfilEliminarCuentaError: 'No se pudo eliminar la cuenta: ',
+perfilEliminarCuentaExito: 'Cuenta eliminada con éxito.',
+
+// ===== META DESCRIPCIONES =====
+metaDescAyuda: 'Centro de ayuda de KAVARI: preguntas frecuentes, guías de uso, soporte para viajeros y guías turísticos.',
+metaDescCookies: 'Política de cookies de KAVARI Travel: qué cookies y almacenamiento utilizamos, cómo y por qué.',
+metaDescCuenta: 'Administra tu perfil de KAVARI, preferencias de viaje y configuración de cuenta.',
+metaDescDestino: 'Descubre destinos turísticos con KAVARI: cultura, gastronomía, aventura, aerolíneas, hospedajes y guías certificados por cada país.',
+metaDescIndex: 'Descubre los mejores destinos del mundo con KAVARI. Guías turísticos certificados, paquetes de viaje, aerolíneas y hospedajes en una sola plataforma.',
+metaDescPaises: 'Explora 21 destinos turísticos en América Latina y el Caribe con KAVARI. Información completa de cultura, gastronomía, hospedajes y guías certificados.',
+metaDescPerfil: 'Administra tu perfil de KAVARI, preferencias de viaje y configuración de cuenta.',
+metaDescPlanes: 'Planes de viaje KAVARI: descubre destinos, paquetes, guías turísticos y más.',
+metaDescPrivacidad: 'Política de privacidad de KAVARI Travel: qué datos recopilamos, cómo los utilizamos y cuáles son tus derechos.',
+metaDescSobrenosotros: 'Conoce al equipo detrás de KAVARI: misión, visión y los miembros que hacen posible esta plataforma de turismo inteligente.',
+metaDescTerminos: 'Términos y condiciones de uso de KAVARI Travel.',
+
+// ===== TÍTULOS DE PÁGINA =====
+titleCookies: 'Política de Cookies · KAVARI',
+titlePrivacidad: 'Política de Privacidad · KAVARI',
+titleTerminos: 'Términos y Condiciones · KAVARI'
 },
 
         en: {
@@ -8060,7 +8097,21 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
   souvenirsTag: "Crafts · Local Culture",
   souvenirsTitulo: "Craft Shops",
   souvenirsDesc: "Authentic souvenirs made by local artisans.",
-  
+
+  // DESTINO: HERO MINI STATS
+  heroMiniDestinos: "Destinations",
+  heroMiniGuias: "Local guides",
+  heroMiniValoracion: "Rating",
+
+  // DESTINO: DESCRIPTIONS
+  destMasiaDios: "Marrakech, Fez, Sahara Desert, historic medinas, and Berber culture.",
+
+  // PROFILE: DELETE ACCOUNT
+  perfilEliminarCuentaConfirm: "Are you sure you want to delete your account? This action cannot be undone.",
+  perfilEliminando: "Deleting…",
+  perfilEliminarCuentaError: "Could not delete account: ",
+  perfilEliminarCuentaExito: "Account deleted successfully.",
+
   // TOUR GUIDES
   guiasTag: "Local Experts · Certified",
   guiasTituloHeader: "Tour Guides",
@@ -15941,14 +15992,16 @@ paisGuyana_hospedajes_5_tipo: 'Coastal cabin',
     }
 
     // Reintentar fusión de extras cuando lleguen (por si se cargan con defer)
+    let mergeIntervalId = null;
     function tryMergeExtras() {
         if (!extrasFusionados && window.__kavariIdiomasExtras) {
             mergeIdiomasExtras();
+            if (mergeIntervalId) { clearInterval(mergeIntervalId); mergeIntervalId = null; }
         }
     }
 
     mergeIdiomasExtras();
-    setInterval(tryMergeExtras, 100);
+    if (!extrasFusionados) mergeIntervalId = setInterval(tryMergeExtras, 100);
 
     let idiomaActual = 'es';
     const idiomaGuardado = localStorage.getItem('kavari-idioma') || (navigator.language && navigator.language.slice(0, 2)) || 'es';

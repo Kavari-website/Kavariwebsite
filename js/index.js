@@ -231,7 +231,7 @@ function renderTop10Cards() {
                 <div class="card-content">
                     <h3>${escapeHtml(title)}</h3>
                     <p>${escapeHtml(desc)}</p>
-                    <button class="btn-sabemas" onclick="abrirModalTop10('${id}')" data-i18n="saberMas">Saber más</button>
+                    <button class="btn-sabemas" onclick="abrirModalTop10('${id}')">${translateOrDefault('saberMas', 'Saber más')}</button>
                 </div>
             </div>`;
     });
@@ -267,15 +267,15 @@ function renderPaquetesCards() {
                     <div class="paquete-features">
                         ${featuresHtml}
                     </div>
-                    <div class="paquete-bottom">
+                        <div class="paquete-bottom">
                         <div class="paquete-precio-wrap">
-                            <div class="paquete-desde" data-i18n="desde">Desde</div>
+                            <div class="paquete-desde">${translateOrDefault('desde', 'Desde')}</div>
                             <div class="paquete-precio">${escapeHtml(d.precio)}</div>
-                            <div class="paquete-pp" data-i18n="porPersona">por persona</div>
+                            <div class="paquete-pp">${translateOrDefault('porPersona', 'por persona')}</div>
                         </div>
                         <div class="paquete-btns">
-                            <button class="btn-paquete-info" onclick="abrirModalPaquete('${id}')" data-i18n="verDetalles">Ver detalles</button>
-                            <button type="button" class="btn-paquete-reservar" onclick="PackageRequest.open('${id}')" data-i18n="reservarAhora">Reservar ahora</button>
+                            <button class="btn-paquete-info" onclick="abrirModalPaquete('${id}')">${translateOrDefault('verDetalles', 'Ver detalles')}</button>
+                            <button type="button" class="btn-paquete-reservar" onclick="PackageRequest.open('${id}')">${translateOrDefault('reservarAhora', 'Reservar ahora')}</button>
                         </div>
                     </div>
                 </div>

@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="css/nav-polish.css">
     <link rel="stylesheet" href="css/mobile-responsive.css?v=99">
     <link rel="stylesheet" href="css/home-page.css?v=3">
+    <link rel="stylesheet" href="css/tutorial.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/traveler-registration.css">
     <!-- CSS NO CRÍTICO: carga asíncrona -->
     <link rel="stylesheet" href="css/chatbot-widget.css?v=99" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="css/footer.css">
@@ -78,20 +80,12 @@
 <link rel="prefetch" href="contacto.html" as="document">
 <link rel="prefetch" href="ayuda.html" as="document">
 
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=80" fetchpriority="high">
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80">
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=80">
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1920&q=80">
+
 <link rel="preload" as="video" href="fondo.mp4" type="video/mp4">
 
 <header class="hero">
     <!-- Carrusel de fondo (fallback: video local) -->
-    <div class="hero-slides" id="heroSlides" aria-hidden="true">
-        <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=80');"></div>
-        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');"></div>
-        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=80');"></div>
-        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1920&q=80');"></div>
-    </div>
+    
     <video autoplay muted loop playsinline preload="metadata" class="background-video">
         <source src="fondo.mp4" type="video/mp4">
     </video>
