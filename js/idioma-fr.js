@@ -6996,4 +6996,3 @@ window.__kavariIdiomasExtras.fr = {
   titleTerminos: 'Conditions Générales · KAVARI'
 
 };
-})();

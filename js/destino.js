@@ -36,6 +36,21 @@ function _t(valor) {
     return valor;
 }
 
+// Traduce un campo del país usando la clave compuesta pais{Pais}_campo
+function _tPais(campo, valor) {
+    try {
+        const nombreKey = PAIS_NOMBRE_KEY[currentCountryCode];
+        if (!nombreKey) return _t(valor) || valor || '';
+        const prefix = nombreKey.replace('_nombre', '');
+        const key = prefix + '_' + campo;
+        if (typeof window.t !== 'function') return valor || '';
+        const traducido = window.t(key);
+        return (traducido !== key && traducido) ? traducido : (valor || '');
+    } catch (e) {
+        return valor || '';
+    }
+}
+
 // ============================================================
 // 2b. RESOLVER NOMBRE DE PAÍS (slug → paisX_nombre)
 // ============================================================
@@ -268,7 +283,7 @@ function renderAerolineas(d) {
         grid.innerHTML = `<p style="padding:40px;text-align:center;opacity:.6">${_t('aerolineasNoDisponible')}</p>`;
         return;
     }
-    grid.innerHTML = aerolineasData.map(a => `
+    grid.innerHTML = aerolineasData.map((a, ai) => `
         <div class="airline-card">
             <div class="airline-logo-wrap">
                 <img class="airline-logo" src="${escapeHtml(a.logo)}" alt="${escapeHtml(a.nombre)}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
@@ -276,10 +291,10 @@ function renderAerolineas(d) {
             </div>
             <div class="airline-info">
                 <div class="airline-name">${escapeHtml(a.nombre)} <span class="airline-iata">${escapeHtml(a.iata)}</span></div>
-                <p class="airline-desc">${escapeHtml(_t(a.descripcion) || a.descripcion)}</p>
+                <p class="airline-desc">${escapeHtml(_tPais('aerolineas_' + ai + '_descripcion', a.descripcion) || a.descripcion)}</p>
                 <div class="airline-meta">
-                    <span class="airline-origin">${escapeHtml(_t(a.origen_referencia) || a.origen_referencia)}</span>
-                    <span class="airline-freq">${escapeHtml(_t(a.frecuencia) || a.frecuencia)}</span>
+                    <span class="airline-origin">${escapeHtml(_tPais('aerolineas_' + ai + '_origen_referencia', a.origen_referencia) || a.origen_referencia)}</span>
+                    <span class="airline-freq">${escapeHtml(_tPais('aerolineas_' + ai + '_frecuencia', a.frecuencia) || a.frecuencia)}</span>
                 </div>
             </div>
             <div class="airline-price-col">
@@ -320,22 +335,22 @@ function renderHospedajes(d) {
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
             <span>${_t('hospedajesZonaNota')}</span>
         </div>`;
-    grid.innerHTML = zonaNota + hospedajesData.map(h => {
+    grid.innerHTML = zonaNota + hospedajesData.map((h, hi) => {
         const stars = Math.round(h.rating);
         const starsHtml = Array.from({length: 5}, (_, i) => `<svg width="12" height="12" viewBox="0 0 24 24" fill="${i < stars ? '#f59e0b' : 'none'}" stroke="#f59e0b" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`).join('');
         return `
             <div class="hospedaje-card">
                 <div class="hospedaje-img-wrap">
-                    <img class="hospedaje-img" src="${escapeHtml(h.imagen)}" alt="${escapeHtml(_t(h.nombre))}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400'">
-                    <div class="hospedaje-tipo">${escapeHtml(_t(h.tipo) || h.tipo)}</div>
+                    <img class="hospedaje-img" src="${escapeHtml(h.imagen)}" alt="${escapeHtml(_tPais('hospedajes_' + hi + '_nombre', h.nombre))}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400'">
+                    <div class="hospedaje-tipo">${escapeHtml(_tPais('hospedajes_' + hi + '_tipo', h.tipo) || h.tipo)}</div>
                 </div>
                 <div class="hospedaje-body">
                     <div class="hospedaje-location">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        ${_t('zonaLabel')}: ${escapeHtml(_t(h.ubicacion) || h.ubicacion)}
+                        ${_t('zonaLabel')}: ${escapeHtml(_tPais('hospedajes_' + hi + '_ubicacion', h.ubicacion) || h.ubicacion)}
                     </div>
-                    <h4 class="hospedaje-nombre">${escapeHtml(_t(h.nombre))}</h4>
-                    <p class="hospedaje-desc">${escapeHtml(_t(h.descripcion) || h.descripcion)}</p>
+                    <h4 class="hospedaje-nombre">${escapeHtml(_tPais('hospedajes_' + hi + '_nombre', h.nombre))}</h4>
+                    <p class="hospedaje-desc">${escapeHtml(_tPais('hospedajes_' + hi + '_descripcion', h.descripcion) || h.descripcion)}</p>
                     <div class="hospedaje-rating">
                         <div class="stars-row">${starsHtml}</div>
                         <span class="rating-num">${escapeHtml(h.rating)}</span>
@@ -349,7 +364,7 @@ function renderHospedajes(d) {
                     <div class="hospedaje-precio-wrap">
                         <div class="hospedaje-precio-label">${_t('porNoche')}</div>
                         <div class="hospedaje-precio">$${h.precio_noche} <span>${h.moneda}</span></div>
-                        <div class="hospedaje-cap">${_t(h.capacidad) || h.capacidad}</div>
+                        <div class="hospedaje-cap">${_tPais('hospedajes_' + hi + '_capacidad', h.capacidad) || h.capacidad}</div>
                     </div>
                     <a href="${h.url}" target="_blank" rel="noopener noreferrer" class="btn-hospedaje">${_t('reservarEstadia')}</a>
                 </div>
@@ -729,27 +744,27 @@ function renderAllSections(d) {
     const heroBg = document.getElementById('heroBg');
     if (heroBg) heroBg.style.backgroundImage = `url('${d.hero_img}')`;
     const heroContinente = document.getElementById('heroContinente');
-    if (heroContinente) heroContinente.textContent = _t(d.continente) || 'América';
+    if (heroContinente) heroContinente.textContent = _tPais('continente', d.continente) || 'América';
     const heroTitulo = document.getElementById('heroTitulo');
-    if (heroTitulo) heroTitulo.innerHTML = nombrePais(currentCountryCode, d.nombre) + '<span id="heroSubtitulo">' + (_t(d.subtitulo) || '') + '</span>';
+    if (heroTitulo) heroTitulo.innerHTML = nombrePais(currentCountryCode, d.nombre) + '<span id="heroSubtitulo">' + (_tPais('subtitulo', d.subtitulo) || '') + '</span>';
     const heroDesc = document.getElementById('heroDesc');
-    if (heroDesc) heroDesc.textContent = _t(d.descripcion) || '';
+    if (heroDesc) heroDesc.textContent = _tPais('descripcion', d.descripcion) || '';
 
     // Ticker
     const tickerInner = document.getElementById('tickerInner');
     if (tickerInner && d.ticker) {
         const items = [...d.ticker, ...d.ticker];
-        tickerInner.innerHTML = items.map(item => {
+        tickerInner.innerHTML = items.map((item, ti) => {
             const [name, desc] = item.split(' | ');
-            return `<span class="tick-item">${_t(name) || name} <span class="tick-dot"></span> <b>${_t(desc) || desc || ''}</b></span>`;
+            return `<span class="tick-item">${_tPais('ticker_' + ti, name) || name} <span class="tick-dot"></span> <b>${_t(desc) || desc || ''}</b></span>`;
         }).join('');
     }
 
     // Stats Bar
     const statsBar = document.getElementById('statsBar');
     if (statsBar && d.stats) {
-        statsBar.innerHTML = d.stats.map(s =>
-            `<div class="stat-cell"><div class="stat-n">${s.numero}</div><div class="stat-l">${_t(s.label) || s.label}</div></div>`
+        statsBar.innerHTML = d.stats.map((s, si) =>
+            `<div class="stat-cell"><div class="stat-n">${s.numero}</div><div class="stat-l">${_tPais('stats_' + si + '_label', s.label) || s.label}</div></div>`
         ).join('');
     }
 
@@ -760,11 +775,11 @@ function renderAllSections(d) {
     if (destinosInicio && d.destinos) {
         destinosInicio.innerHTML = d.destinos.slice(0, 4).map((dest, i) => `
             <div class="card reveal d${(i % 4) + 1}">
-                <div class="card-img-wrap"><img class="card-img" src="${escapeHtml(dest.imagen)}" alt="${escapeHtml(_t(dest.nombre))}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1578922746465-3a80a228f223?q=80&w=800'"></div>
+                <div class="card-img-wrap"><img class="card-img" src="${escapeHtml(dest.imagen)}" alt="${escapeHtml(_tPais('destinos_' + dest.id + '_nombre', dest.nombre))}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1578922746465-3a80a228f223?q=80&w=800'"></div>
                 <div class="card-body">
-                    <div class="card-tag">${escapeHtml(_t(dest.tag) || dest.tag)}</div>
-                    <h4>${escapeHtml(_t(dest.nombre))}</h4>
-                    <p>${escapeHtml(_t(dest.descripcion).substring(0, 120))}...</p>
+                    <div class="card-tag">${escapeHtml(_tPais('destinos_' + dest.id + '_tag', dest.tag) || dest.tag)}</div>
+                    <h4>${escapeHtml(_tPais('destinos_' + dest.id + '_nombre', dest.nombre))}</h4>
+                    <p>${escapeHtml((_tPais('destinos_' + dest.id + '_descripcion', dest.descripcion) || '').substring(0, 120))}...</p>
                     <button class="btn-card" onclick="openModal('${escapeHtml(dest.id)}')"><span>${_t('verMas')}</span></button>
                 </div>
             </div>
@@ -776,12 +791,12 @@ function renderAllSections(d) {
     if (featureBand && d.destinos && d.destinos.length > 0) {
         const featDest = d.destinos[3] || d.destinos[0];
         featureBand.innerHTML = `
-            <div class="feature-img"><img src="${escapeHtml(featDest.imagen)}" alt="${escapeHtml(_t(featDest.nombre))}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200'"></div>
+            <div class="feature-img"><img src="${escapeHtml(featDest.imagen)}" alt="${escapeHtml(_tPais('destinos_' + featDest.id + '_nombre', featDest.nombre))}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200'"></div>
             <div class="feature-text">
-                <div class="sec-tag-line">${escapeHtml(_t(d.continente) || '')} · ${escapeHtml(_t(featDest.tag) || featDest.tag)}</div>
-                <h3>${escapeHtml(_t(featDest.nombre))}</h3>
-                <p>${escapeHtml(_t(featDest.descripcion))}</p>
-                <div class="data-chip">${escapeHtml(_t(featDest.tag) || featDest.tag)}</div>
+                <div class="sec-tag-line">${escapeHtml(_tPais('continente', d.continente) || '')} · ${escapeHtml(_tPais('destinos_' + featDest.id + '_tag', featDest.tag) || featDest.tag)}</div>
+                <h3>${escapeHtml(_tPais('destinos_' + featDest.id + '_nombre', featDest.nombre))}</h3>
+                <p>${escapeHtml(_tPais('destinos_' + featDest.id + '_descripcion', featDest.descripcion))}</p>
+                <div class="data-chip">${escapeHtml(_tPais('destinos_' + featDest.id + '_tag', featDest.tag) || featDest.tag)}</div>
                 <button class="btn-card" style="margin-top:22px" onclick="openModal('${featDest.id}')"><span>${_t('explorarMas')}</span></button>
             </div>`;
     }
@@ -792,10 +807,10 @@ function renderAllSections(d) {
         quickFacts.innerHTML = `
             <h4>${_t('datosSobre')} ${nombrePais(currentCountryCode, d.nombre)}</h4>
             <div class="facts-grid">
-                ${d.quick_facts.map(f => `
+                ${d.quick_facts.map((f, fi) => `
                     <div class="fact-item">
                         <div class="fact-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
-                        <div class="fact-text"><h5>${_t(f.titulo) || f.titulo}</h5><p>${_t(f.texto) || f.texto}</p></div>
+                        <div class="fact-text"><h5>${_tPais('quickFacts_' + fi + '_titulo', f.titulo) || f.titulo}</h5><p>${_tPais('quickFacts_' + fi + '_texto', f.texto) || f.texto}</p></div>
                     </div>
                 `).join('')}
             </div>`;
@@ -809,24 +824,24 @@ function renderAllSections(d) {
         const culturaTag = document.querySelector('#section-cultura .ph-tag');
         if (culturaTag) culturaTag.textContent = _t('culturaTag');
         const culturaTitulo = document.getElementById('culturaTitulo');
-        if (culturaTitulo) culturaTitulo.textContent = _t(c.titulo) || _t('culturaTitulo');
+        if (culturaTitulo) culturaTitulo.textContent = _tPais('cultura_titulo', c.titulo) || _t('culturaTitulo');
         const culturaDesc = document.getElementById('culturaDesc');
-        if (culturaDesc) culturaDesc.textContent = _t(c.descripcion) || _t('culturaDesc');
+        if (culturaDesc) culturaDesc.textContent = _tPais('cultura_descripcion', c.descripcion) || _t('culturaDesc');
         const culturaStats = document.getElementById('culturaStats');
         if (culturaStats && c.stats) {
-            culturaStats.innerHTML = c.stats.map(s =>
-                `<div class="stat-cell"><div class="stat-n">${s.numero}</div><div class="stat-l">${_t(s.label) || s.label}</div></div>`
+            culturaStats.innerHTML = c.stats.map((s, si) =>
+                `<div class="stat-cell"><div class="stat-n">${s.numero}</div><div class="stat-l">${_tPais('cultura_stats_' + si + '_label', s.label) || s.label}</div></div>`
             ).join('');
         }
         const culturaItems = document.getElementById('culturaItems');
         if (culturaItems && c.items) {
             culturaItems.innerHTML = c.items.map((item, i) => `
                 <div class="card reveal d${(i % 4) + 1}">
-                    <div class="card-img-wrap"><img class="card-img" src="${item.imagen}" alt="${_t(item.nombre)}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1521295121783-8a321d551ad2?q=80&w=800'"></div>
+                    <div class="card-img-wrap"><img class="card-img" src="${item.imagen}" alt="${_tPais('cultura_items_' + item.id + '_nombre', item.nombre)}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1521295121783-8a321d551ad2?q=80&w=800'"></div>
                     <div class="card-body">
-                        <div class="card-tag">${_t(item.tag) || item.tag}</div>
-                        <h4>${_t(item.nombre)}</h4>
-                        <p>${_t(item.descripcion).substring(0, 120)}...</p>
+                        <div class="card-tag">${_tPais('cultura_items_' + item.id + '_tag', item.tag) || item.tag}</div>
+                        <h4>${_tPais('cultura_items_' + item.id + '_nombre', item.nombre)}</h4>
+                        <p>${(_tPais('cultura_items_' + item.id + '_descripcion', item.descripcion) || '').substring(0, 120)}...</p>
                         <button class="btn-card" onclick="openModal('${item.id}')"><span>${_t('verMas')}</span></button>
                     </div>
                 </div>
@@ -838,10 +853,10 @@ function renderAllSections(d) {
                 darkBand.innerHTML = `
                     <div class="dark-band-inner">
                         <div class="sec-tag-line">${_t('culturaDarkBandTag')}</div>
-                        <h2>${_t(c.dark_band.titulo) || c.dark_band.titulo}</h2>
-                        <p>${_t(c.dark_band.texto) || c.dark_band.texto}</p>
-                        <div class="dark-data">${c.dark_band.datos.map(dd =>
-                            `<div class="dd-item"><div class="dd-n">${dd.numero}</div><div class="dd-l">${_t(dd.label) || dd.label}</div></div>`
+                        <h2>${_tPais('cultura_darkBand_titulo', c.dark_band.titulo) || c.dark_band.titulo}</h2>
+                        <p>${_tPais('cultura_darkBand_texto', c.dark_band.texto) || c.dark_band.texto}</p>
+                        <div class="dark-data">${c.dark_band.datos.map((dd, ddi) =>
+                            `<div class="dd-item"><div class="dd-n">${dd.numero}</div><div class="dd-l">${_tPais('cultura_darkBand_datos_' + ddi + '_label', dd.label) || dd.label}</div></div>`
                         ).join('')}</div>
                     </div>`;
             }
@@ -861,11 +876,11 @@ function renderAllSections(d) {
     if (todosDestinos && d.destinos) {
         todosDestinos.innerHTML = d.destinos.map((dest, i) => `
             <div class="card reveal d${(i % 4) + 1}">
-                <div class="card-img-wrap"><img class="card-img" src="${dest.imagen}" alt="${_t(dest.nombre)}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=800'"></div>
+                <div class="card-img-wrap"><img class="card-img" src="${dest.imagen}" alt="${_tPais('destinos_' + dest.id + '_nombre', dest.nombre)}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=800'"></div>
                 <div class="card-body">
-                    <div class="card-tag">${_t(dest.tag) || dest.tag}</div>
-                    <h4>${_t(dest.nombre)}</h4>
-                    <p>${_t(dest.descripcion).substring(0, 120)}...</p>
+                    <div class="card-tag">${_tPais('destinos_' + dest.id + '_tag', dest.tag) || dest.tag}</div>
+                    <h4>${_tPais('destinos_' + dest.id + '_nombre', dest.nombre)}</h4>
+                    <p>${(_tPais('destinos_' + dest.id + '_descripcion', dest.descripcion) || '').substring(0, 120)}...</p>
                     <button class="btn-card" onclick="openModal('${dest.id}')"><span>${_t('verMas')}</span></button>
                 </div>
             </div>
@@ -880,19 +895,19 @@ function renderAllSections(d) {
         const gastronomiaHeaderBg = document.getElementById('gastronomiaHeaderBg');
         if (gastronomiaHeaderBg) gastronomiaHeaderBg.style.backgroundImage = `url('${g.header_img || d.page_header_img}')`;
         const gastronomiaTitulo = document.getElementById('gastronomiaTitulo');
-        if (gastronomiaTitulo) gastronomiaTitulo.textContent = _t(g.titulo) || _t('gastronomiaTitulo');
+        if (gastronomiaTitulo) gastronomiaTitulo.textContent = _tPais('gastronomia_titulo', g.titulo) || _t('gastronomiaTitulo');
         const gastronomiaDesc = document.getElementById('gastronomiaDesc');
-        if (gastronomiaDesc) gastronomiaDesc.textContent = _t(g.descripcion) || _t('gastronomiaDesc');
+        if (gastronomiaDesc) gastronomiaDesc.textContent = _tPais('gastronomia_descripcion', g.descripcion) || _t('gastronomiaDesc');
         const foodGrid = document.getElementById('foodGrid');
         if (foodGrid && g.platos) {
-            foodGrid.innerHTML = g.platos.map(plato => `
+            foodGrid.innerHTML = g.platos.map((plato, pi) => `
                 <div class="food-item">
-                    <div class="food-thumb"><img src="${escapeHtml(plato.imagen)}" alt="${escapeHtml(_t(plato.nombre))}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400'"></div>
+                    <div class="food-thumb"><img src="${escapeHtml(plato.imagen)}" alt="${escapeHtml(_tPais('gastronomia_platos_' + pi + '_nombre', plato.nombre))}" decoding="async" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400'"></div>
                     <div class="food-body">
-                        <div class="food-cat">${escapeHtml(_t(plato.categoria) || plato.categoria)}</div>
-                        <h4>${escapeHtml(_t(plato.nombre))}</h4>
-                        <p>${escapeHtml(_t(plato.descripcion) || plato.descripcion)}</p>
-                        ${plato.nota ? `<div class="food-note">${escapeHtml(_t(plato.nota) || plato.nota)}</div>` : ''}
+                        <div class="food-cat">${escapeHtml(_tPais('gastronomia_platos_' + pi + '_categoria', plato.categoria) || plato.categoria)}</div>
+                        <h4>${escapeHtml(_tPais('gastronomia_platos_' + pi + '_nombre', plato.nombre))}</h4>
+                        <p>${escapeHtml(_tPais('gastronomia_platos_' + pi + '_descripcion', plato.descripcion) || plato.descripcion)}</p>
+                        ${plato.nota ? `<div class="food-note">${escapeHtml(_tPais('gastronomia_platos_' + pi + '_nota', plato.nota) || plato.nota)}</div>` : ''}
                     </div>
                 </div>
             `).join('');
@@ -905,22 +920,22 @@ function renderAllSections(d) {
         const headerBg = document.getElementById('aventuraHeaderBg');
         if (headerBg) headerBg.style.backgroundImage = `url('${a.header_img || d.page_header_img}')`;
         const aventuraTitulo = document.getElementById('aventuraTitulo');
-        if (aventuraTitulo) aventuraTitulo.textContent = _t(a.titulo) || _t('aventuraTitulo');
+        if (aventuraTitulo) aventuraTitulo.textContent = _tPais('aventura_titulo', a.titulo) || _t('aventuraTitulo');
         const aventuraDesc = document.getElementById('aventuraDesc');
-        if (aventuraDesc) aventuraDesc.textContent = _t(a.descripcion) || _t('aventuraDesc');
+        if (aventuraDesc) aventuraDesc.textContent = _tPais('aventura_descripcion', a.descripcion) || _t('aventuraDesc');
         const aventuraStats = document.getElementById('aventuraStats');
         if (aventuraStats && a.stats) {
-            aventuraStats.innerHTML = a.stats.map(s =>
-                `<div class="stat-cell"><div class="stat-n">${s.numero}</div><div class="stat-l">${_t(s.label) || s.label}</div></div>`
+            aventuraStats.innerHTML = a.stats.map((s, si) =>
+                `<div class="stat-cell"><div class="stat-n">${s.numero}</div><div class="stat-l">${_tPais('aventura_stats_' + si + '_label', s.label) || s.label}</div></div>`
             ).join('');
         }
         const actList = document.getElementById('actList');
         if (actList && a.actividades) {
-            actList.innerHTML = a.actividades.map(act => `
+            actList.innerHTML = a.actividades.map((act, ai) => `
                 <div class="act-item">
                     <div class="act-n">${act.numero}</div>
-                    <div class="act-content"><h4>${_t(act.nombre)}</h4><p>${_t(act.descripcion)}</p></div>
-                    <div class="act-badges">${act.badges.map(b => `<span class="act-badge">${_t(b) || b}</span>`).join('')}</div>
+                    <div class="act-content"><h4>${_tPais('aventura_actividades_' + ai + '_nombre', act.nombre)}</h4><p>${_tPais('aventura_actividades_' + ai + '_descripcion', act.descripcion)}</p></div>
+                    <div class="act-badges">${act.badges.map((b, bi) => `<span class="act-badge">${_tPais('aventura_actividades_' + ai + '_badges_' + bi, b) || b}</span>`).join('')}</div>
                 </div>
             `).join('');
         }
@@ -930,10 +945,10 @@ function renderAllSections(d) {
                 darkBand.innerHTML = `
                     <div class="dark-band-inner">
                         <div class="sec-tag-line">${_t('aventuraDarkBandTag')}</div>
-                        <h2>${_t(a.dark_band.titulo) || a.dark_band.titulo}</h2>
-                        <p>${_t(a.dark_band.texto) || a.dark_band.texto}</p>
-                        <div class="dark-data">${a.dark_band.datos.map(dd =>
-                            `<div class="dd-item"><div class="dd-n">${dd.numero}</div><div class="dd-l">${_t(dd.label) || dd.label}</div></div>`
+                        <h2>${_tPais('aventura_darkBand_titulo', a.dark_band.titulo) || a.dark_band.titulo}</h2>
+                        <p>${_tPais('aventura_darkBand_texto', a.dark_band.texto) || a.dark_band.texto}</p>
+                        <div class="dark-data">${a.dark_band.datos.map((dd, ddi) =>
+                            `<div class="dd-item"><div class="dd-n">${dd.numero}</div><div class="dd-l">${_tPais('aventura_darkBand_datos_' + ddi + '_label', dd.label) || dd.label}</div></div>`
                         ).join('')}</div>
                     </div>`;
             }
@@ -948,17 +963,17 @@ function renderAllSections(d) {
         const practicaHeaderBg = document.getElementById('practicaHeaderBg');
         if (practicaHeaderBg) practicaHeaderBg.style.backgroundImage = `url('${p.header_img || d.page_header_img}')`;
         const practicaTitulo = document.getElementById('practicaTitulo');
-        if (practicaTitulo) practicaTitulo.textContent = _t(p.titulo) || _t('practicaTitulo');
+        if (practicaTitulo) practicaTitulo.textContent = _tPais('practica_titulo', p.titulo) || _t('practicaTitulo');
         const practicaDesc = document.getElementById('practicaDesc');
-        if (practicaDesc) practicaDesc.textContent = _t(p.descripcion) || _t('practicaDesc');
+        if (practicaDesc) practicaDesc.textContent = _tPais('practica_descripcion', p.descripcion) || _t('practicaDesc');
         const infoGrid = document.getElementById('infoGrid');
         if (infoGrid && p.info_cards) {
-            infoGrid.innerHTML = p.info_cards.map(card => `
+            infoGrid.innerHTML = p.info_cards.map((card, ci) => `
                 <div class="info-card">
                     <div class="info-icon"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
-                    <h4>${_t(card.titulo) || card.titulo}</h4>
-                    <p>${_t(card.texto) || card.texto}</p>
-                    <div class="info-badge">${_t(card.badge) || card.badge}</div>
+                    <h4>${_tPais('practica_infoCards_' + ci + '_titulo', card.titulo) || card.titulo}</h4>
+                    <p>${_tPais('practica_infoCards_' + ci + '_texto', card.texto) || card.texto}</p>
+                    <div class="info-badge">${_tPais('practica_infoCards_' + ci + '_badge', card.badge) || card.badge}</div>
                 </div>
             `).join('');
         }
@@ -967,12 +982,12 @@ function renderAllSections(d) {
             practicaTwoCol.innerHTML = `
                 <div class="col-block">
                     <h4>${_t('cuandoViajar')}</h4>
-                    ${p.temporadas.map(temp => `<p><strong>${_t(temp.nombre) || temp.nombre}: ${temp.meses}</strong> · ${_t(temp.descripcion) || temp.descripcion}</p>`).join('')}
+                    ${p.temporadas.map((temp, ti) => `<p><strong>${_tPais('practica_temporadas_' + ti + '_nombre', temp.nombre) || temp.nombre}: ${temp.meses}</strong> · ${_tPais('practica_temporadas_' + ti + '_descripcion', temp.descripcion) || temp.descripcion}</p>`).join('')}
                 </div>
                 <div class="col-block">
                     <h4>${_t('itinerarioSugerido')}</h4>
                     <ul class="numbered-list">
-                        ${p.itinerario.map(item => `<li><span class="nl-num">${item.dia}</span>${_t(item.titulo) || item.titulo}: ${_t(item.texto) || item.texto}</li>`).join('')}
+                        ${p.itinerario.map((item, ii) => `<li><span class="nl-num">${item.dia}</span>${_tPais('practica_itinerario_' + ii + '_titulo', item.titulo) || item.titulo}: ${_tPais('practica_itinerario_' + ii + '_texto', item.texto) || item.texto}</li>`).join('')}
                     </ul>
                 </div>`;
         }
@@ -989,14 +1004,16 @@ function renderAllSections(d) {
 function openModal(id) {
     let item = countryData.destinos?.find(d => d.id === id) || countryData.cultura?.items?.find(i => i.id === id);
     if (!item) return;
+    const isDestino = countryData.destinos?.some(d => d.id === id);
+    const prefix = isDestino ? 'destinos_' + id : 'cultura_items_' + id;
     document.getElementById('modalBody').innerHTML = `
-        <img src="${escapeHtml(item.imagen)}" alt="${escapeHtml(_t(item.nombre))}" decoding="async" style="width:100%;border-radius:12px;margin-bottom:20px;max-height:400px;object-fit:cover" onerror="this.style.display='none'">
-        <div class="card-tag">${escapeHtml(_t(item.tag) || item.tag)}</div>
-        <h3 style="font-family:'Nunito',sans-serif;font-size:24px;color:var(--text-primary);margin:12px 0">${escapeHtml(_t(item.nombre))}</h3>
-        <p style="line-height:1.8;color:var(--text-secondary)">${escapeHtml(_t(item.detalle) || _t(item.descripcion) || item.descripcion)}</p>
-        ${item.precio_entrada ? `<div class="info-badge" style="margin-top:12px">${_t('entradaLabel')} ${escapeHtml(_t(item.precio_entrada) || item.precio_entrada)}</div>` : ''}
-        ${item.horario ? `<div class="info-badge" style="margin-top:8px">${_t('horarioLabel')} ${escapeHtml(_t(item.horario) || item.horario)}</div>` : ''}
-        ${item.consejo ? `<p style="margin-top:16px;font-style:italic;color:var(--text-secondary);border-left:3px solid var(--primary);padding-left:12px">${_t('consejoLabel')} ${escapeHtml(_t(item.consejo) || item.consejo)}</p>` : ''}
+        <img src="${escapeHtml(item.imagen)}" alt="${escapeHtml(_tPais(prefix + '_nombre', item.nombre))}" decoding="async" style="width:100%;border-radius:12px;margin-bottom:20px;max-height:400px;object-fit:cover" onerror="this.style.display='none'">
+        <div class="card-tag">${escapeHtml(_tPais(prefix + '_tag', item.tag) || item.tag)}</div>
+        <h3 style="font-family:'Nunito',sans-serif;font-size:24px;color:var(--text-primary);margin:12px 0">${escapeHtml(_tPais(prefix + '_nombre', item.nombre))}</h3>
+        <p style="line-height:1.8;color:var(--text-secondary)">${escapeHtml(_tPais(prefix + '_detalle', item.detalle) || _tPais(prefix + '_descripcion', item.descripcion) || item.descripcion)}</p>
+        ${item.precio_entrada ? `<div class="info-badge" style="margin-top:12px">${_t('entradaLabel')} ${escapeHtml(_tPais(prefix + '_precio_entrada', item.precio_entrada) || item.precio_entrada)}</div>` : ''}
+        ${item.horario ? `<div class="info-badge" style="margin-top:8px">${_t('horarioLabel')} ${escapeHtml(_tPais(prefix + '_horario', item.horario) || item.horario)}</div>` : ''}
+        ${item.consejo ? `<p style="margin-top:16px;font-style:italic;color:var(--text-secondary);border-left:3px solid var(--primary);padding-left:12px">${_t('consejoLabel')} ${escapeHtml(_tPais(prefix + '_consejo', item.consejo) || item.consejo)}</p>` : ''}
     `;
     document.getElementById('modalOverlay').classList.add('active');
     if (window.KavariScrollLock) window.KavariScrollLock.lock();
