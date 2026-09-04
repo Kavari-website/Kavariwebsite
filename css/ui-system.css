@@ -612,8 +612,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible {
    ══════════════════════════════════════════════════════════════════════════ */
 body {
   opacity:0;
-  transform:translateY(8px);
-  transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1);
+  transform:translateY(6px);
+  transition:opacity .45s cubic-bezier(.22,1,.36,1),transform .45s cubic-bezier(.22,1,.36,1);
 }
 body.page-loaded {
   opacity:1;
@@ -709,7 +709,7 @@ body.page-loaded {
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  transition:opacity .25s cubic-bezier(.22,1,.36,1),visibility .25s ease;
+  transition:opacity .35s cubic-bezier(.22,1,.36,1),visibility .35s ease;
 }
 .kavari-page-trans.kpt-shown {
   opacity:1;
@@ -785,11 +785,11 @@ body.page-loaded {
 /* Salida suave del overlay */
 .kavari-page-trans.kpt-leaving {
   opacity:0;
-  transition:opacity .2s cubic-bezier(.4,0,1,1);
+  transition:opacity .3s cubic-bezier(.4,0,1,1);
 }
 .kavari-page-trans.kpt-leaving::before {
   width:100% !important;
-  transition:width .3s ease;
+  transition:width .4s ease;
 }
 
 @media (prefers-reduced-motion:reduce) {

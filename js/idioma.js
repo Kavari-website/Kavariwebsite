@@ -16005,10 +16005,12 @@ paisGuyana_hospedajes_5_tipo: 'Coastal cabin',
         const st = document.createElement('style');
         st.id = 'kv-i18n-anim-style';
         st.textContent =
-            '@keyframes kvI18nSwap{0%{opacity:0;transform:translateY(12px) scale(.97);filter:blur(3px)}' +
-            '60%{opacity:1;filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}' +
-            '.kv-i18n-anim{animation:kvI18nSwap .5s cubic-bezier(.22,.61,.36,1) both}' +
-            '@media (prefers-reduced-motion:reduce){.kv-i18n-anim{animation-duration:.01ms}}';
+            '@keyframes kvI18nSwap{0%{opacity:0;transform:translateY(8px)}' +
+            '100%{opacity:1;transform:translateY(0)}}' +
+            '.kv-i18n-anim{animation:kvI18nSwap .35s cubic-bezier(.22,1,.36,1) both}' +
+            '@keyframes kvPageFade{0%{opacity:.7}100%{opacity:1}}' +
+            '.kv-page-fade{animation:kvPageFade .4s cubic-bezier(.22,1,.36,1) both}' +
+            '@media (prefers-reduced-motion:reduce){.kv-i18n-anim,.kv-page-fade{animation-duration:.01ms}}';
         document.head.appendChild(st);
     }
 
@@ -16029,6 +16031,12 @@ paisGuyana_hospedajes_5_tipo: 'Coastal cabin',
     }
 
     function aplicarTraducciones() {
+        document.body.classList.add('kv-page-fade');
+        document.body.addEventListener('animationend', function handler() {
+            document.body.classList.remove('kv-page-fade');
+            document.body.removeEventListener('animationend', handler);
+        });
+
         document.querySelectorAll('[data-i18n]').forEach((el, i) => {
             const clave = el.getAttribute('data-i18n');
             if (el.tagName === 'INPUT' && (el.type === 'text' || el.type === 'email' || el.type === 'password' || el.type === 'search')) {

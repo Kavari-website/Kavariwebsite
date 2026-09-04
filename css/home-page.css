@@ -277,6 +277,11 @@
 .page-index .places-section > .featured-section {
   padding-bottom:26px;
 }
+.page-index .paquetes-grid {
+  display:flex;
+  flex-direction:column;
+  gap:32px;
+}
 .page-index .paquete-card {
   grid-template-columns:340px 1fr;
   border-radius:26px;

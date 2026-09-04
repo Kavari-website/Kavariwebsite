@@ -238,8 +238,6 @@ function renderTop10Cards() {
     container.innerHTML = html;
     // Re-observe new cards for reveal animation
     container.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-    // Re-traducir elementos dinámicos con data-i18n
-    window.aplicarTraducciones?.();
 }
 
 function renderPaquetesCards() {
@@ -286,8 +284,6 @@ function renderPaquetesCards() {
     container.innerHTML = html;
     // Re-observe new cards for reveal animation
     container.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-    // Re-traducir elementos dinámicos con data-i18n
-    window.aplicarTraducciones?.();
 }
 
 // Función para abrir el modal del Top 10
