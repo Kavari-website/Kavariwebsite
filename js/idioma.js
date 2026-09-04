@@ -134,6 +134,83 @@
   // MODALES
   modalCerrar: "Cerrar",
   verEnGoogleMaps: "Ver en Google Maps",
+  modalAltDestino: "Imagen del destino",
+  modalAltPaquete: "Imagen del paquete",
+
+  // BOTONES GENERALES
+  registrarViajero: "Registrarme como viajero",
+
+  // ARIA-LABELS
+  ariaCambiarIdioma: "Cambiar idioma",
+  ariaModoOscuro: "Modo oscuro",
+  ariaMenu: "Menú",
+  ariaCerrarMenu: "Cerrar menú",
+  ariaPreferencias: "Preferencias",
+  ariaRedesSociales: "Redes sociales",
+  ariaEnlacesRapidos: "Enlaces rápidos",
+  ariaIniciarTutorial: "Iniciar tutorial interactivo",
+  ariaVerOpcionesAnteriores: "Ver opciones anteriores",
+  ariaVerMasOpciones: "Ver más opciones",
+  contactoEnviarCorreo: "Enviar correo",
+  terminosYCondiciones: "Términos y Condiciones",
+  perfilGuardando: "Guardando…",
+  perfilActualizado: "Perfil actualizado correctamente",
+  perfilErrorGuardar: "Error al guardar",
+  perfilPreferenciasGuardadas: "Preferencias guardadas",
+  planViajero: "Viajero",
+  planPremium: "Premium",
+  planOp: "OP",
+  paqueteSeleccionado: "Paquete seleccionado",
+  destinoLabel: "Destino:",
+  sinResultados: "Sin resultados",
+  modoClaro: "Claro",
+  ariaModoClaro: "Activar modo claro",
+
+  // TRAVELER REGISTRATION
+  travelerViajerosRegistrados: "Viajeros registrados",
+  travelerSeleccionaPais: "Selecciona un país",
+  travelerEligeDestino: "Elige un destino para ver quién más viaja allí.",
+  travelerNadieRegistrado: "Aún nadie se ha registrado para",
+  travelerSerePrimero: "Sé el primero",
+  travelerRegistrateAqui: "Regístrate y aparece aquí para otros viajeros.",
+  travelerBtnRegistrarme: "Registrarme",
+  travelerPersonasRegistradas: "Personas registradas para",
+  travelerModalTitulo: "Regístrate como viajero",
+  travelerModalDesc: "Guarda tu país y plan para aparecer en la lista del destino elegido.",
+  travelerLabelNombre: "Nombre",
+  travelerLabelCorreo: "Correo",
+  travelerLabelPais: "País",
+  travelerCargandoPaises: "Cargando países…",
+  travelerLabelPlan: "Plan",
+  travelerPlanGratis: "Gratis",
+  travelerBtnGuardar: "Guardar registro",
+  travelerErrorCampos: "Revisa los campos marcados.",
+  travelerGuardando: "Guardando…",
+  travelerYaRegistrado: "Ya estás registrado para este destino.",
+  travelerRegistroGuardado: "Registro guardado. Ya apareces en el destino elegido.",
+  travelerGuiaDisponible: "Guías disponibles:",
+  travelerErrorCargarPaises: "No se pudo cargar la lista de países.",
+
+  // ACCOUNT FORM
+  cuentaVer: "Ver",
+  cuentaOcultar: "Ocultar",
+  cuentaMostrarPass: "Mostrar contraseña",
+  cuentaOcultarPass: "Ocultar contraseña",
+  cuentaErrorNombre: "Escribe tu nombre.",
+  cuentaErrorCorreo: "Escribe un correo válido.",
+  cuentaErrorPass: "Usa al menos 6 caracteres.",
+
+  // PERFIL
+  perfilPanelAdmin: "Panel",
+
+  // OTROS
+  volverInicio: "Volver al inicio",
+  destinoErrorCarga: "No se pudo cargar la información del destino. Revisa la consola para más detalles.",
+  perfilIngresando: "Ingresando…",
+  perfilCreandoCuenta: "Creando cuenta…",
+  perfilEnviando: "Enviando…",
+  perfilCodigoEnviado: "Código enviado",
+  perfilVerificando: "Verificando…",
 
             // ===== NAVEGACIÓN (común) =====
             sobrenosotros: 'Sobre nosotros',
@@ -7993,6 +8070,83 @@ paisGuyana_hospedajes_5_descripcion: 'Cabaña en la playa remota de Shell Beach.
   // MODALS
   modalCerrar: "Close",
   verEnGoogleMaps: "View on Google Maps",
+  modalAltDestino: "Destination image",
+  modalAltPaquete: "Package image",
+
+  // GENERAL BUTTONS
+  registrarViajero: "Register as traveler",
+
+  // ARIA-LABELS
+  ariaCambiarIdioma: "Change language",
+  ariaModoOscuro: "Dark mode",
+  ariaMenu: "Menu",
+  ariaCerrarMenu: "Close menu",
+  ariaPreferencias: "Preferences",
+  ariaRedesSociales: "Social media",
+  ariaEnlacesRapidos: "Quick links",
+  ariaIniciarTutorial: "Start interactive tutorial",
+  ariaVerOpcionesAnteriores: "See previous options",
+  ariaVerMasOpciones: "See more options",
+  contactoEnviarCorreo: "Send email",
+  terminosYCondiciones: "Terms and Conditions",
+  perfilGuardando: "Saving…",
+  perfilActualizado: "Profile updated successfully",
+  perfilErrorGuardar: "Error saving",
+  perfilPreferenciasGuardadas: "Preferences saved",
+  planViajero: "Traveler",
+  planPremium: "Premium",
+  planOp: "OP",
+  paqueteSeleccionado: "Selected package",
+  destinoLabel: "Destination:",
+  sinResultados: "No results",
+  modoClaro: "Light",
+  ariaModoClaro: "Switch to light mode",
+
+  // TRAVELER REGISTRATION
+  travelerViajerosRegistrados: "Registered travelers",
+  travelerSeleccionaPais: "Select a country",
+  travelerEligeDestino: "Choose a destination to see who else is traveling there.",
+  travelerNadieRegistrado: "Nobody has registered for",
+  travelerSerePrimero: "Be the first",
+  travelerRegistrateAqui: "Sign up and appear here for other travelers.",
+  travelerBtnRegistrarme: "Sign up",
+  travelerPersonasRegistradas: "People registered for",
+  travelerModalTitulo: "Register as a traveler",
+  travelerModalDesc: "Save your country and plan to appear on the chosen destination's list.",
+  travelerLabelNombre: "Name",
+  travelerLabelCorreo: "Email",
+  travelerLabelPais: "Country",
+  travelerCargandoPaises: "Loading countries…",
+  travelerLabelPlan: "Plan",
+  travelerPlanGratis: "Free",
+  travelerBtnGuardar: "Save registration",
+  travelerErrorCampos: "Please review the highlighted fields.",
+  travelerGuardando: "Saving…",
+  travelerYaRegistrado: "You are already registered for this destination.",
+  travelerRegistroGuardado: "Registration saved. You now appear on the chosen destination.",
+  travelerGuiaDisponible: "Available guides:",
+  travelerErrorCargarPaises: "Could not load country list.",
+
+  // ACCOUNT FORM
+  cuentaVer: "Show",
+  cuentaOcultar: "Hide",
+  cuentaMostrarPass: "Show password",
+  cuentaOcultarPass: "Hide password",
+  cuentaErrorNombre: "Enter your name.",
+  cuentaErrorCorreo: "Enter a valid email.",
+  cuentaErrorPass: "Use at least 6 characters.",
+
+  // PERFIL
+  perfilPanelAdmin: "Panel",
+
+  // OTROS
+  volverInicio: "Back to home",
+  destinoErrorCarga: "Could not load destination information. Check the console for details.",
+  perfilIngresando: "Signing in…",
+  perfilCreandoCuenta: "Creating account…",
+  perfilEnviando: "Sending…",
+  perfilCodigoEnviado: "Code sent",
+  perfilVerificando: "Verifying…",
 
             // ===== NAVEGACIÓN =====
             sobrenosotros: 'About Us',
@@ -15906,6 +16060,18 @@ paisGuyana_hospedajes_5_tipo: 'Coastal cabin',
             if (el.title !== tr) el.title = tr;
         });
 
+        document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+            const clave = el.getAttribute('data-i18n-aria');
+            const tr = window.t(clave);
+            if (el.getAttribute('aria-label') !== tr) el.setAttribute('aria-label', tr);
+        });
+
+        document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+            const clave = el.getAttribute('data-i18n-alt');
+            const tr = window.t(clave);
+            if (el.alt !== tr) el.alt = tr;
+        });
+
         document.querySelectorAll('select[data-i18n-options]').forEach(select => {
             const claveBase = select.getAttribute('data-i18n-options');
             Array.from(select.options).forEach(option => {
@@ -15952,7 +16118,8 @@ paisGuyana_hospedajes_5_tipo: 'Coastal cabin',
                 }
                 const idx = idiomasSoportados.indexOf(idiomaActual);
                 const nextIdioma = idiomasSoportados[(idx + 1) % idiomasSoportados.length];
-                btnLang.setAttribute('aria-label', 'Cambiar a ' + nextIdioma.toUpperCase());
+                const ariaLabel = typeof window.t === 'function' ? window.t('ariaCambiarIdioma') : 'Cambiar idioma';
+                btnLang.setAttribute('aria-label', ariaLabel + ' (' + nextIdioma.toUpperCase() + ')');
             }
         }
 
@@ -15997,6 +16164,9 @@ paisGuyana_hospedajes_5_tipo: 'Coastal cabin',
             btnLang.addEventListener('click', window.toggleLang);
         }
     });
+
+    // Exportar para que otros scripts puedan re-traducir contenido dinámico
+    window.aplicarTraducciones = aplicarTraducciones;
 
     if (document.readyState !== 'loading') {
         aplicarTraducciones();

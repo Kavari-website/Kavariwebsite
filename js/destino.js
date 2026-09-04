@@ -718,7 +718,7 @@ async function cargarPais(codigoPais) {
         requestAnimationFrame(() => observeReveals());
     } catch (error) {
         console.error('❌ Error al cargar data.json:', error);
-        alert('No se pudo cargar la información del destino. Revisa la consola para más detalles.');
+        alert(typeof window.t === 'function' ? window.t('destinoErrorCarga') : 'No se pudo cargar la información del destino.');
     }
 }
 
@@ -1129,11 +1129,7 @@ window.addEventListener('kavari:langchange', () => {
 
     function lang() { return localStorage.getItem('kavari-idioma') || 'es'; }
     function label() {
-        const l = lang();
-        if (l === 'en') return 'Back to home';
-        if (l === 'pt') return 'Voltar ao início';
-        if (l === 'fr') return 'Retour à l\'accueil';
-        return 'Volver al inicio';
+        return (typeof window.t === 'function' ? window.t('volverInicio') : 'Volver al inicio');
     }
 
     const css = ''

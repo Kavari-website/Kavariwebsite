@@ -192,11 +192,11 @@
     const email = profile?.email || user?.email || '—';
     const avatarUrl = profile?.avatar_url || user?.user_metadata?.avatar_url;
     const plan = localStorage.getItem('kavari-plan') || 'viajero';
-    const planNames = { viajero: 'Viajero', premium: 'Premium', op: 'OP' };
+    const planNames = { viajero: t('planViajero'), premium: t('planPremium'), op: t('planOp') };
 
     if (els.perfilFullName) els.perfilFullName.textContent = displayName;
     if (els.perfilEmail) els.perfilEmail.textContent = email;
-    if (els.perfilPlanBadge) els.perfilPlanBadge.textContent = planNames[plan] || 'Viajero';
+    if (els.perfilPlanBadge) els.perfilPlanBadge.textContent = planNames[plan] || t('planViajero');
 
     if (avatarUrl) {
       if (els.perfilAvatarImg) {
@@ -232,7 +232,7 @@
     if (els.perfilIdiomas) els.perfilIdiomas.value = profile?.languages || '';
 
     if (els.settingsEmail) els.settingsEmail.textContent = email;
-    if (els.settingsPlan) els.settingsPlan.textContent = planNames[plan] || 'Viajero';
+    if (els.settingsPlan) els.settingsPlan.textContent = planNames[plan] || t('planViajero');
     if (els.settingsLangToggle) els.settingsLangToggle.textContent = lang().toUpperCase();
     if (els.settingsThemeToggle) {
       const theme = document.documentElement.getAttribute('data-theme') || 'light';
@@ -582,7 +582,7 @@
     if (!valid) return;
 
     els.loginSubmitBtn.disabled = true;
-    els.loginSubmitBtn.textContent = 'Ingresando…';
+    els.loginSubmitBtn.textContent = t('perfilIngresando');
 
     const result = await window.KavariAuth.signInWithEmail(email, password);
 
@@ -637,7 +637,7 @@
 
     if (els.registerSubmitBtn) {
       els.registerSubmitBtn.disabled = true;
-      els.registerSubmitBtn.textContent = 'Creando cuenta…';
+      els.registerSubmitBtn.textContent = t('perfilCreandoCuenta');
     }
 
     const result = await window.KavariAuth.signUpWithEmail(email, password, name);
@@ -851,7 +851,7 @@
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
 
     els.otpSendBtn.disabled = true;
-    els.otpSendBtn.textContent = 'Enviando…';
+    els.otpSendBtn.textContent = t('perfilEnviando');
 
     const result = await window.KavariAuth.sendOtpEmail(email);
     if (result.error) {
@@ -863,7 +863,7 @@
 
     els.otpCodeField.style.display = 'block';
     els.otpVerifyBtn.style.display = 'block';
-    els.otpSendBtn.textContent = 'Código enviado';
+    els.otpSendBtn.textContent = t('perfilCodigoEnviado');
   }
 
   async function handleVerifyOtp() {
@@ -872,7 +872,7 @@
     if (!email || !token) return;
 
     els.otpVerifyBtn.disabled = true;
-    els.otpVerifyBtn.textContent = 'Verificando…';
+    els.otpVerifyBtn.textContent = t('perfilVerificando');
 
     const result = await window.KavariAuth.verifyOtp(email, token);
     if (result.error) {
@@ -932,15 +932,15 @@
       country: els.perfilCountry.value || null
     };
 
-    setStatus(els.perfilInfoStatus, 'Guardando…', false);
+    setStatus(els.perfilInfoStatus, t('perfilGuardando'), false);
     const result = await window.KavariAuth.updateProfile(session.user.id, updates);
     if (result !== null) {
-      setStatus(els.perfilInfoStatus, 'Perfil actualizado correctamente', false);
+      setStatus(els.perfilInfoStatus, t('perfilActualizado'), false);
       els.perfilFullName.textContent = updates.full_name || '—';
       // Refrescar el nombre en el navbar de todas las páginas
       window.dispatchEvent(new CustomEvent('kavari:profileupdate'));
     } else {
-      setStatus(els.perfilInfoStatus, 'Error al guardar', true);
+      setStatus(els.perfilInfoStatus, t('perfilErrorGuardar'), true);
     }
   }
 
@@ -957,12 +957,12 @@
       languages: els.perfilIdiomas.value.trim()
     };
 
-    setStatus(els.perfilTravelStatus, 'Guardando…', false);
+    setStatus(els.perfilTravelStatus, t('perfilGuardando'), false);
     const result = await window.KavariAuth.updateProfile(session.user.id, updates);
     if (result !== null) {
-      setStatus(els.perfilTravelStatus, 'Preferencias guardadas', false);
+      setStatus(els.perfilTravelStatus, t('perfilPreferenciasGuardadas'), false);
     } else {
-      setStatus(els.perfilTravelStatus, 'Error al guardar', true);
+      setStatus(els.perfilTravelStatus, t('perfilErrorGuardar'), true);
     }
   }
 
@@ -1038,7 +1038,7 @@
       toggle.addEventListener('click', () => {
         const showing = input.type === 'text';
         input.type = showing ? 'password' : 'text';
-        toggle.textContent = showing ? 'Ver' : 'Ocultar';
+        toggle.textContent = showing ? t('cuentaVer') : t('cuentaOcultar');
       });
     });
   }

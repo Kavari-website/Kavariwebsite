@@ -141,7 +141,7 @@
     });
 
     if (shown === 0) {
-      optionsList.innerHTML = '<div class="country-empty">Sin resultados</div>';
+      optionsList.innerHTML = '<div class="country-empty">' + esc(typeof window.t === 'function' ? window.t('sinResultados') : 'Sin resultados') + '</div>';
     }
   }
 

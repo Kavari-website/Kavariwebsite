@@ -371,8 +371,8 @@
     pwToggle.onclick = () => {
       const showing = pwInput.type === 'text';
       pwInput.type = showing ? 'password' : 'text';
-      pwToggle.textContent = showing ? 'Ver' : 'Ocultar';
-      pwToggle.setAttribute('aria-label', showing ? 'Mostrar contraseña' : 'Ocultar contraseña');
+      pwToggle.textContent = showing ? t('cuentaVer') : t('cuentaOcultar');
+      pwToggle.setAttribute('aria-label', showing ? t('cuentaMostrarPass') : t('cuentaOcultarPass'));
     };
 
     document.getElementById('form').addEventListener('submit', event => {
@@ -383,9 +383,9 @@
       const password = String(data.get('password') || '');
 
       const errors = { name: '', email: '', password: '' };
-      if (!name) errors.name = 'Escribe tu nombre.';
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = 'Escribe un correo válido.';
-      if (password.length < 6) errors.password = 'Usa al menos 6 caracteres.';
+      if (!name) errors.name = t('cuentaErrorNombre');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = t('cuentaErrorCorreo');
+      if (password.length < 6) errors.password = t('cuentaErrorPass');
 
       let hasError = false;
       for (const field of ['name', 'email', 'password']) {
