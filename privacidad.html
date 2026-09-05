@@ -10,90 +10,116 @@
     <link rel="stylesheet" href="css/style.css?v=99" />
     <link rel="stylesheet" href="css/ui-system.css?v=100" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/typography-system.css?v=2" />
+    <link rel="stylesheet" href="css/spacing-system.css?v=2" />
+    <link rel="stylesheet" href="css/footer.css?v=99" />
+    <link rel="stylesheet" href="css/mobile-responsive.css?v=99" />
     <link rel="stylesheet" href="css/chatbot-widget.css?v=99" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="css/lang-dropdown.css?v=2" media="print" onload="this.media='all'" />
     <style>
-        .legal-wrap{max-width:820px;margin:0 auto;padding:120px 22px 80px;}
-        .legal-card{background:rgba(255,255,255,.94);border:1px solid rgba(13,31,60,.08);border-radius:20px;padding:38px 34px;box-shadow:0 12px 32px rgba(13,31,60,.10);}
-        .legal-card h1{font-family:'Poppins',system-ui,sans-serif;font-size:1.7rem;font-weight:800;color:#0d1f3c;margin:0 0 6px;}
-        .legal-card .legal-date{color:#64748b;font-size:.85rem;margin:0 0 22px;}
-        .legal-card h2{font-family:'Poppins',system-ui,sans-serif;font-size:1.05rem;font-weight:700;color:#0d1f3c;margin:24px 0 8px;}
+        .legal-wrap{max-width:820px;margin:0 auto;padding:var(--space-3xl,120px) var(--space-md,22px) var(--space-3xl,80px);}
+        .legal-card{background:var(--card-bg,#fff);border:1px solid var(--border-color,#e2e8f0);border-radius:20px;padding:38px 34px;box-shadow:0 12px 32px var(--shadow,rgba(13,31,60,.10));}
+        .legal-card h1{font-family:var(--font-display,'Poppins',sans-serif);font-size:1.7rem;font-weight:800;color:var(--text-primary,#0d1f3c);margin:0 0 6px;}
+        .legal-card .legal-date{color:var(--text-secondary,#64748b);font-size:.85rem;margin:0 0 22px;}
+        .legal-card h2{font-family:var(--font-display,'Poppins',sans-serif);font-size:1.05rem;font-weight:700;color:var(--text-primary,#0d1f3c);margin:24px 0 8px;}
         .legal-card p,.legal-card li{color:#475569;font-size:.93rem;line-height:1.65;}
         .legal-card ul{padding-left:20px;margin:6px 0;}
-        [data-theme="dark"] .legal-card{background:rgba(23,37,66,.92);border-color:rgba(255,255,255,.10);}
-        [data-theme="dark"] .legal-card h1,[data-theme="dark"] .legal-card h2{color:#e6edf3;}
         [data-theme="dark"] .legal-card p,[data-theme="dark"] .legal-card li{color:#9aa7b8;}
-        .legal-back{display:inline-flex;align-items:center;gap:8px;margin-top:26px;color:var(--blue);font-weight:600;text-decoration:none;font-size:.92rem;}
+        .legal-back{display:inline-flex;align-items:center;gap:8px;margin-top:26px;color:var(--accent,#2e6edc);font-weight:600;text-decoration:none;font-size:.92rem;}
         .legal-back:hover{text-decoration:underline;}
     </style>
 </head>
 <body>
+<header class="navbar nav-glass home-nav" role="banner">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="KAVARI - Inicio">KAVARI</a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="index.html" data-i18n="navInicio">Inicio</a>
+      <a href="paises.html" data-i18n="navDestinos">Destinos</a>
+      <a href="sobrenosotros.html" data-i18n="navSobre">Sobre nosotros</a>
+      <a href="contacto.html" data-i18n="navContacto">Contacto</a>
+      <a href="ayuda.html" data-i18n="navAyuda">Ayuda</a>
+      <a href="#" id="guiasNavBtn" data-guide-register data-i18n="navRegistrarmeGuia">Ser Guía</a>
+    </nav>
+    <div class="nav-actions">
+      <button type="button" class="btn-lang-nav" id="btnLang" aria-label="Cambiar idioma" data-i18n-aria="ariaCambiarIdioma"><i class="fa-solid fa-globe" aria-hidden="true"></i> <span id="langLabel">ES</span></button>
+      <button type="button" class="nav-action-btn" id="themeToggle" aria-label="Modo oscuro" data-i18n-aria="ariaModoOscuro"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+      <a href="perfil.html" class="nav-action-btn" aria-label="Mi cuenta" data-i18n-aria="ariaMiCuenta"><i class="fa-regular fa-user" aria-hidden="true"></i></a>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menú" data-i18n-aria="ariaMenu" aria-expanded="false" aria-controls="mobileDrawer">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
 <main class="legal-wrap">
     <div class="legal-card">
-        <h1>Política de Privacidad</h1>
-        <p class="legal-date">Última actualización: agosto 2026</p>
+        <h1 data-i18n="privacidadTitulo">Política de Privacidad</h1>
+        <p class="legal-date" data-i18n="privacidadFecha">Última actualización: agosto 2026</p>
 
-        <h2>1. Responsable del tratamiento</h2>
-        <p>KAVARI (en adelante, "la Plataforma") trata datos personales conforme a esta política y a la legislación aplicable en materia de protección de datos. Para cualquier asunto relacionado con tus datos puedes usar el <a href="contacto.html" style="color:var(--blue);font-weight:600;">formulario de contacto</a>.</p>
+        <h2 data-i18n="privacidadH1">1. Responsable del tratamiento</h2>
+        <p data-i18n="privacidadP1">KAVARI (en adelante, "la Plataforma") trata datos personales conforme a esta política y a la legislación aplicable en materia de protección de datos. Para cualquier asunto relacionado con tus datos puedes usar el <a href="contacto.html" style="color:var(--blue);font-weight:600;">formulario de contacto</a>.</p>
 
-        <h2>2. Datos que recopilamos</h2>
+        <h2 data-i18n="privacidadH2">2. Datos que recopilamos</h2>
         <ul>
-            <li><strong>Cuenta de usuario:</strong> nombre, correo electrónico y foto de perfil (si inicias sesión con correo, Google o GitHub).</li>
-            <li><strong>Preferencias:</strong> idioma, tema claro/oscuro, países favoritos y plan elegido.</li>
-            <li><strong>Formulario de contacto:</strong> nombre, correo, asunto y mensaje.</li>
-            <li><strong>Registro de guías:</strong> datos profesionales (nombre, contacto, país, descripción, idiomas, especialidades) y documentos de verificación que decidas adjuntar (antecedentes, carta médica).</li>
-            <li><strong>Solicitudes de paquetes y registro de viajeros:</strong> datos de contacto y detalles del viaje indicados por ti.</li>
-            <li><strong>Asistente IA:</strong> el contenido de tus conversaciones para recordar el contexto si tienes sesión iniciada.</li>
+            <li data-i18n="privacidadLi1"><strong>Cuenta de usuario:</strong> nombre, correo electrónico y foto de perfil (si inicias sesión con correo, Google o GitHub).</li>
+            <li data-i18n="privacidadLi2"><strong>Preferencias:</strong> idioma, tema claro/oscuro, países favoritos y plan elegido.</li>
+            <li data-i18n="privacidadLi3"><strong>Formulario de contacto:</strong> nombre, correo, asunto y mensaje.</li>
+            <li data-i18n="privacidadLi4"><strong>Registro de guías:</strong> datos profesionales (nombre, contacto, país, descripción, idiomas, especialidades) y documentos de verificación que decidas adjuntar (antecedentes, carta médica).</li>
+            <li data-i18n="privacidadLi5"><strong>Solicitudes de paquetes y registro de viajeros:</strong> datos de contacto y detalles del viaje indicados por ti.</li>
+            <li data-i18n="privacidadLi6"><strong>Asistente IA:</strong> el contenido de tus conversaciones para recordar el contexto si tienes sesión iniciada.</li>
         </ul>
-        <p>No recopilamos datos sensibles, ni información financiera: KAVARI no procesa pagos.</p>
+        <p data-i18n="privacidadP2">No recopilamos datos sensibles, ni información financiera: KAVARI no procesa pagos.</p>
 
-        <h2>3. Para qué usamos tus datos</h2>
+        <h2 data-i18n="privacidadH3">3. Para qué usamos tus datos</h2>
         <ul>
-            <li>Crear y mantener tu cuenta, perfil y favoritos sincronizados entre dispositivos.</li>
-            <li>Responder tus mensajes, solicitudes de paquetes o registros como guía o viajero.</li>
-            <li>Verificar la identidad y certificaciones de los guías registrados.</li>
-            <li>Personalizar recomendaciones y respuestas del asistente.</li>
-            <li>Mejorar el contenido turístico y el funcionamiento de la Plataforma.</li>
+            <li data-i18n="privacidadLi7">Crear y mantener tu cuenta, perfil y favoritos sincronizados entre dispositivos.</li>
+            <li data-i18n="privacidadLi8">Responder tus mensajes, solicitudes de paquetes o registros como guía o viajero.</li>
+            <li data-i18n="privacidadLi9">Verificar la identidad y certificaciones de los guías registrados.</li>
+            <li data-i18n="privacidadLi10">Personalizar recomendaciones y respuestas del asistente.</li>
+            <li data-i18n="privacidadLi11">Mejorar el contenido turístico y el funcionamiento de la Plataforma.</li>
         </ul>
-        <p><strong>Nunca vendemos ni alquilamos tu información personal</strong>, ni la usamos para publicidad dirigida.</p>
+        <p data-i18n="privacidadP3"><strong>Nunca vendemos ni alquilamos tu información personal</strong>, ni la usamos para publicidad dirigida.</p>
 
-        <h2>4. Consentimiento</h2>
-        <p>Al registrarte, enviar un formulario o usar el asistente, nos autorizas a tratar los datos que nos proporcionas para las finalidades descritas. El almacenamiento local se usa para recordar tus preferencias (idioma, tema) y datos de sesión.</p>
+        <h2 data-i18n="privacidadH4">4. Consentimiento</h2>
+        <p data-i18n="privacidadP4">Al registrarte, enviar un formulario o usar el asistente, nos autorizas a tratar los datos que nos proporcionas para las finalidades descritas. El almacenamiento local se usa para recordar tus preferencias (idioma, tema) y datos de sesión.</p>
 
-        <h2>5. Proveedores de servicios (terceros)</h2>
+        <h2 data-i18n="privacidadH5">5. Proveedores de servicios (terceros)</h2>
         <ul>
-            <li><strong>Supabase:</strong> aloja la base de datos, autenticación y archivos (avatares y documentos de guías). Los documentos de guías se almacenan en un contenedor privado.</li>
-            <li><strong>Google / GitHub:</strong> proveedores opcionales de inicio de sesión; reciben los datos mínimos necesarios para autenticarte según sus propias políticas.</li>
-            <li><strong>EmailJS:</strong> envía por correo las notificaciones generadas por nuestros formularios (por ejemplo, tu mensaje de contacto).</li>
-            <li><strong>Google Fonts:</strong> sirve las tipografías del sitio.</li>
+            <li data-i18n="privacidadLi12"><strong>Supabase:</strong> aloja la base de datos, autenticación y archivos (avatares y documentos de guías). Los documentos de guías se almacenan en un contenedor privado.</li>
+            <li data-i18n="privacidadLi13"><strong>Google / GitHub:</strong> proveedores opcionales de inicio de sesión; reciben los datos mínimos necesarios para autenticarte según sus propias políticas.</li>
+            <li data-i18n="privacidadLi14"><strong>EmailJS:</strong> envía por correo las notificaciones generadas por nuestros formularios (por ejemplo, tu mensaje de contacto).</li>
+            <li data-i18n="privacidadLi15"><strong>Google Fonts:</strong> sirve las tipografías del sitio.</li>
         </ul>
 
-        <h2>6. Conservación de los datos</h2>
-        <p>Conservamos tus datos mientras tu cuenta exista o sea necesario para atender tus solicitudes. Las conversaciones del asistente se guardan hasta 4,000 caracteres por mensaje mientras tengas sesión activa y puedes borrarlas desde el propio chat ("Limpiar conversación").</p>
+        <h2 data-i18n="privacidadH6">6. Conservación de los datos</h2>
+        <p data-i18n="privacidadP5">Conservamos tus datos mientras tu cuenta exista o sea necesario para atender tus solicitudes. Las conversaciones del asistente se guardan hasta 4,000 caracteres por mensaje mientras tengas sesión activa y puedes borrarlas desde el propio chat ("Limpiar conversación").</p>
 
-        <h2>7. Tus derechos (ARCO)</h2>
-        <p>Puedes ejercer en cualquier momento tus derechos de:</p>
+        <h2 data-i18n="privacidadH7">7. Tus derechos (ARCO)</h2>
+        <p data-i18n="privacidadP6">Puedes ejercer en cualquier momento tus derechos de:</p>
         <ul>
-            <li><strong>Acceso:</strong> conocer qué datos tuyos tratamos.</li>
-            <li><strong>Rectificación:</strong> corregir datos inexactos (también desde "Mi Perfil").</li>
-            <li><strong>Cancelación / supresión:</strong> eliminar tu cuenta y sus datos.</li>
-            <li><strong>Oposición:</strong> limitar u oponerte a ciertos tratamientos.</li>
+            <li data-i18n="privacidadLi16"><strong>Acceso:</strong> conocer qué datos tuyos tratamos.</li>
+            <li data-i18n="privacidadLi17"><strong>Rectificación:</strong> corregir datos inexactos (también desde "Mi Perfil").</li>
+            <li data-i18n="privacidadLi18"><strong>Cancelación / supresión:</strong> eliminar tu cuenta y sus datos.</li>
+            <li data-i18n="privacidadLi19"><strong>Oposición:</strong> limitar u oponerte a ciertos tratamientos.</li>
         </ul>
-        <p>Para ejercerlos usa el <a href="contacto.html" style="color:var(--blue);font-weight:600;">formulario de contacto</a>. La eliminación de cuenta también está disponible directamente en tu perfil.</p>
+        <p data-i18n="privacidadP7">Para ejercerlos usa el <a href="contacto.html" style="color:var(--blue);font-weight:600;">formulario de contacto</a>. La eliminación de cuenta también está disponible directamente en tu perfil.</p>
 
-        <h2>8. Eliminación de tu cuenta</h2>
-        <p>Al eliminar tu cuenta se borran tu perfil y tus preferencias asociadas. Los registros de guías, solicitudes o mensajes ya enviados pueden conservarse cuando exista una razón legítima (por ejemplo, atención de la solicitud realizada), siempre bajo confidencialidad.</p>
+        <h2 data-i18n="privacidadH8">8. Eliminación de tu cuenta</h2>
+        <p data-i18n="privacidadP8">Al eliminar tu cuenta se borran tu perfil y tus preferencias asociadas. Los registros de guías, solicitudes o mensajes ya enviados pueden conservarse cuando exista una razón legítima (por ejemplo, atención de la solicitud realizada), siempre bajo confidencialidad.</p>
 
-        <h2>9. Seguridad</h2>
-        <p>Aplicamos medidas técnicas y organizativas razonables: conexión cifrada (HTTPS), acceso restringido a datos mediante políticas por usuario, claves privadas fuera del código del navegador y almacenamiento privado para documentos de verificación. Ningún sistema es infalible, pero trabajamos para proteger tu información.</p>
+        <h2 data-i18n="privacidadH9">9. Seguridad</h2>
+        <p data-i18n="privacidadP9">Aplicamos medidas técnicas y organizativas razonables: conexión cifrada (HTTPS), acceso restringido a datos mediante políticas por usuario, claves privadas fuera del código del navegador y almacenamiento privado para documentos de verificación. Ningún sistema es infalible, pero trabajamos para proteger tu información.</p>
 
-        <h2>10. Menores de edad</h2>
-        <p>La Plataforma está dirigida a personas mayores de edad. No recopilamos deliberadamente datos de menores; si detectamos una cuenta de un menor, la eliminaremos.</p>
+        <h2 data-i18n="privacidadH10">10. Menores de edad</h2>
+        <p data-i18n="privacidadP10">La Plataforma está dirigida a personas mayores de edad. No recopilamos deliberadamente datos de menores; si detectamos una cuenta de un menor, la eliminaremos.</p>
 
-        <h2>11. Cambios en esta política</h2>
-        <p>Podemos actualizar esta política para reflejar cambios en la Plataforma o en la legislación. Publicaremos la versión actualizada en esta página indicando la fecha de la última actualización.</p>
+        <h2 data-i18n="privacidadH11">11. Cambios en esta política</h2>
+        <p data-i18n="privacidadP11">Podemos actualizar esta política para reflejar cambios en la Plataforma o en la legislación. Publicaremos la versión actualizada en esta página indicando la fecha de la última actualización.</p>
 
-        <h2>12. Documentos relacionados</h2>
+        <h2 data-i18n="privacidadH12">12. Documentos relacionados</h2>
         <ul>
             <li><a href="terminos.html" style="color:var(--blue);font-weight:600;" data-i18n="terminosYCondiciones">Términos y Condiciones</a></li>
         </ul>
@@ -101,8 +127,64 @@
         <a class="legal-back" href="index.html" data-i18n="volverInicio">← Volver al inicio</a>
     </div>
 </main>
+
+<footer class="footer kv-footer">
+  <div class="kv-footer-grid">
+    <div class="kv-footer-col">
+      <p class="kv-footer-brand">KAVARI</p>
+      <p class="kv-footer-sub" data-i18n="footerSub1">Tu próxima aventura empieza aquí.</p>
+      <div class="kv-footer-social" aria-label="Redes sociales">
+        <a class="kv-social-icon" href="https://www.tiktok.com/@kavari.travel" target="_blank" rel="noopener" aria-label="TikTok de KAVARI"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+        <a class="kv-social-icon" href="https://www.facebook.com/kavari" target="_blank" rel="noopener" aria-label="Facebook de KAVARI"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+        <a class="kv-social-icon" href="https://www.instagram.com/kavari.travel/" target="_blank" rel="noopener" aria-label="Instagram de KAVARI"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a class="kv-social-icon" href="https://github.com/kavari" target="_blank" rel="noopener" aria-label="GitHub de KAVARI"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    <nav class="kv-footer-col" aria-label="Enlaces rápidos">
+      <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces rápidos</p>
+      <ul class="kv-footer-links">
+        <li><a class="kv-footer-link" href="index.html" data-i18n="footerLinkInicio">Inicio</a></li>
+        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkDestinos">Destinos</a></li>
+        <li><a class="kv-footer-link" href="sobrenosotros.html" data-i18n="footerLinkSobre">Sobre nosotros</a></li>
+        <li><a class="kv-footer-link" href="paises.html" data-i18n="footerLinkGuias">Guías locales</a></li>
+        <li><a class="kv-footer-link" href="planes.html" data-i18n="footerLinkPlanes">Planes</a></li>
+      </ul>
+    </nav>
+    <div class="kv-footer-col">
+      <p class="kv-footer-title" data-i18n="footerLegalTitle">Legal</p>
+      <ul class="kv-footer-links">
+        <li><a class="kv-footer-link" href="privacidad.html" data-i18n="footerLinkPrivacidad">Política de privacidad</a></li>
+        <li><a class="kv-footer-link" href="terminos.html" data-i18n="footerLinkTerminos">Términos y condiciones</a></li>
+      </ul>
+      <p class="kv-footer-title" data-i18n="footerSoporteTitle">Soporte</p>
+      <ul class="kv-footer-links">
+        <li><a class="kv-footer-link" href="contacto.html" data-i18n="footerLinkContacto">Contacto</a></li>
+        <li><a class="kv-footer-link" href="ayuda.html" data-i18n="footerLinkAyuda">Centro de ayuda</a></li>
+      </ul>
+    </div>
+    <div class="kv-footer-col">
+      <p class="kv-footer-title" data-i18n="footerNewsletterTitle">Newsletter</p>
+      <p class="kv-footer-sub" data-i18n="footerNewsletterDesc">Recibe ofertas y novedades de destinos.</p>
+      <form class="kv-footer-form" id="kvNewsletterForm" novalidate>
+        <input type="email" placeholder="tucorreo@email.com" required aria-label="Email para newsletter" data-i18n-placeholder="footerNewsletterPlaceholder">
+        <button type="submit" class="kv-footer-btn" data-i18n="footerNewsletterBtn">Suscribirme</button>
+      </form>
+    </div>
+  </div>
+  <div class="kv-footer-bottom">
+    <p class="kv-footer-copy" data-i18n="footerTexto">© 2026 Kavari — Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script defer src="js/idioma.js?v=5"></script>
+<script defer src="js/idioma-pt.js?v=2"></script>
+<script defer src="js/lang-dropdown.js?v=2"></script>
+
 <script defer src="js/theme.js?v=3"></script>
+<script defer src="js/footer.js?v=2"></script>
+<script defer src="js/mobile-nav.js?v=3"></script>
 <script defer src="js/page-transitions.js"></script>
+<script defer src="js/guide-registration.js"></script>
 
 <!-- Botpress Webchat -->
 <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js" defer></script>

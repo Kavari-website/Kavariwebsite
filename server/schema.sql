@@ -255,5 +255,30 @@ CREATE POLICY "Users can view own traveler registrations" ON traveler_registrati
   FOR SELECT USING (auth.uid() = user_id);
 
 -- ============================================
+-- NEWSLETTER SUBSCRIBERS
+-- ============================================
+CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT NOT NULL UNIQUE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE newsletter_subscribers ENABLE ROW LEVEL SECURITY;
+
+-- Cualquiera puede suscribirse (público)
+CREATE POLICY "Anyone can subscribe to newsletter" ON newsletter_subscribers
+  FOR INSERT WITH CHECK (true);
+
+-- Solo admin puede ver suscriptores
+CREATE POLICY "Admins can view newsletter subscribers" ON newsletter_subscribers
+  FOR SELECT USING (
+    auth.uid() IN (
+      SELECT id FROM profiles WHERE email IN (
+        'admin@kavari.com', 'kavari.travel@gmail.com'
+      )
+    )
+  );
+
+-- ============================================
 -- FIN DEL SCHEMA
 -- ============================================

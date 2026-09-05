@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="css/audit-consistency.css" />
   <script defer src="js/idioma.js?v=5"></script>
   <script defer src="js/idioma-pt.js?v=2"></script>
-  <script defer src="js/idioma-fr.js?v=1"></script>
+
   <script defer src="js/theme.js?v=3"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
@@ -34,9 +34,9 @@
   <script defer src="js/img-fallback.js"></script>
 
   <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
-  <link rel="stylesheet" href="css/lang-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/lang-dropdown.css?v=2" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="css/universal-shine.css" media="print" onload="this.media='all'" />
-  <script defer src="js/lang-dropdown.js"></script>
+  <script defer src="js/lang-dropdown.js?v=2"></script>
 
   <!-- ===== FOOTER (estilos, iconos y script) ===== -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
@@ -67,12 +67,12 @@
     </ul>
     <div class="nav-actions">
         <button class="nav-btn-tutorial" id="btnTutorial" onclick="startTutorial(true)" aria-label="Tutorial" data-i18n="tutorial">Tutorial</button>
-        <button class="btn-lang-nav" id="btnLang" onclick="toggleLang()" aria-label="Cambiar idioma">
+        <button class="btn-lang-nav" id="btnLang" aria-label="Cambiar idioma" data-i18n-aria="ariaCambiarIdioma">
             <span id="langLabel">ES</span>
         </button>
-        <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro">Oscuro</button>
+        <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro" data-i18n-aria="ariaModoOscuro">Oscuro</button>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Menú">
+    <button class="hamburger" id="hamburger" aria-label="Menú" data-i18n-aria="ariaMenu">
         <span></span><span></span><span></span>
     </button>
 </nav>
@@ -140,7 +140,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.9-8 12-8 12s-8-7.1-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <h3 data-i18n="ayudaPaso1Titulo">Explora los destinos</h3>
-        <p data-i18n="ayudaPaso1Desc">Navega por los 36 países y descubre cultura, gastronomía, aventura, aerolíneas y hospedajes de cada destino.</p>
+        <p data-i18n="ayudaPaso1Desc">Navega por los 21 países y descubre cultura, gastronomía, aventura, aerolíneas y hospedajes de cada destino.</p>
       </div>
       <div class="step-card">
         <div class="step-num" aria-hidden="true">
@@ -216,7 +216,7 @@
       </button>
       <div class="faq-answer" id="faq1a" role="region">
         <div class="faq-answer-inner">
-          <div class="faq-answer-text" data-i18n="faq1a">En la página de Destinos encontrarás los 36 países disponibles en KAVARI. Puedes usar el buscador en la parte superior para filtrar por nombre de país o ciudad. Haz clic en "Ver destino" para acceder a toda la información turística de ese país: cultura, gastronomía, aventura, aerolíneas, hospedajes y más.</div>
+          <div class="faq-answer-text" data-i18n="faq1a">En la página de Destinos encontrarás los 21 países disponibles en KAVARI. Puedes usar el buscador en la parte superior para filtrar por nombre de país o ciudad. Haz clic en "Ver destino" para acceder a toda la información turística de ese país: cultura, gastronomía, aventura, aerolíneas, hospedajes y más.</div>
           <button type="button" class="faq-copy" onclick="copiarRespuesta(this)" data-copy-source="faq1a">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             <span class="faq-copy-text" data-i18n="ayudaCopiar">Copiar respuesta</span>
@@ -294,7 +294,7 @@
     </div>
   </div>
 
-  <!-- FAQ Gu�as -->
+  <!-- FAQ Guías -->
   <div class="faq-section" id="faq-guias">
     <div class="faq-head">
       <h2 data-i18n="faqGuiasTitulo">Preguntas frecuentes — Guías turísticos</h2>
@@ -346,7 +346,7 @@
       </button>
       <div class="faq-answer" id="faq8a" role="region">
         <div class="faq-answer-inner">
-          <div class="faq-answer-text" data-i18n="faq8a">Puedes registrarte como guía para cualquiera de los 36 destinos disponibles en KAVARI. Al seleccionar tu país durante el registro, tu perfil aparecerá automáticamente en la sección "Guías Turísticos" de ese país. Si operas en múltiples países, puedes crear perfiles separados para cada uno.</div>
+          <div class="faq-answer-text" data-i18n="faq8a">Puedes registrarte como guía para cualquiera de los 21 destinos disponibles en KAVARI. Al seleccionar tu país durante el registro, tu perfil aparecerá automáticamente en la sección "Guías Turísticos" de ese país. Si operas en múltiples países, puedes crear perfiles separados para cada uno.</div>
           <button type="button" class="faq-copy" onclick="copiarRespuesta(this)" data-copy-source="faq8a">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             <span class="faq-copy-text" data-i18n="ayudaCopiar">Copiar respuesta</span>
@@ -390,7 +390,7 @@
       </button>
       <div class="faq-answer" id="faq10a" role="region">
         <div class="faq-answer-inner">
-          <div class="faq-answer-text" data-i18n="faq10a">KAVARI está disponible en Español, Inglés y Portugués. Puedes cambiar el idioma en cualquier momento usando el selector de idioma (ícono 🌐) disponible en la barra de navegación de todas las páginas. Tu preferencia se guarda automáticamente para tu próxima visita.</div>
+          <div class="faq-answer-text" data-i18n="faq10a">KAVARI está disponible en Español, Inglés y Portugués. Puedes cambiar el idioma en cualquier momento usando el selector de idioma (<i class="fa-solid fa-globe" aria-hidden="true" style="font-size:.9em;vertical-align:middle;"></i>) disponible en la barra de navegación de todas las páginas. Tu preferencia se guarda automáticamente para tu próxima visita.</div>
           <button type="button" class="faq-copy" onclick="copiarRespuesta(this)" data-copy-source="faq10a">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             <span class="faq-copy-text" data-i18n="ayudaCopiar">Copiar respuesta</span>
@@ -407,7 +407,7 @@
       </button>
       <div class="faq-answer" id="faq11a" role="region">
         <div class="faq-answer-inner">
-          <div class="faq-answer-text" data-i18n="faq11a">Haz clic en el ícono 🌙 en cualquier barra de navegación de KAVARI para activar el modo oscuro. También puedes activarlo con el ícono ☀️ para volver al modo claro. Tu preferencia se guarda automáticamente y se aplica en todas las páginas de la plataforma.</div>
+          <div class="faq-answer-text" data-i18n="faq11a">Haz clic en el ícono <i class="fa-solid fa-moon" aria-hidden="true" style="font-size:.9em;vertical-align:middle;"></i> en cualquier barra de navegación de KAVARI para activar el modo oscuro. También puedes activarlo con el ícono <i class="fa-solid fa-sun" aria-hidden="true" style="font-size:.9em;vertical-align:middle;"></i> para volver al modo claro. Tu preferencia se guarda automáticamente y se aplica en todas las páginas de la plataforma.</div>
           <button type="button" class="faq-copy" onclick="copiarRespuesta(this)" data-copy-source="faq11a">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             <span class="faq-copy-text" data-i18n="ayudaCopiar">Copiar respuesta</span>

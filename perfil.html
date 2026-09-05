@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title data-i18n="tituloPerfil">Mi Perfil · KAVARI</title>
-  <meta name="description" data-i18n="metaDescPerfil" content="Gestiona tu perfil de KAVARI, preferencias de viaje y configuraciÓn de cuenta.">
+  <meta name="description" data-i18n="metaDescPerfil" content="Gestiona tu perfil de KAVARI, preferencias de viaje y configuración de cuenta.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -28,14 +28,14 @@
   <script defer src="https://accounts.google.com/gsi/client"></script>
   <script defer src="js/idioma.js?v=5"></script>
   <script defer src="js/idioma-pt.js?v=2"></script>
-  <script defer src="js/idioma-fr.js?v=1"></script>
+
   <script defer src="js/theme.js?v=3"></script>
   <script defer src="js/img-fallback.js"></script>
 
   <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
-  <link rel="stylesheet" href="css/lang-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/lang-dropdown.css?v=2" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="css/universal-shine.css" media="print" onload="this.media='all'" />
-  <script defer src="js/lang-dropdown.js"></script>
+  <script defer src="js/lang-dropdown.js?v=2"></script>
 
   <!-- ===== FOOTER (estilos, iconos y script) ===== -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
@@ -63,10 +63,10 @@
     </ul>
     <div class="nav-actions">
       <button class="nav-btn-tutorial" id="btnTutorial" onclick="startTutorial(true)" aria-label="Tutorial" data-i18n="tutorial">Tutorial</button>
-      <button class="btn-lang-nav" id="btnLang" onclick="toggleLang()" aria-label="Cambiar idioma"><span id="langLabel">ES</span></button>
-      <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro">Oscuro</button>
+      <button class="btn-lang-nav" id="btnLang" aria-label="Cambiar idioma" data-i18n-aria="ariaCambiarIdioma"><span id="langLabel">ES</span></button>
+      <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro" data-i18n-aria="ariaModoOscuro">Oscuro</button>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Menú">
+    <button class="hamburger" id="hamburger" aria-label="Menú" data-i18n-aria="ariaMenu">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -83,8 +83,8 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
             </svg>
           </div>
-          <h2 data-i18n="perfilAuthTitulo">Inicia sesiÓn para ver tu perfil</h2>
-          <p data-i18n="perfilAuthDesc">Accede a tu cuenta para gestionar tu informaciÓn y preferencias de viaje.</p>
+          <h2 data-i18n="perfilAuthTitulo">Inicia sesión para ver tu perfil</h2>
+          <p data-i18n="perfilAuthDesc">Accede a tu cuenta para gestionar tu información y preferencias de viaje.</p>
 
           <!-- Banner de error -->
           <div class="perfil-auth-error" id="perfilAuthError" role="alert" style="display:none;"></div>
@@ -100,9 +100,9 @@
             </div>
 
             <div class="auth-field">
-              <label for="loginPassword" data-i18n="cuentaPassLabel">ContraseÑa</label>
+              <label for="loginPassword" data-i18n="cuentaPassLabel">Contraseña</label>
               <div class="auth-input-wrap">
-                <input id="loginPassword" name="password" type="password" minlength="6" required autocomplete="current-password" placeholder="MÍnimo 6 caracteres">
+                <input id="loginPassword" name="password" type="password" minlength="6" required autocomplete="current-password" placeholder="Mínimo 6 caracteres">
                 <button type="button" class="pw-toggle" id="loginPwToggle" data-i18n-aria="cuentaMostrarPass" data-i18n="cuentaVer">Ver</button>
               </div>
               <p class="auth-error" id="loginErrPassword" aria-live="polite"></p>
@@ -128,7 +128,7 @@
 
           <!-- OTP Section -->
           <div class="perfil-divider"><span>o</span></div>
-          <button class="perfil-otp-link" id="showOtpBtn" type="button" data-i18n="perfilOtpLink">Enviar cÓdigo de verificaciÓn por email</button>
+          <button class="perfil-otp-link" id="showOtpBtn" type="button" data-i18n="perfilOtpLink">Enviar código de verificación por email</button>
 
           <div class="perfil-otp-section" id="otpSection" style="display:none;">
             <div class="auth-field">
@@ -140,7 +140,7 @@
             <button class="auth-submit otp-send" id="otpSendBtn" type="button" data-i18n="perfilOtpEnviar">Enviar cÓdigo</button>
 
             <div class="auth-field" id="otpCodeField" style="display:none;">
-              <label for="otpCode" data-i18n="perfilOtpCodeLabel">CÓdigo de verificaciÓn</label>
+              <label for="otpCode" data-i18n="perfilOtpCodeLabel">Código de verificación</label>
               <div class="auth-input-wrap">
                 <input id="otpCode" name="otpCode" type="text" inputmode="numeric" maxlength="6" placeholder="000000">
               </div>
@@ -160,7 +160,7 @@
       <div class="perfil-auth-required" id="perfilRegisterForm" style="display:none;">
         <div class="perfil-auth-card">
           <h2 data-i18n="perfilRegistroTitulo">Crea tu cuenta KAVARI</h2>
-          <p data-i18n="perfilRegistroDesc">RegÍstrate para guardar tus preferencias y acceder a funcionalidades exclusivas.</p>
+          <p data-i18n="perfilRegistroDesc">Regístrate para guardar tus preferencias y acceder a funcionalidades exclusivas.</p>
 
           <div class="perfil-auth-error" id="perfilRegError" role="alert" style="display:none;"></div>
 
@@ -182,9 +182,9 @@
             </div>
 
             <div class="auth-field">
-              <label for="regPassword" data-i18n="cuentaPassLabel">ContraseÑa</label>
+              <label for="regPassword" data-i18n="cuentaPassLabel">Contraseña</label>
               <div class="auth-input-wrap">
-                <input id="regPassword" name="password" type="password" minlength="6" required autocomplete="new-password" placeholder="MÍnimo 6 caracteres">
+                <input id="regPassword" name="password" type="password" minlength="6" required autocomplete="new-password" placeholder="Mínimo 6 caracteres">
                 <button type="button" class="pw-toggle" id="regPwToggle" data-i18n-aria="cuentaMostrarPass" data-i18n="cuentaVer">Ver</button>
               </div>
               <p class="auth-error" id="regErrPassword" aria-live="polite"></p>
@@ -221,8 +221,8 @@
           </button>
 
           <p class="perfil-register-link">
-            <span data-i18n="perfilYaCuenta">ÍYa tienes cuenta?</span>
-            <button type="button" id="showLoginBtn" data-i18n="perfilIniciarSesion">Iniciar sesiÓn</button>
+            <span data-i18n="perfilYaCuenta">¿Ya tienes cuenta?</span>
+            <button type="button" id="showLoginBtn" data-i18n="perfilIniciarSesion">Iniciar sesión</button>
           </p>
         </div>
       </div>
@@ -243,12 +243,12 @@
               <input type="file" id="avatarFileInput" accept="image/*" style="display:none;">
             </div>
             <div class="perfil-header-info">
-              <h1 id="perfilFullName">�</h1>
-              <p id="perfilEmail" class="perfil-email">�</p>
+              <h1 id="perfilFullName"></h1>
+              <p id="perfilEmail" class="perfil-email"></p>
               <span class="perfil-plan-badge" id="perfilPlanBadge">Viajero</span>
             </div>
           </div>
-          <button class="perfil-logout-btn" id="perfilLogoutBtn" type="button" data-i18n="cuentaCerrarSesion">Cerrar sesiÓn</button>
+          <button class="perfil-logout-btn" id="perfilLogoutBtn" type="button" data-i18n="cuentaCerrarSesion">Cerrar sesión</button>
         </div>
 
         <!-- Tabs -->
@@ -257,7 +257,7 @@
           <button class="perfil-tab" data-tab="travel" role="tab" aria-selected="false" data-i18n="perfilTabViaje">Preferencias de viaje</button>
           <button class="perfil-tab" data-tab="favoritos" role="tab" aria-selected="false" data-i18n="perfilTabFavoritos">Favoritos</button>
           <button class="perfil-tab" data-tab="admin" role="tab" aria-selected="false" id="perfilAdminTab" style="display:none;" data-i18n="perfilPanelAdmin">Panel</button>
-          <button class="perfil-tab" data-tab="settings" role="tab" aria-selected="false" data-i18n="perfilTabConfig">ConfiguraciÓn</button>
+          <button class="perfil-tab" data-tab="settings" role="tab" aria-selected="false" data-i18n="perfilTabConfig">Configuración</button>
         </div>
 
         <!-- Tab: Información Personal -->
@@ -344,7 +344,7 @@
               <div class="auth-field">
                 <label for="perfilIdiomas" data-i18n="perfilIdiomasViaje">Idiomas que hablas</label>
                 <div class="auth-input-wrap">
-                  <input id="perfilIdiomas" name="languages" placeholder="EspaÑol, Inglés, Francés">
+                  <input id="perfilIdiomas" name="languages" placeholder="Español, Inglés, Portugués">
                 </div>
               </div>
             </div>
@@ -358,22 +358,22 @@
         <div class="perfil-tab-content" id="tabFavoritos">
           <div class="perfil-fav-header">
             <h3 data-i18n="perfilFavoritosTitulo">Mis países favoritos</h3>
-            <p data-i18n="perfilFavoritosDesc">Los países a los que les diste Íme gustaÍ se guardan aquÍ en tu cuenta.</p>
+            <p data-i18n="perfilFavoritosDesc">Los países a los que les diste ¡me gusta! se guardan aquí en tu cuenta.</p>
             <p class="perfil-fav-hint" id="favHint" data-i18n="perfilFavoritosDrag">Arrastra las tarjetas para cambiar el orden</p>
 
-            <!-- Barra de ordenaciÓn -->
+            <!-- Barra de ordenación -->
             <div class="perfil-fav-sortbar" id="favSortbar" role="group" aria-labelledby="favSortLabel">
               <span class="perfil-fav-sortlabel" id="favSortLabel" data-i18n="perfilFavoritosSortLabel">Ordenar por</span>
               <button type="button" class="perfil-fav-sortbtn is-active" data-sort="manual" aria-pressed="true" data-i18n="perfilFavoritosSortManual">Manual</button>
               <button type="button" class="perfil-fav-sortbtn" data-sort="alpha" aria-pressed="false" data-i18n="perfilFavoritosSortAlpha">Alfabético</button>
-              <button type="button" class="perfil-fav-sortbtn" data-sort="recent" aria-pressed="false" data-i18n="perfilFavoritosSortRecent">MÁs reciente</button>
+              <button type="button" class="perfil-fav-sortbtn" data-sort="recent" aria-pressed="false" data-i18n="perfilFavoritosSortRecent">Más reciente</button>
             </div>
           </div>
 
-          <!-- Estado vacÍo -->
+          <!-- Estado vacío -->
           <div class="perfil-fav-empty" id="favEmpty" style="display:none;">
-            <div class="perfil-fav-empty-icon" aria-hidden="true">?</div>
-            <p data-i18n="perfilFavoritosVacio">AÍn no tienes países favoritos. Explora los destinos y dale Íme gustaÍ a los que más te gusten.</p>
+            <div class="perfil-fav-empty-icon" aria-hidden="true"><i class="fa-regular fa-heart"></i></div>
+            <p data-i18n="perfilFavoritosVacio">Aún no tienes países favoritos. Explora los destinos y dale ¡me gusta! a los que más te gusten.</p>
             <a class="perfil-fav-explore-btn" href="paises.html" data-i18n="perfilFavoritosExplorar">Explorar destinos</a>
           </div>
 
@@ -381,13 +381,13 @@
           <div class="perfil-fav-grid" id="favGrid"></div>
         </div>
 
-        <!-- Tab: ConfiguraciÓn -->
+        <!-- Tab: Configuración -->
         <div class="perfil-tab-content" id="tabSettings">
           <div class="perfil-settings-section">
             <h3 data-i18n="perfilConfigCuenta">Cuenta</h3>
             <div class="perfil-settings-item">
               <span data-i18n="perfilConfigEmail">Correo electrónico</span>
-              <span id="settingsEmail" class="perfil-settings-value">�</span>
+              <span id="settingsEmail" class="perfil-settings-value"></span>
             </div>
             <div class="perfil-settings-item">
               <span data-i18n="perfilConfigPlan">Plan actual</span>
@@ -413,7 +413,7 @@
           </div>
         </div>
 
-        <!-- Tab: Panel de administraciÓn -->
+        <!-- Tab: Panel de administración -->
         <div class="perfil-tab-content" id="tabAdmin" style="display:none;">
           <div class="admin-panel">
             <div class="admin-section">
@@ -434,14 +434,13 @@
   </main>
 
   <!-- ===== FOOTER ===== -->
-    <!-- ===== FOOTER ===== -->
 <footer class="footer kv-footer">
   <div class="kv-footer-grid">
 
     <!-- Columna 1 · Marca + Redes sociales -->
     <div class="kv-footer-col">
       <p class="kv-footer-brand">KAVARI</p>
-      <p class="kv-footer-sub" data-i18n="footerSub1">Tu prÓxima aventura empieza aquí.</p>
+      <p class="kv-footer-sub" data-i18n="footerSub1">Tu próxima aventura empieza aquí.</p>
       <div class="kv-footer-social" aria-label="Redes sociales">
         <a class="kv-social-icon" href="https://www.tiktok.com/@kavari.travel" target="_blank" rel="noopener" aria-label="TikTok de KAVARI"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
         <a class="kv-social-icon" href="https://www.facebook.com/kavari" target="_blank" rel="noopener" aria-label="Facebook de KAVARI"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
@@ -478,7 +477,7 @@
   </div>
 
   <div class="kv-footer-bottom">
-    <p class="kv-footer-copy" data-i18n="footerTexto">© 2026 Kavari · Todos los derechos reservados.</p>
+    <p class="kv-footer-copy" data-i18n="footerTexto">© 2026 Kavari — Todos los derechos reservados.</p>
     <ul class="kv-footer-legal">
       <li><a class="kv-footer-link" href="privacidad.html" data-i18n="footerPrivacidad">Política de privacidad</a></li>
       <li><a class="kv-footer-link" href="terminos.html" data-i18n="footerTerminos">Términos y condiciones</a></li>

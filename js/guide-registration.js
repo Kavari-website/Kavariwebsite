@@ -73,7 +73,7 @@
         <h4 data-i18n="modalGuiasSeccionDocumentos">Documentos Requeridos</h4>
         <div class="field">
           <label for="guideCriminalRecord" data-i18n="modalGuiasRegistroCriminal">Historial Criminal</label>
-          <input type="file" id="guideCriminalRecord" accept=".pdf,.jpg,.jpeg,.png" class="field-file" required>
+          <input type="file" id="guideCriminalRecord" accept=".pdf,.jpg,.jpeg,.png" class="field-file">
           <small class="field-hint" data-i18n="modalGuiasRegistroCriminalHint">Sube tu historial / antecedente penal. Formatos: PDF, JPG, PNG. Máximo 10MB.</small>
         </div>
       </div>
@@ -275,11 +275,6 @@
         setStatus(t('guideCorreoInvalido'), true);
         return;
       }
-      const criminalFile = document.getElementById('guideCriminalRecord')?.files[0];
-      if (!criminalFile) {
-        setStatus(t('guideFaltaHistorial'), true);
-        return;
-      }
       if (!termsAccepted) {
         setStatus(t('guideAceptaTerminos'), true);
         return;
@@ -296,6 +291,7 @@
       }
 
       const photoFile = document.getElementById('guidePhotoFile')?.files[0];
+      const criminalFile = document.getElementById('guideCriminalRecord')?.files[0];
       let photoUrl = null;
       if (photoFile && userId) photoUrl = await uploadFile(userId, photoFile, 'avatars', 'guide_photo', false);
 

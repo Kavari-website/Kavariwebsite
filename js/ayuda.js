@@ -147,32 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* ---------- Menú hamburguesa (móvil) ---------- */
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-
-    navLinks.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        navLinks.classList.remove('open');
-      });
-    });
-
-    document.addEventListener('click', (e) => {
-      const clickedInsideNav = navbar.contains(e.target);
-      if (!clickedInsideNav && navLinks.classList.contains('open')) {
-        hamburger.classList.remove('open');
-        navLinks.classList.remove('open');
-      }
-    });
-  }
-
   /* ---------- Acordeón de preguntas frecuentes ---------- */
   document.querySelectorAll('.faq-item').forEach((item) => {
     const question = item.querySelector('.faq-question');

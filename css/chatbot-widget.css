@@ -9,7 +9,7 @@
   --kb-text:#0f172a;
   --kb-muted:#64748b;
   --kb-border:#e2e8f0;
-  font-family:'Poppins','Nunito',sans-serif;
+  font-family:var(--font-display,'Poppins',sans-serif);
 }
 [data-theme="dark"] #kavari-chat-root {
   --kb-panel:#161b22;

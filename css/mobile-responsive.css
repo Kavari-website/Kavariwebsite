@@ -64,8 +64,25 @@ body.menu-open {
   .btn-cta-outline,
   .btn-paquete-info,
   .btn-paquete-reservar,
-  .perfil-fav-sortbtn {
-    min-height: 46px;
+  .perfil-fav-sortbtn,
+  .top10-modal-close,
+  .paquete-modal-close,
+  .btn-card,
+  .btn-sm,
+  .country-trigger,
+  .filter-chip,
+  .dest-like,
+  .continent-chip,
+  .tbc-empty button,
+  .traveler-close,
+  .traveler-submit,
+  .faq-copy,
+  .btn-lang-nav,
+  .btn-theme-nav,
+  .nav-btn-tutorial,
+  .btn-paquete-vermas {
+    min-height: 44px;
+    min-width: 44px;
   }
 }
 /* ══════════════════════════════════════════════════════════════════════════

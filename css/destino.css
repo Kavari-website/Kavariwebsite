@@ -1,9 +1,6 @@
 :root {
-  --navy:#0d1f3c;
   --navy-mid:#163b80;
-  --blue:#2e6edc;
   --blue-light:#5b93f5;
-  --gold:#f0b429;
   --gold-light:#fcd34d;
   --cream:#FFFFFF;
   --white:#FFFFFF;
@@ -19,8 +16,6 @@
   --shadow-sm:0 2px 8px rgba(14,30,60,.08);
   --shadow:0 6px 24px rgba(14,30,60,.12);
   --shadow-lg:0 16px 48px rgba(14,30,60,.18);
-  --font-display:'Nunito','Montserrat',sans-serif;
-  --font-body:'Lato','Montserrat',sans-serif;
   --transition:.3s cubic-bezier(.4,0,.2,1);
   --ease-spring:cubic-bezier(.22,1,.36,1);
   --nav-h:70px;

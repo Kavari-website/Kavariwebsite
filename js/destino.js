@@ -25,6 +25,56 @@ let allCountries = [];
 let countryOptionsInitialized = false;
 
 // ============================================================
+// ICONOS SVG PERSONALIZADOS — Aerolíneas y Hospedaje
+// ============================================================
+const AIRLINE_COLORS = {
+    CM: { bg: '#0032A0', fg: '#fff', label: 'Copa' },
+    AA: { bg: '#0078D2', fg: '#fff', label: 'American' },
+    UA: { bg: '#002244', fg: '#fff', label: 'United' },
+    AV: { bg: '#E41E2C', fg: '#fff', label: 'Avianca' },
+    NK: { bg: '#FFD200', fg: '#1a1a1a', label: 'Spirit' },
+    AM: { bg: '#004B87', fg: '#C4A35A', label: 'Aeroméxico' },
+    Y4: { bg: '#A6192E', fg: '#fff', label: 'Volaris' },
+    VB: { bg: '#E31937', fg: '#fff', label: 'Viva' },
+    LA: { bg: '#1B0F45', fg: '#E1251B', label: 'LATAM' },
+    H2: { bg: '#00A5DB', fg: '#fff', label: 'Sky' },
+    JA: { bg: '#FF6900', fg: '#fff', label: 'JetSMART' },
+    G3: { bg: '#FF6600', fg: '#fff', label: 'Gol' },
+    AD: { bg: '#003580', fg: '#FFD700', label: 'Azul' },
+    A8: { bg: '#1A1A2E', fg: '#E94560', label: 'AraJet' },
+    DO: { bg: '#00529B', fg: '#fff', label: 'Sky High' },
+    DL: { bg: '#003366', fg: '#C8102E', label: 'Delta' },
+    P5: { bg: '#FF4500', fg: '#fff', label: 'Wingo' },
+    '9R': { bg: '#004B87', fg: '#fff', label: 'Satena' },
+    FO: { bg: '#FF6600', fg: '#fff', label: 'Flybondi' },
+    '6F': { bg: '#2E8B57', fg: '#fff', label: 'Aeroregional' },
+    VH: { bg: '#E31937', fg: '#fff', label: 'Viva Air' }
+};
+const AIRLINE_DEFAULT = { bg: '#03235e', fg: '#4fc3f7', label: '' };
+
+function getAirlineSVG(iata, nombre) {
+    const c = AIRLINE_COLORS[iata] || AIRLINE_DEFAULT;
+    const initials = (c.label || nombre || iata || '?').substring(0, 3).toUpperCase();
+    return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 120 60"><rect width="120" height="60" rx="12" fill="${c.bg}"/><text x="60" y="26" text-anchor="middle" font-family="Poppins,sans-serif" font-size="15" font-weight="700" fill="${c.fg}">${initials}</text><text x="60" y="46" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="${c.fg}" opacity=".7">${iata || ''}</text><path d="M10 12 L18 16 L14 18 L20 22 L16 22 L18 24 L10 20 Z" fill="${c.fg}" opacity=".25"/></svg>`)}`;
+}
+
+const HOSPEDAJE_ICONS = {
+    'Apartamento entero': '<path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/>',
+    'Loft entero': '<path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/><rect x="8" y="9" width="3" height="3" rx=".5" fill="none" stroke="currentColor" stroke-width="1.5"/>',
+    'Cabaña privada': '<path d="M3 21h18M4 21V10l8-7 8 7v11M9 21v-5a3 3 0 0 1 6 0v5"/><path d="M9 14h.01M15 14h.01" stroke-width="2.5"/>',
+    'Cabaña overwater': '<path d="M3 21h18M4 21V10l8-7 8 7v11M9 21v-5a3 3 0 0 1 6 0v5"/><line x1="2" y1="18" x2="22" y2="18" stroke-dasharray="2 2"/>',
+    'Villa privada': '<path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-5a2 2 0 0 1 4 0v5"/><rect x="9" y="12" width="2" height="2" rx=".3"/><rect x="13" y="12" width="2" height="2" rx=".3"/>',
+    'Hotel': '<path d="M3 21h18M5 21V7h14v14M9 21v-4h6v4M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/>',
+    'Eco-lodge': '<path d="M3 21h18M4 21V12l8-9 8 9v9"/><path d="M12 3c-2 3-5 5-5 8a5 5 0 0 0 10 0c0-3-3-5-5-8z" fill="none" stroke="currentColor" stroke-width="1.5"/>'
+};
+const HOSPEDAJE_DEFAULT_ICON = '<path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/>';
+
+function getHospedajeSVG(tipo) {
+    const icon = HOSPEDAJE_ICONS[tipo] || HOSPEDAJE_DEFAULT_ICON;
+    return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240" viewBox="0 0 400 240"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#03235e"/><stop offset="100%" stop-color="#0a3d7a"/></linearGradient></defs><rect width="400" height="240" rx="16" fill="url(#hg)"/><g transform="translate(172,70) scale(4)" stroke="#4fc3f7" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">${icon}</g><text x="200" y="190" text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" font-weight="600" fill="#81d4fa" opacity=".8">${tipo || 'Hospedaje'}</text></svg>`)}`;
+}
+
+// ============================================================
 // 2. FUNCIÓN AUXILIAR DE TRADUCCIÓN (MEJORADA)
 // ============================================================
 function _t(valor) {
@@ -219,8 +269,8 @@ function setGuideFilter(f) { currentGuideFilter = f; renderGuideFilters(); }
 
 function contactarGuia(name, phone, email) {
     let msg = _t('contactGuide') + ': ' + name;
-    if (phone) msg += '\n📞 ' + phone;
-    if (email) msg += '\n✉️ ' + email;
+    if (phone) msg += '\nTel: ' + phone;
+    if (email) msg += '\nEmail: ' + email;
     alert(msg);
 }
 
@@ -283,10 +333,14 @@ function renderAerolineas(d) {
         grid.innerHTML = `<p style="padding:40px;text-align:center;opacity:.6">${_t('aerolineasNoDisponible')}</p>`;
         return;
     }
-    grid.innerHTML = aerolineasData.map((a, ai) => `
+    grid.innerHTML = aerolineasData.map((a, ai) => {
+        const svgLogo = getAirlineSVG(a.iata, a.nombre);
+        return `
         <div class="airline-card">
             <div class="airline-logo-wrap">
-                <img class="airline-logo" src="${escapeHtml(a.logo)}" alt="${escapeHtml(a.nombre)}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <img class="airline-logo" src="${svgLogo}" alt="${escapeHtml(a.nombre)}" data-external="${escapeHtml(a.logo)}" 
+                     onload="var ext=this.getAttribute('data-external');if(ext&&ext!==this.src){var i=new Image();i.onload=function(){this.src=ext};i.src=ext}" 
+                     onerror="this.src='${svgLogo}'; this.onerror=null">
                 <div class="airline-logo-fallback" style="display:none">${escapeHtml(a.iata)}</div>
             </div>
             <div class="airline-info">
@@ -304,7 +358,8 @@ function renderAerolineas(d) {
                 <a href="${escapeHtml(a.url_reserva)}" target="_blank" rel="noopener noreferrer" class="btn-airline">${_t('reservarVuelo')}</a>
             </div>
         </div>
-    `).join('');
+    `;
+    }).join('');
     const headerBg = document.getElementById('aerolineasHeaderBg');
     if (headerBg && d) headerBg.style.backgroundImage = `url('${d.page_header_img}')`;
     
@@ -338,10 +393,13 @@ function renderHospedajes(d) {
     grid.innerHTML = zonaNota + hospedajesData.map((h, hi) => {
         const stars = Math.round(h.rating);
         const starsHtml = Array.from({length: 5}, (_, i) => `<svg width="12" height="12" viewBox="0 0 24 24" fill="${i < stars ? '#f59e0b' : 'none'}" stroke="#f59e0b" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`).join('');
+        const svgImg = getHospedajeSVG(h.tipo);
         return `
             <div class="hospedaje-card">
                 <div class="hospedaje-img-wrap">
-                    <img class="hospedaje-img" src="${escapeHtml(h.imagen)}" alt="${escapeHtml(_tPais('hospedajes_' + hi + '_nombre', h.nombre))}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400'">
+                    <img class="hospedaje-img" src="${svgImg}" alt="${escapeHtml(_tPais('hospedajes_' + hi + '_nombre', h.nombre))}" loading="lazy" data-external="${escapeHtml(h.imagen)}"
+                         onload="var ext=this.getAttribute('data-external');if(ext){var i=new Image();i.onload=function(){this.src=ext}.bind(this);i.onerror=function(){}.bind(this);i.src=ext}"
+                         onerror="this.onerror=null">
                     <div class="hospedaje-tipo">${escapeHtml(_tPais('hospedajes_' + hi + '_tipo', h.tipo) || h.tipo)}</div>
                 </div>
                 <div class="hospedaje-body">
@@ -429,7 +487,7 @@ function initCountrySelector() {
             return `<div class="country-option ${isSelected ? 'selected' : ''}" data-value="${key}" data-name="${nombre}">
                 <span class="country-flag">${flag}</span>
                 <span class="country-name">${nombre}</span>
-                ${isSelected ? '<span class="country-check">✓</span>' : ''}
+                ${isSelected ? '<span class="country-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>' : ''}
             </div>`;
         }).join('');
 
@@ -455,7 +513,7 @@ function initCountrySelector() {
             'italia': '🇮🇹', 'francia': '🇫🇷', 'japon': '🇯🇵', 'tailandia': '🇹🇭',
             'marruecos': '🇲🇦', 'turquia': '🇹🇷', 'grecia': '🇬🇷', 'sudafrica': '🇿🇦'
         };
-        return flags[key] || '🌍';
+        return flags[key] || '<i class="fa-solid fa-earth-americas" style="font-size:1.2em;"></i>';
     }
 
     function updateTrigger() {
@@ -725,6 +783,25 @@ async function cargarPais(codigoPais) {
 function llenarSelectorPaises(todos) {
     const select = document.getElementById('paisSelector');
     if (!select) return;
+    if (!todos || typeof todos !== 'object') return;
+    const paises = getCountryKeys(todos).sort();
+    if (paises.length === 0) return;
+    select.innerHTML = paises.map(key => {
+        const d = todos[key] || {};
+        const nombre = nombrePais(key, d.nombre) || key;
+        const flag = (function () {
+            const flags = {
+                'panama': '🇵🇦', 'costa-rica': '🇨🇷', 'colombia': '🇨🇴', 'mexico': '🇲🇽',
+                'peru': '🇵🇪', 'republica-dominicana': '🇩🇴', 'argentina': '🇦🇷', 'brasil': '🇧🇷',
+                'chile': '🇨🇱', 'ecuador': '🇪🇨', 'cuba': '🇨🇺', 'guatemala': '🇬🇹',
+                'bolivia': '🇧🇴', 'venezuela': '🇻🇪', 'uruguay': '🇺🇾', 'paraguay': '🇵🇾',
+                'honduras': '🇭🇳', 'nicaragua': '🇳🇮', 'el-salvador': '🇸🇻', 'belice': '🇧🇿',
+                'guyana': '🇬🇾'
+            };
+            return flags[key] || '';
+        })();
+        return '<option value="' + key + '" ' + (key === currentCountryCode ? 'selected' : '') + '>' + flag + ' ' + nombre + '</option>';
+    }).join('');
 }
 
 function cambiarPais(codigo) {

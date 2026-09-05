@@ -33,7 +33,7 @@
   background-attachment:fixed;
 }
 .auth-page h1,.auth-page h2 {
-  font-family:"Manrope","Inter",sans-serif;
+  font-family:var(--font-display,"Poppins",sans-serif);
 }
 .auth-main {
   min-height:calc(100vh - 72px);
@@ -134,7 +134,7 @@
   position:relative;
 }
 .auth-route .route-line::after {
-  content:"✈";
+  content:"\f072";
   position:absolute;
   top:50%;
   left:50%;

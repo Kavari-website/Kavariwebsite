@@ -26,16 +26,16 @@
   <script defer src="js/auth.js"></script>
   <script defer src="js/idioma.js?v=5"></script>
   <script defer src="js/idioma-pt.js?v=2"></script>
-  <script defer src="js/idioma-fr.js?v=1"></script>
+
   <script defer src="js/theme.js?v=3"></script>
   <link rel="icon" type="image/png" sizes="3000x3000" href="img/favicon.png">
 
   <script defer src="js/img-fallback.js"></script>
 
   <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
-  <link rel="stylesheet" href="css/lang-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/lang-dropdown.css?v=2" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="css/universal-shine.css" media="print" onload="this.media='all'" />
-  <script defer src="js/lang-dropdown.js"></script>
+  <script defer src="js/lang-dropdown.js?v=2"></script>
 
   <!-- ===== FOOTER (estilos, iconos y script) ===== -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
@@ -132,7 +132,7 @@
 
 <div class="page-utilities" aria-label="Preferencias" data-i18n-aria="ariaPreferencias">
   <button class="nav-btn-tutorial" id="btnTutorial" onclick="startTutorial(true)" aria-label="Tutorial" data-i18n="tutorial">Tutorial</button>
-  <button class="btn-lang-nav" id="btnLang" onclick="toggleLang()" aria-label="Cambiar idioma" data-i18n-aria="ariaCambiarIdioma"><span id="langLabel">ES</span></button>
+  <button class="btn-lang-nav" id="btnLang" aria-label="Cambiar idioma" data-i18n-aria="ariaCambiarIdioma"><span id="langLabel">ES</span></button>
   <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro" data-i18n-aria="ariaModoOscuro">Oscuro</button>
 </div>
 
@@ -170,7 +170,7 @@
         <div class="hero-mini-divider"></div>
         <div class="hero-mini-stat"><b id="heroMiniGuias">120+</b><span data-i18n="heroMiniGuias">Guías locales</span></div>
         <div class="hero-mini-divider"></div>
-        <div class="hero-mini-stat"><b>4.8?</b><span data-i18n="heroMiniValoracion">Valoración</span></div>
+        <div class="hero-mini-stat"><b>4.8&#9733;</b><span data-i18n="heroMiniValoracion">Valoración</span></div>
       </div>
     </div>
   </div>
@@ -188,7 +188,7 @@
 
   <div class="quote-bar reveal">
     <blockquote id="quoteInicio" data-i18n="quoteInicio">Viajar es la Única inversión que te hace más rico.</blockquote>
-    <cite id="citeInicio" data-i18n="citeInicio">KAVARI · GuÍa 2025</cite>
+    <cite id="citeInicio" data-i18n="citeInicio">KAVARI · Guía 2025</cite>
   </div>
 </div>
 
@@ -280,7 +280,7 @@
   <div class="two-col reveal" id="practicaTwoCol"></div>
   <div class="quote-bar reveal">
     <blockquote id="quotePractica" data-i18n="quotePractica">Los mejores destinos no siempre son los más conocidos.</blockquote>
-    <cite id="citePractica" data-i18n="citePractica">KAVARI · GuÍa 2025</cite>
+    <cite id="citePractica" data-i18n="citePractica">KAVARI · Guía 2025</cite>
   </div>
 </div>
 
@@ -297,7 +297,7 @@
   </div>
   <div class="airline-section reveal">
     <div class="sec-intro">
-      <p id="aerolineasIntro" data-i18n="aerolineasIntro">Precios de referencia en clase económica. Los precios finales varÍan segÍn fecha, disponibilidad y origen. Haz clic en "Reservar vuelo" para ir directamente a la aerolÍnea.</p>
+      <p id="aerolineasIntro" data-i18n="aerolineasIntro">Precios de referencia en clase económica. Los precios finales varían según fecha, disponibilidad y origen. Haz clic en "Reservar vuelo" para ir directamente a la aerolínea.</p>
     </div>
     <div class="airline-grid" id="airlineGrid"></div>
   </div>
@@ -396,7 +396,7 @@
   </div>
 
   <div class="kv-footer-bottom">
-    <p class="kv-footer-copy" data-i18n="footerTexto">© 2026 Kavari · Todos los derechos reservados.</p>
+    <p class="kv-footer-copy" data-i18n="footerTexto">© 2026 Kavari — Todos los derechos reservados.</p>
     <ul class="kv-footer-legal">
       <li><a class="kv-footer-link" href="privacidad.html" data-i18n="footerPrivacidad">Política de privacidad</a></li>
       <li><a class="kv-footer-link" href="terminos.html" data-i18n="footerTerminos">Términos y condiciones</a></li>
@@ -411,6 +411,7 @@
 
 <script defer src="js/traveler-registration.js"></script>
 <script defer src="js/destino.js?v=5"></script>
+<script defer src="js/navdedestino.js?v=1"></script>
 <script defer src="js/tutorial.js"></script>
 <script defer src="js/page-transitions.js"></script>
 <script defer src="js/mobile-nav.js?v=3"></script>

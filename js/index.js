@@ -231,7 +231,7 @@ function renderTop10Cards() {
                 <div class="card-content">
                     <h3>${escapeHtml(title)}</h3>
                     <p>${escapeHtml(desc)}</p>
-                    <button class="btn-sabemas" onclick="abrirModalTop10('${id}')">${translateOrDefault('saberMas', 'Saber más')}</button>
+                    <button class="btn-sabemas" data-i18n="saberMas" onclick="abrirModalTop10('${id}')">${translateOrDefault('saberMas', 'Saber más')}</button>
                 </div>
             </div>`;
     });
@@ -269,13 +269,13 @@ function renderPaquetesCards() {
                     </div>
                         <div class="paquete-bottom">
                         <div class="paquete-precio-wrap">
-                            <div class="paquete-desde">${translateOrDefault('desde', 'Desde')}</div>
+                            <div class="paquete-desde" data-i18n="desde">${translateOrDefault('desde', 'Desde')}</div>
                             <div class="paquete-precio">${escapeHtml(d.precio)}</div>
-                            <div class="paquete-pp">${translateOrDefault('porPersona', 'por persona')}</div>
+                            <div class="paquete-pp" data-i18n="porPersona">${translateOrDefault('porPersona', 'por persona')}</div>
                         </div>
                         <div class="paquete-btns">
-                            <button class="btn-paquete-info" onclick="abrirModalPaquete('${id}')">${translateOrDefault('verDetalles', 'Ver detalles')}</button>
-                            <button type="button" class="btn-paquete-reservar" onclick="PackageRequest.open('${id}')">${translateOrDefault('reservarAhora', 'Reservar ahora')}</button>
+                            <button class="btn-paquete-info" data-i18n="verDetalles" onclick="abrirModalPaquete('${id}')">${translateOrDefault('verDetalles', 'Ver detalles')}</button>
+                            <button type="button" class="btn-paquete-reservar" data-i18n="reservarAhora" onclick="PackageRequest.open('${id}')">${translateOrDefault('reservarAhora', 'Reservar ahora')}</button>
                         </div>
                     </div>
                 </div>
@@ -464,25 +464,17 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 window.addEventListener('kavari:langchange', function(e) {
     const idioma = e.detail.idioma;
 
-    if (window.homeDataLoaded) {
-        window.homeDataPromise = null;
-        window.homeDataLoaded = false;
-        loadHomeData().then(() => {
-            if (window.currentTop10ModalId && document.getElementById('top10ModalOverlay').classList.contains('active')) {
-                abrirModalTop10(window.currentTop10ModalId);
-            }
-            if (window.currentPaqueteModalId && document.getElementById('paqueteModalOverlay').classList.contains('active')) {
-                abrirModalPaquete(window.currentPaqueteModalId);
-            }
-        });
-    } else {
+    // Always re-render cards on language change
+    window.homeDataPromise = null;
+    window.homeDataLoaded = false;
+    loadHomeData().then(() => {
         if (window.currentTop10ModalId && document.getElementById('top10ModalOverlay').classList.contains('active')) {
             abrirModalTop10(window.currentTop10ModalId);
         }
         if (window.currentPaqueteModalId && document.getElementById('paqueteModalOverlay').classList.contains('active')) {
             abrirModalPaquete(window.currentPaqueteModalId);
         }
-    }
+    });
 });
 
 // Función auxiliar para actualizar el botón de idioma
@@ -493,7 +485,7 @@ function updateLangButton(idioma) {
         if (langLabel) {
             langLabel.textContent = (idioma || 'es').toUpperCase();
         }
-        const orden = ['es', 'en', 'pt', 'fr'];
+        const orden = ['es', 'en', 'pt'];
         const idx = orden.indexOf(idioma);
         const nextIdioma = orden[(idx + 1) % orden.length];
         const ariaLabel = typeof window.t === 'function' ? window.t('ariaCambiarIdioma') : 'Cambiar idioma';

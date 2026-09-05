@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="css/audit-consistency.css" />
   <script defer src="js/idioma.js?v=5"></script>
   <script defer src="js/idioma-pt.js?v=2"></script>
-  <script defer src="js/idioma-fr.js?v=1"></script>
+
   <script defer src="js/theme.js?v=3"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
@@ -35,9 +35,9 @@
   <script defer src="js/img-fallback.js"></script>
 
   <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
-  <link rel="stylesheet" href="css/lang-dropdown.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/lang-dropdown.css?v=2" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="css/universal-shine.css" media="print" onload="this.media='all'" />
-  <script defer src="js/lang-dropdown.js"></script>
+  <script defer src="js/lang-dropdown.js?v=2"></script>
 
   <!-- ===== FOOTER (estilos, iconos y script) ===== -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
@@ -112,10 +112,10 @@
         </ul>
         <div class="nav-actions">
             <button class="nav-btn-tutorial" id="btnTutorial" onclick="startTutorial(true)" aria-label="Tutorial" data-i18n="tutorial">Tutorial</button>
-            <button class="btn-lang-nav" id="btnLang" onclick="toggleLang()" aria-label="Cambiar idioma"><span id="langLabel">ES</span></button>
-            <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro">Oscuro</button>
+            <button class="btn-lang-nav" id="btnLang" aria-label="Cambiar idioma" data-i18n-aria="ariaCambiarIdioma"><span id="langLabel">ES</span></button>
+            <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro" data-i18n-aria="ariaModoOscuro">Oscuro</button>
         </div>
-        <button class="hamburger" id="hamburger" aria-label="Menú">
+        <button class="hamburger" id="hamburger" aria-label="Menú" data-i18n-aria="ariaMenu">
             <span></span><span></span><span></span>
         </button>
     </nav>
@@ -190,7 +190,7 @@
                     </svg>
                 </div>
                 <div class="ig-item-text">
-                    <span class="ig-handle">@rafael</span>
+                    <span class="ig-handle">@kavari.travel</span>
                     <span class="ig-label">KAVARI Travel</span>
                 </div>
             </a>
@@ -441,7 +441,7 @@
     </div>
 
     <!-- Columna 2 – Enlaces rápidos -->
-    <nav class="kv-footer-col" aria-label="Enlaces r�pidos">
+    <nav class="kv-footer-col" aria-label="Enlaces rápidos">
       <p class="kv-footer-title" data-i18n="footerLinksTitle">Enlaces rápidos</p>
       <ul class="kv-footer-links">
         <li><a class="kv-footer-link" href="index.html" data-i18n="footerLinkInicio">Inicio</a></li>

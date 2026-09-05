@@ -1,23 +1,23 @@
 :root {
-  --ayuda-bg:#FFFFFF;
-  --ayuda-card:#FAF8F2;
-  --ayuda-border:#dce5f0;
-  --ayuda-text:#0c1e38;
-  --ayuda-muted:#4a5b7a;
-  --ayuda-accent:#004aa8;
-  --ayuda-accent2:#00a88e;
-  --ayuda-shadow:0 4px 16px rgba(0,40,100,.1);
-  --ayuda-radius:12px;
+  --planes-bg:#FFFFFF;
+  --planes-card:#FAF8F2;
+  --planes-border:#dce5f0;
+  --planes-text:#0c1e38;
+  --planes-muted:#4a5b7a;
+  --planes-accent:#004aa8;
+  --planes-accent2:#00a88e;
+  --planes-shadow:0 4px 16px rgba(0,40,100,.1);
+  --planes-radius:12px;
 }
 [data-theme="dark"] {
-  --ayuda-bg:#0d1117;
-  --ayuda-card:#161b22;
-  --ayuda-border:#30363d;
-  --ayuda-text:#e6edf3;
-  --ayuda-muted:#8b949e;
-  --ayuda-accent:#58a6ff;
-  --ayuda-accent2:#3fb950;
-  --ayuda-shadow:0 4px 12px rgba(0,0,0,.3);
+  --planes-bg:#0d1117;
+  --planes-card:#161b22;
+  --planes-border:#30363d;
+  --planes-text:#e6edf3;
+  --planes-muted:#8b949e;
+  --planes-accent:#58a6ff;
+  --planes-accent2:#3fb950;
+  --planes-shadow:0 4px 12px rgba(0,0,0,.3);
 }
 .portal-nav {
   position:sticky;
@@ -29,7 +29,7 @@
   gap:24px;
   padding:16px 48px;
   background:linear-gradient(120deg,#0e2a50 0%,#164a7a 100%);
-  box-shadow:var(--ayuda-shadow);
+  box-shadow:var(--planes-shadow);
   transition:padding .3s ease,box-shadow .3s ease;
 }
 [data-theme="dark"] .portal-nav {
@@ -127,8 +127,8 @@
   color:#fff;
 }
 .portal-nav-actions>a:last-child.nav-btn-auth,.portal-nav-actions .btn-solid {
-  background:var(--ayuda-accent)!important;
-  border-color:var(--ayuda-accent)!important;
+  background:var(--planes-accent)!important;
+  border-color:var(--planes-accent)!important;
   color:white!important;
   font-weight:600;
 }

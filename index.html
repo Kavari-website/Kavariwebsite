@@ -39,7 +39,7 @@
     <!-- CSS NO CRÍTICO: carga asíncrona -->
     <link rel="stylesheet" href="css/chatbot-widget.css?v=99" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/lang-dropdown.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/lang-dropdown.css?v=2" media="print" onload="this.media='all'">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
@@ -51,7 +51,7 @@
     <script defer src="js/auth.js"></script>
     <script defer src="js/idioma.js?v=5"></script>
     <script defer src="js/idioma-pt.js?v=2"></script>
-    <script defer src="js/idioma-fr.js?v=1"></script>
+
     <script defer src="js/theme.js?v=3"></script>
     
      <!-- ===== FAVICON GRANDE (PNG) ===== -->
@@ -62,7 +62,7 @@
   <script defer src="js/img-fallback.js"></script>
 
   <!-- ===== MENÚ DESPLEGABLE DE IDIOMAS ===== -->
-  <script defer src="js/lang-dropdown.js"></script>
+  <script defer src="js/lang-dropdown.js?v=2"></script>
 
   <!-- ===== FOOTER (estilos, iconos y script) ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" media="print" onload="this.media='all'" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -106,7 +106,7 @@
         </ul>
         <div class="nav-actions">
             <button class="nav-btn-tutorial" id="btnTutorial" onclick="startTutorial(true)" aria-label="Tutorial" data-i18n="tutorial">Tutorial</button>
-            <button class="btn-lang-nav" id="btnLang" onclick="toggleLang()" aria-label="Cambiar idioma" data-i18n-aria="ariaCambiarIdioma">
+            <button class="btn-lang-nav" id="btnLang" aria-label="Cambiar idioma" data-i18n-aria="ariaCambiarIdioma">
                 <span id="langLabel">ES</span>
             </button>
             <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro" data-i18n-aria="ariaModoOscuro">Oscuro</button>
@@ -180,12 +180,12 @@
                     <label for="planDestino" data-i18n="planCtaDestinoLabel">Destino de interés</label>
                     <select id="planDestino" name="destino">
                         <option value="" selected data-i18n="planCtaDestinoOpc">Selecciona un destino</option>
-                        <option value="francia">Francia</option>
-                        <option value="china">China</option>
-                        <option value="india">India</option>
-                        <option value="italia">Italia</option>
-                        <option value="panama">Panamá</option>
-                        <option value="el-salvador">El Salvador</option>
+                        <option value="francia" data-i18n="heroDestFrancia">Francia</option>
+                        <option value="china" data-i18n="heroDestChina">China</option>
+                        <option value="india" data-i18n="heroDestIndia">India</option>
+                        <option value="italia" data-i18n="heroDestItalia">Italia</option>
+                        <option value="panama" data-i18n="heroDestPanama">Panamá</option>
+                        <option value="el-salvador" data-i18n="heroDestElSalvador">El Salvador</option>
                         <option value="otro" data-i18n="planCtaDestinoOtro">Otro destino</option>
                     </select>
                 </div>

@@ -126,7 +126,7 @@
 
       var flagHtml = info.img
         ? '<img src="' + info.img + '" alt="Bandera de ' + (info.label || label) + '">'
-        : (info.flag || info.initial || "🌎");
+        : (info.flag || info.initial || '<i class="fa-solid fa-earth-americas" style="font-size:1.2em;"></i>');
       row.innerHTML =
         '<span class="country-flag">' + flagHtml + '</span>' +
         '<span class="country-option-info">' +
@@ -151,7 +151,7 @@
     if (!opt) return;
     var info = flagMarkup(opt.textContent, opt.value);
     if (triggerFlag) {
-      triggerFlag.innerHTML = info.img ? '<img src="' + info.img + '" alt="Bandera de ' + (info.label || opt.textContent) + '">' : (info.flag || info.initial || "🌎");
+      triggerFlag.innerHTML = info.img ? '<img src="' + info.img + '" alt="Bandera de ' + (info.label || opt.textContent) + '">' : (info.flag || info.initial || '<i class="fa-solid fa-earth-americas" style="font-size:1.2em;"></i>');
     }
     if (triggerName) triggerName.textContent = info.label || opt.textContent;
   }

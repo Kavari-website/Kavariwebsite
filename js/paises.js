@@ -30,7 +30,7 @@ const PAIS_BADGES = {
 
 function getLang() {
   const l = localStorage.getItem('kavari-idioma') || localStorage.getItem('kavariIdioma') || 'es';
-  return ['es', 'en', 'pt', 'fr'].includes(l) ? l : 'es';
+  return ['es', 'en', 'pt'].includes(l) ? l : 'es';
 }
 
 // Busca el texto traducido de una clave (con respaldo seguro)
@@ -59,16 +59,15 @@ function buildCardHTML(p, lang, idx) {
   const badgeKey = PAIS_BADGES[p.code];
   const badgeHTML = badgeKey ? `<div class="thumb-badge">${tClave(badgeKey)}</div>` : '';
 
-  // Palabras buscables: nombre (ES/EN/PT/FR), descripción, continente, idioma y moneda
+  // Palabras buscables: nombre (ES/EN/PT), descripción, continente, idioma y moneda
   const nombreEn = txt(p.nombre, 'en');
   const nombrePt = txt(p.nombre, 'pt');
-  const nombreFr = txt(p.nombre, 'fr');
   const buscaNombre = txt(p.nombre, 'es');
   const buscaContinentes = (p.continentes || []).map(c => {
     const key = 'paisesContinente' + c.charAt(0).toUpperCase() + c.slice(1);
     return tClave(key);
   }).join(' ');
-  const buscaTexto = [nombre, nombreEn, nombrePt, nombreFr, buscaNombre, buscaContinentes, desc, idioma, moneda].join(' ').toLowerCase();
+  const buscaTexto = [nombre, nombreEn, nombrePt, buscaNombre, buscaContinentes, desc, idioma, moneda].join(' ').toLowerCase();
 
   // Alt descriptivo con el nombre + un atractivo del destino (SEO)
   const atractivo = (desc.split('.')[0] || nombre).trim();

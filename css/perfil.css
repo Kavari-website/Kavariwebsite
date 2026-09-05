@@ -531,7 +531,7 @@
   animation: perfilSuccessPop .4s cubic-bezier(.34, 1.56, .64, 1);
 }
 .perfil-container .auth-submit.is-success::before {
-  content: '✓';
+  content: '\f00c';
   position: absolute;
   left: 18px;
   top: 50%;

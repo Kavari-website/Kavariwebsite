@@ -405,7 +405,7 @@
             (img
               ? `<img src="${esc(img)}" alt="${esc(nombre)}" loading="lazy" decoding="async">`
               : `<span class="perfil-fav-fallback">${esc(nombre.slice(0, 2).toUpperCase())}</span>`) +
-            `<span class="perfil-fav-heart" aria-hidden="true">♥</span>` +
+            `<span class="perfil-fav-heart" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>` +
             `<span class="perfil-fav-drag" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><circle cx="9" cy="6" r="1.7"/><circle cx="15" cy="6" r="1.7"/><circle cx="9" cy="12" r="1.7"/><circle cx="15" cy="12" r="1.7"/><circle cx="9" cy="18" r="1.7"/><circle cx="15" cy="18" r="1.7"/></svg></span>` +
           `</div>` +
           `<div class="perfil-fav-name">${esc(nombre)}</div>`;
@@ -1047,7 +1047,7 @@
   function initSettingsToggles() {
     if (els.settingsLangToggle) {
       els.settingsLangToggle.addEventListener('click', () => {
-        const orden = ['es', 'en', 'pt', 'fr'];
+        const orden = ['es', 'en', 'pt'];
         const actual = orden.indexOf(lang());
         const newLang = orden[(actual + 1) % orden.length];
         if (typeof window.setIdioma === 'function') {

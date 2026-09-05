@@ -343,3 +343,34 @@ a[class*="btn"]:not(.btn-theme-nav):not(.btn-lang-nav):not(.nav-btn-tutorial):no
     animation:kbtnSheen .9s cubic-bezier(.22,1,.36,1);
   }
 }
+/* ---------- Focus-visible uniforme para accesibilidad ---------- */
+.btn-sabemas:focus-visible,.dest-btn:focus-visible,.btn-paquete-reservar:focus-visible,.btn-paquete-info:focus-visible,
+.btn-modal-info:focus-visible,.btn-modal-go:focus-visible,.btn-modal-cerrar:focus-visible,.btn-modal-destino:focus-visible,
+.search-content button:focus-visible,.modal-content .btn-submit:focus-visible,
+.btn-primary:focus-visible,.btn-outline:focus-visible,.btn-ghost:focus-visible,.btn-danger:focus-visible,
+.btn-cta-white:focus-visible,.btn-cta-outline:focus-visible,.email-main-btn:focus-visible,
+.glass-primary:focus-visible,.glass-secondary:focus-visible,.plan-card button:focus-visible,
+.btn-hero:focus-visible,.btn-hero-outline:focus-visible,.btn-card:focus-visible,.btn-sm:focus-visible,
+.perfil-logout-btn:focus-visible,.perfil-danger-btn:focus-visible,
+.top10-modal-close:focus-visible,.paquete-modal-close:focus-visible,
+.country-trigger:focus-visible,.filter-chip:focus-visible,.continent-chip:focus-visible,
+.dest-like:focus-visible,.btn-lang-nav:focus-visible,.btn-theme-nav:focus-visible,
+.nav-btn-tutorial:focus-visible,.btn-paquete-vermas:focus-visible {
+  outline:2px solid #f0b529;
+  outline-offset:2px;
+}
+/* ---------- Desactivar animaciones hover para usuarios con reducción de movimiento ---------- */
+@media (prefers-reduced-motion:reduce) {
+  .btn-sabemas,.dest-btn,.btn-paquete-reservar,.btn-paquete-info,
+  .btn-modal-info,.btn-modal-go,.btn-modal-cerrar,.btn-modal-destino,
+  .search-content button,.modal-content .btn-submit,
+  .btn-primary,.btn-outline,.btn-ghost,.btn-danger,
+  .btn-cta-white,.btn-cta-outline,.email-main-btn,
+  .glass-primary,.glass-secondary,.plan-card button,
+  .btn-hero,.btn-hero-outline,.btn-card,.btn-sm,
+  .perfil-logout-btn,.perfil-danger-btn,
+  button,a[class*="btn"] {
+    transition:none !important;
+    transform:none !important;
+  }
+}
