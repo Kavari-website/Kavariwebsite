@@ -77,7 +77,7 @@ function buildCardHTML(p, lang, idx) {
   // el resto en diferido para que la página se vea antes.
   const imgAttrs = idx < 4 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
   return `
-    <article class="dest-card kv-v2" data-name="${buscaTexto.replace(/"/g, '&quot;')}" data-continent="${(p.continentes || []).join(',')}" style="animation-delay:${Math.min(idx * 0.05, 0.45)}s">
+    <article class="dest-card kv-v2" data-name="${buscaTexto.replace(/"/g, '&quot;')}" data-continent="${(p.continentes || []).join(',')}" style="animation-delay:${Math.min(idx * 0.03, 0.3)}s">
       <div class="dest-thumb">
         <img src="${p.img}" alt="${alt}" ${imgAttrs} decoding="async"/>
         <div class="dest-shade"></div>
@@ -133,7 +133,7 @@ function ocultarCargando() {
   const l = document.getElementById('destinosLoading');
   if (!l) return;
   l.classList.add('oculto');
-  setTimeout(() => { l.style.display = 'none'; }, 400);
+  setTimeout(() => { l.style.display = 'none'; }, 300);
 }
 
 // ============================================
@@ -152,9 +152,9 @@ function aplicarBadgesGuias() {
     const countryGuides = guides.filter(g => g.country === code);
     if (!countryGuides.length) return;
     const n = countryGuides.length;
-    const L = getLang();
-    const w = (n === 1 ? (L === 'en' ? 'guide' : L === 'pt' ? 'guia' : 'guía') : (L === 'en' ? 'guides' : L === 'pt' ? 'guias' : 'guías'));
-    const txtBadge = n + ' ' + w;
+    const singular = typeof window.t === 'function' ? window.t('badgeGuiaSingular') : 'guía';
+    const plural = typeof window.t === 'function' ? window.t('badgeGuiasPlural') : 'guías';
+    const txtBadge = n + ' ' + (n === 1 ? singular : plural);
     let badge = card.querySelector('.thumb-badge');
     if (badge) badge.textContent = txtBadge;
     else {
@@ -232,18 +232,18 @@ function buscar() {
         card.style.transform = 'translateY(15px) scale(0.95)';
         card.offsetHeight;
       }
-      card.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+      card.style.transition = 'opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
       card.style.opacity = '1';
       card.style.transform = 'translateY(0) scale(1)';
       visibles++;
     } else {
       if (card.style.display !== 'none') {
-        card.style.transition = 'opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+        card.style.transition = 'opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
         card.style.opacity = '0';
         card.style.transform = 'translateY(15px) scale(0.95)';
         setTimeout(() => {
           if (card.style.opacity === '0') card.style.display = 'none';
-        }, 300);
+        }, 200);
       }
     }
   });
@@ -378,7 +378,7 @@ function updateLikeBtn(btn, count) {
   btn.classList.toggle('liked', liked);
   const num = btn.querySelector('.dest-like-count');
   if (num) num.textContent = count || '';
-  btn.setAttribute('aria-label', liked ? 'Quitar like' : 'Me gusta');
+  btn.setAttribute('aria-label', liked ? (typeof window.t === 'function' ? window.t('likeQuitar') : 'Quitar like') : (typeof window.t === 'function' ? window.t('likeMeGusta') : 'Me gusta'));
 }
 
 function toggleLike(card) {
@@ -426,7 +426,7 @@ function initLikes() {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'dest-like';
-    btn.setAttribute('aria-label', 'Me gusta');
+    btn.setAttribute('aria-label', typeof window.t === 'function' ? window.t('likeMeGusta') : 'Me gusta');
     btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-8-4.9-8-11a4.6 4.6 0 0 1 8-3.2A4.6 4.6 0 0 1 20 10c0 6.1-8 11-8 11z"/></svg><span class="dest-like-count"></span>';
     btn.addEventListener('click', (e) => {
       e.preventDefault();

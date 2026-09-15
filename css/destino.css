@@ -16,7 +16,7 @@
   --shadow-sm:0 2px 8px rgba(14,30,60,.08);
   --shadow:0 6px 24px rgba(14,30,60,.12);
   --shadow-lg:0 16px 48px rgba(14,30,60,.18);
-  --transition:.3s cubic-bezier(.4,0,.2,1);
+  --transition:.22s cubic-bezier(.4,0,.2,1);
   --ease-spring:cubic-bezier(.22,1,.36,1);
   --nav-h:70px;
 }
@@ -238,10 +238,10 @@ body {
 }
 .section.active {
   display:block;
-  animation:sectionFadeIn .6s cubic-bezier(.19,1,.22,1) both;
+  animation:sectionFadeIn .4s cubic-bezier(.19,1,.22,1) both;
 }
 .section.fly-in {
-  animation:flyIn .7s cubic-bezier(.19,1,.22,1) both;
+  animation:flyIn .45s cubic-bezier(.19,1,.22,1) both;
 }
 @keyframes sectionFadeIn {
   from {
@@ -1681,7 +1681,7 @@ body {
   justify-content:center;
   opacity:0;
   pointer-events:none;
-  transition:opacity .4s ease;
+  transition:opacity .3s ease;
 }
 .modal-overlay.active {
   opacity:1;
@@ -1701,7 +1701,7 @@ body {
   transform:scale(.9) translateY(30px);
 }
 .modal-overlay.active .modal-content {
-  animation:modalIn .5s var(--ease-spring) forwards;
+  animation:modalIn .35s var(--ease-spring) forwards;
 }
 @keyframes modalIn {
   from {
@@ -1942,7 +1942,7 @@ footer {
 .reveal {
   opacity:0;
   transform:translateY(24px);
-  transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);
+  transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1);
   will-change:opacity,transform;
 }
 .reveal.visible {

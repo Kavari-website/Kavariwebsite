@@ -470,7 +470,7 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 }
 /* Aparición escalonada de secciones en destino.html */
 .reveal {
-  transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1);
+  transition:opacity .4s cubic-bezier(.22,1,.36,1),transform .4s cubic-bezier(.22,1,.36,1);
 }
 /* ===== Formulario de plan de viaje (paquetes del index) ===== */
 .traveler-form textarea {

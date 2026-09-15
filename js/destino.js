@@ -269,8 +269,8 @@ function setGuideFilter(f) { currentGuideFilter = f; renderGuideFilters(); }
 
 function contactarGuia(name, phone, email) {
     let msg = _t('contactGuide') + ': ' + name;
-    if (phone) msg += '\nTel: ' + phone;
-    if (email) msg += '\nEmail: ' + email;
+    if (phone) msg += '\n' + _t('labelTelefono') + ' ' + phone;
+    if (email) msg += '\n' + _t('labelEmail') + ' ' + email;
     alert(msg);
 }
 
@@ -708,7 +708,7 @@ function getCountryVeil() {
     return v;
 }
 
-async function withCountryVeil(codigo, { minMs = 180 } = {}) {
+async function withCountryVeil(codigo, { minMs = 120 } = {}) {
     if (_cambiandoPais) return;
     _cambiandoPais = true;
     const veil = getCountryVeil();
@@ -1217,7 +1217,7 @@ window.addEventListener('kavari:langchange', () => {
         + 'background:linear-gradient(135deg,#0d1f3c 0%,#2e6edc 100%);'
         + 'box-shadow:0 10px 28px rgba(13,31,60,.35);'
         + 'opacity:0;transform:translateY(16px);pointer-events:none;'
-        + 'transition:opacity .35s ease,transform .35s ease,box-shadow .25s ease;}'
+        + 'transition:opacity .25s ease,transform .25s ease,box-shadow .2s ease;}'
         + '#kvBackToHome.show{opacity:1;transform:none;pointer-events:auto;}'
         + '#kvBackToHome:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(46,110,220,.45);}'
         + '#kvBackToHome svg{flex-shrink:0;}'
@@ -1255,7 +1255,7 @@ window.addEventListener('kavari:langchange', () => {
 
             document.body.appendChild(btn);
             requestAnimationFrame(function () {
-                setTimeout(function () { btn.classList.add('show'); }, 350);
+                setTimeout(function () { btn.classList.add('show'); }, 250);
             });
         } catch (e) { /* sessionStorage no disponible: no mostramos el botón */ }
     });

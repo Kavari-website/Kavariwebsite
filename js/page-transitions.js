@@ -42,7 +42,7 @@
     setTimeout(function () {
       overlay.classList.remove('kpt-leaving');
       if (callback) callback();
-    }, 350);
+    }, 200);
   }
 
   function revealPage() {
@@ -71,7 +71,7 @@
 
     setTimeout(function () {
       window.location.href = href;
-    }, 350);
+    }, 200);
   }
 
   window.kavariNavigate = function (href) {

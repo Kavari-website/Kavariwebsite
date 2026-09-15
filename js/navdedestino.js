@@ -54,8 +54,8 @@
 
   window.addEventListener("resize", moveActivePill);
   window.addEventListener("load", moveActivePill);
-  setTimeout(moveActivePill, 150);
-  setTimeout(moveActivePill, 500);
+  setTimeout(moveActivePill, 100);
+  setTimeout(moveActivePill, 350);
 
   // Mantiene sincronizado el estado "active" del drawer móvil con el del nav principal
   function syncMobileActiveState(sectionName) {
