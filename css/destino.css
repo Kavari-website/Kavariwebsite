@@ -485,18 +485,7 @@ body {
   position:relative;
   z-index:1;
 }
-.btn-hero-outline {
-  font-family:var(--font-display);
-  font-size:13px;
-  font-weight:800;
-  padding:13px 30px;
-  border-radius:50px;
-  background:transparent;
-  border:2px solid rgba(255,255,255,.5);
-  color:#fff;
-  cursor:pointer;
-  transition:all .3s;
-}
+.btn-hero-outline{font-family:var(--font-display);font-size:13px;font-weight:800;padding:13px 30px;border-radius:50px;background:linear-gradient(135deg,rgba(240,180,41,.30),rgba(240,180,41,.12));border:2px solid #f0b429;color:#fff;box-shadow:0 0 18px rgba(240,180,41,.45),inset 0 1px 0 rgba(255,255,255,.35);cursor:pointer;transition:all .3s ease;}
 .btn-hero-outline:hover {
   background:rgba(255,255,255,.12);
   border-color:#fff;

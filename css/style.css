@@ -10,7 +10,7 @@ body {
   font-family:var(--font-body,'Inter',sans-serif);
   background:var(--bg-primary);
   overflow-x:hidden;
-  color:white;
+  color:var(--text-primary);
   -webkit-font-smoothing:antialiased;
   -webkit-tap-highlight-color:transparent;
   transition:background-color .4s ease;

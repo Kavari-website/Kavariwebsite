@@ -67,7 +67,8 @@
   font-size:clamp(42px,6.2vw,86px);
   line-height:1.05;
   letter-spacing:.005em;
-  text-shadow:0 8px 32px rgba(4,12,30,.55),0 2px 6px rgba(4,12,30,.4);
+  color:#f0b429;
+  text-shadow:0 0 24px rgba(240,180,41,.8),0 0 60px rgba(240,180,41,.5),0 8px 32px rgba(4,12,30,.55),0 2px 6px rgba(4,12,30,.4);
 }
 .page-index .hero-content p {
   font-size:clamp(16px,1.5vw,22px);

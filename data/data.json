@@ -2526,7 +2526,11 @@
         "precio_noche": 120,
         "moneda": "USD",
         "capacidad": "2-4 personas",
-        "amenidades": ["wifi", "desayuno", "senderos"],
+        "amenidades": [
+          "wifi",
+          "desayuno",
+          "senderos"
+        ],
         "url": "https://www.airbnb.com/s/Monteverde--Costa-Rica"
       },
       {
@@ -2541,7 +2545,11 @@
         "precio_noche": 180,
         "moneda": "USD",
         "capacidad": "4-6 personas",
-        "amenidades": ["piscina", "wifi", "playa"],
+        "amenidades": [
+          "piscina",
+          "wifi",
+          "playa"
+        ],
         "url": "https://www.airbnb.com/s/Guanacaste--Costa-Rica"
       },
       {
@@ -2556,7 +2564,11 @@
         "precio_noche": 95,
         "moneda": "USD",
         "capacidad": "2 personas",
-        "amenidades": ["wifi", "restaurante", "terraza"],
+        "amenidades": [
+          "wifi",
+          "restaurante",
+          "terraza"
+        ],
         "url": "https://www.airbnb.com/s/San-Jose--Costa-Rica"
       },
       {
@@ -2571,7 +2583,11 @@
         "precio_noche": 150,
         "moneda": "USD",
         "capacidad": "2-3 personas",
-        "amenidades": ["termales", "wifi", "volcán"],
+        "amenidades": [
+          "termales",
+          "wifi",
+          "volcán"
+        ],
         "url": "https://www.airbnb.com/s/La-Fortuna--Costa-Rica"
       },
       {
@@ -2586,7 +2602,11 @@
         "precio_noche": 110,
         "moneda": "USD",
         "capacidad": "2 personas",
-        "amenidades": ["wifi", "playa", "cocina"],
+        "amenidades": [
+          "wifi",
+          "playa",
+          "cocina"
+        ],
         "url": "https://www.airbnb.com/s/Tamarindo--Costa-Rica"
       },
       {
@@ -2601,7 +2621,11 @@
         "precio_noche": 130,
         "moneda": "USD",
         "capacidad": "2-4 personas",
-        "amenidades": ["tours", "wifi", "naturaleza"],
+        "amenidades": [
+          "tours",
+          "wifi",
+          "naturaleza"
+        ],
         "url": "https://www.airbnb.com/s/Tortuguero--Costa-Rica"
       }
     ],
@@ -3619,7 +3643,7 @@
         "nombre": "Teotihuacán",
         "tag": "Arqueología · Ciudad de los dioses",
         "descripcion": "Ciudad precolombina con la Pirámide del Sol y la Pirámide de la Luna. Una de las ciudades más grandes y pobladas del mundo antiguo.",
-        "imagen": "img/mexico/teotihuacan.jpg",
+        "imagen": "img/mexico/Teotihuacan.jpg",
         "detalle": "Habitada desde el año 200 a.C., alcanzó una población de 150,000 habitantes. La Pirámide del Sol mide 65 metros de altura. La Calzada de los Muertos se extiende por 2 km.",
         "precio_entrada": "85 MXN",
         "horario": "8:00 AM - 5:00 PM",
@@ -4590,7 +4614,7 @@
         "nombre": "Arequipa",
         "tag": "Historia · Ciudad Blanca",
         "descripcion": "Ciudad blanca de arquitectura colonial en sillar. Centro histórico UNESCO y puerta al Cañón del Colca.",
-        "imagen": "img/peru/arequipa.jpg",
+        "imagen": "img/peru/Arequipa.jpg",
         "detalle": "Construida con 'sillar', piedra volcánica blanca. El Monasterio de Santa Catalina es una ciudad dentro de la ciudad. A 2,335 metros de altitud. El Valle del Colca está a 3-4 horas.",
         "precio_entrada": "Monasterio: 45 PEN",
         "horario": "9:00 AM - 5:00 PM",
@@ -5483,7 +5507,7 @@
         "nombre": "Punta Cana",
         "tag": "Playa · Resorts · Caribe",
         "descripcion": "Zona turística de resorts y playas del Caribe. Arena blanca, aguas turquesa y todo incluido. Uno de los destinos más visitados del país.",
-        "imagen": "img/Republica dominicana/punta cana.jpg",
+        "imagen": "img/Republica dominicana/Punta cana.jpg",
         "detalle": "Bávaro es la playa más famosa. Cuenta con más de 50 km de costa. Los arrecifes de coral protegen las aguas, haciéndolas tranquilas. El hoyo de Bavaro es una atracción natural.",
         "precio_entrada": "Playas: gratuitas",
         "horario": "24 horas",
@@ -5516,7 +5540,7 @@
         "nombre": "Puerto Plata",
         "tag": "Playa · Historia · Montaña",
         "descripcion": "Ciudad costera con turismo de playa y el teleférico más importante del Caribe. Atractivos de mar y montaña.",
-        "imagen": "img/Republica dominicana/Puerto Plata.jpg",
+        "imagen": "img/Republica dominicana/Puerto plata.jpg",
         "detalle": "El Teleférico sube al Pico Isabel de Torres (793 m) con jardín botánico. La Fortaleza San Felipe es del siglo XVI. Playa Dorada tiene 18 km de costa.",
         "precio_entrada": "Teleférico: 600 DOP",
         "horario": "9:00-17:00",
@@ -5527,7 +5551,7 @@
         "nombre": "Jarabacoa",
         "tag": "Montaña · Aventura · Clima fresco",
         "descripcion": "Destino de clima fresco en la cordillera Central. Ideal para rafting, senderismo y picos como el Pico Duarte.",
-        "imagen": "img/Republica dominicana/jarabacoa.jpg",
+        "imagen": "img/Republica dominicana/Jarabacoa.jpg",
         "detalle": "Ríos Yaque del Norte, Jimenoa y Baiguate para rafting clase II-III. Salto de Jimenoa (40 m). Punto base para ascenso al Pico Duarte (3,175 m).",
         "precio_entrada": "Parques: 100-200 DOP",
         "horario": "8:00-18:00",
@@ -5560,7 +5584,7 @@
         "nombre": "Constanza",
         "tag": "Montaña · Clima europeo · Agricultura",
         "descripcion": "El 'pedacito de Europa' en el Caribe. Clima frío, paisajes de pino y flores. Puerta al Pico Duarte.",
-        "imagen": "img/Republica dominicana/constanza.avif",
+        "imagen": "img/Republica dominicana/Constanza.avif",
         "detalle": "Producción de fresas, rosas y manzanas. La nevera (bajada de temperatura). Base alternativa para ascenso al Pico Duarte.",
         "precio_entrada": "Parques: gratuito",
         "horario": "24 horas",
@@ -5611,7 +5635,7 @@
           "nombre": "Carnaval Dominicano",
           "tag": "Festividad · Comparsas · Máscaras",
           "descripcion": "Celebración popular con comparsas y máscaras, especialmente en febrero. El carnaval de La Vega es el más famoso.",
-          "imagen": "img/Republica dominicana/carnaval Dominicano.jpeg",
+          "imagen": "img/Republica dominicana/Carnaval Dominicano.jpeg",
           "detalle": "Los diablos cojuelos son personajes emblemáticos. Cada pueblo tiene su tradición: Santiago con los lechones, Santo Domingo con el carnaval del malecón."
         },
         {
@@ -5665,42 +5689,42 @@
           "nombre": "Sancocho Dominicano",
           "categoria": "Sopa · Festivo",
           "descripcion": "Sopa espesa de siete carnes (res, cerdo, pollo, chivo, longaniza) con tubérculos (yuca, ñame, papa).",
-          "imagen": "img/Republica dominicana/sancocho Dominicano.jpg",
+          "imagen": "img/Republica dominicana/Sancocho Dominicano.jpg",
           "nota": "Para domingos y celebraciones"
         },
         {
           "nombre": "Mofongo",
           "categoria": "Plato fuerte",
           "descripcion": "Plátano verde machacado con ajo, chicharrón o relleno de mariscos, pollo o carne. Servido con caldo.",
-          "imagen": "img/Republica dominicana/mofongo.jpg",
+          "imagen": "img/Republica dominicana/Mofongo.jpg",
           "nota": "Popular en toda la costa caribeña"
         },
         {
           "nombre": "Tostones",
           "categoria": "Acompañamiento",
           "descripcion": "Plátano verde frito dos veces hasta quedar crujiente. Se sirven con sal o ajo.",
-          "imagen": "img/Republica dominicana/tostones.jpeg",
+          "imagen": "img/Republica dominicana/Tostones.jpeg",
           "nota": "Acompañan casi todas las comidas"
         },
         {
           "nombre": "Pescado con Coco",
           "categoria": "Plato costero",
           "descripcion": "Pescado fresco cocinado en leche de coco con cebolla, tomate, cilantro y ají. Acompañado de arroz con coco.",
-          "imagen": "img/Republica dominicana/pescado con coco.jpg",
+          "imagen": "img/Republica dominicana/Pescado con Coco.jpg",
           "nota": "Muy común en Samaná"
         },
         {
           "nombre": "Chivo Guisado",
           "categoria": "Plato de montaña",
           "descripcion": "Carne de chivo guisada en salsa de tomate, cebolla, ajo y orégano. Típico de la región de San Cristóbal.",
-          "imagen": "img/Republica dominicana/chivo guisado.jpg",
+          "imagen": "img/Republica dominicana/Chivo Guisado.jpg",
           "nota": "Especialidad en fiestas patronales"
         },
         {
           "nombre": "Yaniqueques",
           "categoria": "Comida callejera",
           "descripcion": "Masa de harina frita, similar a la arepa venezolana. Muy popular en playas y malecón.",
-          "imagen": "img/Republica dominicana/yaniqueques.webp",
+          "imagen": "img/Republica dominicana/Yaniqueques.webp",
           "nota": "Nombre derivado de 'johnny cake'"
         },
         {
@@ -5714,7 +5738,7 @@
           "nombre": "Casabe",
           "categoria": "Pan ancestral",
           "descripcion": "Pan circular de yuca amarga, sin levadura. Herencia de los pueblos taínos.",
-          "imagen": "img/Republica dominicana/casabe.jpg",
+          "imagen": "img/Republica dominicana/Casabe.jpg",
           "nota": "Sin gluten, se conserva por meses"
         }
       ]
@@ -7296,8 +7320,8 @@
     "poblacion": "203,000,000",
     "zona_horaria": "UTC-2 a UTC-5",
     "codigo_telefonico": "+55",
-    "hero_img": "img/brasil/brasil.jpg",
-    "page_header_img": "img/banners/bannerdebrasil.png",
+    "hero_img": "img/Brasil/brasil.jpg",
+    "page_header_img": "img/banners/bannerdebrazil.png",
     "stats": [
       {
         "numero": "8,515,767",
@@ -7387,7 +7411,7 @@
         "nombre": "Salvador de Bahía",
         "tag": "Cultura · Afrobrasil · Historia",
         "descripcion": "Ciudad con fuerte herencia afrobrasileña. Muy rica en música, historia, gastronomía y el famoso Pelourinho.",
-        "imagen": "img/Brasil/salvador de Bahía.jpg",
+        "imagen": "img/Brasil/Salvador de Bahía.jpg",
         "detalle": "Pelourinho, centro histórico Patrimonio UNESCO. Elevador Lacerda conecta ciudad alta y baja. Farol da Barra. Capoeira en las calles. Acarajé, la comida callejera más famosa.",
         "precio_entrada": "Museos: 20-50 BRL",
         "horario": "8:00 AM - 6:00 PM",
@@ -7398,7 +7422,7 @@
         "nombre": "São Paulo",
         "tag": "Urbano · Finanzas · Gastronomía",
         "descripcion": "La ciudad más grande del país y de Sudamérica. Centro financiero, gastronómico y cultural de Brasil.",
-        "imagen": "img/Brasil/são Paulo.jpg",
+        "imagen": "img/Brasil/São Paulo.jpg",
         "detalle": "Avenida Paulista, MASP (Museo de Arte), Mercado Municipal (Mercadão). Barrios: Liberdade (japonés), Vila Madalena (grafitis). La vida nocturna y restaurantes de primer nivel.",
         "precio_entrada": "MASP: 60 BRL",
         "horario": "10:00 AM - 6:00 PM",
@@ -7409,7 +7433,7 @@
         "nombre": "Florianópolis",
         "tag": "Playa · Isla · Naturaleza",
         "descripcion": "Isla con más de 40 playas. Muy visitada por turismo nacional e internacional. Ideal para surf, naturaleza y vida nocturna.",
-        "imagen": "img/Brasil/florianópolis.jpg",
+        "imagen": "img/Brasil/Florianópolis.jpg",
         "detalle": "Playas famosas: Joaquina (surf), Mole (jóvenes), Campeche (agua cristalina), Lagoa da Conceição. Puente Hercílio Luz, símbolo de la ciudad.",
         "precio_entrada": "Parques: 30 BRL",
         "horario": "24 horas",
@@ -7431,7 +7455,7 @@
         "nombre": "Pantanal",
         "tag": "Naturaleza · Fauna · Humedal",
         "descripcion": "El humedal más grande del mundo. La mejor región de América del Sur para avistamiento de fauna.",
-        "imagen": "img/Brasil/pantanal.jpg",
+        "imagen": "img/Brasil/Pantanal.jpg",
         "detalle": "Patrimonio Natural de la UNESCO. Jacares, capibaras, anacondas, tucanes, jaguares (mejor lugar para verlos). Pescado gigante (pintado y pacú).",
         "precio_entrada": "Tours desde 300 BRL/día",
         "horario": "6:00 AM - 6:00 PM",
@@ -7439,7 +7463,7 @@
       }
     ],
     "cultura": {
-      "header_img": "img/brasil/cultura-header.jpg",
+      "header_img": "img/Brasil/cultura-header.jpg",
       "titulo": "Cultura Brasileña",
       "descripcion": "Brasil tiene una cultura muy diversa y dinámica, con influencias indígenas, africanas, portuguesas y de inmigrantes europeos y asiáticos (italianos, japoneses, alemanes, árabes). Esa mezcla se refleja en su música, danza, comida y celebraciones.",
       "stats": [
@@ -7518,7 +7542,7 @@
       }
     },
     "gastronomia": {
-      "header_img": "img/brasil/gastronomia-header.jpg",
+      "header_img": "img/Brasil/gastronomia-header.jpg",
       "titulo": "Gastronomía de Brasil",
       "descripcion": "La cocina brasileña varía mucho según la región. Usa arroz, frijoles, carnes, mandioca (yuca), pescado, frutas tropicales y especias locales. Una cocina diversa como su territorio.",
       "platos": [
@@ -7526,7 +7550,7 @@
           "nombre": "Feijoada",
           "categoria": "Plato nacional",
           "descripcion": "Guiso de frijoles negros con carnes de cerdo y res (oreja, rabo, costilla, chorizo). Servido con arroz, farofa, col rizada y naranja.",
-          "imagen": "img/brasil/feijoada.jpg",
+          "imagen": "img/Brasil/Feijoada.jpg",
           "nota": "Tradicional los miércoles y sábados"
         },
         {
@@ -7595,7 +7619,7 @@
       ]
     },
     "aventura": {
-      "header_img": "img/brasil/aventura-header.jpg",
+      "header_img": "img/Brasil/aventura-header.jpg",
       "titulo": "Aventura & Naturaleza en Brasil",
       "descripcion": "Brasil destaca por su selva amazónica, su litoral atlántico (7,367 km de costa), sus parques naturales y su enorme variedad de ecosistemas. Alberga el 20% de la biodiversidad mundial.",
       "stats": [
@@ -7692,7 +7716,7 @@
       }
     },
     "historia": {
-      "header_img": "img/brasil/historia-header.jpg",
+      "header_img": "img/Brasil/historia-header.jpg",
       "titulo": "Historia de Brasil",
       "descripcion": "Desde la llegada portuguesa en 1500 hasta la consolidación como potencia regional.",
       "cronologia": [
@@ -7724,7 +7748,7 @@
       ]
     },
     "practica": {
-      "header_img": "img/brasil/practica-header.png",
+      "header_img": "img/Brasil/practica-header.png",
       "titulo": "Información Práctica",
       "descripcion": "Moneda, transporte, clima, visados y conectividad para planificar tu viaje a Brasil.",
       "info_cards": [
@@ -8240,7 +8264,7 @@
     "zona_horaria": "UTC-3 a UTC-6",
     "codigo_telefonico": "+56",
     "hero_img": "img/banners/bannerdechile.jpeg",
-    "page_header_img": "img/chile/header.jpg",
+    "page_header_img": "img/Chile/header.jpg",
     "stats": [
       {
         "numero": "756,700",
@@ -8297,7 +8321,7 @@
         "nombre": "Santiago",
         "tag": "Capital · Cultura · Urbano",
         "descripcion": "Capital y centro urbano principal de Chile. Base ideal para explorar museos, cerros, barrios históricos y la moderna ciudad.",
-        "imagen": "img/chile/Santiago.jpg",
+        "imagen": "img/Chile/Santiago.jpg",
         "detalle": "Cerro San Cristóbal y Cerro Santa Lucía. Barrios: Bellavista (bohemio), Lastarria (cultural), Providencia (comercial). Museo de la Memoria y La Moneda. Valles vitivinícolas cercanos (Maipo, Casablanca).",
         "precio_entrada": "Museos: 2,000-6,000 CLP",
         "horario": "10:00 AM - 6:00 PM",
@@ -8308,7 +8332,7 @@
         "nombre": "Desierto de Atacama",
         "tag": "Naturaleza · Desierto · Astronomía",
         "descripcion": "El desierto más seco del planeta. Muy famoso por sus paisajes, salares, géiseres, lagunas y cielos limpios para observación astronómica.",
-        "imagen": "img/chile/DesiertodeAtacama.jpg",
+        "imagen": "img/Chile/DesiertodeAtacama.jpg",
         "detalle": "Valle de la Luna, Salar de Atacama (flamencos), Lagunas Miscanti y Miñiques, Géiseres del Tatio (el campo geotérmico más alto del mundo, 4,320 m). Observatorios: ALMA es el proyecto astronómico más caro del mundo.",
         "precio_entrada": "Parques: 5,000-15,000 CLP",
         "horario": "Géiseres: salida 4:00 AM",
@@ -8319,7 +8343,7 @@
         "nombre": "Torres del Paine",
         "tag": "Naturaleza · Trekking · 8ª maravilla",
         "descripcion": "Parque Nacional más famoso de Chile. Montañas, glaciares, lagos turquesa y fauna. Considerado la 8ª maravilla del mundo.",
-        "imagen": "img/chile/TorresdelPaine.jpg",
+        "imagen": "img/Chile/TorresdelPaine.jpg",
         "detalle": "Las Torres del Paine (granito de 2,850 m), Cuernos del Paine, Glaciar Grey, Lago Pehoé (turquesa). Circuito W (4-5 días) y Circuito O (7-9 días). Guanacos, cóndores, pumas.",
         "precio_entrada": "32,000 CLP (extranjeros)",
         "horario": "7:00 AM - 9:00 PM",
@@ -8330,7 +8354,7 @@
         "nombre": "Valparaíso",
         "tag": "Historia · Arte urbano · Patrimonio UNESCO",
         "descripcion": "Ciudad portuaria con cerros y arte urbano. Patrimonio de la Humanidad por su arquitectura y funiculares.",
-        "imagen": "img/chile/Valparaiso.jpg",
+        "imagen": "img/Chile/Valparaiso.jpg",
         "detalle": "Cerros Alegre y Concepción. Ascensores (funiculares) históricos. Graffitis y murales en cada esquina. La Sebastiana, casa de Pablo Neruda. Puerto histórico y Paseo 21 de Mayo.",
         "precio_entrada": "Ascensores: 300 CLP",
         "horario": "Siempre accesible",
@@ -8341,7 +8365,7 @@
         "nombre": "Isla de Pascua",
         "tag": "Cultura · Moái · Rapa Nui",
         "descripcion": "Territorio oceánico chileno en medio del Pacífico. Famosa por sus moái, estatuas monolíticas de la cultura Rapa Nui.",
-        "imagen": "img/chile/IslaPascua.avif",
+        "imagen": "img/Chile/IslaPascua.avif",
         "detalle": "Ahu Tongariki (15 moái restaurados). Rano Raraku (cantera de los moái). Orongo (aldea ceremonial del culto al hombre pájaro). Anakena (playa de arena blanca).",
         "precio_entrada": "80 USD (extranjeros)",
         "horario": "9:00 AM - 6:00 PM",
@@ -8352,7 +8376,7 @@
         "nombre": "Viña del Mar",
         "tag": "Playa · Ciudad jardín",
         "descripcion": "Ciudad costera muy visitada. Destino clásico de verano, playas y descanso. 'La Ciudad Jardín'.",
-        "imagen": "img/chile/Viñadelmar.jpg",
+        "imagen": "img/Chile/Viñadelmar.jpg",
         "detalle": "Playas: Reñaca, Caleta Abarca, Las Salinas. Reloj de Flores. Castillo Wulff. Casino de Viña del Mar (uno de los más famosos de Sudamérica). Quinta Vergara (Festival de la Canción).",
         "precio_entrada": "Playas: gratuitas",
         "horario": "24 horas",
@@ -8363,7 +8387,7 @@
         "nombre": "Archipiélago de Chiloé",
         "tag": "Cultura · Iglesias UNESCO · Mitología",
         "descripcion": "Archipiélago con identidad propia. Iglesias de madera Patrimonio UNESCO, palafitos y mitología chilota.",
-        "imagen": "img/chile/ArchipielagodeCholié.jpeg",
+        "imagen": "img/Chile/ArchipielagodeCholié.jpeg",
         "detalle": "Iglesias de madera (16 declaradas UNESCO). Palafitos de Castro. Parque Nacional Chiloé. Pingüineras de Puñihuil (pingüinos de Humboldt y Magallanes). Mitología: trauco, pincoya, caleuche.",
         "precio_entrada": "Iglesias: gratuito",
         "horario": "Siempre accesible",
@@ -8374,7 +8398,7 @@
         "nombre": "Pucón y Lago Villarrica",
         "tag": "Naturaleza · Volcán · Lagos",
         "descripcion": "Destino de aventura en la Región de la Araucanía. Volcán Villarrica, lagos y termales.",
-        "imagen": "img/chile/Villarica.jpeg",
+        "imagen": "img/Chile/Villarica.jpeg",
         "detalle": "Ascenso al Volcán Villarrica (2,847 m) con vistas al cráter activo. Lago Villarrica para natación y deportes acuáticos. Termas Geométricas. Parque Nacional Huerquehue (araucarias).",
         "precio_entrada": "Ascenso: 40,000-60,000 CLP",
         "horario": "8:00 AM - 6:00 PM",
@@ -8382,7 +8406,7 @@
       }
     ],
     "cultura": {
-      "header_img": "img/chile/cultura-header.jpg",
+      "header_img": "img/Chile/cultura-header.jpg",
       "titulo": "Cultura Chilena",
       "descripcion": "Chile tiene una cultura diversa con influencias indígenas (mapuche, rapa nui, diaguita, aimara), españolas y modernas urbanas. La vida cultural se concentra especialmente en Santiago, Valparaíso y otras ciudades importantes.",
       "stats": [
@@ -8409,7 +8433,7 @@
           "nombre": "Cueca",
           "tag": "Baile tradicional",
           "descripcion": "Baile tradicional chileno, declarado danza nacional. Representa el cortejo entre un huaso y una china.",
-          "imagen": "img/chile/Cueca.avif",
+          "imagen": "img/Chile/Cueca.avif",
           "detalle": "Se baila con pañuelo blanco. Es obligatoria en las Fiestas Patrias (18 de septiembre). Tiene versiones: cueca nortina, cueca chilota, cueca urbana."
         },
         {
@@ -8417,7 +8441,7 @@
           "nombre": "Pablo Neruda",
           "tag": "Literatura · Premio Nobel",
           "descripcion": "Poeta chileno, Premio Nobel de Literatura 1971. Autor de 'Veinte poemas de amor y una canción desesperada' y 'Odas elementales'.",
-          "imagen": "img/chile/PabloNeruda.jpg",
+          "imagen": "img/Chile/PabloNeruda.jpg",
           "detalle": "Sus casas museo: La Chascona (Santiago), La Sebastiana (Valparaíso), Casa de Isla Negra (frente al mar). Icono de la poesía del siglo XX."
         },
         {
@@ -8425,7 +8449,7 @@
           "nombre": "Fiestas Patrias",
           "tag": "Celebración · 18 de septiembre",
           "descripcion": "Celebraciones muy importantes en septiembre, en conmemoración de la Primera Junta de Gobierno (1810).",
-          "imagen": "img/chile/Fiestaspatrias.jpg",
+          "imagen": "img/Chile/Fiestaspatrias.jpg",
           "detalle": "Fondas y ramadas con comida típica: empanadas, anticuchos, chicha, terremoto (bebida). Cueca obligatoria. Vuelos de chilenos todo el país."
         },
         {
@@ -8433,7 +8457,7 @@
           "nombre": "Cultura Rapa Nui",
           "tag": "Isla de Pascua · Moái",
           "descripcion": "Cultura polinésica de Isla de Pascua. Famosos por los moái (estatuas monolíticas) y el culto al hombre pájaro (Tangata Manu).",
-          "imagen": "img/chile/RapaNui.jpg",
+          "imagen": "img/Chile/RapaNui.jpg",
           "detalle": "Lengua rapa nui junto al español. Parque Nacional Rapa Nui (UNESCO). El único pueblo polinésico dentro de Chile."
         }
       ],
@@ -8461,7 +8485,7 @@
       }
     },
     "gastronomia": {
-      "header_img": "img/chile/gastronomia-header.jpg",
+      "header_img": "img/Chile/gastronomia-header.jpg",
       "titulo": "Gastronomía de Chile",
       "descripcion": "La cocina chilena combina productos del mar del Pacífico, carnes, maíz, papas, frutas y preparaciones tradicionales de distintas zonas del país (norte, centro y sur).",
       "platos": [
@@ -8469,76 +8493,76 @@
           "nombre": "Empanadas chilenas",
           "categoria": "Comida típica",
           "descripcion": "Empanada de horno rellena de pino (carne picada, cebolla, huevo duro, aceituna y pasas).",
-          "imagen": "img/chile/EmpanadasdeChile.webp",
+          "imagen": "img/Chile/EmpanadasdeChile.webp",
           "nota": "Muy típica en Fiestas Patrias"
         },
         {
           "nombre": "Pastel de choclo",
           "categoria": "Plato tradicional",
           "descripcion": "Pastel de maíz dulce horneado, relleno de pino (carne, cebolla, huevo y aceituna). Cubierto con azúcar.",
-          "imagen": "img/chile/PastelChoclo.jpg",
+          "imagen": "img/Chile/PastelChoclo.jpg",
           "nota": "Tradicional en todo el país"
         },
         {
           "nombre": "Curanto",
           "categoria": "Plato del sur · Chiloé",
           "descripcion": "Cocción ancestral bajo tierra de mariscos, carnes, papas, chapaleles y milcaos. Tradición chilota.",
-          "imagen": "img/chile/Curanto.webp",
+          "imagen": "img/Chile/Curanto.webp",
           "nota": "Símbolo de Chiloé"
         },
         {
           "nombre": "Cazuela",
           "categoria": "Sopa · Plato diario",
           "descripcion": "Caldo con carne de res o pollo, zapallo, papas, choclo, arroz y verduras. La comida reconfortante chilena.",
-          "imagen": "img/chile/Cazuela.png",
+          "imagen": "img/Chile/Cazuela.png",
           "nota": "Popular en invierno"
         },
         {
           "nombre": "Completo",
           "categoria": "Comida rápida",
           "descripcion": "Hot dog chileno: pan, vienesa, palta, tomate, mayonesa, chucrut y ají. Versión chilena del hot dog.",
-          "imagen": "img/chile/Completo.webp",
+          "imagen": "img/Chile/Completo.webp",
           "nota": "El italiano lleva palta, tomate y mayo"
         },
         {
           "nombre": "Charquicán",
           "categoria": "Guiso",
           "descripcion": "Guiso de charqui (carne seca) con papas, zapallo, choclo, porotos verdes y calabaza. Origen mapuche.",
-          "imagen": "img/chile/Charquican.jpg",
+          "imagen": "img/Chile/Charquican.jpg",
           "nota": "Herencia indígena"
         },
         {
           "nombre": "Mariscal",
           "categoria": "Mariscos",
           "descripcion": "Plato frío de mariscos (erizos, machas, almejas) con limón, cebolla y cilantro.",
-          "imagen": "img/chile/Mariscal.jpg",
+          "imagen": "img/Chile/Mariscal.jpg",
           "nota": "Popular en la costa"
         },
         {
           "nombre": "Humitas",
           "categoria": "Preparación de maíz",
           "descripcion": "Masa de maíz fresco con cebolla, albahaca y ají, envuelta en chala de choclo y hervida.",
-          "imagen": "img/chile/Humitas.jpg",
+          "imagen": "img/Chile/Humitas.jpg",
           "nota": "Similar a los tamales"
         },
         {
           "nombre": "Pebre",
           "categoria": "Salsa acompañamiento",
           "descripcion": "Salsa de cilantro, cebolla, tomate, ají y ajo. Acompaña empanadas, asados y completos.",
-          "imagen": "img/chile/Pebre.jpg",
+          "imagen": "img/Chile/Pebre.jpg",
           "nota": "Icono de la mesa chilena"
         },
         {
           "nombre": "Sopaipillas",
           "categoria": "Comida callejera",
           "descripcion": "Masa de zapallo y harina frita. Se comen con pebre, mostaza o chancaca (sopaipilla pasada).",
-          "imagen": "img/chile/Sopaipillas.jpg",
+          "imagen": "img/Chile/Sopaipillas.jpg",
           "nota": "Muy comunes en días lluviosos"
         }
       ]
     },
     "aventura": {
-      "header_img": "img/chile/aventura-header.jpg",
+      "header_img": "img/Chile/aventura-header.jpg",
       "titulo": "Aventura & Naturaleza en Chile",
       "descripcion": "Chile sobresale por su enorme variedad ecológica: costa del Pacífico (6,435 km), desierto (Atacama), cordillera de los Andes, lagos, volcanes activos, glaciares y Patagonia.",
       "stats": [
@@ -8635,7 +8659,7 @@
       }
     },
     "historia": {
-      "header_img": "img/chile/historia-header.jpg",
+      "header_img": "img/Chile/historia-header.jpg",
       "titulo": "Historia de Chile",
       "descripcion": "Desde la llegada de los españoles hasta la consolidación democrática moderna.",
       "cronologia": [
@@ -8662,7 +8686,7 @@
       ]
     },
     "practica": {
-      "header_img": "img/chile/practica-header.jpg",
+      "header_img": "img/Chile/practica-header.jpg",
       "titulo": "Información Práctica",
       "descripcion": "Moneda, transporte, clima, visados y conectividad para planificar tu viaje a Chile.",
       "info_cards": [
@@ -10120,7 +10144,7 @@
     "zona_horaria": "UTC-5",
     "codigo_telefonico": "+53",
     "hero_img": "img/banners/bannerdecuba.jpeg",
-    "page_header_img": "img/cuba/header.jpg",
+    "page_header_img": "img/Cuba/header.jpg",
     "stats": [
       {
         "numero": "109,880",
@@ -10177,7 +10201,7 @@
         "nombre": "La Habana",
         "tag": "Historia · Cultura · Capital",
         "descripcion": "Capital con centro histórico y ambiente colonial. Principal puerta cultural del país. Patrimonio UNESCO desde 1982.",
-        "imagen": "img/cuba/LaHabana.jpg",
+        "imagen": "img/Cuba/LaHabana.jpg",
         "detalle": "La Habana Vieja: calles empedradas, Catedral de San Cristóbal, Castillo de la Real Fuerza. Malecón (paseo costero de 8 km). El Capitolio (réplica del de Washington). Barrio de Vedado. Fábrica de Arte Cubano (FAC). Tabaquería Partagás. Museo de la Revolución.",
         "precio_entrada": "Museos: 200-500 CUP",
         "horario": "Centro histórico: siempre accesible",
@@ -10188,7 +10212,7 @@
         "nombre": "Varadero",
         "tag": "Playa · Resorts · Caribe",
         "descripcion": "Uno de los destinos de playa más famosos del Caribe. Muy popular por su litoral de arena blanca, aguas turquesa y resorts todo incluido.",
-        "imagen": "img/cuba/Varadero.webp",
+        "imagen": "img/Cuba/Varadero.webp",
         "detalle": "Playa de 20 km de largo. Resorts todo incluido. Delfinario. Cuevas de Saturno (cenote para snorkel). Parque Josone. Golf (uno de los pocos de Cuba). Muy cerca de Matanzas.",
         "precio_entrada": "Playas: acceso libre",
         "horario": "24 horas",
@@ -10199,7 +10223,7 @@
         "nombre": "Trinidad",
         "tag": "Historia · Patrimonio UNESCO",
         "descripcion": "Ciudad colonial muy bien conservada, una de las joyas arquitectónicas del Caribe. Patrimonio de la Humanidad.",
-        "imagen": "img/cuba/Trinidad.avif",
+        "imagen": "img/Cuba/Trinidad.avif",
         "detalle": "Centro histórico: calles empedradas, Plaza Mayor, Iglesia Parroquial de la Santísima Trinidad. Museo Romántico. Torre Manaca Iznaga (antigua torre de esclavos). Valle de los Ingenios (Patrimonio UNESCO). Playas cercanas: Ancón.",
         "precio_entrada": "Museos: 150-300 CUP",
         "horario": "9:00 AM - 5:00 PM",
@@ -10210,7 +10234,7 @@
         "nombre": "Viñales",
         "tag": "Naturaleza · Mogotes · Valle",
         "descripcion": "Valle con mogotes (formaciones rocosas) y paisajes rurales. Patrimonio Natural de la Humanidad. Muy apreciado para senderismo, cabalgatas y fotografía.",
-        "imagen": "img/cuba/Viñales.avif",
+        "imagen": "img/Cuba/Viñales.avif",
         "detalle": "Mogotes (colinas cársticas de 300-400 m). Vistas del valle. Mural de la Prehistoria (pintura en mogote). Cueva del Indio (recorrido en bote subterráneo). Finca de tabaco (cigarros artesanales). Palenque de los Cimarrones.",
         "precio_entrada": "Valle: acceso libre",
         "horario": "Sitios: 9:00 AM - 5:00 PM",
@@ -10221,7 +10245,7 @@
         "nombre": "Santiago de Cuba",
         "tag": "Cultura · Música · Trova",
         "descripcion": "Ciudad con fuerte tradición musical, cuna de la trova y el son cubano. Centro importante de cultura y carnaval.",
-        "imagen": "img/cuba/SantiagodeCuba.jpg",
+        "imagen": "img/Cuba/SantiagodeCuba.jpg",
         "detalle": "Castillo del Morro (San Pedro de la Roca, Patrimonio UNESCO). Catedral de Nuestra Señora de la Asunción. Cuartel Moncada (símbolo de la Revolución). Casa de la Trova (música en vivo). Cementerio de Santa Ifigenia (tumba de José Martí). Carnaval de Santiago (julio).",
         "precio_entrada": "Castillo: 250 CUP",
         "horario": "Museos: 9:00 AM - 5:00 PM",
@@ -10232,7 +10256,7 @@
         "nombre": "Cayo Coco",
         "tag": "Playa · Cayos · Resorts",
         "descripcion": "Cayo turístico con aguas turquesa, playas vírgenes y resorts todo incluido. Conectado por pedraplén (calzada sobre el mar).",
-        "imagen": "img/cuba/cayococo.jpg",
+        "imagen": "img/Cuba/cayococo.jpg",
         "detalle": "Playa Flamencos (4 km de arena blanca), Playa Prohibida (virgen, solo accesible en lancha). Flamencos rosados en lagunas naturales. Buceo y snorkel. Parque Nacional Jardines de la Reina (buceo de clase mundial).",
         "precio_entrada": "Playas: acceso libre",
         "horario": "24 horas",
@@ -10243,7 +10267,7 @@
         "nombre": "Cienfuegos",
         "tag": "Historia · Arquitectura francesa",
         "descripcion": "Ciudad colonial fundada por franceses. Patrimonio UNESCO. Conocida como la 'Perla del Sur'.",
-        "imagen": "img/cuba/cienfuegos.jpg",
+        "imagen": "img/Cuba/cienfuegos.jpg",
         "detalle": "Parque José Martí. Palacio de Valle (arquitectura neogótica y morisca). Catedral de la Purísima Concepción. Malecón de Cienfuegos. Punta Gorda (barrio residencial). Castillo de Jagua.",
         "precio_entrada": "Palacio de Valle: 200 CUP",
         "horario": "9:00 AM - 6:00 PM",
@@ -10254,7 +10278,7 @@
         "nombre": "Baracoa",
         "tag": "Naturaleza · Aventura · Primera villa",
         "descripcion": "Primera villa fundada por los españoles en Cuba (1511). Paisaje montañoso y coco, chocolate y playas vírgenes.",
-        "imagen": "img/cuba/Baracoa.webp",
+        "imagen": "img/Cuba/Baracoa.webp",
         "detalle": "Primer asentamiento español en Cuba (1511). Parque Nacional Alejandro de Humboldt (Patrimonio UNESCO, biodiversidad). El Yunque (meseta plana emblemática). Playa Maguana. Río Toa (el más caudaloso de Cuba). Cacao y chocolate artesanal.",
         "precio_entrada": "Parque: 250 CUP",
         "horario": "8:00 AM - 5:00 PM",
@@ -10262,7 +10286,7 @@
       }
     ],
     "cultura": {
-      "header_img": "img/cuba/cultura-header.jpg",
+      "header_img": "img/Cuba/cultura-header.jpg",
       "titulo": "Cultura Cubana",
       "descripcion": "La cultura cubana mezcla raíces españolas, africanas y caribeñas, con fuerte presencia de música, danza, literatura y tradición oral. Cuba ha sido cuna de géneros musicales que trascendieron fronteras.",
       "stats": [
@@ -10289,7 +10313,7 @@
           "nombre": "Son Cubano",
           "tag": "Música · Patrimonio UNESCO",
           "descripcion": "Base de buena parte de la música popular cubana. El son cubano es el género del cual derivan la salsa, el mambo y otros ritmos caribeños.",
-          "imagen": "img/cuba/son.jpg",
+          "imagen": "img/Cuba/son.jpg",
           "detalle": "Declarado Patrimonio Cultural Inmaterial de la Humanidad (UNESCO). El Buena Vista Social Club popularizó el son mundialmente. Símbolo: el tres (guitarra de 3 pares de cuerdas)."
         },
         {
@@ -10297,7 +10321,7 @@
           "nombre": "Trova Cubana",
           "tag": "Música · Santiago",
           "descripcion": "Tradición musical muy viva en Santiago de Cuba. La trova es canción lírica de autor, con guitarra y poesía.",
-          "imagen": "img/cuba/trova.jpg",
+          "imagen": "img/Cuba/trova.jpg",
           "detalle": "Originaria de Santiago. Figuras: Sindo Garay, Ñico Saquito. Casa de la Trova en Santiago es templo. La nueva trova (Silvio Rodríguez, Pablo Milanés) renovó el género."
         },
         {
@@ -10305,7 +10329,7 @@
           "nombre": "Arquitectura Colonial",
           "tag": "Patrimonio · UNESCO",
           "descripcion": "Visible en La Habana, Trinidad, Cienfuegos, Camagüey. Centros históricos mejor conservados del Caribe.",
-          "imagen": "img/cuba/arquitectura.jpg",
+          "imagen": "img/Cuba/arquitectura.jpg",
           "detalle": "La Habana Vieja es el centro histórico más grande del Caribe (4 km²). Plazas: Catedral, Plaza de Armas, Plaza Vieja, Plaza del Cristo. Cienfuegos tiene influencia francesa."
         },
         {
@@ -10313,7 +10337,7 @@
           "nombre": "Carnavales Cubanos",
           "tag": "Festividad · Comparsas",
           "descripcion": "Carnavales y fiestas populares muy importantes en la vida cultural cubana. El carnaval de Santiago es el más famoso.",
-          "imagen": "img/Cuba/carnaval cubano.jpg",
+          "imagen": "img/Cuba/Carnaval cubano.jpg",
           "detalle": "Carnaval de Santiago (julio): congas, comparsas, murgas, fuegos artificiales. Carnaval de La Habana (agosto). Fiesta del Fuego en Santiago."
         }
       ],
@@ -10337,7 +10361,7 @@
       }
     },
     "gastronomia": {
-      "header_img": "img/cuba/gastronomia-header.jpg",
+      "header_img": "img/Cuba/gastronomia-header.jpg",
       "titulo": "Gastronomía de Cuba",
       "descripcion": "La cocina cubana combina influencias españolas y africanas, con uso frecuente de arroz, frijoles, cerdo, plátano, yuca y especias. Es una cocina sabrosa y contundente.",
       "platos": [
@@ -10366,7 +10390,7 @@
           "nombre": "Tostones",
           "categoria": "Acompañamiento",
           "descripcion": "Plátano verde frito dos veces hasta quedar crujiente. Se sirven con sal o mojo.",
-          "imagen": "img/Cuba/Tostones.jpg",
+          "imagen": "img/Cuba/tostones.jpg",
           "nota": "Presentes en todas las comidas"
         },
         {
@@ -10408,13 +10432,13 @@
           "nombre": "Flan cubano",
           "categoria": "Postre",
           "descripcion": "Flan de huevo con caramelo, hecho con leche condensada o evaporada.",
-          "imagen": "img/Cuba/flan cubano.webp",
+          "imagen": "img/Cuba/Flan cubano.webp",
           "nota": "Postre clásico"
         }
       ]
     },
     "aventura": {
-      "header_img": "img/cuba/aventura-header.jpg",
+      "header_img": "img/Cuba/aventura-header.jpg",
       "titulo": "Aventura & Naturaleza en Cuba",
       "descripcion": "Cuba ofrece costas extensas (más de 5,000 km de costa), cayos, valles, montañas y zonas de selva tropical, con un fuerte enfoque en turismo de playa, naturaleza y cultura.",
       "stats": [
@@ -10511,7 +10535,7 @@
       }
     },
     "historia": {
-      "header_img": "img/cuba/historia-header.jpg",
+      "header_img": "img/Cuba/historia-header.jpg",
       "titulo": "Historia de Cuba",
       "descripcion": "Desde la llegada de Colón en 1492 hasta la revolución y el período especial.",
       "cronologia": [
@@ -10538,7 +10562,7 @@
       ]
     },
     "practica": {
-      "header_img": "img/cuba/practica-header.jpg",
+      "header_img": "img/Cuba/practica-header.jpg",
       "titulo": "Información Práctica",
       "descripcion": "Moneda, transporte, clima, visados y conectividad para planificar tu viaje a Cuba.",
       "info_cards": [
@@ -12210,14 +12234,14 @@
           "nombre": "Salteñas",
           "categoria": "Empanadas · Desayuno",
           "descripcion": "Empanada jugosa rellena de carne de res, pollo, papa, arvejas, huevo, pasas y aceitunas. Ligeramente dulce.",
-          "imagen": "img/Bolivia/Salteñas.webp",
+          "imagen": "img/bolivia/Salteñas.webp",
           "nota": "Las más famosas son de Cochabamba"
         },
         {
           "nombre": "Silpancho",
           "categoria": "Plato fuerte · Cochabamba",
           "descripcion": "Arroz, papa, carne de res empanizada, huevo frito y ensalada. Plato contundente de Cochabamba.",
-          "imagen": "img/Bolivia/Silpancho.jpg",
+          "imagen": "img/bolivia/silpancho.jpg",
           "nota": "Tradicional cochabambino"
         },
         {
@@ -12231,49 +12255,49 @@
           "nombre": "Pique macho",
           "categoria": "Plato abundante",
           "descripcion": "Lomo de res, salchicha, papa frita, huevo duro, cebolla, pimiento y llajua (salsa picante). Plato representativo de Cochabamba.",
-          "imagen": "img/Bolivia/Pique Macho.webp",
+          "imagen": "img/bolivia/Pique Macho.webp",
           "nota": "Para compartir"
         },
         {
           "nombre": "Anticuchos",
           "categoria": "Brochetas · Callejero",
           "descripcion": "Brochetas de corazón de res asadas a la parrilla. Servidas con papa y ají. Muy populares en La Paz.",
-          "imagen": "img/Bolivia/Anticuchoss.png",
+          "imagen": "img/bolivia/Anticuchoss.png",
           "nota": "Clásico paceño"
         },
         {
           "nombre": "Fricasé",
           "categoria": "Sopa espesa",
           "descripcion": "Sopa espesa de cerdo con maíz, papa, choclo y ají. Plato del Altiplano.",
-          "imagen": "img/Bolivia/Fricasé.webp",
+          "imagen": "img/bolivia/Fricasé.webp",
           "nota": "Consumido en La Paz"
         },
         {
           "nombre": "Majadito",
           "categoria": "Plato del oriente",
           "descripcion": "Arroz seco con charque (carne seca), huevo, plátano frito y ají. Plato típico del oriente boliviano (Santa Cruz, Beni).",
-          "imagen": "img/Bolivia/Majadito.jpeg",
+          "imagen": "img/bolivia/Majadito.jpeg",
           "nota": "Oriente boliviano"
         },
         {
           "nombre": "Api con pastel",
           "categoria": "Desayuno",
           "descripcion": "Bebida caliente espesa de maíz morado (api) acompañada con pastel de queso frito. Desayuno tradicional paceño.",
-          "imagen": "img/Bolivia/Api con pastel.jpg",
+          "imagen": "img/bolivia/Api con pastel.jpg",
           "nota": "Desayuno callejero"
         },
         {
           "nombre": "Saice",
           "categoria": "Guiso",
           "descripcion": "Guiso de carne picada con arvejas, papas, cebolla, tomate y ají. Plato tradicional, especialmente en Carnaval.",
-          "imagen": "img/Bolivia/sai.jpg",
+          "imagen": "img/bolivia/sai.jpg",
           "nota": "Muy conocido"
         },
         {
           "nombre": "Huminta",
           "categoria": "Masa de maíz",
           "descripcion": "Masa de maíz tierno con queso, envuelta en chala (hoja de maíz) y hervida. Similar al tamal.",
-          "imagen": "img/Bolivia/huminta.jpg",
+          "imagen": "img/bolivia/huminta.jpg",
           "nota": "Popular en valles"
         }
       ]
@@ -13144,7 +13168,7 @@
           "nombre": "Pabellón criollo",
           "categoria": "Plato nacional",
           "descripcion": "Arroz blanco, carne mechada de res, caraotas negras y plátano maduro frito. Representa la mezcla cultural venezolana.",
-          "imagen": "img/venezuela/Pabellon.jpg",
+          "imagen": "img/venezuela/pabellon.jpg",
           "nota": "Símbolo gastronómico"
         },
         {
@@ -14870,7 +14894,7 @@
         "nombre": "Ciudad del Este",
         "tag": "Comercio · Compras",
         "descripcion": "Centro fronterizo y comercial, en la Triple Frontera (Paraguay, Brasil, Argentina). Muy conocido por compras y acceso a las Cataratas del Iguazú.",
-         "detalle": "Zona de free shops (shopping China, Shopping del Este). Puente de la Amistad (conexión con Brasil). Represa de Itaipú (una de las mayores hidroeléctricas del mundo).",
+        "detalle": "Zona de free shops (shopping China, Shopping del Este). Puente de la Amistad (conexión con Brasil). Represa de Itaipú (una de las mayores hidroeléctricas del mundo).",
         "precio_entrada": "Itaipú: 25,000 PYG",
         "horario": "9:00 AM - 6:00 PM",
         "consejo": "Planear bien el transporte y la aduana"
@@ -15770,7 +15794,7 @@
         "nombre": "Roatán",
         "tag": "Playa · Buceo · Arrecife",
         "descripcion": "Isla famosa por buceo y arrecifes. Muy visitada por turismo internacional. Parte del Arrecife Mesoamericano, segundo más grande del mundo.",
-        "imagen": "img/honduras/roatán.jpg",
+        "imagen": "img/honduras/Roatán.jpg",
         "detalle": "West Bay (playa más famosa). West End (vida nocturna). Punta Gorda (comunidad garífuna). Arrecifes de coral para buceo. Snorkel con tortugas, rayas y tiburones ballena.",
         "precio_entrada": "Playas: accesibles",
         "horario": "24 horas",
@@ -16313,7 +16337,7 @@
         "productos": [
           {
             "nombre": "Réplica de Estela Maya",
-           "descripcion": "Réplica en miniatura de una estela de Copán, con glifos y figuras talladas. Hecha de piedra o resina.",
+            "descripcion": "Réplica en miniatura de una estela de Copán, con glifos y figuras talladas. Hecha de piedra o resina.",
             "precio": "15-40 USD",
             "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400"
           },
@@ -16710,7 +16734,7 @@
         "nombre": "Isla de Ometepe",
         "tag": "Volcán · Lago · Aventura",
         "descripcion": "Isla volcánica en el Lago de Nicaragua, formada por dos volcanes: Concepción (activo) y Maderas. Paraíso natural único.",
-        "imagen": "img/nicaragua/isladeOmetepe.jpg",
+        "imagen": "img/nicaragua/IsladeOmetepe.jpg",
         "detalle": "Volcán Concepción (1,610 m, activo, trekking desafiante). Volcán Maderas (1,394 m, inactivo, laguna en el cráter). Ojo de Agua (piscinas naturales). Petrograbados. Playa Santo Domingo.",
         "precio_entrada": "Parques: 5 USD",
         "horario": "7:00 AM - 5:00 PM",

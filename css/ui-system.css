@@ -983,3 +983,24 @@ body.page-loaded {
 [data-theme="dark"] .guide-terms-text strong {
   color:#e6edf3;
 }
+
+/* ===== LIGHT MODE · ORO: botones nav tema/idioma/tutorial (visible sobre navbar clara) ===== */
+html:not([data-theme="dark"]) .page-common .btn-theme-nav,
+html:not([data-theme="dark"]) .page-common .btn-lang-nav,
+html:not([data-theme="dark"]) .page-common .nav-btn-tutorial,
+html:not([data-theme="dark"]) .btn-theme-nav,
+html:not([data-theme="dark"]) .btn-lang-nav,
+html:not([data-theme="dark"]) .nav-btn-tutorial {
+  background:linear-gradient(135deg,#f7c948,#eab308)!important;
+  border:1.5px solid #f0b429!important;
+  color:#0d1330!important;
+  box-shadow:0 2px 8px rgba(240,180,41,.45),inset 0 1px 0 rgba(255,255,255,.55)!important;
+}
+html:not([data-theme="dark"]) .btn-theme-nav::before {
+  box-shadow:0 0 8px rgba(240,180,41,.35),inset 0 1px 0 rgba(255,255,255,.9)!important;
+}
+html:not([data-theme="dark"]) .btn-theme-nav div,
+html:not([data-theme="dark"]) .btn-theme-nav .sun-icon,
+html:not([data-theme="dark"]) .btn-theme-nav .moon-icon {
+  color:#0d1330!important;
+}

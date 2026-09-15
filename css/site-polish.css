@@ -356,10 +356,10 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
   border-color:rgba(255,255,255,.12);
 }
 /* --------------------------------------------------------------
-   POLISH PREMIUM v2 � microinteracciones de tarjetas y botones
+   POLISH PREMIUM v2 · microinteracciones de tarjetas y botones
    en destino.html / paises.html
    -------------------------------------------------------------- */
-/* Tarjetas de gu�as: elevaci�n con resorte */
+/* Tarjetas de guías: elevación con resorte */
 .guide-card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
 }
@@ -380,7 +380,7 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 .guide-card:hover .guide-avatar {
   transform:scale(1.06) rotate(2deg);
 }
-/* Hospedajes: elevaci�n + imagen con zoom sutil */
+/* Hospedajes: elevación + imagen con zoom sutil */
 .hospedaje-card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
 }
@@ -397,7 +397,7 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 .hospedaje-card:hover .hospedaje-img {
   transform:scale(1.07);
 }
-/* Aerol�neas */
+/* Aerolíneas */
 .airline-card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
 }
@@ -439,7 +439,7 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
 .card:hover .card-img {
   transform:scale(1.06);
 }
-/* Cards de pa�ses (paises.html) */
+/* Cards de países (paises.html) */
 .dest-card {
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
 }
@@ -468,7 +468,7 @@ body:not(.page-destino) .navbar:not(.nav-glass).scrolled .nav-logo,body:not(.pag
   transform:translateY(-3px) scale(1.03);
   box-shadow:0 12px 30px rgba(0,194,168,.45);
 }
-/* Aparici�n escalonada de secciones en destino.html */
+/* Aparición escalonada de secciones en destino.html */
 .reveal {
   transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1);
 }
