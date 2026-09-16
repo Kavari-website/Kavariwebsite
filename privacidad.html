@@ -2,67 +2,112 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0d1f3c">
+
     <title data-i18n="titlePrivacidad">Política de Privacidad — KAVARI</title>
     <meta name="description" data-i18n="metaDescPrivacidad" content="Política de privacidad de KAVARI Travel: qué datos recopilamos, cómo los usamos y cuáles son tus derechos.">
     <link rel="icon" type="image/png" href="img/favicon.png">
-    <link rel="stylesheet" href="css/style.css?v=99" />
-    <link rel="stylesheet" href="css/ui-system.css?v=100" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css?v=99" />
+    <link rel="stylesheet" href="css/ui-system.css?v=100" />
+    <link rel="stylesheet" href="css/nav-polish.css" />
+    <link rel="stylesheet" href="css/site-polish.css" />
     <link rel="stylesheet" href="css/typography-system.css?v=2" />
     <link rel="stylesheet" href="css/spacing-system.css?v=2" />
+    <link rel="stylesheet" href="css/buttons-system.css" />
+    <link rel="stylesheet" href="css/audit-consistency.css" />
     <link rel="stylesheet" href="css/footer.css?v=99" />
     <link rel="stylesheet" href="css/mobile-responsive.css?v=99" />
     <link rel="stylesheet" href="css/chatbot-widget.css?v=99" media="print" onload="this.media='all'" />
     <link rel="stylesheet" href="css/lang-dropdown.css?v=2" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="css/universal-shine.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
+
     <style>
-        .legal-wrap{max-width:820px;margin:0 auto;padding:var(--space-3xl,120px) var(--space-md,22px) var(--space-3xl,80px);}
-        .legal-card{background:var(--card-bg,#fff);border:1px solid var(--border-color,#e2e8f0);border-radius:20px;padding:38px 34px;box-shadow:0 12px 32px var(--shadow,rgba(13,31,60,.10));}
+        /* ===== HERO DEL DOCUMENTO LEGAL ===== */
+        .legal-hero{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:150px 24px 84px;border-radius:0 0 40px 40px;}
+        .legal-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0d1f3c 0%,#12345a 45%,#1b5c7a 100%);}
+        .legal-hero-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top left,rgba(255,255,255,.12),transparent 45%),radial-gradient(circle at bottom right,rgba(252,211,77,.16),transparent 40%);opacity:.9;}
+        .legal-hero-content{position:relative;z-index:2;max-width:820px;animation:legalFade .8s cubic-bezier(.22,1,.36,1) both;}
+        @keyframes legalFade{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+        .legal-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;padding:8px 18px;border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.16);box-shadow:0 0 18px rgba(255,255,255,.22);margin-bottom:20px;}
+        .legal-hero-content h1{font-family:var(--font-display,'Poppins',sans-serif);font-size:clamp(2.2rem,6vw,3.6rem);font-weight:900;line-height:1.02;letter-spacing:-.04em;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.28);margin:0 0 14px;}
+        .legal-hero-date{display:inline-flex;align-items:center;gap:8px;font-size:.92rem;font-weight:500;color:rgba(255,255,255,.82);background:rgba(13,31,60,.35);border:1px solid rgba(255,255,255,.14);padding:8px 16px;border-radius:999px;}
+        .legal-hero-date i{color:var(--gold-light,#fcd34d);}
+        .legal-back-btn{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:12px 24px;border-radius:999px;background:#fff;color:#0d1f3c;font-family:var(--font-display,'Poppins',sans-serif);font-size:.9rem;font-weight:700;text-decoration:none;box-shadow:0 10px 26px rgba(0,0,0,.25);transition:all .3s ease;}
+        .legal-back-btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 14px 34px rgba(0,0,0,.32),0 0 0 3px rgba(252,211,77,.5);}
+        @media (prefers-reduced-motion:reduce){.legal-hero-content{animation:none;}.legal-hero-bg::before{animation:none;}}
+
+        /* ===== CONTENIDO ===== */
+        .legal-wrap{max-width:860px;margin:0 auto;padding:56px var(--space-md,22px) 90px;}
+        .legal-card{background:var(--card-bg,#fff);border:1px solid var(--border-color,#e2e8f0);border-radius:24px;padding:48px clamp(22px,5vw,56px);box-shadow:0 20px 60px var(--shadow,rgba(13,31,60,.12));position:relative;overflow:hidden;}
+        .legal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#2e6edc,#38bdf8,#fcd34d);}
         .legal-card h1{font-family:var(--font-display,'Poppins',sans-serif);font-size:1.7rem;font-weight:800;color:var(--text-primary,#0d1f3c);margin:0 0 6px;}
-        .legal-card .legal-date{color:var(--text-secondary,#64748b);font-size:.85rem;margin:0 0 22px;}
-        .legal-card h2{font-family:var(--font-display,'Poppins',sans-serif);font-size:1.05rem;font-weight:700;color:var(--text-primary,#0d1f3c);margin:24px 0 8px;}
-        .legal-card p,.legal-card li{color:#475569;font-size:.93rem;line-height:1.65;}
-        .legal-card ul{padding-left:20px;margin:6px 0;}
+        .legal-card .legal-date{color:var(--text-secondary,#64748b);font-size:.85rem;margin:0 0 24px;}
+        .legal-card h2{display:flex;align-items:center;gap:10px;font-family:var(--font-display,'Poppins',sans-serif);font-size:1.05rem;font-weight:700;color:var(--text-primary,#0d1f3c);margin:26px 0 10px;}
+        .legal-card h2 i{color:var(--blue,#2e6edc);font-size:.9em;}
+        .legal-card p,.legal-card li{color:#475569;font-size:.93rem;line-height:1.7;}
+        .legal-card ul{list-style:none;padding-left:0;margin:8px 0;}
+        .legal-card ul li{position:relative;padding:4px 0 4px 26px;}
+        .legal-card ul li::before{content:'\f061';font-family:'Font Awesome 6 Free';font-weight:900;font-size:.7rem;position:absolute;left:2px;top:9px;color:var(--blue,#2e6edc);}
+        .legal-card a{color:var(--blue,#2e6edc);font-weight:600;}
+        [data-theme="dark"] .legal-card{box-shadow:0 20px 60px rgba(0,0,0,.35);}
         [data-theme="dark"] .legal-card p,[data-theme="dark"] .legal-card li{color:#9aa7b8;}
-        .legal-back{display:inline-flex;align-items:center;gap:8px;margin-top:26px;color:var(--accent,#2e6edc);font-weight:600;text-decoration:none;font-size:.92rem;}
-        .legal-back:hover{text-decoration:underline;}
+        .legal-footer-links{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px;padding-top:28px;border-top:1px solid var(--border-color,#e2e8f0);}
+        .legal-card .btn-legal-doc{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:999px;background:var(--blue,#2e6edc);color:#fff;font-family:var(--font-display,'Poppins',sans-serif);font-size:.86rem;font-weight:600;text-decoration:none;box-shadow:0 8px 20px rgba(46,110,220,.28);transition:all .3s ease;}
+        .legal-card .btn-legal-doc:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(46,110,220,.4);}
+        .legal-card .btn-legal-doc.ghost{background:transparent;color:var(--text-primary,#0d1f3c);border:2px solid var(--border-color,#cbd5e1);box-shadow:none;}
+        .legal-card .btn-legal-doc.ghost:hover{border-color:var(--blue,#2e6edc);color:var(--blue,#2e6edc);box-shadow:0 8px 20px rgba(46,110,220,.15);}
     </style>
 </head>
 <body>
-<header class="navbar nav-glass home-nav" role="banner">
-  <div class="nav-inner">
-    <a href="index.html" class="logo" aria-label="KAVARI - Inicio">KAVARI</a>
-    <nav class="nav-links" aria-label="Navegación principal">
-      <a href="index.html" data-i18n="navInicio">Inicio</a>
-      <a href="paises.html" data-i18n="navDestinos">Destinos</a>
-      <a href="sobrenosotros.html" data-i18n="navSobre">Sobre nosotros</a>
-      <a href="contacto.html" data-i18n="navContacto">Contacto</a>
-      <a href="ayuda.html" data-i18n="navAyuda">Ayuda</a>
-      <a href="#" id="guiasNavBtn" data-guide-register data-i18n="navRegistrarmeGuia">Ser Guía</a>
-    </nav>
-    <div class="nav-actions">
-      <button type="button" class="btn-lang-nav" id="btnLang" aria-label="Cambiar idioma" data-i18n-aria="ariaCambiarIdioma"><i class="fa-solid fa-globe" aria-hidden="true"></i> <span id="langLabel">ES</span></button>
-      <button type="button" class="nav-action-btn" id="themeToggle" aria-label="Modo oscuro" data-i18n-aria="ariaModoOscuro"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
-      <a href="perfil.html" class="nav-action-btn" aria-label="Mi cuenta" data-i18n-aria="ariaMiCuenta"><i class="fa-regular fa-user" aria-hidden="true"></i></a>
+<!-- ===== NAVBAR UNIFICADO KAVARI ===== -->
+<nav class="navbar nav-glass home-nav" id="navbar">
+    <div class="logo">
+        <a href="index.html" style="color: inherit; text-decoration: none;">KAVARI</a>
     </div>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Menú" data-i18n-aria="ariaMenu" aria-expanded="false" aria-controls="mobileDrawer">
-      <span></span><span></span><span></span>
+    <ul class="nav-links kv-menu" id="navLinks">
+        <li><a href="index.html" data-i18n="navInicio">Inicio</a></li>
+        <li><a href="paises.html" data-i18n="navDestinos">Destinos</a></li>
+        <li><a href="#" id="guiasNavBtn" data-guide-register data-i18n="navRegistrarmeGuia">Ser Guía</a></li>
+        <li><a href="sobrenosotros.html" data-i18n="sobrenosotros">Sobre nosotros</a></li>
+        <li><a href="ayuda.html" data-i18n="ayuda">Ayuda</a></li>
+        <li><a href="contacto.html" data-i18n="contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button class="btn-lang-nav" id="btnLang" aria-label="Cambiar idioma" data-i18n-aria="ariaCambiarIdioma"><span id="langLabel">ES</span></button>
+        <button class="btn-theme-nav" id="btnTheme" onclick="toggleTheme()" aria-label="Modo oscuro" data-i18n="modoOscuro" data-i18n-aria="ariaModoOscuro">Oscuro</button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú" data-i18n-aria="ariaMenu">
+        <span></span><span></span><span></span>
     </button>
-  </div>
+</nav>
+
+<!-- ===== HERO DEL DOCUMENTO ===== -->
+<header class="legal-hero">
+    <div class="legal-hero-bg" aria-hidden="true"></div>
+    <div class="legal-hero-content">
+        <span class="legal-eyebrow"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> <span data-i18n="legalDocumento">Documento legal</span></span>
+        <h1 data-i18n="privacidadTitulo">Política de Privacidad</h1>
+        <span class="legal-hero-date"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> <span data-i18n="privacidadFecha">Última actualización: agosto 2026</span></span>
+        <br>
+        <a href="index.html" class="legal-back-btn" onclick="goBackLegal(); return false;" aria-label="Volver" data-i18n-aria="ariaVolverAtras">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            <span data-i18n="volverAtras">Volver atrás</span>
+        </a>
+    </div>
 </header>
 
 <main class="legal-wrap">
     <div class="legal-card">
-        <h1 data-i18n="privacidadTitulo">Política de Privacidad</h1>
-        <p class="legal-date" data-i18n="privacidadFecha">Última actualización: agosto 2026</p>
+        <h2><i class="fa-solid fa-user-shield" aria-hidden="true"></i><span data-i18n="privacidadH1">1. Responsable del tratamiento</span></h2>
+        <p data-i18n="privacidadP1">KAVARI (en adelante, "la Plataforma") trata datos personales conforme a esta política y a la legislación aplicable en materia de protección de datos. Para cualquier asunto relacionado con tus datos puedes usar el <a href="contacto.html">formulario de contacto</a>.</p>
 
-        <h2 data-i18n="privacidadH1">1. Responsable del tratamiento</h2>
-        <p data-i18n="privacidadP1">KAVARI (en adelante, "la Plataforma") trata datos personales conforme a esta política y a la legislación aplicable en materia de protección de datos. Para cualquier asunto relacionado con tus datos puedes usar el <a href="contacto.html" style="color:var(--blue);font-weight:600;">formulario de contacto</a>.</p>
-
-        <h2 data-i18n="privacidadH2">2. Datos que recopilamos</h2>
+        <h2><i class="fa-solid fa-database" aria-hidden="true"></i><span data-i18n="privacidadH2">2. Datos que recopilamos</span></h2>
         <ul>
             <li data-i18n="privacidadLi1"><strong>Cuenta de usuario:</strong> nombre, correo electrónico y foto de perfil (si inicias sesión con correo, Google o GitHub).</li>
             <li data-i18n="privacidadLi2"><strong>Preferencias:</strong> idioma, tema claro/oscuro, países favoritos y plan elegido.</li>
@@ -73,7 +118,7 @@
         </ul>
         <p data-i18n="privacidadP2">No recopilamos datos sensibles, ni información financiera: KAVARI no procesa pagos.</p>
 
-        <h2 data-i18n="privacidadH3">3. Para qué usamos tus datos</h2>
+        <h2><i class="fa-solid fa-list-check" aria-hidden="true"></i><span data-i18n="privacidadH3">3. Para qué usamos tus datos</span></h2>
         <ul>
             <li data-i18n="privacidadLi7">Crear y mantener tu cuenta, perfil y favoritos sincronizados entre dispositivos.</li>
             <li data-i18n="privacidadLi8">Responder tus mensajes, solicitudes de paquetes o registros como guía o viajero.</li>
@@ -83,10 +128,10 @@
         </ul>
         <p data-i18n="privacidadP3"><strong>Nunca vendemos ni alquilamos tu información personal</strong>, ni la usamos para publicidad dirigida.</p>
 
-        <h2 data-i18n="privacidadH4">4. Consentimiento</h2>
+        <h2><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i><span data-i18n="privacidadH4">4. Consentimiento</span></h2>
         <p data-i18n="privacidadP4">Al registrarte, enviar un formulario o usar el asistente, nos autorizas a tratar los datos que nos proporcionas para las finalidades descritas. El almacenamiento local se usa para recordar tus preferencias (idioma, tema) y datos de sesión.</p>
 
-        <h2 data-i18n="privacidadH5">5. Proveedores de servicios (terceros)</h2>
+        <h2><i class="fa-solid fa-server" aria-hidden="true"></i><span data-i18n="privacidadH5">5. Proveedores de servicios (terceros)</span></h2>
         <ul>
             <li data-i18n="privacidadLi12"><strong>Supabase:</strong> aloja la base de datos, autenticación y archivos (avatares y documentos de guías). Los documentos de guías se almacenan en un contenedor privado.</li>
             <li data-i18n="privacidadLi13"><strong>Google / GitHub:</strong> proveedores opcionales de inicio de sesión; reciben los datos mínimos necesarios para autenticarte según sus propias políticas.</li>
@@ -94,10 +139,10 @@
             <li data-i18n="privacidadLi15"><strong>Google Fonts:</strong> sirve las tipografías del sitio.</li>
         </ul>
 
-        <h2 data-i18n="privacidadH6">6. Conservación de los datos</h2>
+        <h2><i class="fa-solid fa-clock" aria-hidden="true"></i><span data-i18n="privacidadH6">6. Conservación de los datos</span></h2>
         <p data-i18n="privacidadP5">Conservamos tus datos mientras tu cuenta exista o sea necesario para atender tus solicitudes. Las conversaciones del asistente se guardan hasta 4,000 caracteres por mensaje mientras tengas sesión activa y puedes borrarlas desde el propio chat ("Limpiar conversación").</p>
 
-        <h2 data-i18n="privacidadH7">7. Tus derechos (ARCO)</h2>
+        <h2><i class="fa-solid fa-file-shield" aria-hidden="true"></i><span data-i18n="privacidadH7">7. Tus derechos (ARCO)</span></h2>
         <p data-i18n="privacidadP6">Puedes ejercer en cualquier momento tus derechos de:</p>
         <ul>
             <li data-i18n="privacidadLi16"><strong>Acceso:</strong> conocer qué datos tuyos tratamos.</li>
@@ -105,29 +150,33 @@
             <li data-i18n="privacidadLi18"><strong>Cancelación / supresión:</strong> eliminar tu cuenta y sus datos.</li>
             <li data-i18n="privacidadLi19"><strong>Oposición:</strong> limitar u oponerte a ciertos tratamientos.</li>
         </ul>
-        <p data-i18n="privacidadP7">Para ejercerlos usa el <a href="contacto.html" style="color:var(--blue);font-weight:600;">formulario de contacto</a>. La eliminación de cuenta también está disponible directamente en tu perfil.</p>
+        <p data-i18n="privacidadP7">Para ejercerlos usa el <a href="contacto.html">formulario de contacto</a>. La eliminación de cuenta también está disponible directamente en tu perfil.</p>
 
-        <h2 data-i18n="privacidadH8">8. Eliminación de tu cuenta</h2>
+        <h2><i class="fa-solid fa-trash-can" aria-hidden="true"></i><span data-i18n="privacidadH8">8. Eliminación de tu cuenta</span></h2>
         <p data-i18n="privacidadP8">Al eliminar tu cuenta se borran tu perfil y tus preferencias asociadas. Los registros de guías, solicitudes o mensajes ya enviados pueden conservarse cuando exista una razón legítima (por ejemplo, atención de la solicitud realizada), siempre bajo confidencialidad.</p>
 
-        <h2 data-i18n="privacidadH9">9. Seguridad</h2>
+        <h2><i class="fa-solid fa-lock" aria-hidden="true"></i><span data-i18n="privacidadH9">9. Seguridad</span></h2>
         <p data-i18n="privacidadP9">Aplicamos medidas técnicas y organizativas razonables: conexión cifrada (HTTPS), acceso restringido a datos mediante políticas por usuario, claves privadas fuera del código del navegador y almacenamiento privado para documentos de verificación. Ningún sistema es infalible, pero trabajamos para proteger tu información.</p>
 
-        <h2 data-i18n="privacidadH10">10. Menores de edad</h2>
+        <h2><i class="fa-solid fa-children" aria-hidden="true"></i><span data-i18n="privacidadH10">10. Menores de edad</span></h2>
         <p data-i18n="privacidadP10">La Plataforma está dirigida a personas mayores de edad. No recopilamos deliberadamente datos de menores; si detectamos una cuenta de un menor, la eliminaremos.</p>
 
-        <h2 data-i18n="privacidadH11">11. Cambios en esta política</h2>
+        <h2><i class="fa-solid fa-rotate" aria-hidden="true"></i><span data-i18n="privacidadH11">11. Cambios en esta política</span></h2>
         <p data-i18n="privacidadP11">Podemos actualizar esta política para reflejar cambios en la Plataforma o en la legislación. Publicaremos la versión actualizada en esta página indicando la fecha de la última actualización.</p>
 
-        <h2 data-i18n="privacidadH12">12. Documentos relacionados</h2>
+        <h2><i class="fa-solid fa-folder-closed" aria-hidden="true"></i><span data-i18n="privacidadH12">12. Documentos relacionados</span></h2>
         <ul>
-            <li><a href="terminos.html" style="color:var(--blue);font-weight:600;" data-i18n="terminosYCondiciones">Términos y Condiciones</a></li>
+            <li><a href="terminos.html" data-i18n="terminosYCondiciones">Términos y Condiciones</a></li>
         </ul>
 
-        <a class="legal-back" href="index.html" data-i18n="volverInicio">← Volver al inicio</a>
+        <div class="legal-footer-links">
+            <a class="btn-legal-doc" href="index.html" onclick="goBackLegal(); return false;"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> <span data-i18n="volverAtras">Volver atrás</span></a>
+            <a class="btn-legal-doc ghost" href="terminos.html"><i class="fa-solid fa-file-contract" aria-hidden="true"></i> <span data-i18n="terminosYCondiciones">Términos y Condiciones</span></a>
+        </div>
     </div>
 </main>
 
+<!-- ===== FOOTER ===== -->
 <footer class="footer kv-footer">
   <div class="kv-footer-grid">
     <div class="kv-footer-col">
@@ -185,6 +234,26 @@
 <script defer src="js/mobile-nav.js?v=3"></script>
 <script defer src="js/page-transitions.js"></script>
 <script defer src="js/guide-registration.js"></script>
+<script defer src="js/img-fallback.js"></script>
+<script defer src="js/performance.js"></script>
+
+<script>
+  (function () {
+    function navbarScroll() {
+      var navbar = document.getElementById('navbar');
+      if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }
+    window.addEventListener('scroll', navbarScroll, { passive: true });
+    navbarScroll();
+  })();
+
+  function goBackLegal() {
+    try {
+      if (window.history.length > 1) { window.history.back(); return; }
+    } catch (e) {}
+    window.location.href = 'index.html';
+  }
+</script>
 
 <!-- Botpress Webchat -->
 <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js" defer></script>

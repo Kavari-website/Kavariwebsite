@@ -858,6 +858,8 @@
             modalGuiasTarjeta: 'Cartão de Crédito/Débito',
             modalGuiasBoton: 'Ativar Perfil de Guia',
             volverAtras: 'Voltar',
+            ariaVolverAtras: 'Voltar',
+            legalDocumento: 'Documento legal',
             quieroIr: 'Quero ir',
             verDestinoCompleto: 'Ver destino completo',
             paisesEyebrow: 'Sua Próxima Aventura Espera Você',

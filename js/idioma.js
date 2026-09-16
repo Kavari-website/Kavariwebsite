@@ -205,6 +205,7 @@
 
   // OTROS
   volverInicio: "Volver al inicio",
+  ariaVolverAtras: "Volver atrás",
   destinoErrorCarga: "No se pudo cargar la información del destino. Revisa la consola para más detalles.",
   perfilIngresando: "Ingresando…",
   perfilCreandoCuenta: "Creando cuenta…",
@@ -8041,6 +8042,7 @@ metaDescTerminos: 'Términos y condiciones de uso de KAVARI Travel.',
 // ===== TÍTULOS DE PÁGINA =====
 titleCookies: 'Política de Cookies · KAVARI',
 titlePrivacidad: 'Política de Privacidad · KAVARI',
+legalDocumento: 'Documento legal',
 titleTerminos: 'Términos y Condiciones · KAVARI',
 
 terminosTitulo: 'Términos y Condiciones',
@@ -8305,6 +8307,7 @@ privacidadH12: '12. Documentos relacionados'
 
   // OTROS
   volverInicio: "Back to home",
+  ariaVolverAtras: "Go back",
   destinoErrorCarga: "Could not load destination information. Check the console for details.",
   perfilIngresando: "Signing in…",
   perfilCreandoCuenta: "Creating account…",
@@ -16593,6 +16596,7 @@ paisGuyana_hospedajes_5_tipo: 'Coastal cabin',
   titleCookies: 'Cookie Policy · KAVARI',
   titlePrivacidad: 'Privacy Policy · KAVARI',
   titleTerminos: 'Terms and Conditions · KAVARI',
+  legalDocumento: 'Legal document',
 
   terminosTitulo: 'Terms and Conditions',
   terminosFecha: 'Last updated: August 2026',
