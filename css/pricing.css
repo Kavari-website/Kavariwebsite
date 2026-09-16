@@ -66,6 +66,10 @@
   font-weight:500;
   letter-spacing:-.05em;
   margin:24px 0 0;
+  color:var(--pricing-fg);
+}
+[data-theme="dark"] .pricing-header h1 {
+  color:#ffffff;
 }
 .pricing-header p {
   max-width:330px;

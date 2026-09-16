@@ -270,7 +270,7 @@ function renderPaquetesCards() {
                         <div class="paquete-bottom">
                         <div class="paquete-precio-wrap">
                             <div class="paquete-desde" data-i18n="desde">${translateOrDefault('desde', 'Desde')}</div>
-                            <div class="paquete-precio">${escapeHtml(d.precio)}</div>
+                            <div class="paquete-precio">${escapeHtml(d.precio.replace(/\s*(por persona|per person|por pessoa)$/i, '').trim())}</div>
                             <div class="paquete-pp" data-i18n="porPersona">${translateOrDefault('porPersona', 'por persona')}</div>
                         </div>
                         <div class="paquete-btns">
