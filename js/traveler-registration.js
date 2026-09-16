@@ -206,6 +206,15 @@
           }
         }catch(err){}
 
+        if(window.KavariNotify){
+          window.KavariNotify({
+            from_name:name,
+            from_email:email,
+            subject:'Nueva inscripción de viajero KAVARI',
+            message:'Nombre: '+name+'\nEmail: '+email+'\nDestino: '+country_+(plan?'\nPlan: '+plan:'')
+          });
+        }
+
         setTimeout(()=>{
           status.textContent=t('travelerRegistroGuardado');
           submitBtn.disabled=false;

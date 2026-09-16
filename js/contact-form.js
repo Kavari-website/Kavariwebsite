@@ -87,20 +87,13 @@
       // Notificación por correo con EmailJS. Es "fire-and-forget":
       // el mensaje ya quedó guardado en Supabase, así que si el email
       // falla solo lo registramos en consola sin bloquear al usuario.
-      if (window.emailjs && typeof window.emailjs.send === 'function') {
-        window.emailjs.send(
-          'service_qvmfjk6',      // Gmail service
-          'template_8txcmq8',     // plantilla de notificación
-          {
-            from_name: fullName,
-            reply_to: email,
-            from_email: email,
-            subject: subject,
-            message: message
-          },
-          { publicKey: '2zIIrkekPIphTzjNk' }
-        ).catch(function (err) {
-          // console.warn('[KAVARI] No se pudo enviar la notificación por correo:', err);
+      if (window.KavariNotify) {
+        window.KavariNotify({
+          from_name: fullName,
+          reply_to: email,
+          from_email: email,
+          subject: subject,
+          message: message
         });
       }
 

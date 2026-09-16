@@ -178,6 +178,21 @@
       });
     }).then(function (res) {
       if (res && res.error) throw res.error;
+      if (window.KavariNotify) {
+        window.KavariNotify({
+          from_name: fullName,
+          from_email: email,
+          subject: 'Nueva solicitud de paquete KAVARI',
+          message: [
+            'Nombre: ' + fullName,
+            'Email: ' + email + (phone ? ' · Teléfono: ' + phone : ''),
+            'Paquete: ' + (packageName || '—'),
+            'Destino: ' + (packageId || '—'),
+            'Viaje: ' + (travelDate || '—') + ' · ' + travelers + ' viajero(s)',
+            notes ? 'Notas: ' + notes : ''
+          ].filter(Boolean).join('\n')
+        });
+      }
       setStatus(window.t('planCtaExito'));
       form.reset();
       setTimeout(function () {

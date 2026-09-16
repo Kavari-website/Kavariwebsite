@@ -61,6 +61,7 @@
   }
 
   function navigate(href) {
+    if (window.__navInstantActive) return; // gestionado por nav-instant.js
     if (transitioning) return;
     transitioning = true;
 
@@ -76,12 +77,18 @@
 
   window.kavariNavigate = function (href) {
     if (!href) return;
+    // La navegación instantánea (nav-instant.js) se encarga: sin recarga.
+    if (window.__navInstantActive && window.kavariInstantGo) {
+      window.kavariInstantGo(href);
+      return;
+    }
     if (prefersReduced) { window.location.href = href; return; }
     navigate(href);
   };
 
   function bindClicks() {
     document.addEventListener('click', function (e) {
+      if (window.__navInstantActive) return; // gestionado por nav-instant.js
       if (prefersReduced || transitioning) return;
       var anchor = e.target && e.target.closest ? e.target.closest('a[href]') : null;
       if (!anchor) return;

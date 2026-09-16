@@ -333,6 +333,22 @@
         localStorage.setItem('kavariGuides', JSON.stringify(existingGuides));
       } catch (_) {}
 
+      if (window.KavariNotify) {
+        window.KavariNotify({
+          from_name: guideData.fullName,
+          from_email: guideData.email,
+          subject: 'Nueva inscripción de guía KAVARI',
+          message: [
+            'Nombre: ' + guideData.fullName,
+            'Email: ' + guideData.email + ' · Teléfono: ' + guideData.phone,
+            'País: ' + guideData.country,
+            'Idiomas: ' + guideData.languages,
+            'Membresía: ' + guideData.membership,
+            guideData.description ? 'Perfil: ' + guideData.description : ''
+          ].filter(Boolean).join('\n')
+        });
+      }
+
       setStatus(t('guideExito'), false);
       registerForm.reset();
       submitBtn.disabled = false;
