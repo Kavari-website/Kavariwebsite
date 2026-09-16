@@ -491,6 +491,12 @@ body {
   border-color:#fff;
   transform:translateY(-3px);
 }
+[data-theme="light"] .btn-hero-outline {
+  color:#0d1f3c;
+}
+[data-theme="light"] .btn-hero-outline:hover {
+  color:#0d1f3c;
+}
 .hero-scroll {
   position:absolute;
   bottom:32px;
