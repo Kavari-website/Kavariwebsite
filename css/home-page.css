@@ -63,7 +63,9 @@
   border-radius:99px;
   background:linear-gradient(90deg,#f0b429,#2e6edc);
 }
-.page-index .hero-content h1 {
+.page-index .hero-content h1,
+[data-theme="light"] .page-index .hero-content h1,
+html:not([data-theme="dark"]) .page-index .hero-content h1 {
   font-size:clamp(42px,6.2vw,86px);
   line-height:1.05;
   letter-spacing:.005em;
@@ -71,13 +73,20 @@
   text-shadow:0 2px 8px rgba(4,12,30,.4);
 }
 [data-theme="dark"] .page-index .hero-content h1 {
-  color:#7dd3fc;
-  text-shadow:0 0 22px rgba(125,211,252,.95),0 0 55px rgba(125,211,252,.6),0 0 90px rgba(56,189,248,.4),0 8px 32px rgba(4,12,30,.6),0 2px 6px rgba(4,12,30,.45);
+  color:#ffffff;
+  text-shadow:0 0 22px rgba(255,255,255,.55),0 0 55px rgba(255,255,255,.35),0 0 90px rgba(255,255,255,.2),0 8px 32px rgba(4,12,30,.6),0 2px 6px rgba(4,12,30,.45);
 }
-.page-index .hero-content p {
+.page-index .hero-content p,
+[data-theme="light"] .page-index .hero-content p,
+html:not([data-theme="dark"]) .page-index .hero-content p {
   font-size:clamp(16px,1.5vw,22px);
   line-height:1.6;
+  color:#ffffff;
   text-shadow:0 2px 14px rgba(4,12,30,.55);
+}
+[data-theme="dark"] .page-index .hero-content p {
+  color:#ffffff;
+  text-shadow:0 0 14px rgba(255,255,255,.4),0 2px 14px rgba(4,12,30,.6);
 }
 /* ---------- PANEL DE AVENTURA (search-box) ---------- */
 .page-index .search-box {

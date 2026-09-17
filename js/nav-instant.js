@@ -24,6 +24,8 @@
 
   var busy = false;
   var cacheHtml = {};
+  var enVuelo = {};
+  var assetsCalentados = {};
   var soportado = false;
 
   try {
@@ -72,10 +74,22 @@
     window.scrollTo(0, 0);
   }
 
-  // ===== Descarga con caché en memoria =====
+  // ===== Descarga con caché en memoria (evita peticiones duplicadas) =====
   function obtenerHTML(u, ok, falla) {
     var href = u.href;
+
+    // Ya está en memoria: respuesta instantánea, sin red.
     if (cacheHtml[href]) { ok(cacheHtml[href]); return; }
+
+    // Ya se está descargando: únete a la petición en curso.
+    if (enVuelo[href]) {
+      enVuelo[href].ok.push(ok);
+      enVuelo[href].falla.push(falla);
+      return;
+    }
+
+    enVuelo[href] = { ok: [ok], falla: [falla] };
+
     fetch(href, {
       credentials: 'include',
       cache: 'default',
@@ -90,9 +104,69 @@
           throw new Error('contenido-no-html');
         }
         cacheHtml[href] = html;
-        ok(html);
+        calentarAssets(html, href);
+        var cola = enVuelo[href];
+        delete enVuelo[href];
+        for (var i = 0; i < cola.ok.length; i++) {
+          try { cola.ok[i](html); } catch (e) {}
+        }
       })
-      .catch(function (err) { falla(err); });
+      .catch(function (err) {
+        var cola = enVuelo[href];
+        delete enVuelo[href];
+        if (!cola) return;
+        for (var i = 0; i < cola.falla.length; i++) {
+          try { cola.falla[i](err); } catch (e) {}
+        }
+      });
+  }
+
+  // ===== Calienta (prefetch) el CSS/JS propio de la página destino =====
+  function prefetchAsset(href, as, baseHref) {
+    try {
+      var u = new URL(href, baseHref);
+      if (u.origin !== window.location.origin) return; // solo recursos locales
+      if (assetsCalentados[u.href]) return;
+      assetsCalentados[u.href] = true;
+      var link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.as = as;
+      link.href = u.href;
+      (document.head || document.documentElement).appendChild(link);
+    } catch (e) {}
+  }
+
+  function calentarAssets(html, baseHref) {
+    try {
+      if (!html) return;
+      var m;
+
+      var reLink = /<link[^>]+rel=["']?stylesheet["']?[^>]*>/gi;
+      var reHref = /href=["']([^"']+)["']/i;
+      while ((m = reLink.exec(html))) {
+        var h = reHref.exec(m[0]);
+        if (h && h[1]) prefetchAsset(h[1], 'style', baseHref);
+      }
+
+      var reScript = /<script[^>]+src=["']([^"']+)["']/gi;
+      while ((m = reScript.exec(html))) {
+        if (m[1]) prefetchAsset(m[1], 'script', baseHref);
+      }
+    } catch (e) {}
+  }
+
+  // ===== Prefetch de un enlace concreto (al pasar el mouse / enfocar) =====
+  function prefetchEnlace(href) {
+    try {
+      var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      if (conn && conn.saveData) return;
+    } catch (e) {}
+
+    var u;
+    try { u = new URL(href, window.location.href); } catch (e) { return; }
+    if (!esPaginaInterna(u.href) || mismaUrl(u)) return;
+    if (cacheHtml[u.href] || enVuelo[u.href]) return;
+    obtenerHTML(u, function () {}, function () {});
   }
 
   // ===== Navegación suave =====
@@ -184,43 +258,75 @@
     irA(href);
   }, true);
 
-  // ===== Prefetch en segundo plano (primera visita instantánea) =====
+  // ===== Prefetch en segundo plano (navegación instantánea) =====
   var PREFETCH = [
-    'index.html', 'paises.html', 'sobrenosotros.html', 'ayuda.html',
-    'contacto.html', 'planes.html', 'cuenta.html', 'perfil.html',
-    'privacidad.html', 'terminos.html', 'destino.html', 'data/data.json'
+    'paises.html', 'destino.html', 'sobrenosotros.html', 'contacto.html',
+    'ayuda.html', 'planes.html', 'index.html', 'perfil.html'
   ];
 
-  function prefetchEnIdle() {
+  function sinAhorroDatos() {
     try {
       var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-      if (conn && conn.saveData) return;
-    } catch (e) {}
+      return !!(conn && conn.saveData);
+    } catch (e) {
+      return false;
+    }
+  }
 
-    var hecho = false;
-    try { hecho = sessionStorage.getItem('kavari-prefetch') === '1'; } catch (e) {}
-    if (hecho) return;
+  function prefetchEnIdle() {
+    if (!soportado || sinAhorroDatos()) return;
 
     var base = window.location.href.split(/[?#]/)[0];
     var i = 0;
 
     function siguiente() {
-      if (i >= PREFETCH.length) {
-        try { sessionStorage.setItem('kavari-prefetch', '1'); } catch (e) {}
+      if (i >= PREFETCH.length) return;
+      var href = PREFETCH[i++];
+      var u;
+      try { u = new URL(href, base); } catch (e) { siguiente(); return; }
+
+      // Ya cargada o descargándose: sigue con la próxima sin tocar la red.
+      if (mismaUrl(u) || cacheHtml[u.href] || enVuelo[u.href]) {
+        if (window.requestIdleCallback) {
+          window.requestIdleCallback(siguiente, { timeout: 2000 });
+        } else {
+          window.setTimeout(siguiente, 0);
+        }
         return;
       }
-      var u = new URL(PREFETCH[i], base);
-      i++;
-      obtenerHTML(u, siguiente, siguiente); // almacena en cacheHtml y continúa
+      obtenerHTML(u, siguiente, siguiente); // al terminar, continúa con la próxima
     }
 
     // Prefetch seriado para no saturar la red en la carga inicial
     if (window.requestIdleCallback) {
       window.requestIdleCallback(siguiente, { timeout: 3500 });
     } else {
-      window.setTimeout(siguiente, 800);
+      window.setTimeout(siguiente, 700);
     }
   }
+
+  // ===== Prefetch especulativo al pasar el mouse o enfocar un enlace =====
+  var prefetchTimer = null;
+
+  function alPasarEnlace(e, delay) {
+    if (!soportado || sinAhorroDatos()) return;
+    var enlace = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!enlace) return;
+    if (enlace.target && enlace.target !== '_self') return;
+    if (enlace.hasAttribute('download')) return;
+    if (enlace.hasAttribute('data-guide-register')) return;
+    if (enlace.dataset && enlace.dataset.navegable === 'false') return;
+
+    var href = enlace.getAttribute('href') || '';
+    if (!esPaginaInterna(href)) return;
+
+    if (prefetchTimer) clearTimeout(prefetchTimer);
+    prefetchTimer = setTimeout(function () { prefetchEnlace(href); }, delay);
+  }
+
+  document.addEventListener('pointerover', function (e) { alPasarEnlace(e, 70); }, { passive: true });
+  document.addEventListener('focusin', function (e) { alPasarEnlace(e, 0); }, { passive: true });
+  document.addEventListener('touchstart', function (e) { alPasarEnlace(e, 0); }, { passive: true });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', prefetchEnIdle);
